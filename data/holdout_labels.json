@@ -1,0 +1,15 @@
+{
+  "_about": "Hand labels for data/holdout_tickets.json. These tickets were written AFTER the rules engine, and the rules were not tuned on them, so they show how it does on tickets it has never seen.",
+  "H-01": {"category": "billing", "priority": "high"},
+  "H-02": {"category": "feature_request", "priority": "low"},
+  "H-03": {"category": "calendar_sync", "priority": "normal"},
+  "H-04": {"category": "account_access", "priority": "high"},
+  "H-05": {"category": "presales", "priority": "normal"},
+  "H-06": {"category": "reminders", "priority": "normal"},
+  "H-07": {"category": "cancellation", "priority": "normal"},
+  "H-08": {"category": "payments", "priority": "normal"},
+  "H-09": {"category": "reminders", "priority": "high"},
+  "H-10": {"category": "booking_setup", "priority": "normal"},
+  "H-11": {"category": "refund", "priority": "high"},
+  "H-12": {"category": "security", "priority": "urgent"}
+}

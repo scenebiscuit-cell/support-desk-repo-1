@@ -1,0 +1,186 @@
+[
+  {
+    "id": "M01",
+    "title": "Refund: duplicate or incorrect charge",
+    "category": "refund",
+    "actions": {"tags": ["refund", "duplicate_charge"], "priority": "high", "status": "pending"},
+    "internal_note": "Confirm both invoice numbers in Billing admin before issuing. Refund the duplicate in full. Needs agent approval.",
+    "body": "Hi {{customer_first_name}},\n\nI'm sorry about the double charge, and thanks for sending the invoice numbers. That made it quick to find. I've confirmed the duplicate and refunded the extra charge in full. You'll see it back on your statement in 5 to 7 business days, depending on your bank.\n\nYour plan isn't affected, and you don't need to do anything else. If the refund hasn't shown up by then, reply here and I'll chase it down.\n\nBest,\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M02",
+    "title": "Refund: annual plan within 30 days (pro-rated)",
+    "category": "refund",
+    "actions": {"tags": ["refund", "annual_plan"], "priority": "normal", "status": "pending"},
+    "internal_note": "Eligible only if the annual charge was within the last 30 days. Calculate pro-rated amount by day. Cancel the plan at the same time unless the customer asks otherwise.",
+    "body": "Hi {{customer_first_name}},\n\nThanks for letting us know, and no need to apologize at all. Because you're within 30 days of your annual payment, you're eligible for a pro-rated refund for the unused part of the year.\n\nHere's what happens next:\n1. I'll cancel the annual plan and process the refund for the unused days.\n2. The refund will reach your card in 5 to 7 business days.\n3. Your booking page stays active until {{end_date}} so you can finish out your current bookings.\n\nIf you'd like to keep a copy of your client list, you can export it any time under Settings > Data > Export: https://help.pharos.example/data-export-and-deletion\n\nWishing you and your family the best,\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M03",
+    "title": "Refund: monthly plan (policy, no partial months)",
+    "category": "refund",
+    "actions": {"tags": ["refund", "policy_decline"], "priority": "normal", "status": "pending"},
+    "internal_note": "Monthly plans aren't refunded for partial months. If there's a real service failure on our side, escalate to a lead for a goodwill credit instead.",
+    "body": "Hi {{customer_first_name}},\n\nThanks for reaching out. I checked your account, and because you're on a monthly plan, we aren't able to refund a partial month. The good news is you keep full access until the end of the period you've already paid for, so nothing shuts off early.\n\nIf you'd like to cancel so you won't be charged again, the steps are here: https://help.pharos.example/change-or-cancel-plan\n\nIf something on our side didn't work the way it should have, tell me what happened and I'll take another look.\n\nBest,\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M04",
+    "title": "Cancellation: how to cancel (owner vs. staff login)",
+    "category": "cancellation",
+    "actions": {"tags": ["cancellation"], "priority": "normal", "status": "pending"},
+    "internal_note": "If the requester isn't the owner, don't cancel on their behalf. Point them to the owner.",
+    "body": "Hi {{customer_first_name}},\n\nThanks for reaching out. The Cancel plan option only shows up for the account owner, which is probably why you can't find it. Staff and admin logins don't have billing access.\n\nThe account owner can cancel in a few clicks:\n1. Log in and go to Settings > Billing > Cancel plan.\n2. Pick a reason and confirm.\n3. The plan stays active until the end of the current billing period.\n\nIf the owner prefers, they can reply to this email from the owner's email address and I'll take care of it for them.\n\nFull guide: https://help.pharos.example/change-or-cancel-plan\n\nBest,\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M05",
+    "title": "Cancellation: churn risk (export help + save offer)",
+    "category": "cancellation",
+    "actions": {"tags": ["cancellation", "churn_risk"], "priority": "high", "status": "pending"},
+    "internal_note": "Churn risk. Acknowledge the specific pain points, help them leave cleanly, and offer one real fix or the pause option. Don't be pushy. Flag to the CS lead.",
+    "body": "Hi {{customer_first_name}},\n\nI'm sorry Pharos hasn't been working the way you need, and thank you for telling us why. That feedback goes straight to our product team.\n\nTo get your data out:\n1. Go to Settings > Data > Export.\n2. Export clients, appointments, and payments (pick \"All time\" for the date range).\n3. Large exports are emailed to you as a download link within 15 minutes.\n\nTo cancel afterward, go to Settings > Billing > Cancel plan. You keep access until the end of your billing period.\n\nBefore you go: if {{pain_point}} is the main issue, I'd be glad to look at it with you. It's often a settings fix. And if you just need a break, you can pause the account for up to 3 months at $5/month and keep everything as it is.\n\nEither way, I'm here to help.\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M06",
+    "title": "Calendar sync: double booking troubleshooting",
+    "category": "calendar_sync",
+    "actions": {"tags": ["calendar_sync", "double_booking"], "priority": "high", "status": "open"},
+    "internal_note": "Pull the sync log for the staff member and timestamps. Check token expiry and which calendars are selected. If repeated, escalate to engineering with log excerpt.",
+    "body": "Hi {{customer_first_name}},\n\nI'm really sorry about the double booking. That's exactly what Pharos is supposed to prevent, and I understand how frustrating it is in front of your clients.\n\nI'm pulling the sync log for {{staff_name}}'s calendar now. In the meantime, these are the most common causes, and it's worth a 2-minute check:\n\n1. The calendar event is set to \"Free\" instead of \"Busy.\" Only Busy events block the booking page.\n2. The calendar holding that event isn't selected under Settings > Calendar sync > Calendars to check.\n3. The connection expired (often after a password change). If you see a red \"Reconnect\" banner in Settings > Calendar sync, click it and sign in again.\n\nI'll follow up today with what the log shows and what we're doing about it.\n\nGuide: https://help.pharos.example/calendar-sync\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M07",
+    "title": "Reminders: SMS not delivering",
+    "category": "reminders",
+    "actions": {"tags": ["reminders", "sms"], "priority": "high", "status": "open"},
+    "internal_note": "Check SMS usage vs. any SMS cap the customer set, and the message delivery log for failures. Check carrier status if failures are widespread.",
+    "body": "Hi {{customer_first_name}},\n\nThanks for flagging this, and I'm sorry about the no-shows. Since email reminders are still going out, this is almost always an SMS-specific setting. I'm checking your account now. Here's what I'm looking at:\n\n1. Whether a monthly SMS cap is set under Settings > Reminders > SMS limit. Once it's reached, texts stop until next month.\n2. The delivery status in Clients > [client] > Messages (Sent, Delivered, Failed, or Opted out).\n3. Whether clients replied STOP, which unsubscribes them from all texts.\n\nIf you can send a screenshot of the Messages tab for one patient who didn't get a text, that will speed things up.\n\nGuide: https://help.pharos.example/reminders\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M08",
+    "title": "Booking setup: wrong times (time zone)",
+    "category": "booking_setup",
+    "actions": {"tags": ["booking_setup", "time_zone"], "priority": "high", "status": "pending"},
+    "internal_note": "Check business time zone in Business profile. A mismatch with the business's actual location causes confirmations to show shifted times.",
+    "body": "Hi {{customer_first_name}},\n\nSorry about the mix-up with your clients. When confirmation times are off by exactly an hour, it's almost always the business time zone setting.\n\nPlease check Settings > Business profile > Business time zone. For Austin, it should be Central Time (America/Chicago). If it's set to a different zone, change it and click Save. Existing appointments keep their correct calendar time, and new confirmations will show the right time.\n\nFor anyone already booked, I'd suggest a quick note to confirm their time, just in case.\n\nGuide: https://help.pharos.example/getting-started\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M09",
+    "title": "Booking page: error for a single business",
+    "category": "booking_setup",
+    "actions": {"tags": ["booking_setup", "booking_page_error"], "priority": "high", "status": "open"},
+    "internal_note": "If more than one customer reports this in 15 minutes, switch to the outage macro and page on-call.",
+    "body": "Hi {{customer_first_name}},\n\nSorry your booking page isn't loading. Let's get it back up. A few quick checks:\n\n1. Status page: https://status.pharos.example shows any active incidents.\n2. Account status: a paused or past-due account shows \"This business isn't taking bookings right now.\"\n3. Try the page in a private browser window to rule out extensions.\n\nIf it still fails, please reply with the page URL, a screenshot, and roughly when it started, and I'll dig in right away.\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M10",
+    "title": "Payments: deposit not collected",
+    "category": "payments",
+    "actions": {"tags": ["payments", "deposit"], "priority": "normal", "status": "pending"},
+    "internal_note": "Most common cause: deposit is set per service and wasn't enabled on that service, or the booking was added manually by staff.",
+    "body": "Hi {{customer_first_name}},\n\nThanks for the details. Since Stripe shows Connected, there are two usual reasons a deposit gets skipped:\n\n1. Deposits are set per service. Open Services > {{service_name}} and make sure \"Require payment at booking\" is turned on.\n2. Bookings added by your team from the calendar skip payment by design. Only bookings clients make on the booking page collect a deposit.\n\nFor this Friday's appointment, you can send the client a payment link from the appointment, or turn on Card on file so you can charge a no-show fee.\n\nGuide: https://help.pharos.example/deposits-and-payments\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M11",
+    "title": "Account access: password reset email not arriving",
+    "category": "account_access",
+    "actions": {"tags": ["account_access", "password_reset"], "priority": "normal", "status": "pending"},
+    "internal_note": "Look up which email the login was created with. Never reveal account details to an email that isn't on the account.",
+    "body": "Hi {{customer_first_name}},\n\nSorry you're stuck. Reset emails come from security@pharos.example and only go to the exact email your login was created with, so if you signed up with an older address, the email went there.\n\nTry requesting the reset using your other email address. The link expires after 1 hour, so use it right away. If you no longer have access to that inbox, reply from it if you can, or let me know and I'll walk you through verifying your account.\n\nGuide: https://help.pharos.example/account-security\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M12",
+    "title": "Account access: lost 2FA device (identity verification)",
+    "category": "account_access",
+    "actions": {"tags": ["account_access", "2fa_reset", "identity_verification"], "priority": "high", "status": "pending"},
+    "internal_note": "Do NOT remove 2FA until the customer passes verification: last 4 of card on file + date of most recent invoice, from the account email. Never ask for a password.",
+    "body": "Hi {{customer_first_name}},\n\nI can help you get back in. Because two-factor authentication protects your account, I need to verify it's you before I remove it. Please reply from this email address with:\n\n1. The last 4 digits of the card on file\n2. The date of your most recent Pharos invoice\n\nAs soon as that checks out, I'll reset 2FA so you can log in, then you can set it up on your new phone under Settings > Account > Security. Be sure to save the backup codes this time. They'll get you in if this happens again.\n\nWe will never ask for your password.\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M13",
+    "title": "Staff: over plan limit (upgrade path)",
+    "category": "staff",
+    "actions": {"tags": ["staff", "plan_limit", "upsell"], "priority": "normal", "status": "pending"},
+    "internal_note": "Expansion opportunity. Mention deactivating former staff first, since they may be counting toward the limit.",
+    "body": "Hi {{customer_first_name}},\n\nCongrats on growing the team! The Team plan includes up to 10 staff calendars, so the 11th invite is hitting that limit. You have two options:\n\n1. Upgrade to Plus ($99/month) for unlimited staff, plus multiple locations and priority support. Upgrades take effect immediately and you only pay the pro-rated difference: Settings > Billing > Change plan.\n2. Free up a seat: if anyone has left, deactivate them under Team. Deactivated staff don't count toward the limit, and their history is kept.\n\nGuide: https://help.pharos.example/staff-and-permissions\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M14",
+    "title": "Staff: ownership transfer (owner unavailable)",
+    "category": "staff",
+    "actions": {"tags": ["staff", "ownership_transfer", "identity_verification"], "priority": "normal", "status": "pending"},
+    "internal_note": "Requires proof of authority: business license or recent invoice with requester's name. Escalate to a lead for approval before transferring.",
+    "body": "Hi {{customer_first_name}},\n\nThanks for explaining. Normally the current owner transfers ownership themselves, but since they've left and aren't reachable, we can handle it for you after a quick verification.\n\nPlease reply with one of these showing your name and the business name:\n- A business license or registration\n- A recent business invoice or bank statement\n\nOnce a team lead approves it (usually within one business day), I'll move ownership to your login, since you're already an admin.\n\nGuide: https://help.pharos.example/staff-and-permissions\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M15",
+    "title": "Privacy: client requests data deletion",
+    "category": "data_privacy",
+    "actions": {"tags": ["data_privacy", "deletion_request"], "priority": "normal", "status": "pending"},
+    "internal_note": "We're the processor; the business is the controller. Business deletes the client; backups purge within 90 days.",
+    "body": "Hi {{customer_first_name}},\n\nGood question, and thanks for handling this carefully. Here's how it works:\n\n1. Open the client in Pharos and click Delete client. This removes their contact details and cancels any future appointments.\n2. Past appointments stay in your reports as \"Deleted client,\" with no personal details attached.\n3. On our side, deleted data is removed from active systems right away and fully purged from backups within 90 days.\n\nBecause Pharos processes client data on your behalf, deleting it in your account is all that's needed. You can let the client know it's been taken care of.\n\nGuide: https://help.pharos.example/data-export-and-deletion\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M16",
+    "title": "Data: how to export",
+    "category": "data_privacy",
+    "actions": {"tags": ["data_export"], "priority": "normal", "status": "pending"},
+    "internal_note": "",
+    "body": "Hi {{customer_first_name}},\n\nYou can export everything yourself in a couple of minutes:\n\n1. Go to Settings > Data > Export (owners and admins only).\n2. Choose clients, appointments, or payments, and pick a date range.\n3. Exports download as CSV files that open in Excel or Google Sheets. Large exports are emailed as a link within 15 minutes.\n\nGuide: https://help.pharos.example/data-export-and-deletion\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M17",
+    "title": "Outage: acknowledge and link status page",
+    "category": "outage",
+    "actions": {"tags": ["outage", "incident"], "priority": "urgent", "status": "open"},
+    "internal_note": "Link ticket to the active incident. If no incident is open yet, page on-call immediately with customer count and symptoms.",
+    "body": "Hi {{customer_first_name}},\n\nThank you for reporting this so quickly, and I'm sorry. I know every minute your booking page is down costs you bookings. Our engineering team is aware and actively working on it.\n\nYou can follow live updates at https://status.pharos.example and subscribe there for an alert the moment it's resolved. I've linked your ticket to the incident, so I'll also update you here directly.\n\nIn the meantime, if customers call, you can add their bookings manually from your Pharos calendar if the dashboard is loading for you.\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M18",
+    "title": "Security: vulnerability report acknowledgment",
+    "category": "security",
+    "actions": {"tags": ["security", "vulnerability_report"], "priority": "urgent", "status": "open"},
+    "internal_note": "Escalate to the security team immediately. Do not confirm or deny details in the reply. Do not discuss on public channels.",
+    "body": "Hi {{customer_first_name}},\n\nThank you for reporting this responsibly and for keeping it private. I've escalated it to our security team, who will review it as a priority.\n\nPlease send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you continuing to hold off on public disclosure while we investigate and fix it.\n\nThanks again for helping keep our customers safe.\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M19",
+    "title": "Feature request: logged + share roadmap",
+    "category": "feature_request",
+    "actions": {"tags": ["feature_request"], "priority": "low", "status": "solved"},
+    "internal_note": "Log the request in the product board with the customer's plan and use case.",
+    "body": "Hi {{customer_first_name}},\n\nThanks for the idea, and for the kind words! I've logged your request with our product team along with how you'd use it, which really helps them prioritize.\n\n{{roadmap_status}}\n\nYou can vote on and follow ideas at https://ideas.pharos.example, and see what we're building at https://ideas.pharos.example/roadmap.\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M20",
+    "title": "Presales: plan and feature questions",
+    "category": "presales",
+    "actions": {"tags": ["presales", "trial"], "priority": "normal", "status": "pending"},
+    "internal_note": "Answer every question asked, honestly. If a feature doesn't exist, say so and suggest the closest workaround.",
+    "body": "Hi {{customer_first_name}},\n\nSo glad you're enjoying the trial! Happy to help you pick the right plan.\n\n{{answers}}\n\nYou can compare plans here: https://help.pharos.example/plans-and-pricing. And if you pay annually, you get two months free.\n\nAny other questions, just reply here.\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M21",
+    "title": "Feedback: thank you",
+    "category": "feedback",
+    "actions": {"tags": ["feedback", "positive"], "priority": "low", "status": "solved"},
+    "internal_note": "Share in #customer-love. Consider asking for a review if they haven't left one.",
+    "body": "Hi {{customer_first_name}},\n\nThis made our whole team's day. Thank you for taking the time to write! It's great to hear the reminders are cutting your no-shows and that families like rescheduling on their own.\n\nIf you ever have a minute, a short review on Capterra or G2 helps other small businesses find us. No pressure at all.\n\nThanks for being a Pharos customer,\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M22",
+    "title": "Billing: SMS overage explained",
+    "category": "billing",
+    "actions": {"tags": ["billing", "sms_overage"], "priority": "normal", "status": "pending"},
+    "internal_note": "Overages aren't refundable unless caused by a bug. A one-time courtesy credit for a first overage is allowed with lead approval.",
+    "body": "Hi {{customer_first_name}},\n\nI understand the surprise, and I'm sorry it wasn't clearer. Here's what happened: your Team plan includes 1,000 SMS reminders a month. Texts beyond that are $0.02 each, and last month's extra texts were added to this invoice.\n\nTo make sure it doesn't happen again:\n1. Set a monthly cap under Settings > Reminders > SMS limit. Texts stop when you hit it.\n2. Send one reminder per appointment instead of two, or keep texts under 160 characters (longer ones count as two messages).\n\n{{credit_line}}\n\nGuide: https://help.pharos.example/plans-and-pricing\n\n{{agent_name}}\nPharos Support"
+  },
+  {
+    "id": "M23",
+    "title": "Spam / vendor pitch: close without reply",
+    "category": "spam",
+    "actions": {"tags": ["spam"], "priority": "low", "status": "closed"},
+    "internal_note": "No customer reply. Close and mark as spam.",
+    "body": ""
+  }
+]

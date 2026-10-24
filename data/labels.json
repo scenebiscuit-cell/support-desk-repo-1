@@ -1,0 +1,23 @@
+{
+  "_about": "Hand-labeled answers for data/tickets.json. The triage script never sees this file; it is only used to score accuracy with --eval.",
+  "T-1001": {"category": "refund", "priority": "high"},
+  "T-1002": {"category": "cancellation", "priority": "normal"},
+  "T-1003": {"category": "calendar_sync", "priority": "high"},
+  "T-1004": {"category": "reminders", "priority": "high"},
+  "T-1005": {"category": "presales", "priority": "normal"},
+  "T-1006": {"category": "account_access", "priority": "high"},
+  "T-1007": {"category": "outage", "priority": "urgent"},
+  "T-1008": {"category": "refund", "priority": "normal"},
+  "T-1009": {"category": "feature_request", "priority": "low"},
+  "T-1010": {"category": "spam", "priority": "low"},
+  "T-1011": {"category": "payments", "priority": "normal"},
+  "T-1012": {"category": "staff", "priority": "normal"},
+  "T-1013": {"category": "data_privacy", "priority": "normal"},
+  "T-1014": {"category": "feedback", "priority": "low"},
+  "T-1015": {"category": "booking_setup", "priority": "high"},
+  "T-1016": {"category": "account_access", "priority": "normal"},
+  "T-1017": {"category": "billing", "priority": "normal"},
+  "T-1018": {"category": "staff", "priority": "normal"},
+  "T-1019": {"category": "cancellation", "priority": "high"},
+  "T-1020": {"category": "security", "priority": "urgent"}
+}

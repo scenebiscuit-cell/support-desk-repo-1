@@ -1,0 +1,521 @@
+{
+  "engine": "rules",
+  "summary": {
+    "tickets": 20,
+    "by_category": {
+      "refund": 2,
+      "cancellation": 2,
+      "account_access": 2,
+      "staff": 2,
+      "calendar_sync": 1,
+      "reminders": 1,
+      "presales": 1,
+      "outage": 1,
+      "feature_request": 1,
+      "spam": 1,
+      "payments": 1,
+      "data_privacy": 1,
+      "feedback": 1,
+      "booking_setup": 1,
+      "billing": 1,
+      "security": 1
+    },
+    "by_priority": {
+      "urgent": 2,
+      "high": 6,
+      "normal": 9,
+      "low": 3
+    },
+    "churn_risk": [
+      "T-1002",
+      "T-1003",
+      "T-1019"
+    ],
+    "needs_human": 10,
+    "ready_to_send": 9,
+    "auto_closed_spam": 1,
+    "accuracy": {
+      "category": 1.0,
+      "priority": 1.0,
+      "misses": []
+    }
+  },
+  "results": [
+    {
+      "ticket_id": "T-1001",
+      "engine": "rules",
+      "category": "refund",
+      "priority": "high",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "refund",
+        "duplicate_charge"
+      ],
+      "macro_id": "M01",
+      "macro_title": "Refund: duplicate or incorrect charge",
+      "summary": "Charged twice this month??",
+      "draft_reply": "Hi Maria,\n\nI'm sorry about the double charge, and thanks for sending the invoice numbers. That made it quick to find. I've confirmed the duplicate and refunded the extra charge in full. You'll see it back on your statement in 5 to 7 business days, depending on your bank.\n\nYour plan isn't affected, and you don't need to do anything else. If the refund hasn't shown up by then, reply here and I'll chase it down.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": true,
+      "cited_articles": [
+        "billing-and-refunds",
+        "billing-and-refunds"
+      ],
+      "confidence": 0.73
+    },
+    {
+      "ticket_id": "T-1002",
+      "engine": "rules",
+      "category": "cancellation",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": true,
+      "tags": [
+        "cancellation",
+        "churn_risk"
+      ],
+      "macro_id": "M04",
+      "macro_title": "Cancellation: how to cancel (owner vs. staff login)",
+      "summary": "where is the cancel button",
+      "draft_reply": "Hi Derek,\n\nThanks for reaching out. The Cancel plan option only shows up for the account owner, which is probably why you can't find it. Staff and admin logins don't have billing access.\n\nThe account owner can cancel in a few clicks:\n1. Log in and go to Settings > Billing > Cancel plan.\n2. Pick a reason and confirm.\n3. The plan stays active until the end of the current billing period.\n\nIf the owner prefers, they can reply to this email from the owner's email address and I'll take care of it for them.\n\nFull guide: https://help.pharos.example/change-or-cancel-plan\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "change-or-cancel-plan",
+        "staff-and-permissions"
+      ],
+      "confidence": 0.8
+    },
+    {
+      "ticket_id": "T-1003",
+      "engine": "rules",
+      "category": "calendar_sync",
+      "priority": "high",
+      "sentiment": "negative",
+      "churn_risk": true,
+      "tags": [
+        "calendar_sync",
+        "double_booking",
+        "churn_risk"
+      ],
+      "macro_id": "M06",
+      "macro_title": "Calendar sync: double booking troubleshooting",
+      "summary": "Double booked AGAIN - this is the third time",
+      "draft_reply": "Hi Priya,\n\nI'm really sorry about the double booking. That's exactly what Pharos is supposed to prevent, and I understand how frustrating it is in front of your clients.\n\nI'm pulling the sync log for [[fill in: staff name]]'s calendar now. In the meantime, these are the most common causes, and it's worth a 2-minute check:\n\n1. The calendar event is set to \"Free\" instead of \"Busy.\" Only Busy events block the booking page.\n2. The calendar holding that event isn't selected under Settings > Calendar sync > Calendars to check.\n3. The connection expired (often after a password change). If you see a red \"Reconnect\" banner in Settings > Calendar sync, click it and sign in again.\n\nI'll follow up today with what the log shows and what we're doing about it.\n\nGuide: https://help.pharos.example/calendar-sync\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "staff_name"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "calendar-sync",
+        "calendar-sync"
+      ],
+      "confidence": 0.88
+    },
+    {
+      "ticket_id": "T-1004",
+      "engine": "rules",
+      "category": "reminders",
+      "priority": "high",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "reminders",
+        "sms"
+      ],
+      "macro_id": "M07",
+      "macro_title": "Reminders: SMS not delivering",
+      "summary": "Text reminders stopped going out",
+      "draft_reply": "Hi James,\n\nThanks for flagging this, and I'm sorry about the no-shows. Since email reminders are still going out, this is almost always an SMS-specific setting. I'm checking your account now. Here's what I'm looking at:\n\n1. Whether a monthly SMS cap is set under Settings > Reminders > SMS limit. Once it's reached, texts stop until next month.\n2. The delivery status in Clients > [client] > Messages (Sent, Delivered, Failed, or Opted out).\n3. Whether clients replied STOP, which unsubscribes them from all texts.\n\nIf you can send a screenshot of the Messages tab for one patient who didn't get a text, that will speed things up.\n\nGuide: https://help.pharos.example/reminders\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "reminders",
+        "reminders"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1005",
+      "engine": "rules",
+      "category": "presales",
+      "priority": "normal",
+      "sentiment": "positive",
+      "churn_risk": false,
+      "tags": [
+        "presales",
+        "trial"
+      ],
+      "macro_id": "M20",
+      "macro_title": "Presales: plan and feature questions",
+      "summary": "Questions before I pay",
+      "draft_reply": "Hi Alicia,\n\nSo glad you're enjoying the trial! Happy to help you pick the right plan.\n\n[[fill in: answers]]\n\nYou can compare plans here: https://help.pharos.example/plans-and-pricing. And if you pay annually, you get two months free.\n\nAny other questions, just reply here.\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "answers"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "getting-started",
+        "booking-page"
+      ],
+      "confidence": 0.9
+    },
+    {
+      "ticket_id": "T-1006",
+      "engine": "rules",
+      "category": "account_access",
+      "priority": "high",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "account_access",
+        "2fa_reset",
+        "identity_verification"
+      ],
+      "macro_id": "M12",
+      "macro_title": "Account access: lost 2FA device (identity verification)",
+      "summary": "Locked out - new phone",
+      "draft_reply": "Hi Tom,\n\nI can help you get back in. Because two-factor authentication protects your account, I need to verify it's you before I remove it. Please reply from this email address with:\n\n1. The last 4 digits of the card on file\n2. The date of your most recent Pharos invoice\n\nAs soon as that checks out, I'll reset 2FA so you can log in, then you can set it up on your new phone under Settings > Account > Security. Be sure to save the backup codes this time. They'll get you in if this happens again.\n\nWe will never ask for your password.\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "account-security",
+        "account-security"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1007",
+      "engine": "rules",
+      "category": "outage",
+      "priority": "urgent",
+      "sentiment": "negative",
+      "churn_risk": false,
+      "tags": [
+        "outage",
+        "incident"
+      ],
+      "macro_id": "M17",
+      "macro_title": "Outage: acknowledge and link status page",
+      "summary": "URGENT booking page is down",
+      "draft_reply": "Hi Ben,\n\nThank you for reporting this so quickly, and I'm sorry. I know every minute your booking page is down costs you bookings. Our engineering team is aware and actively working on it.\n\nYou can follow live updates at https://status.pharos.example and subscribe there for an alert the moment it's resolved. I've linked your ticket to the incident, so I'll also update you here directly.\n\nIn the meantime, if customers call, you can add their bookings manually from your Pharos calendar if the dashboard is loading for you.\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": true,
+      "cited_articles": [
+        "booking-page",
+        "contact-support"
+      ],
+      "confidence": 0.91
+    },
+    {
+      "ticket_id": "T-1008",
+      "engine": "rules",
+      "category": "refund",
+      "priority": "normal",
+      "sentiment": "negative",
+      "churn_risk": false,
+      "tags": [
+        "refund",
+        "annual_plan"
+      ],
+      "macro_id": "M02",
+      "macro_title": "Refund: annual plan within 30 days (pro-rated)",
+      "summary": "Refund for annual plan",
+      "draft_reply": "Hi Grace,\n\nThanks for letting us know, and no need to apologize at all. Because you're within 30 days of your annual payment, you're eligible for a pro-rated refund for the unused part of the year.\n\nHere's what happens next:\n1. I'll cancel the annual plan and process the refund for the unused days.\n2. The refund will reach your card in 5 to 7 business days.\n3. Your booking page stays active until [[fill in: end date]] so you can finish out your current bookings.\n\nIf you'd like to keep a copy of your client list, you can export it any time under Settings > Data > Export: https://help.pharos.example/data-export-and-deletion\n\nWishing you and your family the best,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "end_date"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "billing-and-refunds",
+        "plans-and-pricing"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1009",
+      "engine": "rules",
+      "category": "feature_request",
+      "priority": "low",
+      "sentiment": "positive",
+      "churn_risk": false,
+      "tags": [
+        "feature_request"
+      ],
+      "macro_id": "M19",
+      "macro_title": "Feature request: logged + share roadmap",
+      "summary": "Waitlist?",
+      "draft_reply": "Hi Sam,\n\nThanks for the idea, and for the kind words! I've logged your request with our product team along with how you'd use it, which really helps them prioritize.\n\n[[fill in: roadmap status]]\n\nYou can vote on and follow ideas at https://ideas.pharos.example, and see what we're building at https://ideas.pharos.example/roadmap.\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "roadmap_status"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "contact-support",
+        "contact-support"
+      ],
+      "confidence": 0.73
+    },
+    {
+      "ticket_id": "T-1010",
+      "engine": "rules",
+      "category": "spam",
+      "priority": "low",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "spam"
+      ],
+      "macro_id": "M23",
+      "macro_title": "Spam / vendor pitch: close without reply",
+      "summary": "Partnership opportunity - 10x your organic traffic",
+      "draft_reply": "",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "getting-started",
+        "staff-and-permissions"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1011",
+      "engine": "rules",
+      "category": "payments",
+      "priority": "normal",
+      "sentiment": "negative",
+      "churn_risk": false,
+      "tags": [
+        "payments",
+        "deposit"
+      ],
+      "macro_id": "M10",
+      "macro_title": "Payments: deposit not collected",
+      "summary": "Deposit wasn't collected",
+      "draft_reply": "Hi Linda,\n\nThanks for the details. Since Stripe shows Connected, there are two usual reasons a deposit gets skipped:\n\n1. Deposits are set per service. Open Services > [[fill in: service name]] and make sure \"Require payment at booking\" is turned on.\n2. Bookings added by your team from the calendar skip payment by design. Only bookings clients make on the booking page collect a deposit.\n\nFor this Friday's appointment, you can send the client a payment link from the appointment, or turn on Card on file so you can charge a no-show fee.\n\nGuide: https://help.pharos.example/deposits-and-payments\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "service_name"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "deposits-and-payments",
+        "getting-started"
+      ],
+      "confidence": 0.88
+    },
+    {
+      "ticket_id": "T-1012",
+      "engine": "rules",
+      "category": "staff",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "staff",
+        "plan_limit",
+        "upsell"
+      ],
+      "macro_id": "M13",
+      "macro_title": "Staff: over plan limit (upgrade path)",
+      "summary": "Can't add new stylist",
+      "draft_reply": "Hi Chris,\n\nCongrats on growing the team! The Team plan includes up to 10 staff calendars, so the 11th invite is hitting that limit. You have two options:\n\n1. Upgrade to Plus ($99/month) for unlimited staff, plus multiple locations and priority support. Upgrades take effect immediately and you only pay the pro-rated difference: Settings > Billing > Change plan.\n2. Free up a seat: if anyone has left, deactivate them under Team. Deactivated staff don't count toward the limit, and their history is kept.\n\nGuide: https://help.pharos.example/staff-and-permissions\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "staff-and-permissions",
+        "staff-and-permissions"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1013",
+      "engine": "rules",
+      "category": "data_privacy",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "data_privacy",
+        "deletion_request"
+      ],
+      "macro_id": "M15",
+      "macro_title": "Privacy: client requests data deletion",
+      "summary": "Client requesting deletion of her information",
+      "draft_reply": "Hi Nadia,\n\nGood question, and thanks for handling this carefully. Here's how it works:\n\n1. Open the client in Pharos and click Delete client. This removes their contact details and cancels any future appointments.\n2. Past appointments stay in your reports as \"Deleted client,\" with no personal details attached.\n3. On our side, deleted data is removed from active systems right away and fully purged from backups within 90 days.\n\nBecause Pharos processes client data on your behalf, deleting it in your account is all that's needed. You can let the client know it's been taken care of.\n\nGuide: https://help.pharos.example/data-export-and-deletion\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "data-export-and-deletion",
+        "staff-and-permissions"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1014",
+      "engine": "rules",
+      "category": "feedback",
+      "priority": "low",
+      "sentiment": "positive",
+      "churn_risk": false,
+      "tags": [
+        "feedback",
+        "positive"
+      ],
+      "macro_id": "M21",
+      "macro_title": "Feedback: thank you",
+      "summary": "Thank you!",
+      "draft_reply": "Hi Owen,\n\nThis made our whole team's day. Thank you for taking the time to write! It's great to hear the reminders are cutting your no-shows and that families like rescheduling on their own.\n\nIf you ever have a minute, a short review on Capterra or G2 helps other small businesses find us. No pressure at all.\n\nThanks for being a Pharos customer,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "plans-and-pricing",
+        "reminders"
+      ],
+      "confidence": 0.76
+    },
+    {
+      "ticket_id": "T-1015",
+      "engine": "rules",
+      "category": "booking_setup",
+      "priority": "high",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "booking_setup",
+        "time_zone"
+      ],
+      "macro_id": "M08",
+      "macro_title": "Booking setup: wrong times (time zone)",
+      "summary": "Client came an hour early",
+      "draft_reply": "Hi Rosa,\n\nSorry about the mix-up with your clients. When confirmation times are off by exactly an hour, it's almost always the business time zone setting.\n\nPlease check Settings > Business profile > Business time zone. For Austin, it should be Central Time (America/Chicago). If it's set to a different zone, change it and click Save. Existing appointments keep their correct calendar time, and new confirmations will show the right time.\n\nFor anyone already booked, I'd suggest a quick note to confirm their time, just in case.\n\nGuide: https://help.pharos.example/getting-started\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "data-export-and-deletion",
+        "billing-and-refunds"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1016",
+      "engine": "rules",
+      "category": "account_access",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "account_access",
+        "password_reset"
+      ],
+      "macro_id": "M11",
+      "macro_title": "Account access: password reset email not arriving",
+      "summary": "password reset not working",
+      "draft_reply": "Hi Kevin,\n\nSorry you're stuck. Reset emails come from security@pharos.example and only go to the exact email your login was created with, so if you signed up with an older address, the email went there.\n\nTry requesting the reset using your other email address. The link expires after 1 hour, so use it right away. If you no longer have access to that inbox, reply from it if you can, or let me know and I'll walk you through verifying your account.\n\nGuide: https://help.pharos.example/account-security\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "account-security",
+        "account-security"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "T-1017",
+      "engine": "rules",
+      "category": "billing",
+      "priority": "normal",
+      "sentiment": "negative",
+      "churn_risk": false,
+      "tags": [
+        "billing",
+        "sms_overage"
+      ],
+      "macro_id": "M22",
+      "macro_title": "Billing: SMS overage explained",
+      "summary": "Why is my bill $95?",
+      "draft_reply": "Hi Hannah,\n\nI understand the surprise, and I'm sorry it wasn't clearer. Here's what happened: your Team plan includes 1,000 SMS reminders a month. Texts beyond that are $0.02 each, and last month's extra texts were added to this invoice.\n\nTo make sure it doesn't happen again:\n1. Set a monthly cap under Settings > Reminders > SMS limit. Texts stop when you hit it.\n2. Send one reminder per appointment instead of two, or keep texts under 160 characters (longer ones count as two messages).\n\n[[fill in: credit line]]\n\nGuide: https://help.pharos.example/plans-and-pricing\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "credit_line"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "plans-and-pricing",
+        "billing-and-refunds"
+      ],
+      "confidence": 0.75
+    },
+    {
+      "ticket_id": "T-1018",
+      "engine": "rules",
+      "category": "staff",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "staff",
+        "ownership_transfer",
+        "identity_verification"
+      ],
+      "macro_id": "M14",
+      "macro_title": "Staff: ownership transfer (owner unavailable)",
+      "summary": "Need to take over account - previous owner left",
+      "draft_reply": "Hi Marcus,\n\nThanks for explaining. Normally the current owner transfers ownership themselves, but since they've left and aren't reachable, we can handle it for you after a quick verification.\n\nPlease reply with one of these showing your name and the business name:\n- A business license or registration\n- A recent business invoice or bank statement\n\nOnce a team lead approves it (usually within one business day), I'll move ownership to your login, since you're already an admin.\n\nGuide: https://help.pharos.example/staff-and-permissions\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "staff-and-permissions",
+        "staff-and-permissions"
+      ],
+      "confidence": 0.85
+    },
+    {
+      "ticket_id": "T-1019",
+      "engine": "rules",
+      "category": "cancellation",
+      "priority": "high",
+      "sentiment": "negative",
+      "churn_risk": true,
+      "tags": [
+        "cancellation",
+        "churn_risk"
+      ],
+      "macro_id": "M05",
+      "macro_title": "Cancellation: churn risk (export help + save offer)",
+      "summary": "Moving to another tool",
+      "draft_reply": "Hi Elena,\n\nI'm sorry Pharos hasn't been working the way you need, and thank you for telling us why. That feedback goes straight to our product team.\n\nTo get your data out:\n1. Go to Settings > Data > Export.\n2. Export clients, appointments, and payments (pick \"All time\" for the date range).\n3. Large exports are emailed to you as a download link within 15 minutes.\n\nTo cancel afterward, go to Settings > Billing > Cancel plan. You keep access until the end of your billing period.\n\nBefore you go: if [[fill in: pain point]] is the main issue, I'd be glad to look at it with you. It's often a settings fix. And if you just need a break, you can pause the account for up to 3 months at $5/month and keep everything as it is.\n\nEither way, I'm here to help.\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "pain_point"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "data-export-and-deletion",
+        "billing-and-refunds"
+      ],
+      "confidence": 0.71
+    },
+    {
+      "ticket_id": "T-1020",
+      "engine": "rules",
+      "category": "security",
+      "priority": "urgent",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "security",
+        "vulnerability_report"
+      ],
+      "macro_id": "M18",
+      "macro_title": "Security: vulnerability report acknowledgment",
+      "summary": "Security issue in booking page intake form",
+      "draft_reply": "Hi J.,\n\nThank you for reporting this responsibly and for keeping it private. I've escalated it to our security team, who will review it as a priority.\n\nPlease send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you continuing to hold off on public disclosure while we investigate and fix it.\n\nThanks again for helping keep our customers safe.\n\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": true,
+      "cited_articles": [
+        "booking-page",
+        "account-security"
+      ],
+      "confidence": 0.9
+    }
+  ]
+}

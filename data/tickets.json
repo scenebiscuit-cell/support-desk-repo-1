@@ -1,0 +1,162 @@
+[
+  {
+    "id": "T-1001",
+    "created_at": "2026-10-19T09:12:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Maria Delgado", "email": "maria@brightsidesalon.example", "business": "Brightside Salon", "plan": "Team"},
+    "subject": "Charged twice this month??",
+    "body": "Hi, I just looked at my bank statement and Pharos charged me $49 twice on October 3rd. Same amount, same day. I only have one account. Can you please fix this and refund the extra charge? Invoice numbers are PHR-88213 and PHR-88214. Thanks, Maria"
+  },
+  {
+    "id": "T-1002",
+    "created_at": "2026-10-19T10:03:00-05:00",
+    "channel": "chat",
+    "customer": {"name": "Derek Olsen", "email": "derek@fadeandco.example", "business": "Fade & Co Barbers", "plan": "Team"},
+    "subject": "where is the cancel button",
+    "body": "I've looked everywhere in settings and there is no cancel option. The shop owner asked me to cancel our subscription because we're switching to the POS system's built-in booking. How do I do it?"
+  },
+  {
+    "id": "T-1003",
+    "created_at": "2026-10-19T11:47:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Priya Raman", "email": "priya@lotuspilates.example", "business": "Lotus Pilates Studio", "plan": "Plus"},
+    "subject": "Double booked AGAIN - this is the third time",
+    "body": "This is getting ridiculous. Yesterday two clients showed up for the same 6pm slot with my instructor Jess. Jess had a dentist appointment on her Google Calendar at that time too, so she wasn't even supposed to be available. This is the third time this month. I'm paying for your most expensive plan and I'm seriously looking at other booking tools now. I need this fixed today."
+  },
+  {
+    "id": "T-1004",
+    "created_at": "2026-10-19T13:20:00-05:00",
+    "channel": "email",
+    "customer": {"name": "James Whitfield", "email": "james@whitfieldphysio.example", "business": "Whitfield Physio", "plan": "Team"},
+    "subject": "Text reminders stopped going out",
+    "body": "Hello, since about the 15th none of our patients are getting text reminders. Email reminders still work. We've had 4 no-shows this week, which never happens. Nothing changed on our end that I know of. Can you look into it?"
+  },
+  {
+    "id": "T-1005",
+    "created_at": "2026-10-19T14:05:00-05:00",
+    "channel": "chat",
+    "customer": {"name": "Alicia Moreno", "email": "alicia@moreno-yoga.example", "business": "Moreno Yoga", "plan": "Trial"},
+    "subject": "Questions before I pay",
+    "body": "Hi! I'm on the trial and loving it so far. Two questions before I pick a plan: can I use my own website address for the booking page instead of the pharos one? And do you support group classes where 12 people book the same time slot?"
+  },
+  {
+    "id": "T-1006",
+    "created_at": "2026-10-19T15:31:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Tom Becker", "email": "tom@beckertutoring.example", "business": "Becker Tutoring", "plan": "Solo"},
+    "subject": "Locked out - new phone",
+    "body": "I got a new phone over the weekend and now I can't log in because the 6 digit code app was on my old phone. I never saved any backup codes. I have sessions booked tomorrow and I can't see my schedule. Please help ASAP."
+  },
+  {
+    "id": "T-1007",
+    "created_at": "2026-10-20T08:14:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Ben Carter", "email": "ben@carterautocare.example", "business": "Carter Auto Care (3 locations)", "plan": "Plus"},
+    "subject": "URGENT booking page is down",
+    "body": "Our booking page has been showing an error page for the last 30 minutes at all three of our locations. Customers are calling us saying they can't book. I checked on my phone and on my laptop, same thing. Is Pharos down??"
+  },
+  {
+    "id": "T-1008",
+    "created_at": "2026-10-20T09:40:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Grace Kim", "email": "grace@kimnails.example", "business": "Kim Nail Lounge", "plan": "Team"},
+    "subject": "Refund for annual plan",
+    "body": "Hello, I paid for the annual Team plan 12 days ago, but unfortunately I have to close my shop at the end of the month for family reasons. Is it possible to get a refund for the rest of the year? I'm sorry for the trouble. Grace"
+  },
+  {
+    "id": "T-1009",
+    "created_at": "2026-10-20T10:22:00-05:00",
+    "channel": "chat",
+    "customer": {"name": "Sam Ortiz", "email": "sam@inkwellstudio.example", "business": "Inkwell Tattoo Studio", "plan": "Team"},
+    "subject": "Waitlist?",
+    "body": "Love the app. Any chance you'll add a waitlist? When my artists are booked out, people want to get notified if someone cancels. Right now I'm keeping a list in my notes app lol"
+  },
+  {
+    "id": "T-1010",
+    "created_at": "2026-10-20T11:00:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Kevin from RankRocket", "email": "outreach@rankrocket-seo.example", "business": "RankRocket SEO", "plan": "None"},
+    "subject": "Partnership opportunity - 10x your organic traffic",
+    "body": "Hi there, I came across pharos.example and noticed you're missing out on huge organic traffic. Our team guarantees first-page Google rankings in 30 days. Can I send over a free audit? Reply YES to get started."
+  },
+  {
+    "id": "T-1011",
+    "created_at": "2026-10-20T12:45:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Linda Park", "email": "linda@parkdental.example", "business": "Park Family Dental", "plan": "Team"},
+    "subject": "Deposit wasn't collected",
+    "body": "We require a $50 deposit for whitening appointments, but a patient just booked one for Friday and wasn't asked to pay anything. Stripe shows connected. What happened? We've been burned by no-shows on these before."
+  },
+  {
+    "id": "T-1012",
+    "created_at": "2026-10-20T14:10:00-05:00",
+    "channel": "chat",
+    "customer": {"name": "Chris Nguyen", "email": "chris@urbanmanestudio.example", "business": "Urban Mane Studio", "plan": "Team"},
+    "subject": "Can't add new stylist",
+    "body": "Trying to invite our 11th stylist and it says I've reached my limit. We hired two new people this month. What are my options?"
+  },
+  {
+    "id": "T-1013",
+    "created_at": "2026-10-20T15:55:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Nadia Hassan", "email": "nadia@clearskinclinic.example", "business": "Clear Skin Clinic", "plan": "Plus"},
+    "subject": "Client requesting deletion of her information",
+    "body": "One of our former clients emailed asking us to delete all of her personal information from our systems, including our booking system. How do we do that in Pharos, and does it remove her from your servers too?"
+  },
+  {
+    "id": "T-1014",
+    "created_at": "2026-10-21T08:30:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Owen Brooks", "email": "owen@brookspiano.example", "business": "Brooks Piano Lessons", "plan": "Solo"},
+    "subject": "Thank you!",
+    "body": "Just wanted to say thanks. I switched from a paper calendar three months ago and my no-shows have basically disappeared thanks to the text reminders. My students' parents love being able to reschedule themselves. Great product!"
+  },
+  {
+    "id": "T-1015",
+    "created_at": "2026-10-21T09:15:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Rosa Jimenez", "email": "rosa@rosamassage.example", "business": "Rosa Massage Therapy", "plan": "Team"},
+    "subject": "Client came an hour early",
+    "body": "I'm in Austin. A new client showed up at 9am for a 10am massage and her confirmation email said 9am. My calendar in Pharos says 10. Another client said the same thing last week. Why are the times different?"
+  },
+  {
+    "id": "T-1016",
+    "created_at": "2026-10-21T10:02:00-05:00",
+    "channel": "chat",
+    "customer": {"name": "Kevin Shah", "email": "kevin.shah@shahcpa.example", "business": "Shah CPA", "plan": "Solo"},
+    "subject": "password reset not working",
+    "body": "I clicked forgot password like 5 times and never got an email. Checked spam. My login email might be my old gmail though, not sure."
+  },
+  {
+    "id": "T-1017",
+    "created_at": "2026-10-21T11:30:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Hannah Lee", "email": "hannah@leefitness.example", "business": "Lee Fitness Coaching", "plan": "Team"},
+    "subject": "Why is my bill $95?",
+    "body": "My plan is $49 but this month's invoice is $95.20. I see a line for SMS overage. I had no idea texts cost extra. That's almost double what I expected. Can you explain and can I get that taken off?"
+  },
+  {
+    "id": "T-1018",
+    "created_at": "2026-10-21T13:12:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Marcus Bell", "email": "marcus@bellvet.example", "business": "Bell Veterinary Clinic", "plan": "Plus"},
+    "subject": "Need to take over account - previous owner left",
+    "body": "Our practice manager set up our Pharos account and was the owner on it. She left the clinic last month and isn't responding to us. I'm the clinic owner and an admin on the account. How do I get ownership moved to me so I can manage billing?"
+  },
+  {
+    "id": "T-1019",
+    "created_at": "2026-10-21T14:48:00-05:00",
+    "channel": "email",
+    "customer": {"name": "Elena Petrova", "email": "elena@petrovaphoto.example", "business": "Petrova Photography", "plan": "Team"},
+    "subject": "Moving to another tool",
+    "body": "Honestly the calendar sync issues and the extra text fees have been frustrating, so I'm going to switch to a different booking app next month. I need to get all my client info and appointment history out first. How do I export everything, and then how do I cancel?"
+  },
+  {
+    "id": "T-1020",
+    "created_at": "2026-10-21T16:20:00-05:00",
+    "channel": "email",
+    "customer": {"name": "J. Alvarez", "email": "jalvarez.sec@protonmail.example", "business": "Independent researcher", "plan": "None"},
+    "subject": "Security issue in booking page intake form",
+    "body": "Hello, I found that the custom intake question field on booking pages doesn't escape HTML, so a script entered as an answer runs when the business views the booking in the dashboard. This looks like stored XSS. I haven't shared this publicly. Happy to send steps to reproduce privately."
+  }
+]

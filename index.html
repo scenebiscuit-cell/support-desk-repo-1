@@ -1,3 +1,5 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Pharos Support Desk</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -102,7 +104,11 @@ section.panel{padding-bottom:48px}
 .md th,.md td{border-bottom:1px solid var(--line);padding:5px 10px 5px 0;text-align:left;white-space:nowrap}
 .md th{font-weight:600}
 .note{font-size:13px;color:var(--muted)}
-.ai-only[hidden]{display:none!important}
+.ai-only[hidden],.local-only[hidden]{display:none!important}
+.modes{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#local-model{background:transparent;color:var(--sea-ink);border:1px solid color-mix(in srgb, var(--sea-ink) 30%, transparent);border-radius:8px;padding:5px 8px;font-size:13px;max-width:180px}
+#local-model option{color:var(--ink);background:var(--surface)}
+.draft-actions{display:flex;gap:8px;flex-wrap:wrap}
 
 /* chat */
 .chat-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:16px;align-items:start}
@@ -254,9 +260,13 @@ section.panel{padding-bottom:48px}
       <div class="pane chat">
         <div class="pane-h">
           <h2>Ask the Keeper</h2>
-          <div class="seg ai-only" id="chat-mode" hidden style="margin-left:auto">
-            <button aria-pressed="true" data-mode="docs">Docs excerpt</button>
-            <button aria-pressed="false" data-mode="ai">AI answer</button>
+          <div class="modes">
+            <select id="local-model" class="local-only" hidden aria-label="Local model"></select>
+            <div class="seg" id="chat-mode" hidden>
+              <button aria-pressed="true" data-mode="docs">Docs excerpt</button>
+              <button aria-pressed="false" data-mode="ai" class="ai-only" hidden>AI answer</button>
+              <button aria-pressed="false" data-mode="local" class="local-only" hidden>Local AI</button>
+            </div>
           </div>
         </div>
         <div class="msgs" id="msgs" aria-live="polite"></div>
@@ -418,10 +428,49 @@ const catChip = c => `<span class="chip cat ${CAT_FAMILY[c]?"cat-"+CAT_FAMILY[c]
 let sample = null;
 const aiReady = (async () => {
   try { sample = window.claude ? await window.claude.use("sample") : null; } catch { sample = null; }
-  if (sample) document.querySelectorAll(".ai-only").forEach(el => el.hidden = false);
+  if (sample){ document.querySelectorAll(".ai-only").forEach(el => el.hidden = false); $("#chat-mode").hidden = false; }
   return !!sample;
 })();
+/* ---------- Local AI: Ollama on the viewer's own computer (optional) ---------- */
+const OLLAMA = "http://localhost:11434";
+let localModel = null;
+const localReady = (async () => {
+  try {
+    const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 1500);
+    const res = await fetch(OLLAMA + "/api/tags", {signal: ctl.signal}); clearTimeout(tm);
+    if (!res.ok) return false;
+    const models = ((await res.json()).models || []).map(m => m.name).filter(n => !/embed/i.test(n));
+    if (!models.length) return false;
+    const pref = ["qwen2.5:14b","qwen2.5:7b","llama3.1:8b"].find(n => models.includes(n));
+    localModel = pref || models[0];
+    const sel = $("#local-model");
+    sel.innerHTML = models.map(n => `<option ${n===localModel?"selected":""}>${esc(n)}</option>`).join("");
+    sel.addEventListener("change", () => { localModel = sel.value; });
+    document.querySelectorAll(".local-only").forEach(el => el.hidden = false);
+    $("#chat-mode").hidden = false;
+    return true;
+  } catch { return false; }
+})();
+async function ollamaChat(system, user, {json=false, onText=null} = {}){
+  const res = await fetch(OLLAMA + "/api/chat", {method:"POST", headers:{"Content-Type":"application/json"},
+    body: JSON.stringify({model: localModel, stream: !!onText, format: json ? "json" : undefined,
+      options:{temperature:0.2, num_ctx:8192}, messages:[{role:"system",content:system},{role:"user",content:user}]})});
+  if (!res.ok) throw {code:"local_http", message:"Ollama returned " + res.status};
+  if (!onText) return (await res.json()).message?.content || "";
+  const reader = res.body.getReader(), dec = new TextDecoder(); let buf = "", text = "";
+  for (;;){
+    const {done, value} = await reader.read(); if (done) break;
+    buf += dec.decode(value, {stream:true});
+    let i; while ((i = buf.indexOf("\n")) >= 0){
+      const line = buf.slice(0, i).trim(); buf = buf.slice(i + 1);
+      if (!line) continue;
+      try { const j = JSON.parse(line); if (j.message?.content){ text += j.message.content; onText(text); } } catch {}
+    }
+  }
+  return text;
+}
 function aiError(e){
+  if (e?.code === "local_http" || e instanceof TypeError) return "Couldn't reach Ollama on this computer. Make sure it's running, then try again.";
   return ({not_granted:"AI answers weren't allowed for this page, so it's using the docs-only mode.",
            rate_limited:"Too many AI requests at once. Wait a moment and try again."})[e?.code] || "The AI request didn't finish. The docs-only answer still works.";
 }
@@ -485,15 +534,19 @@ async function ask(q){
   const ok = hits.length && confident(hits[0].score, hits[0].coverage);
   if (!ok){ renderTrace(q, hits, {ok:false, why: hits.length ? "The best match is too weak to trust, so this goes to the support team." : "Nothing in the help center covers this."}); handoffMsg("docs"); return; }
   const top = hits[0].c, src = `<span class="src">Source: <a href="${esc(top.url)}" target="_blank" rel="noopener">${esc(top.title)}</a></span>`;
-  if (chatMode === "ai" && sample){
-    renderTrace(q, hits, {ok:true, why:"Claude writes the answer using only these sections."});
-    const el = addMsg("bot", `<span class="from">The Keeper · AI</span><span class="body">Thinking…</span>`);
+  const useLocal = chatMode === "local" && localModel, useClaude = chatMode === "ai" && sample;
+  if (useLocal || useClaude){
+    const who = useLocal ? `your local model (${localModel})` : "Claude";
+    renderTrace(q, hits, {ok:true, why:`${useLocal ? "Your local model" : "Claude"} writes the answer using only these sections.`});
+    const el = addMsg("bot", `<span class="from">The Keeper · ${useLocal ? "Local AI" : "AI"}</span><span class="body">Thinking…</span>`);
     busy = true;
     const excerpts = hits.map(h=>`[${h.c.title} > ${h.c.heading}]\n${h.c.intro ? h.c.intro+"\n" : ""}${h.c.text}`).join("\n\n");
-    const input = `${D.prompts.chat}\n\nHELP CENTER EXCERPTS\n${excerpts}\n\nCUSTOMER QUESTION\n${q}`;
+    const userMsg = `HELP CENTER EXCERPTS\n${excerpts}\n\nCUSTOMER QUESTION\n${q}`;
+    const show = t => { el.querySelector(".body").innerHTML = md(t); $("#msgs").scrollTop=1e9; };
     try {
-      const {text} = await sample(input, {modelTier:"quick", cache:false, onText:({text}) => { el.querySelector(".body").innerHTML = md(text); $("#msgs").scrollTop=1e9; }});
-      if (text.trim().toUpperCase().startsWith("HANDOFF")){ el.remove(); renderTrace(q, hits, {ok:false, why:"Claude found no answer in these sections, so it handed off."}); handoffMsg("docs"); }
+      const text = useLocal ? await ollamaChat(D.prompts.chat, userMsg, {onText: show})
+        : (await sample(`${D.prompts.chat}\n\n${userMsg}`, {modelTier:"quick", cache:false, onText:({text}) => show(text)})).text;
+      if (text.trim().toUpperCase().startsWith("HANDOFF")){ el.remove(); renderTrace(q, hits, {ok:false, why:`${useLocal ? "The local model" : "Claude"} found no answer in these sections, so it handed off.`}); handoffMsg("docs"); }
       else { el.querySelector(".body").innerHTML = md(text.replace(/\n?Source:.*$/i,"")); el.insertAdjacentHTML("beforeend", src); }
     } catch(e){ el.querySelector(".body").textContent = aiError(e); }
     busy = false; return;
@@ -556,11 +609,18 @@ function triagePrompt(ticket, baseline){
   const cands = [MACROS[baseline.macro_id], ...scored.filter(m=>m.id!==baseline.macro_id).slice(0,3)];
   const candText = cands.map(m=>`[${m.id}] ${m.title} (category: ${m.category})\nInternal note: ${m.internal_note||""}\n${m.body}`).join("\n\n");
   const c = ticket.customer;
-  return `${D.prompts.triage}\n\nRespond with a single JSON object and nothing else.\n\nTICKET ${ticket.id}\nFrom: ${c.name} <${c.email||""}>\nBusiness: ${c.business||""}\nPlan: ${c.plan||""}\nChannel: ${ticket.channel||""}\nSubject: ${ticket.subject}\n\n${ticket.body}\n\nHELP CENTER EXCERPTS\n${excerpts}\n\nCANDIDATE MACROS (full text)\n${candText}\n\nALL MACROS\n${D.macros.map(m=>`${m.id}: ${m.title}`).join("\n")}`;
+  return `TICKET ${ticket.id}\nFrom: ${c.name} <${c.email||""}>\nBusiness: ${c.business||""}\nPlan: ${c.plan||""}\nChannel: ${ticket.channel||""}\nSubject: ${ticket.subject}\n\n${ticket.body}\n\nHELP CENTER EXCERPTS\n${excerpts}\n\nCANDIDATE MACROS (full text)\n${candText}\n\nALL MACROS\n${D.macros.map(m=>`${m.id}: ${m.title}`).join("\n")}`;
 }
-async function aiTriage(ticket, baseline){
-  const out = await sample.json(triagePrompt(ticket, baseline), {modelTier:"quick"});
-  const r = {...baseline, engine:"Claude (live)", rules_baseline:{category:baseline.category, priority:baseline.priority, macro_id:baseline.macro_id}};
+async function aiTriage(ticket, baseline, local=false){
+  const user = triagePrompt(ticket, baseline);
+  let out;
+  if (local){
+    const raw = await ollamaChat(D.prompts.triage, user, {json:true});
+    try { out = JSON.parse(raw); } catch { const m = raw.match(/\{[\s\S]*\}/); if (!m) throw {code:"bad_json"}; out = JSON.parse(m[0]); }
+  } else {
+    out = await sample.json(`${D.prompts.triage}\n\nRespond with a single JSON object and nothing else.\n\n${user}`, {modelTier:"quick"});
+  }
+  const r = {...baseline, engine: local ? `Local AI (${localModel}, live)` : "Claude (live)", rules_baseline:{category:baseline.category, priority:baseline.priority, macro_id:baseline.macro_id}};
   if (out.category in TX.categories) r.category = out.category;
   if (PR.includes(out.priority)) r.priority = out.priority;
   if (["negative","neutral","positive"].includes(out.sentiment)) r.sentiment = out.sentiment;
@@ -615,7 +675,10 @@ function draftHTML(r){
   return `<div>
     <div class="draft-h"><h3>Draft reply</h3><span class="engine">${esc(r.engine==="rules"?"Offline rules engine":r.engine)}</span>
       ${r.draft_reply?'<button class="btn" data-copy>Copy</button>':""}
-      <button class="btn ai-only" data-ai ${sample?"":"hidden"}>${r.engine==="Claude (live)"?"Redraft with AI":"Draft with AI"}</button></div>
+      <span class="draft-actions">
+        <button class="btn ai-only" data-ai ${sample?"":"hidden"}>${r.engine==="Claude (live)"?"Redraft with AI":"Draft with AI"}</button>
+        <button class="btn local-only" data-local ${localModel?"":"hidden"}>${String(r.engine).startsWith("Local AI")?"Redraft with local AI":"Draft with local AI"}</button>
+      </span></div>
     <div class="draft">${body}</div>
     ${r.unfilled_placeholders?.length ? `<p class="note">Highlighted fields need the agent's input. The AI engine writes these from the ticket.</p>` : ""}
     ${r.rules_baseline ? `<p class="note">Rules engine said: ${esc(catLabel(r.rules_baseline.category))}, ${r.rules_baseline.priority}, ${r.rules_baseline.macro_id}.</p>` : ""}
@@ -637,16 +700,16 @@ function renderDetail(){
     ${draftHTML(r)}
   </div>`;
   const cp = $("#detail [data-copy]"); if (cp) cp.addEventListener("click", ()=>copyText(r.draft_reply, cp));
-  const ab = $("#detail [data-ai]");
-  if (ab) ab.addEventListener("click", async () => {
+  document.querySelectorAll("#detail [data-ai], #detail [data-local]").forEach(ab => ab.addEventListener("click", async () => {
+    const local = ab.hasAttribute("data-local");
     ab.disabled = true; ab.textContent = "Thinking…";
     try {
       const base = curSet==="own" ? rulesTriage(t) : setData().results.find(x=>x.ticket_id===t.id);
-      const res = await aiTriage(t, base);
+      const res = await aiTriage(t, base, local);
       if (curSet==="own") ownResult = res; else aiResults[t.id] = res;
       renderQueue(); renderDetail();
-    } catch(e){ ab.textContent = aiError(e); }
-  });
+    } catch(e){ ab.textContent = e?.code==="bad_json" ? "The model's reply wasn't usable. Try again." : aiError(e); }
+  }));
 }
 function ownForm(){
   return `<form class="own" id="own-form">
@@ -656,7 +719,7 @@ function ownForm(){
     <div class="row"><label>Customer name<input id="own-name" value="${esc(ownTicket.customer.name)}"></label>
       <label>Plan<select id="own-plan">${["Trial","Free","Team","Business"].map(p=>`<option ${p===ownTicket.customer.plan?"selected":""}>${p}</option>`).join("")}</select></label></div>
     <button class="btn primary" type="submit">Triage this ticket</button>
-    <p class="note">Runs the offline rules engine instantly in your browser.${sample?" Then use Draft with AI for a written reply from Claude.":""}</p>
+    <p class="note">Runs the offline rules engine instantly in your browser.${sample||localModel?" Then use the AI draft button for a written reply.":""}</p>
   </form>`;
 }
 function bindOwn(){
@@ -678,6 +741,7 @@ document.querySelectorAll("#set-seg button").forEach(b => b.addEventListener("cl
 curId = D.sets.sample.tickets.map(t=>({t,r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority])[0].t.id;
 renderQueue(); renderDetail();
 aiReady.then(ok => { if (ok) renderDetail(); });
+localReady.then(ok => { if (ok){ renderDetail(); if (curSet==="own") renderQueue(); } });
 
 /* ---------- macros ---------- */
 const cats = [...new Set(D.macros.map(m=>m.category))];

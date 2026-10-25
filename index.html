@@ -17,6 +17,7 @@
   --sea:#0f2140; --sea-2:#173262; --sea-ink:#eef3ff; --sea-muted:#a9b8d8; --beam:#f4a63b; --beam-soft:#fdf0dc; --beam-ink:#8a4f06;
   --c-money:#9a5b06; --c-money-bg:#fcefd8; --c-sched:#1f5bc4; --c-sched-bg:#e3ecfb; --c-comms:#6d43b8; --c-comms-bg:#efe8fb;
   --c-acct:#0f7480; --c-acct-bg:#dcf2f3; --c-risk:#b3302a; --c-risk-bg:#fbe4e1; --c-grow:#24785a; --c-grow-bg:#dff1e9;
+  --s1:#1f5bc4; --s2:#d98a1c; --scrim:rgba(10,18,38,.45); --shadow:0 18px 50px rgba(15,33,64,.22);
   --f-display:"Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
   --f-body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -29,7 +30,7 @@
   --mark:#4a3d0a; --mark-ink:#ffe49a;
   --sea:#08142b; --sea-2:#11254b; --sea-ink:#eef3ff; --sea-muted:#9fb0d4; --beam:#f6b04f; --beam-soft:#3a2810; --beam-ink:#ffd08a;
   --c-money:#f2b25c; --c-money-bg:#3a2a12; --c-sched:#8fb3ff; --c-sched-bg:#1c2c52; --c-comms:#c2a4ff; --c-comms-bg:#2c2150;
-  --c-acct:#5fd0d8; --c-acct-bg:#12343a; --c-risk:#ff8a7f; --c-risk-bg:#3d1c1c; --c-grow:#6fd1a3; --c-grow-bg:#15302a; color-scheme:dark }}
+  --c-acct:#5fd0d8; --c-acct-bg:#12343a; --c-risk:#ff8a7f; --c-risk-bg:#3d1c1c; --c-grow:#6fd1a3; --c-grow-bg:#15302a; --s1:#5b8af0; --s2:#c9801f; --scrim:rgba(0,0,0,.6); --shadow:0 18px 50px rgba(0,0,0,.5); color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#0b1120; --surface:#131b2f; --sunk:#0e1528; --ink:#e6ecf8; --muted:#97a5c4; --line:#253252;
   --accent:#7fa8ff; --accent-ink:#0b1120; --accent-soft:#1c2c52; --stem:#5ec497; --stem-soft:#15302a;
@@ -37,8 +38,9 @@
   --mark:#4a3d0a; --mark-ink:#ffe49a;
   --sea:#08142b; --sea-2:#11254b; --sea-ink:#eef3ff; --sea-muted:#9fb0d4; --beam:#f6b04f; --beam-soft:#3a2810; --beam-ink:#ffd08a;
   --c-money:#f2b25c; --c-money-bg:#3a2a12; --c-sched:#8fb3ff; --c-sched-bg:#1c2c52; --c-comms:#c2a4ff; --c-comms-bg:#2c2150;
-  --c-acct:#5fd0d8; --c-acct-bg:#12343a; --c-risk:#ff8a7f; --c-risk-bg:#3d1c1c; --c-grow:#6fd1a3; --c-grow-bg:#15302a; color-scheme:dark }
+  --c-acct:#5fd0d8; --c-acct-bg:#12343a; --c-risk:#ff8a7f; --c-risk-bg:#3d1c1c; --c-grow:#6fd1a3; --c-grow-bg:#15302a; --s1:#5b8af0; --s2:#c9801f; --scrim:rgba(0,0,0,.6); --shadow:0 18px 50px rgba(0,0,0,.5); color-scheme:dark }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-body);-webkit-font-smoothing:antialiased}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
 h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0;letter-spacing:-.01em}
@@ -53,7 +55,7 @@ header .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;paddin
 header .stats-wrap{padding-block:0 20px}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand svg{flex:none}
-.brand h1{font-size:22px;font-weight:700}
+.brand h1{font-size:clamp(26px, 2.2vw + 14px, 36px);font-weight:700;letter-spacing:-.025em;line-height:1.05}
 .brand p{margin:2px 0 0;color:var(--sea-muted);font-size:13.5px;max-width:62ch}
 .brand p em{font-style:normal;color:var(--beam)}
 .credit{margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:13.5px}
@@ -66,7 +68,7 @@ footer{border-top:1px solid var(--line);padding-block:20px;color:var(--muted);fo
 .stats{display:flex;flex-wrap:wrap;gap:10px}
 .stat{flex:1 1 150px;background:color-mix(in srgb, var(--sea-ink) 7%, transparent);border:1px solid color-mix(in srgb, var(--sea-ink) 12%, transparent);border-radius:var(--r);padding:10px 14px}
 .stat b{display:block;font:700 26px/1.1 var(--f-display);font-variant-numeric:tabular-nums;color:var(--sea-ink)}
-.stat b i{font-style:normal;color:var(--beam)}
+.stat b i{font-style:normal;color:var(--sea-muted);font-size:.55em;font-weight:500;letter-spacing:0}
 .stat span{font-size:13px;color:var(--sea-muted)}
 
 /* tabs */
@@ -74,6 +76,10 @@ nav.tabs{display:flex;gap:4px;overflow-x:auto;padding-block:14px 0;border-bottom
 nav.tabs button{background:none;border:0;padding:10px 14px;border-bottom:2px solid transparent;color:var(--muted);font-weight:500;cursor:pointer;white-space:nowrap}
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--beam);font-weight:600}
 nav.tabs button:hover{color:var(--ink)}
+nav.tabs button{transition:color .15s, border-color .2s}
+nav.tabs .kbar-open{margin-left:auto;align-self:center;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:6px 8px 6px 12px;color:var(--muted);background:var(--surface);font-weight:400;font-size:13.5px}
+nav.tabs .kbar-open:hover{border-color:var(--accent);color:var(--ink)}
+kbd{font:500 11.5px/1 var(--f-mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:3px 6px;background:var(--sunk);color:var(--muted)}
 section.panel{padding-bottom:48px}
 .lede{max-width:68ch;color:var(--muted);margin:0 0 18px}
 
@@ -187,7 +193,7 @@ section.panel{padding-bottom:48px}
 .mac{padding:16px;display:grid;gap:10px;align-content:start}
 .mac-h{display:flex;gap:10px;align-items:baseline}
 .mac-h h3{font-size:16px;flex:1;min-width:0}
-.mac pre{margin:0;white-space:pre-wrap;font:13.5px/1.55 var(--f-body);background:var(--sunk);border-radius:8px;padding:12px;max-height:260px;overflow:auto}
+.mac pre{margin:0;white-space:pre-wrap;font:13.5px/1.55 var(--f-body);background:var(--sunk);border-radius:8px;padding:12px}
 .ph{background:var(--accent-soft);color:var(--accent);border-radius:3px;padding:0 3px;font-family:var(--f-mono);font-size:.85em}
 .mac .meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
 
@@ -211,12 +217,75 @@ section.panel{padding-bottom:48px}
 .evalt th,.evalt td{text-align:left;padding:8px 14px 8px 0;border-bottom:1px solid var(--line)}
 .evalt th{font-weight:600;font-size:13px;color:var(--muted)}
 
+/* command palette */
+.kbar{position:fixed;inset:0;z-index:50;background:var(--scrim);display:flex;justify-content:center;align-items:flex-start;
+  padding-top:max(10vh, calc(env(safe-area-inset-top, 0px) + 16px));padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+.kbar-panel{width:min(640px,100%);background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden;animation:pop .16s ease-out}
+.kbar-panel input{width:100%;border:0;border-bottom:1px solid var(--line);padding:16px 18px;font-size:16px;background:var(--surface);outline:none}
+.kbar-list{max-height:min(420px,55vh);overflow-y:auto;padding:6px}
+.kbar-group{font:500 11px/1 var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:10px 12px 6px}
+.kbar-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:none;border-radius:8px;padding:9px 12px;cursor:pointer;min-width:0}
+.kbar-item .t{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kbar-item .k{font:500 11px/1 var(--f-mono);color:var(--muted);flex:none}
+.kbar-item[aria-selected="true"]{background:var(--accent-soft)}
+.kbar-foot{display:flex;gap:14px;flex-wrap:wrap;padding:10px 14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.kbar-empty{padding:18px 14px;color:var(--muted);font-size:14px}
+/* toast */
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom, 0px));transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:14px;
+  background:var(--sea);color:var(--sea-ink);border-radius:10px;padding:10px 12px 10px 16px;box-shadow:var(--shadow);font-size:14px;max-width:calc(100vw - 32px);animation:rise .2s ease-out}
+.toast button{background:none;border:1px solid color-mix(in srgb, var(--sea-ink) 35%, transparent);color:var(--sea-ink);border-radius:7px;padding:4px 10px;cursor:pointer;font-size:13px}
+/* queue progress + handled state */
+.qprog{position:sticky;top:0;z-index:1;background:var(--surface);border-bottom:1px solid var(--line);padding:10px 14px;display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.qprog b{color:var(--ink);font-variant-numeric:tabular-nums}
+.qprog .bar{height:6px}
+.qprog .bar i{background:var(--stem);transition:width .35s ease}
+.qitem{transition:background .15s, opacity .2s}
+.qitem.done{opacity:.55}
+.qitem.done .subj{text-decoration:line-through;text-decoration-color:var(--muted)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn:active{transform:translateY(1px)}
+/* all clear */
+.allclear{display:grid;justify-items:center;text-align:center;gap:10px;padding:42px 20px}
+.allclear h2{font-size:24px}
+.allclear p{color:var(--muted);max-width:44ch;margin:0}
+.beam{width:120px;height:120px;position:relative}
+.beam::before{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg, color-mix(in srgb, var(--beam) 70%, transparent) 0 26deg, transparent 26deg 180deg, color-mix(in srgb, var(--beam) 70%, transparent) 180deg 206deg, transparent 206deg);
+  -webkit-mask:radial-gradient(circle, transparent 18%, #000 19%);mask:radial-gradient(circle, transparent 18%, #000 19%);animation:sweep 3.2s linear 2}
+.beam::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:var(--beam);box-shadow:0 0 0 6px color-mix(in srgb, var(--beam) 25%, transparent)}
+/* typing indicator */
+.dots{display:inline-flex;gap:4px;margin-left:6px;vertical-align:middle}
+.dots i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:blink 1.2s infinite ease-in-out}
+.dots i:nth-child(2){animation-delay:.15s} .dots i:nth-child(3){animation-delay:.3s}
+.msg{animation:rise .22s ease-out}
+/* macro disclosure */
+.mac pre.clamped{max-height:8.6em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 60%, transparent);mask-image:linear-gradient(#000 60%, transparent)}
+.linkbtn{background:none;border:0;color:var(--accent);cursor:pointer;padding:0;font-size:13.5px;font-weight:500;justify-self:start}
+.empty{display:grid;gap:10px;justify-items:start;padding:24px 0}
+/* accuracy chart */
+.acc{display:grid;gap:16px;margin:14px 0 8px}
+.acc-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.acc-legend span{display:inline-flex;align-items:center;gap:6px}
+.acc-legend i{width:12px;height:12px;border-radius:3px}
+.acc-group h4{margin:0 0 8px;font:600 13px var(--f-body);color:var(--ink)}
+.acc-row{display:grid;grid-template-columns:minmax(0,150px) minmax(0,1fr) 44px;align-items:center;gap:10px;padding:3px 0;font-size:13px;color:var(--muted)}
+.acc-track{position:relative;height:14px;background:var(--sunk);border-radius:4px}
+.acc-track i{position:absolute;left:0;top:0;bottom:0;border-radius:0 4px 4px 0;transition:width .5s ease}
+.acc-row:hover .acc-track{outline:2px solid var(--line);outline-offset:2px}
+.acc-row b{color:var(--ink);font-variant-numeric:tabular-nums;text-align:right;font-weight:600}
+.acc-tip{position:fixed;z-index:40;pointer-events:none;background:var(--sea);color:var(--sea-ink);font-size:12.5px;border-radius:7px;padding:6px 9px;box-shadow:var(--shadow);max-width:260px}
+@keyframes rise{from{opacity:0;transform:translate(var(--tx,0),6px)}to{opacity:1;transform:translate(var(--tx,0),0)}}
+.toast{--tx:-50%}
+@keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+@keyframes sweep{to{transform:rotate(360deg)}}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+
 @media (max-width:860px){
   .chat-grid,.tri-grid{grid-template-columns:minmax(0,1fr)}
   .chat{height:560px}
   .queue{max-height:340px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:560px){nav.tabs .kbar-open .lbl{display:none}}
 </style>
 
 <header>
@@ -253,6 +322,7 @@ section.panel{padding-bottom:48px}
     <button role="tab" id="tab-triage" aria-controls="triage" aria-selected="false">Ticket triage</button>
     <button role="tab" id="tab-macros" aria-controls="macros" aria-selected="false">Macro library</button>
     <button role="tab" id="tab-how" aria-controls="how" aria-selected="false">How it works</button>
+    <button type="button" class="kbar-open" id="kbar-open" aria-label="Search or jump to (Ctrl K)"><span class="lbl">Search or jump to…</span><kbd id="kbar-key">Ctrl K</kbd></button>
   </nav>
 
   <!-- HELP CHAT -->
@@ -348,11 +418,20 @@ section.panel{padding-bottom:48px}
       <div>
         <h3>Measured, not guessed</h3>
         <p>Every ticket set has hand-checked labels, so accuracy is scored rather than eyeballed. The rules engine was written alongside the sample tickets, so its score there is a ceiling. The unseen set shows how keyword rules hold up on new phrasing, and is the bar the AI engine has to beat.</p>
-        <div class="evalt"><table id="eval-table"></table></div>
+        <div class="acc" id="acc-chart" aria-hidden="true"></div>
+        <details><summary class="note" style="cursor:pointer">Table view</summary><div class="evalt"><table id="eval-table"></table></div></details>
       </div>
     </div>
   </section>
 </main>
+<div class="kbar" id="kbar" hidden role="dialog" aria-modal="true" aria-label="Search or jump to">
+  <div class="kbar-panel">
+    <input id="kbar-q" autocomplete="off" placeholder="Search tickets, macros, help articles, or ask the Keeper…" aria-label="Search" aria-controls="kbar-list">
+    <div class="kbar-list" id="kbar-list" role="listbox"></div>
+    <div class="kbar-foot"><span><kbd>↑</kbd> <kbd>↓</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>Esc</kbd> to close</span></div>
+  </div>
+</div>
+<div id="toast-root" aria-live="polite"></div>
 <footer><div class="wrap">Created by Nick Lax · <span class="mono" style="user-select:all">nlaxatx@gmail.com</span> · Pharos and its customers are fictional; the tools are real and run on any company's docs and tickets.</div></footer>
 
 <script>
@@ -413,8 +492,15 @@ function md(text){
   }
   return html;
 }
+let toastTimer = null;
+function toast(msg, action){
+  const root = document.getElementById("toast-root"); clearTimeout(toastTimer);
+  root.innerHTML = `<div class="toast" role="status"><span>${msg}</span>${action ? `<button type="button">${esc(action.label)}</button>` : ""}</div>`;
+  if (action) root.querySelector("button").addEventListener("click", () => { root.innerHTML = ""; action.run(); });
+  toastTimer = setTimeout(() => { root.innerHTML = ""; }, action ? 6000 : 2200);
+}
 async function copyText(text, btn){
-  const done = () => { const o=btn.textContent; btn.textContent="Copied"; setTimeout(()=>btn.textContent=o,1400); };
+  const done = () => { const o=btn.textContent; btn.textContent="Copied"; toast("Copied to clipboard."); setTimeout(()=>btn.textContent=o,1400); };
   try { await navigator.clipboard.writeText(text); done(); }
   catch { const ta=document.createElement("textarea"); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy"); done();}catch{} ta.remove(); }
 }
@@ -482,8 +568,8 @@ $("#copy-email").addEventListener("click", e => copyText("nlaxatx@gmail.com", e.
 /* ---------- stats ---------- */
 (function(){
   const s = D.sets.sample.summary;
-  const items = [[CH.length,`help-center sections from ${D.kb.articles} articles`],[s.tickets,"sample tickets triaged"],
-    [s.ready_to_send,"drafts ready after a quick review"],[s.churn_risk.length,"churn risks flagged"],[D.macros.length,"macros"]];
+  const items = [[`${s.ready_to_send}<i> of ${s.tickets}</i>`,"tickets drafted and ready to send"],[s.needs_human,"flagged for a person first"],
+    [s.churn_risk.length,"churn risks caught"],[CH.length,`help-center sections from ${D.kb.articles} articles`],[D.macros.length,"macros"]];
   $("#stats").innerHTML = items.map(([n,l])=>`<div class="stat"><b>${n}</b><span>${l}</span></div>`).join("");
 })();
 
@@ -540,7 +626,7 @@ async function ask(q){
   if (useLocal || useClaude){
     const who = useLocal ? `your local model (${localModel})` : "Claude";
     renderTrace(q, hits, {ok:true, why:`${useLocal ? "Your local model" : "Claude"} writes the answer using only these sections.`});
-    const el = addMsg("bot", `<span class="from">The Keeper · ${useLocal ? "Local AI" : "AI"}</span><span class="body">Thinking…</span>`);
+    const el = addMsg("bot", `<span class="from">The Keeper · ${useLocal ? "Local AI" : "AI"}</span><span class="body">Checking the docs<span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></span>`);
     busy = true;
     const excerpts = hits.map(h=>`[${h.c.title} > ${h.c.heading}]\n${h.c.intro ? h.c.intro+"\n" : ""}${h.c.text}`).join("\n\n");
     const userMsg = `HELP CENTER EXCERPTS\n${excerpts}\n\nCUSTOMER QUESTION\n${q}`;
@@ -640,6 +726,9 @@ async function aiTriage(ticket, baseline, local=false){
 /* ---------- triage UI ---------- */
 const ORDER = {urgent:0, high:1, normal:2, low:3};
 let curSet = "sample", curId = null;
+const handled = {sample: new Set(), unseen: new Set()};
+function orderedRows(){ const s = setData(); return s.tickets.map(t=>({t, r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority]); }
+function nextOpen(after){ const rows = orderedRows().filter(x => !handled[curSet].has(x.t.id)); return rows.find(x => x.t.id !== after)?.t.id || null; }
 const aiResults = {};      // ticket id -> live AI result
 const ownTicket = {id:"YOU-1", channel:"email", customer:{name:"Jamie Rivera", email:"jamie@example.com", business:"Your business", plan:"Team"},
   subject:"Slack updates stopped", body:"Hi, our #client-work Slack channel stopped getting task updates from Pharos sometime yesterday. Nothing changed on our end. Can you help?"};
@@ -655,8 +744,11 @@ function renderQueue(){
   const sum = s.summary;
   $("#qsum").innerHTML = PR.slice().reverse().map(p=>`<span class="pill p-${p}">${sum.by_priority[p]} ${p}</span>`).join("") +
     `<span class="chip">${sum.ready_to_send} ready</span><span class="chip">${sum.needs_human} need a person</span>`;
-  $("#queue").innerHTML = rows.map(({t,r})=>`<button class="qitem" data-id="${t.id}" aria-current="${t.id===curId}">
-      <span class="row"><span class="pill p-${r.priority}">${r.priority}</span>${catChip(r.category)}${r.churn_risk?'<span class="flag">churn risk</span>':""}</span>
+  const done = handled[curSet], n = rows.length, k = rows.filter(x=>done.has(x.t.id)).length;
+  rows.sort((a,b) => done.has(a.t.id) - done.has(b.t.id));
+  $("#queue").innerHTML = `<div class="qprog"><span><b>${k} of ${n}</b> handled${k && k<n ? " · next up is at the top" : ""}</span><div class="bar"><i style="width:${n?Math.round(k/n*100):0}%"></i></div></div>` +
+    rows.map(({t,r})=>`<button class="qitem${done.has(t.id)?" done":""}" data-id="${t.id}" aria-current="${t.id===curId}">
+      <span class="row"><span class="pill p-${r.priority}">${r.priority}</span>${catChip(r.category)}${r.churn_risk?'<span class="flag">churn risk</span>':""}${done.has(t.id)?'<span class="flag ok">handled</span>':""}</span>
       <span class="subj">${esc(t.subject)}</span><span class="who"><span class="mono">${t.id}</span> · ${esc(t.customer.business)}</span></button>`).join("");
 }
 function fieldsHTML(r){
@@ -677,6 +769,7 @@ function draftHTML(r){
   return `<div>
     <div class="draft-h"><h3>Draft reply</h3><span class="engine">${esc(r.engine==="rules"?"Offline rules engine":r.engine)}</span>
       ${r.draft_reply?'<button class="btn" data-copy>Copy</button>':""}
+      ${curSet!=="own" ? (handled[curSet].has(r.ticket_id) ? '<button class="btn" data-reopen>Reopen</button>' : `<button class="btn primary" data-done>${r.category==="spam"?"Close as spam":"Mark as sent"}</button>`) : ""}
       <span class="draft-actions">
         <button class="btn ai-only" data-ai ${sample?"":"hidden"}>${r.engine==="Claude (live)"?"Redraft with AI":"Draft with AI"}</button>
         <button class="btn local-only" data-local ${localModel?"":"hidden"}>${String(r.engine).startsWith("Local AI")?"Redraft with local AI":"Draft with local AI"}</button>
@@ -692,9 +785,16 @@ function renderDetail(){
   let t, r;
   if (curSet === "own"){ t = ownTicket; r = ownResult; }
   else { t = setData().tickets.find(x=>x.id===curId); r = resultFor(curId); }
+  if (curSet !== "own" && curId === null){
+    $("#detail").innerHTML = `<div class="allclear"><div class="beam" aria-hidden="true"></div><h2>Inbox zero</h2>
+      <p>Every customer in this queue has an answer. The light's on, and nobody's waiting.</p>
+      <button class="btn" id="reset-queue">Reset the queue</button></div>`;
+    $("#reset-queue").addEventListener("click", () => { handled[curSet].clear(); curId = nextOpen(null); renderQueue(); renderDetail(); });
+    return;
+  }
   if (!t || !r){ $("#detail").innerHTML = `<div class="detail"><p class="note">Pick a ticket from the queue.</p></div>`; return; }
   $("#detail").innerHTML = `<div class="detail">
-    <div class="d-head"><span class="eyebrow">${esc(t.id)} · ${esc(t.channel)} · ${esc(t.customer.plan)} plan</span>
+    <div class="d-head"><span class="eyebrow">${esc(t.id)} · ${esc(t.channel)} · ${t.customer.plan==="None" ? "not a customer" : esc(t.customer.plan) + " plan"}</span>
       <h2>${esc(t.subject)}</h2><span class="who">${esc(t.customer.name)}, ${esc(t.customer.business)}</span></div>
     <div class="cust-msg">${esc(t.body)}</div>
     ${r.summary && r.summary !== t.subject ? `<div><span class="eyebrow">Summary for the agent</span><div style="margin-top:4px">${esc(r.summary)}</div></div>` : ""}
@@ -702,9 +802,18 @@ function renderDetail(){
     ${draftHTML(r)}
   </div>`;
   const cp = $("#detail [data-copy]"); if (cp) cp.addEventListener("click", ()=>copyText(r.draft_reply, cp));
+  const dn = $("#detail [data-done]");
+  if (dn) dn.addEventListener("click", () => {
+    const id = t.id, set = curSet;
+    handled[set].add(id); curId = nextOpen(id);
+    renderQueue(); renderDetail();
+    toast(curId ? `${r.category==="spam"?"Closed":"Sent"}. Next up: ${curId}.` : "That's the last one. Nice work.", {label:"Undo", run: () => { handled[set].delete(id); curSet = set; curId = id; renderQueue(); renderDetail(); }});
+  });
+  const ro = $("#detail [data-reopen]");
+  if (ro) ro.addEventListener("click", () => { handled[curSet].delete(t.id); renderQueue(); renderDetail(); });
   document.querySelectorAll("#detail [data-ai], #detail [data-local]").forEach(ab => ab.addEventListener("click", async () => {
     const local = ab.hasAttribute("data-local");
-    ab.disabled = true; ab.textContent = "Thinking…";
+    ab.disabled = true; ab.textContent = "Drafting a reply…";
     try {
       const base = curSet==="own" ? rulesTriage(t) : setData().results.find(x=>x.ticket_id===t.id);
       const res = await aiTriage(t, base, local);
@@ -737,7 +846,7 @@ $("#queue").addEventListener("click", e => { const b = e.target.closest(".qitem"
 document.querySelectorAll("#set-seg button").forEach(b => b.addEventListener("click", () => {
   curSet = b.dataset.set; document.querySelectorAll("#set-seg button").forEach(x=>x.setAttribute("aria-pressed", x===b));
   if (curSet === "own"){ ownResult = ownResult || rulesTriage(ownTicket); }
-  else { const s=setData(); curId = s.tickets.map(t=>({t,r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority])[0].t.id; }
+  else { curId = nextOpen(null); }
   renderQueue(); renderDetail();
 }));
 curId = D.sets.sample.tickets.map(t=>({t,r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority])[0].t.id;
@@ -748,6 +857,7 @@ localReady.then(ok => { if (ok){ renderDetail(); if (curSet==="own") renderQueue
 /* ---------- macros ---------- */
 const cats = [...new Set(D.macros.map(m=>m.category))];
 $("#mac-cat").innerHTML += cats.map(c=>`<option value="${c}">${catLabel(c)}</option>`).join("");
+const openMacros = new Set();
 function renderMacros(){
   const q = $("#mac-q").value.toLowerCase().trim(), c = $("#mac-cat").value;
   const list = D.macros.filter(m => (!c || m.category===c) && (!q || (m.title+" "+m.body+" "+m.actions.tags.join(" ")).toLowerCase().includes(q)));
@@ -755,11 +865,16 @@ function renderMacros(){
     <div class="mac-h"><span class="mono">${m.id}</span><h3>${esc(m.title)}</h3>${m.body?`<button class="btn" data-copy="${m.id}">Copy</button>`:""}</div>
     <div class="meta">${catChip(m.category)}<span class="pill p-${m.actions.priority}">${m.actions.priority}</span><span class="chip">status: ${m.actions.status}</span>${m.actions.tags.map(t=>`<span class="chip">#${esc(t)}</span>`).join("")}</div>
     ${m.internal_note?`<div class="internal">${esc(m.internal_note)}</div>`:""}
-    <pre>${m.body ? esc(m.body).replace(/\{\{(\w+)\}\}/g,'<span class="ph">$1</span>') : "No reply is sent. The ticket is closed and marked as spam."}</pre>
-  </article>`).join("") : `<p class="note">No macros match “${esc(q)}”.</p>`;
+    <pre class="${m.body.split("\n").length > 7 && !openMacros.has(m.id) ? "clamped" : ""}">${m.body ? esc(m.body).replace(/\{\{(\w+)\}\}/g,'<span class="ph">$1</span>') : "No reply is sent. The ticket is closed and marked as spam."}</pre>
+    ${m.body.split("\n").length > 7 ? `<button class="linkbtn" data-more="${m.id}">${openMacros.has(m.id) ? "Show less" : "Show full reply"}</button>` : ""}
+  </article>`).join("") : `<div class="empty"><p class="note">No macros match “${esc(q)}”${c ? ` in ${esc(catLabel(c))}` : ""}.</p><button class="btn" id="mac-clear">Clear search</button></div>`;
+  const clr = $("#mac-clear"); if (clr) clr.addEventListener("click", () => { $("#mac-q").value = ""; $("#mac-cat").value = ""; renderMacros(); $("#mac-q").focus(); });
 }
 $("#mac-q").addEventListener("input", renderMacros); $("#mac-cat").addEventListener("change", renderMacros);
-$("#mac-grid").addEventListener("click", e => { const b = e.target.closest("[data-copy]"); if (b) copyText(MACROS[b.dataset.copy].body, b); });
+$("#mac-grid").addEventListener("click", e => {
+  const b = e.target.closest("[data-copy]"); if (b) return copyText(MACROS[b.dataset.copy].body, b);
+  const mo = e.target.closest("[data-more]"); if (mo){ const id = mo.dataset.more; openMacros.has(id) ? openMacros.delete(id) : openMacros.add(id); renderMacros(); }
+});
 renderMacros();
 
 /* ---------- eval table ---------- */
@@ -767,6 +882,110 @@ renderMacros();
   const row = (name, s) => { const a = s.summary.accuracy; return `<tr><td>${name}</td><td>${s.tickets.length}</td><td>${s.engine==="rules"?"Offline rules":esc(s.engine)}</td><td>${Math.round(a.category*100)}%</td><td>${Math.round(a.priority*100)}%</td></tr>`; };
   $("#eval-table").innerHTML = `<tr><th>Ticket set</th><th>Tickets</th><th>Engine</th><th>Category</th><th>Priority</th></tr>` +
     row("Sample (rules written for these)", D.sets.sample) + row("Unseen (new phrasing)", D.sets.unseen);
+})();
+
+/* ---------- accuracy chart: one bar per engine and ticket set, color = engine ---------- */
+(function(){
+  const score = (key, results) => {
+    const labels = D.sets[key].labels, rs = results.filter(r => labels[r.ticket_id]);
+    const c = rs.filter(r => r.category === labels[r.ticket_id].category).length, p = rs.filter(r => r.priority === labels[r.ticket_id].priority).length;
+    return {n: rs.length, cat: c, pri: p};
+  };
+  const rows = [];
+  for (const [key, name] of [["sample","Sample"],["unseen","Unseen"]]){
+    const set = D.sets[key];
+    const rulesRes = set.engine === "rules" ? set.results : set.tickets.map(rulesTriage);
+    rows.push({set:name, engine:"Keyword rules", s:1, ...score(key, rulesRes)});
+    if (set.engine !== "rules") rows.push({set:name, engine:set.engine.replace(/^ollama:/,"Local AI · "), s:2, ...score(key, set.results)});
+  }
+  const engines = [...new Map(rows.map(r => [r.s, r.engine])).entries()];
+  const bar = (r, k) => { const v = r[k], pct = r.n ? Math.round(v / r.n * 100) : 0;
+    return `<div class="acc-row" data-tip="${esc(r.set)} tickets · ${esc(r.engine)} · ${k==="cat"?"category":"priority"} ${pct}% (${v} of ${r.n})">
+      <span>${esc(r.set)}${engines.length > 1 ? ` · ${r.s===1?"rules":"AI"}` : ""}</span>
+      <span class="acc-track"><i style="width:${pct}%;background:var(--s${r.s})"></i></span><b>${pct}%</b></div>`; };
+  $("#acc-chart").innerHTML =
+    (engines.length > 1 ? `<div class="acc-legend">${engines.map(([s, e]) => `<span><i style="background:var(--s${s})"></i>${esc(e)}</span>`).join("")}</div>` : "") +
+    `<div class="acc-group"><h4>Category accuracy${engines.length === 1 ? " · keyword rules" : ""}</h4>${rows.map(r => bar(r, "cat")).join("")}</div>` +
+    `<div class="acc-group"><h4>Priority accuracy${engines.length === 1 ? " · keyword rules" : ""}</h4>${rows.map(r => bar(r, "pri")).join("")}</div>`;
+  const tip = document.createElement("div"); tip.className = "acc-tip"; tip.hidden = true; document.body.appendChild(tip);
+  $("#acc-chart").addEventListener("mousemove", e => { const row = e.target.closest(".acc-row");
+    if (!row){ tip.hidden = true; return; } tip.textContent = row.dataset.tip; tip.hidden = false;
+    tip.style.left = Math.min(e.clientX + 12, innerWidth - tip.offsetWidth - 8) + "px"; tip.style.top = (e.clientY + 14) + "px"; });
+  $("#acc-chart").addEventListener("mouseleave", () => { tip.hidden = true; });
+})();
+
+/* ---------- command palette (Ctrl/Cmd + K) ---------- */
+(function(){
+  const isMac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+  $("#kbar-key").textContent = isMac ? "⌘ K" : "Ctrl K";
+  const kbar = $("#kbar"), input = $("#kbar-q"), list = $("#kbar-list");
+  let items = [], active = 0, lastFocus = null;
+  const recent = [];
+  const tabNames = {chat:"Help chat", triage:"Ticket triage", macros:"Macro library", how:"How it works"};
+  function openTicket(set, id){
+    curSet = set; document.querySelectorAll("#set-seg button").forEach(x => x.setAttribute("aria-pressed", x.dataset.set === set));
+    curId = id; showTab("triage"); renderQueue(); renderDetail();
+  }
+  function allItems(){
+    const out = [];
+    for (const [id, name] of Object.entries(tabNames)) out.push({group:"Go to", kind:"tab", label:name, run:() => showTab(id)});
+    const nxt = (() => { const keep = curSet; if (keep === "own") return null; return nextOpen(null); })();
+    if (nxt) out.push({group:"Go to", kind:"next", label:`Next ticket to handle (${nxt})`, run:() => openTicket(curSet === "own" ? "sample" : curSet, nxt)});
+    for (const [key, name] of [["sample","Sample"],["unseen","Unseen"]]) for (const t of D.sets[key].tickets)
+      out.push({group:"Tickets", kind:t.id, label:`${t.subject} · ${t.customer.business}`, run:() => openTicket(key, t.id)});
+    for (const m of D.macros) out.push({group:"Macros", kind:m.id, label:m.title, run:() => { showTab("macros"); $("#mac-cat").value = ""; $("#mac-q").value = m.title; renderMacros(); }});
+    const seen = new Set();
+    for (const c of CH){ const key = c.title + c.heading; if (seen.has(key)) continue; seen.add(key);
+      out.push({group:"Help center", kind:"doc", label:`${c.title} › ${c.heading}`, run:() => { showTab("chat"); ask(c.heading === "Overview" ? c.title : c.heading); }}); }
+    return out;
+  }
+  // Fuzzy match: every typed character appears in order; contiguous runs and word starts score higher.
+  function fuzzy(q, text){
+    q = q.toLowerCase(); text = text.toLowerCase();
+    if (text.includes(q)) return 100 - text.indexOf(q) * .1;
+    let ti = 0, score = 0, run = 0;
+    for (const ch of q){ if (ch === " ") continue; const i = text.indexOf(ch, ti); if (i < 0) return 0;
+      run = i === ti ? run + 1 : 0; score += 1 + run + (i === 0 || " ›·-".includes(text[i-1]) ? 2 : 0); ti = i + 1; }
+    return score;
+  }
+  function render(){
+    const q = input.value.trim();
+    let pool = allItems();
+    if (!q){ pool = [...recent.map(r => ({...r, group:"Recent"})), ...pool.filter(x => x.group === "Go to")]; }
+    else {
+      pool = pool.map(x => ({x, s: fuzzy(q, x.label + " " + x.kind)})).filter(o => o.s > 0).sort((a,b) => b.s - a.s).slice(0, 14).map(o => o.x);
+      // Keep each group together, with groups ordered by their best match.
+      const order = [...new Set(pool.map(x => x.group))];
+      pool.sort((a,b) => order.indexOf(a.group) - order.indexOf(b.group));
+      pool.push({group:"Ask", kind:"chat", label:`Ask the Keeper: “${q}”`, run:() => { showTab("chat"); ask(q); }});
+    }
+    items = pool; active = Math.min(active, items.length - 1);
+    let g = null, html = "";
+    items.forEach((it, i) => { if (it.group !== g){ g = it.group; html += `<div class="kbar-group">${esc(g)}</div>`; }
+      html += `<button type="button" class="kbar-item" role="option" id="kb-${i}" data-i="${i}" aria-selected="${i===active}"><span class="t">${esc(it.label)}</span><span class="k">${esc(it.kind)}</span></button>`; });
+    list.innerHTML = html || `<div class="kbar-empty">Nothing matches. Press Enter to ask the Keeper.</div>`;
+    input.setAttribute("aria-activedescendant", items.length ? `kb-${active}` : "");
+  }
+  function choose(i){
+    const it = items[i]; if (!it) return;
+    close();
+    if (it.group !== "Ask" && it.kind !== "next"){ const k = recent.findIndex(r => r.label === it.label); if (k >= 0) recent.splice(k, 1); recent.unshift(it); recent.length = Math.min(recent.length, 4); }
+    it.run();
+  }
+  function open(){ lastFocus = document.activeElement; kbar.hidden = false; input.value = ""; active = 0; render(); input.focus(); }
+  function close(){ kbar.hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  $("#kbar-open").addEventListener("click", open);
+  document.addEventListener("keydown", e => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k"){ e.preventDefault(); kbar.hidden ? open() : close(); return; }
+    if (kbar.hidden) return;
+    if (e.key === "Escape"){ e.preventDefault(); close(); }
+    else if (e.key === "ArrowDown"){ e.preventDefault(); active = (active + 1) % Math.max(items.length, 1); render(); $("#kb-" + active)?.scrollIntoView({block:"nearest"}); }
+    else if (e.key === "ArrowUp"){ e.preventDefault(); active = (active - 1 + items.length) % Math.max(items.length, 1); render(); $("#kb-" + active)?.scrollIntoView({block:"nearest"}); }
+    else if (e.key === "Enter"){ e.preventDefault(); choose(active); }
+  });
+  input.addEventListener("input", () => { active = 0; render(); });
+  list.addEventListener("click", e => { const b = e.target.closest(".kbar-item"); if (b) choose(+b.dataset.i); });
+  kbar.addEventListener("click", e => { if (e.target === kbar) close(); });
 })();
 </script>
 

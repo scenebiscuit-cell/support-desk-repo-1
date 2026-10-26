@@ -1,0 +1,15 @@
+name = "pharos-ai-worker"
+main = "worker.js"
+compatibility_date = "2025-03-01"
+
+[ai]
+binding = "AI"
+
+[[kv_namespaces]]
+binding = "LIMITS"
+id = "99f432b341924d698b02ab7ddf3c4dac"
+
+[vars]
+ALLOWED_ORIGINS = "https://scenebiscuit-cell.github.io"
+PER_VISITOR_DAILY = "10"
+GLOBAL_DAILY = "40"

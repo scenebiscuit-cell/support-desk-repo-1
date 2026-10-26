@@ -83,13 +83,19 @@ The gap is the point. Keyword rules break on new phrasing (a "Squarespace" ticke
 - **Help chat** shows which doc sections matched, how strongly, and why the bot answered or handed off.
 - **Ticket triage** shows the queue sorted by priority, each ticket's tags, and the draft. "Try your own" triages any pasted ticket in the browser.
 - **Macro library** is searchable and copyable.
-- **AI mode**: when the page is opened inside Claude (claude.ai), "AI answer" and "Draft with AI" buttons appear and use the viewer's own Claude account. Everywhere else, the page runs on the offline engine, so it always works.
+- **AI mode**: "AI answer" and "Draft with AI" can use the Cloudflare Worker when built with `--cloud-url`; the Worker enforces an origin allowlist and daily usage caps. The page also supports Claude in a Claude viewer and a local Ollama model, while the offline engine always works.
 
 To show AI-written drafts in the queue, run triage with a model, then rebuild:
 
 ```bash
 python triage.py --backend ollama
 python build_demo.py --results output/triage_results.json
+```
+
+After deploying the Cloudflare Worker, connect the demo to its `workers.dev` URL and rebuild:
+
+```bash
+python build_demo.py --cloud-url https://<worker-name>.<account-subdomain>.workers.dev
 ```
 
 ## Adapting it for a client
@@ -114,6 +120,7 @@ support_ops/macros.py    macro selection, placeholder fill, exports
 support_ops/triage_engine.py  rules + LLM triage, prompt, scoring
 triage.py  chat.py  export_macros.py  build_demo.py
 demo/template.html → demo/index.html
+worker/worker.template.js → worker/worker.js
 output/                  generated reports
 ```
 

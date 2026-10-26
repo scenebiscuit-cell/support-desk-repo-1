@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
-"""Build demo/index.html: one self-contained page with the help chat, triage queue,
-and macro library, using the real docs, macros, and triage results from this project.
+"""Build the demo page and Cloudflare Worker from the project's source prompts and data.
 
   python build_demo.py                                   # triage with the offline rules engine
   python build_demo.py --results output/triage_results.json
         # show results from an AI run instead (e.g. after: python triage.py --backend ollama)
+  python build_demo.py --cloud-url https://worker.example.workers.dev
 """
 from __future__ import annotations
 
 import argparse
 import json
 from pathlib import Path
+from urllib.parse import urlparse
 
 import chat
 from support_ops import kb as kbmod
@@ -43,10 +44,15 @@ def run_set(tickets_path: Path, labels_path: Path, kb, macros, results_path: Pat
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--results", help="triage_results.json for the sample tickets (default: run rules engine)")
+    p.add_argument("--cloud-url", help="HTTPS root URL of the deployed Cloudflare Worker")
     args = p.parse_args()
 
     kb = KnowledgeBase.from_dir(ROOT / "docs")
     macros = load_macros(ROOT / "macros" / "macros.json")
+    prompts = {
+        "triage": SYSTEM_PROMPT.format(agent_name=AGENT, categories=", ".join(tx.CATEGORIES)),
+        "chat": chat.SYSTEM,
+    }
     data = {
         "kb": {
             "stopwords": sorted(kbmod.STOPWORDS), "synonyms": kbmod.SYNONYMS, "phrases": kbmod.PHRASES,
@@ -64,21 +70,66 @@ def main() -> None:
             "unseen": run_set(ROOT / "data" / "holdout_tickets.json", ROOT / "data" / "holdout_labels.json",
                               kb, macros, None),
         },
-        "prompts": {
-            "triage": SYSTEM_PROMPT.format(agent_name=AGENT, categories=", ".join(tx.CATEGORIES)),
-            "chat": chat.SYSTEM,
-        },
+        "prompts": prompts,
         "thresholds": {"min_score": chat.MIN_SCORE, "min_coverage": chat.MIN_COVERAGE,
                        "strong": chat.STRONG_COVERAGE_SCORE},
         "agent": AGENT,
     }
+    worker_url = args.cloud_url.rstrip("/") if args.cloud_url else read_worker_url(ROOT / "index.html")
+    if worker_url:
+        parsed = urlparse(worker_url)
+        if parsed.scheme != "https" or not parsed.netloc or parsed.path not in ("", "/") or parsed.query or parsed.fragment:
+            p.error("--cloud-url must be an HTTPS origin, such as https://pharos-ai-worker.example.workers.dev")
+
     template = (ROOT / "demo" / "template.html").read_text(encoding="utf-8")
     blob = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    template = replace_worker_url(template, worker_url)
     out = template.replace("/*__DEMO_DATA__*/null", blob)
     (ROOT / "demo" / "index.html").write_text(out, encoding="utf-8")
+    root_page = (ROOT / "index.html").read_text(encoding="utf-8")
+    (ROOT / "index.html").write_text(replace_worker_url(root_page, worker_url), encoding="utf-8")
+    worker_template = (ROOT / "worker" / "worker.template.js").read_text(encoding="utf-8")
+    prompt_json = json.dumps(prompts, ensure_ascii=False).replace("</", "<\\/")
+    prompt_marker = "/*__PROMPTS__*/{}"
+    if worker_template.count(prompt_marker) != 1:
+        raise RuntimeError("Expected exactly one PROMPTS marker in worker/worker.template.js")
+    worker = worker_template.replace(prompt_marker, prompt_json)
+    (ROOT / "worker" / "worker.js").write_text(worker, encoding="utf-8")
     s = data["sets"]
     print(f"Built demo/index.html ({len(out) // 1024} KB): {len(kb.chunks)} doc sections, {len(macros)} macros, "
           f"{len(s['sample']['tickets'])} + {len(s['unseen']['tickets'])} tickets ({s['sample']['engine']})")
+    print(f"Built worker/worker.js and index.html (Cloudflare Worker URL: {worker_url or 'not configured'})")
+
+
+def read_worker_url(path: Path) -> str:
+    text = path.read_text(encoding="utf-8")
+    marker = 'const WORKER_URL = /*__WORKER_URL__*/'
+    for line in text.splitlines():
+        if marker in line:
+            value = line.split(marker, 1)[1].strip().rstrip(";")
+            try:
+                return json.loads(value)
+            except json.JSONDecodeError:
+                break
+    return ""
+
+
+def replace_worker_url(text: str, worker_url: str) -> str:
+    marker = 'const WORKER_URL = /*__WORKER_URL__*/'
+    replacement = f"{marker}{json.dumps(worker_url)}"
+    lines = text.splitlines(keepends=True)
+    matches = [i for i, line in enumerate(lines) if marker in line]
+    if len(matches) != 1:
+        raise RuntimeError(f"Expected exactly one WORKER_URL marker, found {len(matches)}")
+    index = matches[0]
+    before, after = lines[index].split(marker, 1)
+    value = after.strip().rstrip(";")
+    try:
+        json.loads(value)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError("WORKER_URL marker must be followed by a JSON string") from exc
+    lines[index] = f"{before}{replacement};\n" if lines[index].endswith("\n") else f"{before}{replacement}"
+    return "".join(lines)
 
 
 if __name__ == "__main__":

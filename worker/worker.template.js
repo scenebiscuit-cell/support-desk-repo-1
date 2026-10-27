@@ -11,7 +11,7 @@
 const DEFAULT_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast";
 const PROMPTS = /*__PROMPTS__*/{};
 const SIZE_LIMITS = {
-  chat: { maxInput: 8000, maxTokens: 400 },
+  chat: { maxInput: /*__CHAT_MAX_INPUT__*/8000, maxTokens: 400 },
   triage: { maxInput: 14000, maxTokens: 900 },
 };
 

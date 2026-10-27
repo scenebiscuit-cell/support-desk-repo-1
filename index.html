@@ -341,6 +341,7 @@ details.data .evalt{padding:0 14px 12px}
         <span>Created by <b>Nick Lax</b></span>
         <span class="mono" id="email">nlaxatx@gmail.com</span>
         <button class="bandbtn" type="button" id="copy-email">Copy email</button>
+        <a class="bandbtn" href="/portal/">Customer help portal</a>
         <span class="fiction">Fictional company · demo data</span>
       </div>
     </div>
@@ -606,7 +607,8 @@ async function ollamaChat(system, user, {json=false, onText=null} = {}){
   return text;
 }
 /* ---------- Cloud AI: the Pharos Worker on Cloudflare Workers AI (free daily allowance) ---------- */
-const CLOUD = (D.cloud_url || "").replace(/\/$/, "");
+const WORKER_URL = /*__WORKER_URL__*/"https://pharos-ai-worker.scenebiscuit.workers.dev";
+const CLOUD = (WORKER_URL || D.cloud_url || "").replace(/\/$/, "");
 let cloudOn = false, cloudLeft = null;
 const cloudReady = (async () => {
   if (!CLOUD) return false;

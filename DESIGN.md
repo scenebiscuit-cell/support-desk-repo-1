@@ -123,6 +123,7 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 ## Motion
 
 - **Wave sea:** canvas perspective mesh, 17 rows, slow swell; low-contrast lines (alpha .06–.26), a small forward lean on near crests, sparse spray (capped at 70). Masked to fade toward the text side. Keep it quiet: it's background, not content. Color is read from `--band-hi`, so it follows the theme.
+- **Sea life (`shared/sea-life.js`):** every 7–13 s, one wireframe fish (outline, spine, ribs, fin, eye; gold ink at about half opacity) jumps in an arc on the right side of the water, or a splash bursts. Each entry and exit throws a few droplets and two flat ripple rings. One event at a time; none for reduced motion or while paused.
 - **Beam:** radial-gradient wedge from the lighthouse lamp; sweeps on its own, eases toward the mouse while the pointer is over the masthead (fine pointers only).
 - Pauses when the masthead is off screen, the tab is hidden, or the visitor clicks Pause waves (WCAG 2.2.2). Reduced-motion users get one still frame and no button.
 

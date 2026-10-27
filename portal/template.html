@@ -733,13 +733,15 @@ FORM: One single-column help conversation in the same visual system as the agent
     addEventListener("hashchange", () => { showView(location.hash.slice(1) || "ask"); scrollTo({ top: 0 }); });
     showView(location.hash.slice(1) || "ask");
 
+    /*__SEA_LIFE__*/
+
     /* ---------- header: wireframe sea breaking toward the viewer, swept by the lighthouse beam ---------- */
     (function(){
       const cv = $("#sea"), band = cv.parentElement, ctx = cv.getContext("2d");
       if (!ctx) return;
       const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
       let W = 0, H = 0, dpr = 1, ink = "235,200,116", running = false, visible = true, raf = 0, t0 = performance.now();
-      const foam = [];
+      const foam = [], life = makeSeaLife();
   const btn = document.getElementById("seaToggle");
   let paused = false; try { paused = localStorage.getItem("pharos-waves") === "off"; } catch (e) {}
   if (btn && !still){
@@ -807,6 +809,8 @@ FORM: One single-column help conversation in the same visual system as the agent
           ctx.fillStyle = `rgba(${ink},${f.a})`; ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill();
         }
         if (foam.length > 70) foam.splice(0, foam.length - 70);
+        // a fish jump or splash now and then
+        if (!still) life.step(ctx, pts, t, ink, foam, W);
         // lighthouse beam, sweeping out over the water from the lamp in the eyebrow
         const lamp = $("#lamp"), br = band.getBoundingClientRect(), lr = lamp ? lamp.getBoundingClientRect() : null;
         if (lr && lr.width){

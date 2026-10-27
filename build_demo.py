@@ -121,6 +121,8 @@ def main() -> None:
     template = (ROOT / "demo" / "template.html").read_text(encoding="utf-8")
     desk_store = (ROOT / "shared" / "desk-store.js").read_text(encoding="utf-8")
     template = replace_once(template, "/*__DESK_STORE__*/", desk_store, "demo/template.html")
+    sea_life = (ROOT / "shared" / "sea-life.js").read_text(encoding="utf-8")
+    template = replace_once(template, "/*__SEA_LIFE__*/", sea_life, "demo/template.html")
     template = set_worker_url(template, worker_url, "demo/template.html")
     blob = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     out = replace_once(template, "/*__DEMO_DATA__*/null", blob, "demo/template.html")
@@ -133,6 +135,7 @@ def main() -> None:
     # Public portal: help-center content only, never tickets or macros.
     portal = (ROOT / "portal" / "template.html").read_text(encoding="utf-8")
     portal = replace_once(portal, "/*__DESK_STORE__*/", desk_store, "portal/template.html")
+    portal = replace_once(portal, "/*__SEA_LIFE__*/", sea_life, "portal/template.html")
     portal = set_worker_url(portal, worker_url, "portal/template.html")
     portal_data = {"kb": data["kb"], "thresholds": data["thresholds"], "max_input": CHAT_MAX_INPUT}
     portal_blob = json.dumps(portal_data, ensure_ascii=False).replace("</", "<\\/")

@@ -83,7 +83,7 @@ export default {
       });
       const r = out?.response;
       const raw = typeof r === "string" ? r : r ? JSON.stringify(r) : "";
-      const text = kind === "triage" ? polishTriage(raw) : scrub(raw);
+      const text = kind === "triage" ? polishTriage(raw, input) : scrub(raw);
       return json({ text, model: MODEL, remaining_today: Math.max(0, global - gUsed - 1) });
     } catch (e) {
       return json({ error: "model_error", message: "The AI model didn't answer. Try again in a moment." }, 502);
@@ -118,24 +118,29 @@ function scrub(text) {
     .trim();
 }
 
-function fixDraft(draft) {
+function fixDraft(draft, firstName = "") {
   // Greeting: pull "Hi Name," off first so scrubbing a filler sentence can't take it with it.
   let greeting = "", body = String(draft).trim();
   const m = body.match(/^((?:hi|hello|hey|dear)\b[^,\n]{0,40},)\s*/i);
   if (m) { greeting = m[1]; body = body.slice(m[0].length); }
   let rest = scrub(body);
   if (!rest && !greeting) return rest;
+  // The model sometimes skips the greeting; the ticket's From: line has the name.
+  if (!greeting && firstName) greeting = `Hi ${firstName},`;
   // Opening line.
   if (!/^thank you for contacting pharos/i.test(rest)) rest = `${OPENING} ${rest}`.trim();
   // Sign-off: strip whatever the model used, then add the standard one.
-  rest = rest.replace(/\n*(?:best|thanks|cheers|regards|kind regards|best regards|sincerely|warmly)[,!]?\s*\n+[\s\S]{0,80}$/i, "")
+  rest = rest.replace(/\n+(?:best|thanks|cheers|regards|kind regards|best regards|sincerely|warmly)[,!]?\s*\n+[\s\S]{0,80}$/i, "")
              .replace(/\n*\b(?:[A-Z][a-z]+\s*\n)?Pharos Support\s*$/i, "")
              .replace(/\s*\b(?:Alex)\s*$/,"")
+             .trim()
+             // a closing left on the last line, e.g. "...follow up. Best," or "Wishing you all the best,"
+             .replace(/\s*\b(?:wishing you all the best|all the best|best regards|kind regards|warm regards|best|regards|thanks|thank you|cheers|sincerely|warmly|take care|all the best|wishing you all the best|with thanks)[^.!?\n]{0,25}[,!]?\s*$/i, "")
              .trim();
   return `${greeting ? greeting + "\n\n" : ""}${rest}\n\nBest,\n${AGENT}\nPharos Support`;
 }
 
-function polishTriage(raw) {
+function polishTriage(raw, input = "") {
   const cleaned = String(raw).trim().replace(/^```(?:json)?\s*|\s*```$/g, "");
   let obj;
   try { obj = JSON.parse(cleaned); }
@@ -144,7 +149,8 @@ function polishTriage(raw) {
     if (!m) return raw;
     try { obj = JSON.parse(m[0]); } catch { return raw; }
   }
-  if (typeof obj.draft_reply === "string" && obj.category !== "spam") obj.draft_reply = fixDraft(obj.draft_reply);
+  const from = String(input).match(/^From:\s*([A-Za-z][A-Za-z'-]*)/m);
+  if (typeof obj.draft_reply === "string" && obj.category !== "spam") obj.draft_reply = fixDraft(obj.draft_reply, from ? from[1] : "");
   if (Array.isArray(obj.cited_articles)) obj.cited_articles = obj.cited_articles.map(s => String(s).split(">")[0].trim());
   return JSON.stringify(obj);
 }

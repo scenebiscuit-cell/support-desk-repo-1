@@ -127,7 +127,7 @@ def main() -> None:
     blob = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     out = replace_once(template, "/*__DEMO_DATA__*/null", blob, "demo/template.html")
     # demo/ sits one folder down, so its portal link needs to climb back out.
-    (ROOT / "demo" / "index.html").write_text(out.replace('href="portal/"', 'href="../portal/"'), encoding="utf-8")
+    (ROOT / "demo" / "index.html").write_text(out.replace('href="portal/"', 'href="../portal/"').replace('href="assets/', 'href="../assets/'), encoding="utf-8")
     # GitHub Pages serves the root file as-is, so give it a doctype (keeps browsers out of quirks mode).
     root_page = '<!doctype html>\n<html lang="en">\n' + out + "\n</html>\n"
     (ROOT / "index.html").write_text(root_page, encoding="utf-8")

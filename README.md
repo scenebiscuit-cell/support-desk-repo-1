@@ -210,7 +210,8 @@ demo/template.html → demo/index.html and index.html (the GitHub Pages home pag
 portal/template.html → portal/index.html (public help portal: Ask the Keeper, Contact support, My requests)
 shared/desk-store.js     the shared request store, inlined into both pages by build_demo.py
 DESIGN.md, PRODUCT.md     design system and product notes
-screenshots/              images used in this README
+assets/                   favicon and home-screen icons (lighthouse)
+screenshots/              images used in this README (hero.png is also the link-preview image)
 tests/                   parity, Worker voice, and end-to-end desk tests
 worker/                  Cloudflare Worker for free live AI: worker.template.js → worker.js, wrangler.toml, README.md
 .github/workflows/        deploys the Worker when worker/ changes

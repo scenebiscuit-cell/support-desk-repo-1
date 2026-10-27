@@ -45,7 +45,7 @@ SYNONYMS = {
 
 
 def stem(word: str) -> str:
-    """A tiny suffix stripper. Good enough to match 'reminders' to 'reminder'."""
+    """A tiny suffix stripper. Good enough to match 'invoices' to 'invoice'."""
     for suffix in ("ing", "ed", "es", "s"):
         if len(word) > 4 and word.endswith(suffix):
             return word[: -len(suffix)]
@@ -53,7 +53,7 @@ def stem(word: str) -> str:
 
 
 PHRASES = {"how much": "price", "log in": "login", "sign in": "login",
-           "two factor": "two-factor", "time zone": "timezone", "no show": "no-show"}
+           "two factor": "two-factor", "time zone": "timezone"}
 
 
 def tokenize(text: str) -> list[str]:

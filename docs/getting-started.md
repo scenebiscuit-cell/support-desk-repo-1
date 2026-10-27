@@ -6,30 +6,28 @@ category: Basics
 
 # Getting started with Pharos
 
-Pharos is online booking and reminders for small service businesses: salons, studios, clinics, tutors, repair shops, and anyone who books time with clients. This guide gets you from sign-up to your first booking in about 15 minutes.
+Pharos is project management for small teams: agencies, studios, startups, and anyone juggling client work. Plan projects on boards, lists, and timelines, assign tasks, and keep everyone in the loop. This guide gets your team set up in about 15 minutes.
 
 ## Start your free trial
 
-Every new account starts with a 14-day free trial of the Team plan. No credit card is required to start. When the trial ends, pick a plan under **Settings > Billing**. If you don't pick one, your booking page pauses but your data is kept for 60 days.
+Every new workspace starts with a 14-day free trial of the Team plan. No credit card is required. When the trial ends, pick a plan under **Settings > Billing**. If you don't, your workspace moves to the Free plan and nothing is deleted.
 
-## Set up your business profile
+## Create your first project
 
-Go to **Settings > Business profile** and fill in your business name, address, phone number, and **business time zone**. The time zone matters: every appointment is stored in your business time zone, and clients see times converted to their own local time on the booking page.
+Click **New project**, give it a name, and choose a view: **Board** for moving tasks through stages, **List** for checklists, or **Timeline** for scheduling work across weeks. You can switch views anytime. To start faster, pick a template like *Client onboarding* or *Website launch*.
 
-## Add your services
+## Add tasks
 
-Go to **Services > Add service**. For each service, set a name, duration, price, and optional buffer time before or after the appointment. Buffer time keeps back-to-back bookings from running into each other.
+Click **Add task** in any column or list. Each task can have an assignee, due date, priority, subtasks, attachments, and comments. Type `@` in a comment to mention a teammate and notify them.
 
-## Set your availability
+## Invite your team
 
-Go to **Calendar > Availability** to set your weekly working hours. Add time off or holidays with **Block time**. Clients can only book inside the hours you set.
+Go to **Settings > Members > Invite** and enter email addresses. Members get an email invite to join your workspace. You can also invite clients as guests so they can see and comment on specific projects.
 
-## Share your booking page
+## Connect your tools
 
-Your booking page lives at `yourbusiness.pharos.example`. Copy the link from **Booking page > Share**, add it to your website, Instagram bio, or Google Business Profile, or embed it with the code snippet on the same screen.
+Connect Slack, Google Drive, GitHub, and more under **Settings > Integrations** (see *Integrations*).
 
-## Next steps
+## Set your time zone
 
-- Connect Google Calendar or Outlook so personal events block your availability (see *Calendar sync*).
-- Turn on SMS and email reminders to cut no-shows (see *Appointment reminders*).
-- Collect deposits through Stripe or Square (see *Deposits and payments*).
+Each person sets their own time zone under **Profile > Preferences**. Due dates and reminders show in each person's local time.

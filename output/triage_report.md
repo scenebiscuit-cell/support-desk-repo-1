@@ -2,8 +2,8 @@
 
 Engine: **rules**  ·  Tickets: **20**  ·  Time: 0.0s
 
-- Ready to send after a quick review: **9**
-- Need a person to act first (refund, identity check, escalation): **10**
+- Ready to send after a quick review: **10**
+- Need a person to act first (refund, identity check, escalation): **9**
 - Spam closed automatically: **1**
 - Churn risk flagged: **T-1002, T-1003, T-1019**
 
@@ -14,248 +14,223 @@ Engine: **rules**  ·  Tickets: **20**  ·  Time: 0.0s
 
 | Ticket | Priority | Category | Macro | Human? | Subject |
 |---|---|---|---|---|---|
-| T-1007 | urgent | outage | M17 | yes | URGENT booking page is down |
-| T-1020 | urgent | security | M18 | yes | Security issue in booking page intake form |
+| T-1007 | urgent | outage | M17 | yes | URGENT Pharos won't load |
+| T-1020 | urgent | security | M18 | yes | Security issue in task comments |
 | T-1001 | high | refund | M01 | yes | Charged twice this month?? |
-| T-1003 | high | calendar_sync | M06 | yes | Double booked AGAIN - this is the third time |
-| T-1004 | high | reminders | M07 | no | Text reminders stopped going out |
+| T-1003 | high | integrations | M06 | yes | Slack integration broke AGAIN - third time this month |
+| T-1004 | high | notifications | M07 | no | Nobody is getting email notifications |
 | T-1006 | high | account_access | M12 | no | Locked out - new phone |
-| T-1015 | high | booking_setup | M08 | no | Client came an hour early |
 | T-1019 | high | cancellation | M05 | yes | Moving to another tool |
 | T-1002 | normal | cancellation | M04 | no | where is the cancel button |
 | T-1005 | normal | presales | M20 | yes | Questions before I pay |
 | T-1008 | normal | refund | M02 | yes | Refund for annual plan |
-| T-1011 | normal | payments | M10 | yes | Deposit wasn't collected |
-| T-1012 | normal | staff | M13 | no | Can't add new stylist |
-| T-1013 | normal | data_privacy | M15 | no | Client requesting deletion of her information |
+| T-1011 | normal | bug | M10 | no | Tasks disappeared from our board |
+| T-1012 | normal | seats | M13 | no | Can't add a 4th person |
+| T-1013 | normal | data_privacy | M15 | no | Former employee requesting deletion of their information |
+| T-1015 | normal | workspace_setup | M08 | no | Client sees due dates a day early |
 | T-1016 | normal | account_access | M11 | no | password reset not working |
-| T-1017 | normal | billing | M22 | yes | Why is my bill $95? |
-| T-1018 | normal | staff | M14 | no | Need to take over account - previous owner left |
-| T-1009 | low | feature_request | M19 | yes | Waitlist? |
+| T-1017 | normal | billing | M22 | yes | Why is my bill $135? |
+| T-1018 | normal | seats | M14 | no | Need to take over account - previous owner left |
+| T-1009 | low | feature_request | M19 | yes | Dependencies? |
 | T-1010 | low | spam | M23 | no | Partnership opportunity - 10x your organic traffic |
 | T-1014 | low | feedback | M21 | no | Thank you! |
 
 ## Drafts
 
-### T-1007 · URGENT booking page is down
+### T-1007 · URGENT Pharos won't load
 
-*Ben Carter, Carter Auto Care (3 locations) (Plus)*  
+*Ben Carter, Carter Build Co. (40 members) (Business)*  
 **urgent** · outage · negative · macro M17 · tags: outage, incident
 
-> Our booking page has been showing an error page for the last 30 minutes at all three of our locations. Customers are calling us saying they can't book. I checked on my phone and on my laptop, same thing. Is Pharos down??
+> Pharos won't load for anyone on our team. We've been getting a 502 error for the last 30 minutes on laptops and phones. We have a site handoff at 10 and all our checklists are in there. Is Pharos down??
 
 **Draft reply:**
 
 ```
 Hi Ben,
 
-Thank you for reporting this so quickly, and I'm sorry. I know every minute your booking page is down costs you bookings. Our engineering team is aware and actively working on it.
+Thank you for letting us know so quickly, and I'm sorry. I know your team can't work while Pharos is down. Our engineers are on it right now.
 
-You can follow live updates at https://status.pharos.example and subscribe there for an alert the moment it's resolved. I've linked your ticket to the incident, so I'll also update you here directly.
-
-In the meantime, if customers call, you can add their bookings manually from your Pharos calendar if the dashboard is loading for you.
-
-Alex
-Pharos Support
-```
-
-### T-1020 · Security issue in booking page intake form
-
-*J. Alvarez, Independent researcher (None)*  
-**urgent** · security · neutral · macro M18 · tags: security, vulnerability_report
-
-> Hello, I found that the custom intake question field on booking pages doesn't escape HTML, so a script entered as an answer runs when the business views the booking in the dashboard. This looks like stored XSS. I haven't shared this publicly. Happy to send steps to reproduce privately.
-
-**Draft reply:**
-
-```
-Hi J.,
-
-Thank you for reporting this responsibly and for keeping it private. I've escalated it to our security team, who will review it as a priority.
-
-Please send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you continuing to hold off on public disclosure while we investigate and fix it.
-
-Thanks again for helping keep our customers safe.
-
-Alex
-Pharos Support
-```
-
-### T-1001 · Charged twice this month??
-
-*Maria Delgado, Brightside Salon (Team)*  
-**high** · refund · neutral · macro M01 · tags: refund, duplicate_charge
-
-> Hi, I just looked at my bank statement and Pharos charged me $49 twice on October 3rd. Same amount, same day. I only have one account. Can you please fix this and refund the extra charge? Invoice numbers are PHR-88213 and PHR-88214. Thanks, Maria
-
-**Draft reply:**
-
-```
-Hi Maria,
-
-I'm sorry about the double charge, and thanks for sending the invoice numbers. That made it quick to find. I've confirmed the duplicate and refunded the extra charge in full. You'll see it back on your statement in 5 to 7 business days, depending on your bank.
-
-Your plan isn't affected, and you don't need to do anything else. If the refund hasn't shown up by then, reply here and I'll chase it down.
+You can follow live updates at status.pharos.example and subscribe there for an alert the moment it's fixed. I've also linked your ticket to the incident, so I'll update you here directly.
 
 Best,
 Alex
 Pharos Support
 ```
 
-### T-1003 · Double booked AGAIN - this is the third time
+### T-1020 · Security issue in task comments
 
-*Priya Raman, Lotus Pilates Studio (Plus)*  
-**high** · calendar_sync · negative · macro M06 · tags: calendar_sync, double_booking, churn_risk
+*J. Alvarez, Independent researcher (None)*  
+**urgent** · security · neutral · macro M18 · tags: security, vulnerability_report
 
-> This is getting ridiculous. Yesterday two clients showed up for the same 6pm slot with my instructor Jess. Jess had a dentist appointment on her Google Calendar at that time too, so she wasn't even supposed to be available. This is the third time this month. I'm paying for your most expensive plan and I'm seriously looking at other booking tools now. I need this fixed today.
+> Hello, I found that task comments don't escape HTML when rendered in the activity feed, so a script posted in a comment runs for anyone who views the feed. This looks like stored XSS. I haven't shared this publicly. Happy to send steps to reproduce privately.
+
+**Draft reply:**
+
+```
+Hi J.,
+
+Thank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.
+
+Please send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.
+
+Thanks again for helping keep our customers safe.
+
+Best,
+Alex
+Pharos Support
+```
+
+### T-1001 · Charged twice this month??
+
+*Maria Delgado, Brightside Creative (Team)*  
+**high** · refund · neutral · macro M01 · tags: refund, billing_error
+
+> Hi, I just looked at our bank statement and Pharos charged us $80 twice on October 3rd. Same amount, same day. We only have one workspace. Can you please fix this and refund the extra charge? Invoice numbers are PHR-88213 and PHR-88214. Thanks, Maria
+
+**Draft reply:**
+
+```
+Hi Maria,
+
+Thank you for contacting Pharos. Sorry about that! The extra charge was an error on our end, and I've refunded it in full.
+
+Depending on your bank, it should show up within 5 to 7 business days. Your plan isn't affected, and there's nothing else you need to do. If you don't see it by then, just reply here and I'll follow up.
+
+Best,
+Alex
+Pharos Support
+```
+
+### T-1003 · Slack integration broke AGAIN - third time this month
+
+*Priya Raman, Lotus Digital Agency (Business)*  
+**high** · integrations · negative · macro M06 · tags: integrations, churn_risk
+
+> This is getting ridiculous. Our Slack channel for the Hartwell client project stopped getting task updates again yesterday, and nobody noticed a blocker for a full day. This is the third time this month I've had to reconnect it. I'm paying for your most expensive plan and I'm seriously looking at other tools now. I need this fixed today.
 
 **Draft reply:**
 
 ```
 Hi Priya,
 
-I'm really sorry about the double booking. That's exactly what Pharos is supposed to prevent, and I understand how frustrating it is in front of your clients.
+Thank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.
 
-I'm pulling the sync log for [[fill in: staff name]]'s calendar now. In the meantime, these are the most common causes, and it's worth a 2-minute check:
+In the meantime, these cause most integration problems and only take a minute to check:
+1. A red "Reconnect" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.
+2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.
+3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.
 
-1. The calendar event is set to "Free" instead of "Busy." Only Busy events block the booking page.
-2. The calendar holding that event isn't selected under Settings > Calendar sync > Calendars to check.
-3. The connection expired (often after a password change). If you see a red "Reconnect" banner in Settings > Calendar sync, click it and sign in again.
-
-I'll follow up today with what the log shows and what we're doing about it.
-
-Guide: https://help.pharos.example/calendar-sync
-
+Talk soon,
 Alex
 Pharos Support
 ```
 
-### T-1004 · Text reminders stopped going out
+### T-1004 · Nobody is getting email notifications
 
-*James Whitfield, Whitfield Physio (Team)*  
-**high** · reminders · neutral · macro M07 · tags: reminders, sms
+*James Whitfield, Whitfield Architecture (Team)*  
+**high** · notifications · neutral · macro M07 · tags: notifications, email
 
-> Hello, since about the 15th none of our patients are getting text reminders. Email reminders still work. We've had 4 no-shows this week, which never happens. Nothing changed on our end that I know of. Can you look into it?
+> Hello, since about the 15th nobody on our team is getting email notifications when they're assigned a task or mentioned. In-app notifications still show up. We've missed two deadlines this week because people didn't know work was waiting on them. Nothing changed on our end that I know of. Can you look into it?
 
 **Draft reply:**
 
 ```
 Hi James,
 
-Thanks for flagging this, and I'm sorry about the no-shows. Since email reminders are still going out, this is almost always an SMS-specific setting. I'm checking your account now. Here's what I'm looking at:
+Thank you for contacting Pharos, and I'm sorry this has caused missed work. I'm checking our email delivery log for your workspace now.
 
-1. Whether a monthly SMS cap is set under Settings > Reminders > SMS limit. Once it's reached, texts stop until next month.
-2. The delivery status in Clients > [client] > Messages (Sent, Delivered, Failed, or Opted out).
-3. Whether clients replied STOP, which unsubscribes them from all texts.
+A few settings that usually explain it:
+1. Email is turned on for each notification type under Profile > Notifications.
+2. Daily digest is off. When it's on, individual emails pause.
+3. Do not disturb (the moon icon by your profile picture) is off.
+4. Your company's email filter isn't blocking notifications@pharos.example. Your IT team can allow our domain.
 
-If you can send a screenshot of the Messages tab for one patient who didn't get a text, that will speed things up.
+If you can send a screenshot of one teammate's notification settings, that'll help me get to the bottom of it faster.
 
-Guide: https://help.pharos.example/reminders
-
+Best,
 Alex
 Pharos Support
 ```
 
 ### T-1006 · Locked out - new phone
 
-*Tom Becker, Becker Tutoring (Solo)*  
+*Tom Becker, Becker Consulting (Team)*  
 **high** · account_access · neutral · macro M12 · tags: account_access, 2fa_reset, identity_verification
 
-> I got a new phone over the weekend and now I can't log in because the 6 digit code app was on my old phone. I never saved any backup codes. I have sessions booked tomorrow and I can't see my schedule. Please help ASAP.
+> I got a new phone over the weekend and now I can't log in because the 6 digit code app was on my old phone. I never saved any backup codes. I have a client deliverable due tomorrow and all my notes are in Pharos. Please help ASAP.
 
 **Draft reply:**
 
 ```
 Hi Tom,
 
-I can help you get back in. Because two-factor authentication protects your account, I need to verify it's you before I remove it. Please reply from this email address with:
+Thank you for contacting Pharos. I'll get you back in as quickly as I can. To keep your account safe, I just need to confirm it's you first. Please reply from this email address with:
 
-1. The last 4 digits of the card on file
-2. The date of your most recent Pharos invoice
+1. The name of your Pharos workspace
+2. If you're the workspace owner, the last 4 digits of the card on file
 
-As soon as that checks out, I'll reset 2FA so you can log in, then you can set it up on your new phone under Settings > Account > Security. Be sure to save the backup codes this time. They'll get you in if this happens again.
+As soon as that checks out, I'll reset two-factor authentication so you can log in. Once you're in, set it up on your new phone under Profile > Security, and save the backup codes. They'll get you in if this ever happens again.
 
-We will never ask for your password.
+We'll never ask for your password.
 
-Alex
-Pharos Support
-```
-
-### T-1015 · Client came an hour early
-
-*Rosa Jimenez, Rosa Massage Therapy (Team)*  
-**high** · booking_setup · neutral · macro M08 · tags: booking_setup, time_zone
-
-> I'm in Austin. A new client showed up at 9am for a 10am massage and her confirmation email said 9am. My calendar in Pharos says 10. Another client said the same thing last week. Why are the times different?
-
-**Draft reply:**
-
-```
-Hi Rosa,
-
-Sorry about the mix-up with your clients. When confirmation times are off by exactly an hour, it's almost always the business time zone setting.
-
-Please check Settings > Business profile > Business time zone. For Austin, it should be Central Time (America/Chicago). If it's set to a different zone, change it and click Save. Existing appointments keep their correct calendar time, and new confirmations will show the right time.
-
-For anyone already booked, I'd suggest a quick note to confirm their time, just in case.
-
-Guide: https://help.pharos.example/getting-started
-
+Best,
 Alex
 Pharos Support
 ```
 
 ### T-1019 · Moving to another tool
 
-*Elena Petrova, Petrova Photography (Team)*  
+*Elena Petrova, Petrova Films (Team)*  
 **high** · cancellation · negative · macro M05 · tags: cancellation, churn_risk
 
-> Honestly the calendar sync issues and the extra text fees have been frustrating, so I'm going to switch to a different booking app next month. I need to get all my client info and appointment history out first. How do I export everything, and then how do I cancel?
+> Honestly the integration problems and the surprise charges have been frustrating, so I'm going to switch to a different tool next month. I need to get all our projects, tasks, and files out first. How do I export everything, and then how do I cancel?
 
 **Draft reply:**
 
 ```
 Hi Elena,
 
-I'm sorry Pharos hasn't been working the way you need, and thank you for telling us why. That feedback goes straight to our product team.
+Thank you for contacting Pharos, and for being honest with us. I'm sorry we haven't been what you needed. I've passed your feedback straight to our product team.
 
-To get your data out:
+Getting your data out is easy:
 1. Go to Settings > Data > Export.
-2. Export clients, appointments, and payments (pick "All time" for the date range).
-3. Large exports are emailed to you as a download link within 15 minutes.
+2. Choose the whole workspace and pick JSON to keep comments and history, or CSV for spreadsheets.
+3. Larger exports arrive by email as a download link within 15 minutes, with attachments in a separate ZIP.
 
-To cancel afterward, go to Settings > Billing > Cancel plan. You keep access until the end of your billing period.
+When you're ready, cancel under Settings > Billing > Cancel plan. You'll keep access until the end of your billing period.
 
-Before you go: if [[fill in: pain point]] is the main issue, I'd be glad to look at it with you. It's often a settings fix. And if you just need a break, you can pause the account for up to 3 months at $5/month and keep everything as it is.
+Before you go, I'd be glad to look at [[fill in: pain point]] with you. It's often a quick fix. And if you'd rather not pay for now, your workspace can drop to the Free plan and keep all your projects.
 
-Either way, I'm here to help.
+Either way, I'm here if you need anything.
 
+Best,
 Alex
 Pharos Support
 ```
 
 ### T-1002 · where is the cancel button
 
-*Derek Olsen, Fade & Co Barbers (Team)*  
+*Derek Olsen, North Loop Dev (Team)*  
 **normal** · cancellation · neutral · macro M04 · tags: cancellation, churn_risk
 
-> I've looked everywhere in settings and there is no cancel option. The shop owner asked me to cancel our subscription because we're switching to the POS system's built-in booking. How do I do it?
+> I've looked everywhere in settings and there is no cancel option. The owner asked me to cancel our subscription because we're switching to the project tool that comes with our CRM. How do I do it?
 
 **Draft reply:**
 
 ```
 Hi Derek,
 
-Thanks for reaching out. The Cancel plan option only shows up for the account owner, which is probably why you can't find it. Staff and admin logins don't have billing access.
+Thank you for contacting Pharos. You're not missing anything: the Cancel plan option only appears for the workspace owner, so admin and member logins won't see it.
 
-The account owner can cancel in a few clicks:
+The owner can cancel in a minute or two:
 1. Log in and go to Settings > Billing > Cancel plan.
 2. Pick a reason and confirm.
-3. The plan stays active until the end of the current billing period.
+3. The plan stays active until the end of the current billing period, then the workspace moves to the Free plan. Nothing is deleted.
 
-If the owner prefers, they can reply to this email from the owner's email address and I'll take care of it for them.
+If it's easier, the owner can reply to this email from their own address and I'll take care of it.
 
-Full guide: https://help.pharos.example/change-or-cancel-plan
+We're sorry to see you go, and thank you for using Pharos.
 
 Best,
 Alex
@@ -264,131 +239,160 @@ Pharos Support
 
 ### T-1005 · Questions before I pay
 
-*Alicia Moreno, Moreno Yoga (Trial)*  
+*Alicia Moreno, Moreno Studio (Trial)*  
 **normal** · presales · positive · macro M20 · tags: presales, trial
 
-> Hi! I'm on the trial and loving it so far. Two questions before I pick a plan: can I use my own website address for the booking page instead of the pharos one? And do you support group classes where 12 people book the same time slot?
+> Hi! I'm on the trial and loving it so far. Two questions before I pick a plan: can my clients see their own projects without paying for a seat? And can I make some projects private so only two of us can see them?
 
 **Draft reply:**
 
 ```
 Hi Alicia,
 
-So glad you're enjoying the trial! Happy to help you pick the right plan.
+Thank you for contacting Pharos! I'm so glad you're enjoying the trial. Happy to help you pick the right plan.
 
 [[fill in: answers]]
 
-You can compare plans here: https://help.pharos.example/plans-and-pricing. And if you pay annually, you get two months free.
+You can compare all the plans at help.pharos.example/plans-and-pricing, and paying annually gets you two months free.
 
-Any other questions, just reply here.
+If anything else comes up, just reply here.
 
+Best,
 Alex
 Pharos Support
 ```
 
 ### T-1008 · Refund for annual plan
 
-*Grace Kim, Kim Nail Lounge (Team)*  
+*Grace Kim, Kim Design Co. (Team)*  
 **normal** · refund · negative · macro M02 · tags: refund, annual_plan
 
-> Hello, I paid for the annual Team plan 12 days ago, but unfortunately I have to close my shop at the end of the month for family reasons. Is it possible to get a refund for the rest of the year? I'm sorry for the trouble. Grace
+> Hello, I paid for the annual Team plan 12 days ago, but unfortunately I have to close my studio at the end of the month for family reasons. Is it possible to get a refund for the rest of the year? I'm sorry for the trouble. Grace
 
 **Draft reply:**
 
 ```
 Hi Grace,
 
-Thanks for letting us know, and no need to apologize at all. Because you're within 30 days of your annual payment, you're eligible for a pro-rated refund for the unused part of the year.
+Thank you for contacting Pharos, and please don't apologize. I'm sorry things have changed, and I hope all is well with you.
 
-Here's what happens next:
-1. I'll cancel the annual plan and process the refund for the unused days.
+Since you're within 30 days of your annual payment, you're eligible for a refund for the rest of the year. I'll take care of everything:
+1. I'll cancel the annual plan and refund the unused days.
 2. The refund will reach your card in 5 to 7 business days.
-3. Your booking page stays active until [[fill in: end date]] so you can finish out your current bookings.
+3. Your workspace stays fully active until [[fill in: end date]], so you can wrap up any open projects.
 
-If you'd like to keep a copy of your client list, you can export it any time under Settings > Data > Export: https://help.pharos.example/data-export-and-deletion
+If you'd like a copy of your projects, you can export them anytime under Settings > Data > Export.
 
-Wishing you and your family the best,
+Wishing you all the best,
 Alex
 Pharos Support
 ```
 
-### T-1011 · Deposit wasn't collected
+### T-1011 · Tasks disappeared from our board
 
-*Linda Park, Park Family Dental (Team)*  
-**normal** · payments · negative · macro M10 · tags: payments, deposit
+*Linda Park, Park Events (Team)*  
+**normal** · bug · neutral · macro M10 · tags: bug
 
-> We require a $50 deposit for whitening appointments, but a patient just booked one for Friday and wasn't asked to pay anything. Stripe shows connected. What happened? We've been burned by no-shows on these before.
+> This morning a whole column of tasks on our Fall Gala board just vanished. There were about 15 tasks in the Vendors column and now it's empty. Nobody on my team says they deleted anything. Where did they go?
 
 **Draft reply:**
 
 ```
 Hi Linda,
 
-Thanks for the details. Since Stripe shows Connected, there are two usual reasons a deposit gets skipped:
+Thank you for contacting Pharos, and sorry for the scare. This is usually recoverable, so let's track it down.
 
-1. Deposits are set per service. Open Services > [[fill in: service name]] and make sure "Require payment at booking" is turned on.
-2. Bookings added by your team from the calendar skip payment by design. Only bookings clients make on the booking page collect a deposit.
+For missing tasks, check these first:
+1. Click Clear filters at the top of the board. A saved view can hide tasks.
+2. Turn on Show archived in the view menu. Completed tasks can be archived automatically.
+3. Look in Projects > Trash. Deleted tasks stay there for 30 days and can be restored.
 
-For this Friday's appointment, you can send the client a payment link from the appointment, or turn on Card on file so you can charge a no-show fee.
+For a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.
 
-Guide: https://help.pharos.example/deposits-and-payments
+If none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.
 
+Best,
 Alex
 Pharos Support
 ```
 
-### T-1012 · Can't add new stylist
+### T-1012 · Can't add a 4th person
 
-*Chris Nguyen, Urban Mane Studio (Team)*  
-**normal** · staff · neutral · macro M13 · tags: staff, plan_limit, upsell
+*Chris Nguyen, Urban Mane Marketing (Free)*  
+**normal** · seats · neutral · macro M13 · tags: seats, plan_limit, upsell
 
-> Trying to invite our 11th stylist and it says I've reached my limit. We hired two new people this month. What are my options?
+> Trying to invite a new hire and it says we've reached our member limit. There are only 3 of us at the moment. What are my options?
 
 **Draft reply:**
 
 ```
 Hi Chris,
 
-Congrats on growing the team! The Team plan includes up to 10 staff calendars, so the 11th invite is hitting that limit. You have two options:
+Thank you for contacting Pharos, and congratulations on growing your team! The Free plan includes up to 3 members, so you have two options:
 
-1. Upgrade to Plus ($99/month) for unlimited staff, plus multiple locations and priority support. Upgrades take effect immediately and you only pay the pro-rated difference: Settings > Billing > Change plan.
-2. Free up a seat: if anyone has left, deactivate them under Team. Deactivated staff don't count toward the limit, and their history is kept.
+1. Upgrade to Team ($10 per member a month) for unlimited members and projects. It takes effect right away: Settings > Billing > Change plan.
+2. If the new person only needs to view and comment on certain projects, you can invite them as a guest instead. Guests are free on paid plans.
 
-Guide: https://help.pharos.example/staff-and-permissions
+Happy to help with either one.
 
+Best,
 Alex
 Pharos Support
 ```
 
-### T-1013 · Client requesting deletion of her information
+### T-1013 · Former employee requesting deletion of their information
 
-*Nadia Hassan, Clear Skin Clinic (Plus)*  
+*Nadia Hassan, Clearpath HR (Business)*  
 **normal** · data_privacy · neutral · macro M15 · tags: data_privacy, deletion_request
 
-> One of our former clients emailed asking us to delete all of her personal information from our systems, including our booking system. How do we do that in Pharos, and does it remove her from your servers too?
+> A former employee emailed asking us to delete all of their personal information from our systems, including our project management tool. How do we do that in Pharos, and does it remove them from your servers too?
 
 **Draft reply:**
 
 ```
 Hi Nadia,
 
-Good question, and thanks for handling this carefully. Here's how it works:
+Thank you for contacting Pharos, and for handling this so carefully. Here's how it works:
 
-1. Open the client in Pharos and click Delete client. This removes their contact details and cancels any future appointments.
-2. Past appointments stay in your reports as "Deleted client," with no personal details attached.
-3. On our side, deleted data is removed from active systems right away and fully purged from backups within 90 days.
+1. A workspace admin removes the person under Settings > Members.
+2. On their profile, click Anonymize. Their name is replaced on past comments and activity, and their personal details are removed.
+3. On our side, removed data is cleared from active systems right away and fully purged from backups within 90 days.
 
-Because Pharos processes client data on your behalf, deleting it in your account is all that's needed. You can let the client know it's been taken care of.
+Since Pharos handles your workspace data on your behalf, that's all you need to do, and you can let them know it's done. If they've made a formal request and you'd like written confirmation, just let me know.
 
-Guide: https://help.pharos.example/data-export-and-deletion
+Best,
+Alex
+Pharos Support
+```
 
+### T-1015 · Client sees due dates a day early
+
+*Rosa Jimenez, Jimenez Web Works (Team)*  
+**normal** · workspace_setup · neutral · macro M08 · tags: workspace_setup, time_zone
+
+> I'm in Austin. Our client in London is a guest on our project, and she says every due date shows a day earlier than what I set. A task I set for the 14th shows the 13th for her. Why are the dates different?
+
+**Draft reply:**
+
+```
+Hi Rosa,
+
+Thank you for contacting Pharos. When due dates are off by a day for someone else, it's almost always time zones, and it's an easy fix.
+
+Due dates show in each person's own time zone, so:
+1. Ask everyone, including guests, to check their time zone under Profile > Preferences.
+2. For tasks shared across time zones, set a specific due time (like 5:00 PM your time) instead of an all-day date. That keeps the date from slipping to the day before for people ahead or behind you.
+
+Happy to help if anything still looks off.
+
+Best,
 Alex
 Pharos Support
 ```
 
 ### T-1016 · password reset not working
 
-*Kevin Shah, Shah CPA (Solo)*  
+*Kevin Shah, Shah CPA (Team)*  
 **normal** · account_access · neutral · macro M11 · tags: account_access, password_reset
 
 > I clicked forgot password like 5 times and never got an email. Checked spam. My login email might be my old gmail though, not sure.
@@ -398,86 +402,84 @@ Pharos Support
 ```
 Hi Kevin,
 
-Sorry you're stuck. Reset emails come from security@pharos.example and only go to the exact email your login was created with, so if you signed up with an older address, the email went there.
+Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
 
-Try requesting the reset using your other email address. The link expires after 1 hour, so use it right away. If you no longer have access to that inbox, reply from it if you can, or let me know and I'll walk you through verifying your account.
+Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
 
-Guide: https://help.pharos.example/account-security
-
+Best,
 Alex
 Pharos Support
 ```
 
-### T-1017 · Why is my bill $95?
+### T-1017 · Why is my bill $135?
 
-*Hannah Lee, Lee Fitness Coaching (Team)*  
-**normal** · billing · negative · macro M22 · tags: billing, sms_overage
+*Hannah Lee, Lee & Co Accounting (Team)*  
+**normal** · billing · negative · macro M22 · tags: billing, prorated_charges
 
-> My plan is $49 but this month's invoice is $95.20. I see a line for SMS overage. I had no idea texts cost extra. That's almost double what I expected. Can you explain and can I get that taken off?
+> We have 10 people on the Team plan so I expected $100, but this month's invoice is $135. There's a line that says prorated member charges. I had no idea adding people mid-month cost extra. Can you explain and can I get that taken off?
 
 **Draft reply:**
 
 ```
 Hi Hannah,
 
-I understand the surprise, and I'm sorry it wasn't clearer. Here's what happened: your Team plan includes 1,000 SMS reminders a month. Texts beyond that are $0.02 each, and last month's extra texts were added to this invoice.
+Thank you for contacting Pharos. I can see how that was a surprise, so here's what happened.
 
-To make sure it doesn't happen again:
-1. Set a monthly cap under Settings > Reminders > SMS limit. Texts stop when you hit it.
-2. Send one reminder per appointment instead of two, or keep texts under 160 characters (longer ones count as two messages).
+Plans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.
 
 [[fill in: credit line]]
 
-Guide: https://help.pharos.example/plans-and-pricing
+Two tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.
 
+Best,
 Alex
 Pharos Support
 ```
 
 ### T-1018 · Need to take over account - previous owner left
 
-*Marcus Bell, Bell Veterinary Clinic (Plus)*  
-**normal** · staff · neutral · macro M14 · tags: staff, ownership_transfer, identity_verification
+*Marcus Bell, Bell Engineering (Business)*  
+**normal** · seats · neutral · macro M14 · tags: seats, ownership_transfer, identity_verification
 
-> Our practice manager set up our Pharos account and was the owner on it. She left the clinic last month and isn't responding to us. I'm the clinic owner and an admin on the account. How do I get ownership moved to me so I can manage billing?
+> Our operations manager set up our Pharos workspace and was the owner on it. She left the company last month and isn't responding to us. I'm the company owner and an admin in the workspace. How do I get ownership moved to me so I can manage billing?
 
 **Draft reply:**
 
 ```
 Hi Marcus,
 
-Thanks for explaining. Normally the current owner transfers ownership themselves, but since they've left and aren't reachable, we can handle it for you after a quick verification.
+Thank you for contacting Pharos. Normally the current owner transfers ownership, but since they aren't reachable, we can take care of it for you after a quick verification.
 
 Please reply with one of these showing your name and the business name:
 - A business license or registration
 - A recent business invoice or bank statement
 
-Once a team lead approves it (usually within one business day), I'll move ownership to your login, since you're already an admin.
+Once a team lead approves it, usually within one business day, I'll move ownership to your login, since you're already an admin.
 
-Guide: https://help.pharos.example/staff-and-permissions
-
+Best,
 Alex
 Pharos Support
 ```
 
-### T-1009 · Waitlist?
+### T-1009 · Dependencies?
 
-*Sam Ortiz, Inkwell Tattoo Studio (Team)*  
+*Sam Ortiz, Inkwell Media (Team)*  
 **low** · feature_request · positive · macro M19 · tags: feature_request
 
-> Love the app. Any chance you'll add a waitlist? When my artists are booked out, people want to get notified if someone cancels. Right now I'm keeping a list in my notes app lol
+> Love the app. Any chance you'll add task dependencies to the timeline view? When one task slips I have to move everything after it by hand. Right now I'm tracking it in a spreadsheet lol
 
 **Draft reply:**
 
 ```
 Hi Sam,
 
-Thanks for the idea, and for the kind words! I've logged your request with our product team along with how you'd use it, which really helps them prioritize.
+Thank you for contacting Pharos, and for the kind words! That's a great idea, and I've passed it to our product team along with how you'd use it, which really helps them decide what to build next.
 
 [[fill in: roadmap status]]
 
-You can vote on and follow ideas at https://ideas.pharos.example, and see what we're building at https://ideas.pharos.example/roadmap.
+You can vote on and follow ideas at ideas.pharos.example, and see what's coming at ideas.pharos.example/roadmap.
 
+Best,
 Alex
 Pharos Support
 ```
@@ -497,21 +499,21 @@ Pharos Support
 
 ### T-1014 · Thank you!
 
-*Owen Brooks, Brooks Piano Lessons (Solo)*  
+*Owen Brooks, Brooks Sound Studio (Team)*  
 **low** · feedback · positive · macro M21 · tags: feedback, positive
 
-> Just wanted to say thanks. I switched from a paper calendar three months ago and my no-shows have basically disappeared thanks to the text reminders. My students' parents love being able to reschedule themselves. Great product!
+> Just wanted to say thanks. We switched from sticky notes and a group chat three months ago and we haven't dropped a single client request since. The timeline view alone has saved me hours. Great product!
 
 **Draft reply:**
 
 ```
 Hi Owen,
 
-This made our whole team's day. Thank you for taking the time to write! It's great to hear the reminders are cutting your no-shows and that families like rescheduling on their own.
+Thank you so much for writing in. This genuinely made our whole team's day, and I've shared it with everyone here.
 
-If you ever have a minute, a short review on Capterra or G2 helps other small businesses find us. No pressure at all.
+If you ever have a minute, a short review on Capterra or G2 helps other small teams find us. No pressure at all.
 
-Thanks for being a Pharos customer,
+Thanks for being part of Pharos,
 Alex
 Pharos Support
 ```

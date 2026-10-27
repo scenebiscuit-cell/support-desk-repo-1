@@ -11,41 +11,41 @@
 /* Layout: same system as COA Crosscheck. A teal-green-blue band holds the product name and headline numbers;
    a frosted sticky nav switches tools; each tool is a pair of panels (work on the left, the "why" on the right). Stacks on phones. */
 :root{
-  --paper:#eef3f6; --sheet:#ffffff; --ink:#0d1c25; --muted:#4c616d; --rule:#cbd8df; --tint:#f3f7f9;
-  --band-a:#094a52; --band-b:#0f5747; --band-c:#133f63;
-  --band-ink:#ffffff; --band-soft:rgba(255,255,255,.8); --band-hi:#b4f0dd; --band-line:rgba(255,255,255,.06);
-  --accent:#0d6779; --accent-ink:#ffffff; --accent-soft:#d6eef0;
+  --paper:#f4efe3; --sheet:#fffdf8; --ink:#121a2b; --muted:#585d6c; --rule:#ddd3bd; --tint:#f9f4ea;
+  --band-a:#0c1f4a; --band-b:#14397a; --band-c:#0a4766;
+  --band-ink:#ffffff; --band-soft:rgba(255,255,255,.8); --band-hi:#ebc874; --band-line:rgba(235,200,116,.07);
+  --accent:#1d4f91; --accent-ink:#ffffff; --accent-soft:#e0e8f4;
   --pass:#1f7a46; --pass-soft:#e0f2e7; --warn:#a15c00; --warn-soft:#fcefd6; --fail:#b4261b; --fail-soft:#fbe3e0; --info:#3f5664; --info-soft:#e5edf2;
   --on-sem:#ffffff; --mark:#fff1b8; --mark-ink:#5a4600;
   --c-money:#8a5300; --c-money-bg:#fcefd6; --c-sched:#1d5a9e; --c-sched-bg:#e1ecf8; --c-comms:#6a3fb0; --c-comms-bg:#efe8fb;
   --c-acct:#0d6779; --c-acct-bg:#d6eef0; --c-risk:#b4261b; --c-risk-bg:#fbe3e0; --c-grow:#1f7a46; --c-grow-bg:#e0f2e7;
-  --s1:#00809a; --s2:#d98a1c; --scrim:rgba(9,30,38,.5); --shadow:0 18px 50px rgba(13,28,37,.22);
+  --s1:#2a64ad; --s2:#d98a1c; --scrim:rgba(10,18,40,.5); --shadow:0 18px 50px rgba(18,26,43,.22);
   --f-display:"IBM Plex Sans Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --f-body:"IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
   --f-mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
   --r:8px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#0b1318; --sheet:#121d24; --ink:#e3ebef; --muted:#96a8b2; --rule:#24343f; --tint:#16232b;
-  --band-a:#083a40; --band-b:#0b3f34; --band-c:#0f2f4a;
-  --band-ink:#f2f8fb; --band-soft:rgba(242,248,251,.74); --band-hi:#9ae6cf; --band-line:rgba(255,255,255,.045);
-  --accent:#6cc9d6; --accent-ink:#0b1318; --accent-soft:#153a40;
+  --paper:#0a0f1c; --sheet:#111829; --ink:#ebe6d9; --muted:#a39e90; --rule:#263049; --tint:#161e33;
+  --band-a:#07163a; --band-b:#0d2a5a; --band-c:#072f48;
+  --band-ink:#f2f8fb; --band-soft:rgba(242,248,251,.74); --band-hi:#e6c36a; --band-line:rgba(230,195,106,.05);
+  --accent:#8fb3ec; --accent-ink:#0a0f1c; --accent-soft:#1a2a4d;
   --pass:#5fcf8e; --pass-soft:#12301f; --warn:#f0ae45; --warn-soft:#36280d; --fail:#ff7a6e; --fail-soft:#3d1714; --info:#a6b9c5; --info-soft:#1b2932;
-  --on-sem:#0b1318; --mark:#4a3d0a; --mark-ink:#ffe49a;
+  --on-sem:#0a0f1c; --mark:#4a3d0a; --mark-ink:#ffe49a;
   --c-money:#f0ae45; --c-money-bg:#36280d; --c-sched:#8fb8ef; --c-sched-bg:#16283f; --c-comms:#c2a4ff; --c-comms-bg:#2a2048;
   --c-acct:#6cc9d6; --c-acct-bg:#153a40; --c-risk:#ff7a6e; --c-risk-bg:#3d1714; --c-grow:#5fcf8e; --c-grow-bg:#12301f;
-  --s1:#14a2bb; --s2:#c9801f; --scrim:rgba(0,0,0,.6); --shadow:0 18px 50px rgba(0,0,0,.5);
+  --s1:#5b8fd6; --s2:#c9801f; --scrim:rgba(0,0,0,.6); --shadow:0 18px 50px rgba(0,0,0,.5);
   color-scheme:dark; } }
 :root[data-theme="dark"]{
-  --paper:#0b1318; --sheet:#121d24; --ink:#e3ebef; --muted:#96a8b2; --rule:#24343f; --tint:#16232b;
-  --band-a:#083a40; --band-b:#0b3f34; --band-c:#0f2f4a;
-  --band-ink:#f2f8fb; --band-soft:rgba(242,248,251,.74); --band-hi:#9ae6cf; --band-line:rgba(255,255,255,.045);
-  --accent:#6cc9d6; --accent-ink:#0b1318; --accent-soft:#153a40;
+  --paper:#0a0f1c; --sheet:#111829; --ink:#ebe6d9; --muted:#a39e90; --rule:#263049; --tint:#161e33;
+  --band-a:#07163a; --band-b:#0d2a5a; --band-c:#072f48;
+  --band-ink:#f2f8fb; --band-soft:rgba(242,248,251,.74); --band-hi:#e6c36a; --band-line:rgba(230,195,106,.05);
+  --accent:#8fb3ec; --accent-ink:#0a0f1c; --accent-soft:#1a2a4d;
   --pass:#5fcf8e; --pass-soft:#12301f; --warn:#f0ae45; --warn-soft:#36280d; --fail:#ff7a6e; --fail-soft:#3d1714; --info:#a6b9c5; --info-soft:#1b2932;
-  --on-sem:#0b1318; --mark:#4a3d0a; --mark-ink:#ffe49a;
+  --on-sem:#0a0f1c; --mark:#4a3d0a; --mark-ink:#ffe49a;
   --c-money:#f0ae45; --c-money-bg:#36280d; --c-sched:#8fb8ef; --c-sched-bg:#16283f; --c-comms:#c2a4ff; --c-comms-bg:#2a2048;
   --c-acct:#6cc9d6; --c-acct-bg:#153a40; --c-risk:#ff7a6e; --c-risk-bg:#3d1714; --c-grow:#5fcf8e; --c-grow-bg:#12301f;
-  --s1:#14a2bb; --s2:#c9801f; --scrim:rgba(0,0,0,.6); --shadow:0 18px 50px rgba(0,0,0,.5);
+  --s1:#5b8fd6; --s2:#c9801f; --scrim:rgba(0,0,0,.6); --shadow:0 18px 50px rgba(0,0,0,.5);
   color-scheme:dark; }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -66,20 +66,25 @@ button,input,select,textarea{font:inherit;color:inherit}
 .band{color:var(--band-ink);background-color:var(--band-b);
   background-image:linear-gradient(var(--band-line) 1px, transparent 1px),linear-gradient(90deg, var(--band-line) 1px, transparent 1px),linear-gradient(115deg, var(--band-a) 0%, var(--band-b) 48%, var(--band-c) 100%);
   background-size:28px 28px,28px 28px,100% 100%}
-.band-in{max-width:1240px;margin:0 auto;padding-block:34px 30px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-end;justify-content:space-between}
+.band{position:relative;overflow:hidden;isolation:isolate}
+.sea{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.band-in{position:relative;max-width:1240px;margin:0 auto;padding-block:34px 30px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-end;justify-content:space-between}
 .band-copy{min-width:0;flex:1 1 520px}
 .band .eyebrow{color:var(--band-hi);display:flex;align-items:center;gap:8px}
-.band h1{font-size:clamp(34px, 5.2vw, 56px);font-weight:700;line-height:1;letter-spacing:-.005em;margin-top:8px}
+.band h1{font-size:clamp(34px, 5.2vw, 56px);font-weight:700;line-height:1;letter-spacing:-.005em}
+.band-title{display:flex;align-items:flex-end;gap:14px;margin-top:10px}
+.lighthouse{flex:none;width:clamp(40px, 5vw, 58px);height:auto;aspect-ratio:48/86;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
 .band p{margin:12px 0 0;color:var(--band-soft);max-width:60ch;font-size:16px}
 .band p b{color:var(--band-ink);font-weight:600}
 .band-meta{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:13px;color:var(--band-soft)}
 .band-meta b{color:var(--band-ink);font-weight:600}
 .band-meta .mono{color:var(--band-ink);user-select:all}
-.bandbtn{border:1px solid rgba(180,240,221,.45);background:rgba(0,0,0,.18);color:var(--band-ink);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
+.bandbtn{border:1px solid rgba(235,200,116,.45);background:rgba(0,0,0,.18);color:var(--band-ink);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;cursor:pointer}
 .bandbtn:hover{border-color:var(--band-hi)}
-.fiction{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-hi);border:1px dashed rgba(180,240,221,.45);padding:3px 9px;border-radius:999px}
+a.bandbtn{text-decoration:none;display:inline-flex;align-items:center}
+.fiction{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--band-hi);border:1px dashed rgba(235,200,116,.45);padding:3px 9px;border-radius:999px}
 .stats{display:flex;gap:12px;flex-wrap:wrap}
-.stat{border:1px solid rgba(180,240,221,.38);border-radius:var(--r);padding:12px 16px 10px;min-width:150px;background:rgba(0,0,0,.12)}
+.stat{border:1px solid rgba(235,200,116,.38);border-radius:var(--r);padding:12px 16px 10px;min-width:150px;background:rgba(0,0,0,.12)}
 .stat b{display:block;font-family:var(--f-display);font-size:34px;font-weight:700;line-height:1;color:var(--band-hi);font-variant-numeric:tabular-nums}
 .stat b i{font-style:normal;font-size:.5em;color:var(--band-soft);font-weight:600;margin-left:2px}
 .stat span{display:block;font-size:13px;color:var(--band-soft);margin-top:4px;max-width:190px}
@@ -111,7 +116,7 @@ section.view{display:grid;gap:22px}
 .sec-head p{margin:0;color:var(--muted);font-size:13.5px;max-width:72ch}
 
 /* ---------- panels ---------- */
-.pane{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);min-width:0;box-shadow:0 1px 2px rgba(13,28,37,.04)}
+.pane{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);min-width:0;box-shadow:0 1px 2px rgba(18,26,43,.04)}
 .pane-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px 12px;flex-wrap:wrap;margin:0 20px;padding:18px 0 12px;border-bottom:2px solid var(--ink)}
 .pane-h h2{font-size:21px;font-weight:700}
 .pane-h .eyebrow{white-space:nowrap}
@@ -329,19 +334,20 @@ details.data .evalt{padding:0 14px 12px}
 
 <a class="skip" href="#main">Skip to the demo</a>
 <header class="band">
+  <canvas class="sea" id="sea" aria-hidden="true"></canvas>
   <div class="band-in gutter">
     <div class="band-copy">
       <div class="eyebrow">
         <svg width="16" height="18" viewBox="0 0 38 40" aria-hidden="true"><path d="M15 6 L19 2 L23 6 Z" fill="currentColor"/><rect x="15" y="7" width="8" height="7" rx="1" fill="currentColor"/><path d="M15 15 L23 15 L25 34 L13 34 Z" fill="currentColor"/><rect x="8" y="35" width="22" height="3" rx="1" fill="currentColor"/><path d="M2 8 L14 10.5 L14 12.5 L2 15 Z" fill="currentColor" opacity=".55"/><path d="M36 8 L24 10.5 L24 12.5 L36 15 Z" fill="currentColor" opacity=".55"/></svg>
         Support operations · AI help desk demo
       </div>
-      <h1>Pharos Support Desk</h1>
+      <div class="band-title"><svg class="lighthouse" id="lamp" data-ox=".5" data-oy=".22" viewBox="20 6 48 86" aria-hidden="true"><path d="M35 19 L44 10 L53 19 Z" fill="var(--band-ink)"/><rect x="37" y="19" width="14" height="12" rx="1.5" fill="var(--band-hi)"/><rect x="40" y="21" width="8" height="7" rx="1" fill="#fff6d8"/><path d="M35 32 L53 32 L58 82 L30 82 Z" fill="var(--band-ink)"/><path d="M34 48 L55 48 L56 54 L33 54 Z" fill="var(--band-hi)"/><path d="M32 66 L56 66 L57 72 L31 72 Z" fill="var(--band-hi)"/><rect x="23" y="83" width="42" height="5" rx="2" fill="var(--band-soft)"/></svg><h1>Pharos Support Desk</h1></div>
       <p><b>A light for every question.</b> AI support ops for a small project-management software company: a help chat that answers only from the docs, ticket triage that drafts on-policy replies, and a macro library.</p>
       <div class="band-meta">
         <span>Created by <b>Nick Lax</b></span>
         <span class="mono" id="email">nlaxatx@gmail.com</span>
         <button class="bandbtn" type="button" id="copy-email">Copy email</button>
-        <a class="bandbtn" href="portal/">Customer help portal</a>
+        <a class="bandbtn" href="portal/">Customer help portal →</a>
         <span class="fiction">Fictional company · demo data</span>
       </div>
     </div>
@@ -608,7 +614,7 @@ async function ollamaChat(system, user, {json=false, onText=null} = {}){
 }
 /* ---------- Cloud AI: the Pharos Worker on Cloudflare Workers AI (free daily allowance) ---------- */
 const WORKER_URL = /*__WORKER_URL__*/"https://pharos-ai-worker.scenebiscuit.workers.dev";
-const CLOUD = (WORKER_URL || D.cloud_url || "").replace(/\/$/, "");
+const CLOUD = (WORKER_URL || "").replace(/\/$/, "");
 let cloudOn = false, cloudLeft = null;
 const cloudReady = (async () => {
   if (!CLOUD) return false;
@@ -642,6 +648,98 @@ function aiError(e){
 }
 
 $("#copy-email").addEventListener("click", e => copyText("nlaxatx@gmail.com", e.currentTarget));
+
+/* ---------- header: wireframe sea breaking toward the viewer, swept by the lighthouse beam ---------- */
+(function(){
+  const cv = $("#sea"), band = cv.parentElement, ctx = cv.getContext("2d");
+  if (!ctx) return;
+  const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let W = 0, H = 0, dpr = 1, ink = "235,200,116", running = false, visible = true, raf = 0, t0 = performance.now();
+  const foam = [];
+  let aim = null, beamAng = null;
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) band.addEventListener("pointermove", e => {
+    const r = band.getBoundingClientRect(); aim = {x: e.clientX - r.left, y: e.clientY - r.top, at: performance.now()};
+  });
+  function readInk(){
+    const v = getComputedStyle(document.documentElement).getPropertyValue("--band-hi").trim();
+    const m = v.match(/^#?([0-9a-f]{6})$/i);
+    if (m){ const n = parseInt(m[1], 16); ink = `${n>>16&255},${n>>8&255},${n&255}`; }
+  }
+  function size(){
+    const r = band.getBoundingClientRect(); dpr = Math.min(devicePixelRatio || 1, 2);
+    W = r.width; H = r.height; cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0); readInk(); if (!running) draw(still ? 2.2 : (performance.now()-t0)/1000);
+  }
+  // Height of the sea at column u (0..1 across) and depth z (0 far .. 1 near), time t.
+  // Rows rise one after another as z grows, so swells roll toward the viewer and peak near the front.
+  function wave(u, z, t){
+    const roll = z*9 - t*1.1 + Math.sin(u*3.1 + t*.3)*.6;
+    const crest = Math.pow(.5 + .5*Math.sin(roll), 3);            // sharp crests, flat troughs
+    const chop = Math.sin(u*23 + t*1.7 + z*4)*.18 + Math.sin(u*11 - t*.9)*.22;
+    return crest*(.55 + .45*z) + chop*(.25 + .5*z);
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    const horizon = H*(+cv.dataset.horizon || .30), rows = 17, cols = Math.max(24, Math.round(W/22)), cx = W*.62;
+    const pts = [];
+    for (let i = 0; i < rows; i++){
+      const z = i/(rows-1), y0 = horizon + (H - horizon + 18)*Math.pow(z, 1.55), amp = 4 + 74*Math.pow(z, 1.6), spread = .5 + .62*z;
+      const row = [];
+      for (let j = 0; j <= cols; j++){
+        const u = j/cols, h = wave(u, z, t);
+        // breaking lip: on the nearest rows the tallest crests lean forward (down-screen) and throw foam
+        const lean = z > .5 && h > .72 ? (h - .72)*amp*1.2 : 0;
+        row.push([cx + (u*W*1.2 - W*.1 - cx)*spread, y0 - h*amp + lean, h, z]);
+      }
+      pts.push(row);
+    }
+    // vertical ribs
+    ctx.lineWidth = 1;
+    for (let j = 0; j <= cols; j += 2){
+      ctx.beginPath();
+      for (let i = 0; i < rows; i++){ const p = pts[i][j]; i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }
+      ctx.strokeStyle = `rgba(${ink},.09)`; ctx.stroke();
+    }
+    // wave lines, brighter toward the viewer and on crests
+    for (let i = 0; i < rows; i++){
+      const z = i/(rows-1);
+      ctx.beginPath();
+      pts[i].forEach((p, j) => j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]));
+      ctx.strokeStyle = `rgba(${ink},${.1 + .38*z})`; ctx.lineWidth = .8 + .9*z; ctx.stroke();
+      if (z > .45 && !still) for (const p of pts[i]) if (p[2] > .86 && Math.random() < .08*z) foam.push({x:p[0], y:p[1], vx:(Math.random()-.3)*.6, vy:-.4-Math.random()*.9, a:.55, r:.6+Math.random()*1.3});
+    }
+    // spray from breaking crests
+    for (let k = foam.length - 1; k >= 0; k--){
+      const f = foam[k]; f.x += f.vx; f.y += f.vy; f.vy += .045; f.a -= .012;
+      if (f.a <= 0){ foam.splice(k, 1); continue; }
+      ctx.fillStyle = `rgba(${ink},${f.a})`; ctx.beginPath(); ctx.arc(f.x, f.y, f.r, 0, 6.283); ctx.fill();
+    }
+    if (foam.length > 260) foam.splice(0, foam.length - 260);
+    // lighthouse beam, sweeping out over the water from the lamp in the eyebrow
+    const lamp = $("#lamp"), br = band.getBoundingClientRect(), lr = lamp ? lamp.getBoundingClientRect() : null;
+    if (lr && lr.width){
+      const ox = lr.left - br.left + lr.width*(+lamp.dataset.ox || .5), oy = lr.top - br.top + lr.height*(+lamp.dataset.oy || .3);
+      // follows the mouse while it's over the header, otherwise sweeps on its own
+      const sweep = .38 + Math.sin(t*.35)*.32;
+      const want = aim && performance.now() - aim.at < 2500 ? Math.min(1.45, Math.max(-.15, Math.atan2(aim.y - oy, aim.x - ox))) : sweep;
+      beamAng = beamAng == null ? want : beamAng + (want - beamAng)*.08;
+      const ang = beamAng, half = .07, len = Math.hypot(W, H);
+      const g = ctx.createRadialGradient(ox, oy, 0, ox, oy, len*.75);
+      g.addColorStop(0, `rgba(${ink},.16)`); g.addColorStop(1, `rgba(${ink},0)`);
+      ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(ox, oy);
+      ctx.lineTo(ox + Math.cos(ang - half)*len, oy + Math.sin(ang - half)*len);
+      ctx.lineTo(ox + Math.cos(ang + half)*len, oy + Math.sin(ang + half)*len); ctx.closePath(); ctx.fill();
+    }
+  }
+  function loop(now){ if (!running) return; draw((now - t0)/1000); raf = requestAnimationFrame(loop); }
+  function update(){ const go = !still && visible && !document.hidden; if (go && !running){ running = true; raf = requestAnimationFrame(loop); } else if (!go && running){ running = false; cancelAnimationFrame(raf); } }
+  new ResizeObserver(size).observe(band);
+  if ("IntersectionObserver" in window) new IntersectionObserver(e => { visible = e[0].isIntersecting; update(); }).observe(band);
+  document.addEventListener("visibilitychange", update);
+  new MutationObserver(() => { readInk(); if (!running) draw(2.2); }).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
+  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { readInk(); if (!running) draw(2.2); });
+  size(); update();
+})();
 
 /* ---------- theme: System → Light → Dark ---------- */
 (function(){

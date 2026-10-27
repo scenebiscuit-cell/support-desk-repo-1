@@ -18,10 +18,10 @@ The page shows the fictional company's help center, labeled demo tickets, decisi
 Preserve existing copy and workflows, cloud/offline/sample modes, ticket and chat behavior, responsive layout, keyboard access, reduced-motion support, and fictional-data labels.
 
 ## Chosen direction
-A lighthouse at dusk: deep marine blue, sea-glass teal, warm lantern amber, and a subtle wave-wireframe mesh confined to the masthead above the amber divider. Keep the work area below it quiet and readable in both themes.
+The lighthouse of Alexandria over open water: a lapis-to-ocean masthead with a gold grid and an animated gold wireframe sea breaking toward the viewer, a papyrus page, IBM Plex Sans Condensed headings. Keep the work area below it quiet and readable in both themes. See DESIGN.md.
 
 ## Memorable moment
-The lighthouse's small amber beam turns toward the pointer across the page; touch and reduced-motion users see a static beam.
+The wireframe swells roll in and break with spray while the lighthouse beam sweeps the water, turning toward the mouse when the pointer is over the masthead. Reduced-motion users see a still frame.
 
 ## Unresolved decisions
 None.

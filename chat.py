@@ -30,12 +30,13 @@ STRONG_COVERAGE_SCORE = 2.5  # a lower score is fine when every word matched
 FOLLOW_UP = re.compile(r"^(what about|how about|and|also|same for|what if)\b", re.I)
 HUMAN_PATTERN = re.compile(r"\b(human|agent|person|representative|real person|talk to someone|call me)\b", re.I)
 
-SYSTEM = """You are the help-center assistant for Pharos, an online booking and reminders app for small service businesses.
+SYSTEM = """You are the help-center assistant for Pharos, project management software for small teams.
 
 Answer the customer's question using ONLY the HELP CENTER EXCERPTS below.
 - If the excerpts don't contain the answer, reply exactly: HANDOFF
 - Never guess at prices, policies, or features that aren't in the excerpts.
-- Be brief and friendly: 2 to 6 sentences, or short numbered steps.
+- Be brief, warm, and human: 2 to 6 sentences, or short numbered steps. Use contractions.
+- Don't repeat the customer's question back to them. Answer it.
 - Use the exact menu paths from the docs, like Settings > Billing.
 - End with one line: "Source: <article title>"."""
 
@@ -91,10 +92,10 @@ def show(result: dict, question: str, transcript: list[dict]) -> None:
         log_handoff(question, result["reason"], transcript)
         if result["reason"] == "asked for a person":
             print("\nKeeper: Sure. I've passed this conversation to our support team, and they'll reply by email. "
-                  "They answer within 1 business day (4 business hours on Plus).")
+                  "They answer within 1 business day (4 business hours on the Business plan).")
         else:
             print("\nKeeper: I'm not certain about that one, so I've passed your question to our support team "
-                  "rather than guess. They reply within 1 business day (4 business hours on Plus).")
+                  "rather than guess. They reply within 1 business day (4 business hours on the Business plan).")
         print(f"     [handoff logged: {result['reason']}]\n")
         return
     print(f"\nKeeper: {result['text']}")

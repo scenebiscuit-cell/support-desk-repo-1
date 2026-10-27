@@ -33,14 +33,14 @@ It can run on the AI provider of your choice, or entirely on your own computer i
 ## Interview talking points (CS / support roles)
 
 - "I built AI ticket deflection for a demo SaaS: a docs-grounded chatbot that cites sources and hands off when it's not confident."
-- "I built triage that sorts by real business impact (outages and security first, then customers losing bookings or money) and flags churn risk from tone and intent."
-- "I measured it. My keyword baseline scored 100% on tickets I wrote it against and 50% on unseen ones. That gap is why the LLM layer exists, and it's how I'd evaluate any AI support tool before trusting it." (Swap in your Ollama/Claude number once you run it.)
+- "I built triage that sorts by real business impact (outages and security first, then teams that are blocked or losing money) and flags churn risk from tone and intent."
+- "I measured it. My keyword baseline scored 100% on tickets I wrote it against and 67% on unseen ones. That gap is why the LLM layer exists, and it's how I'd evaluate any AI support tool before trusting it." (Swap in your Ollama/Claude number once you run it.)
 - "I designed it so AI drafts and people decide: refunds, identity verification, and security reports always route to a human."
 - "Macros encode policy. Each one sets tags, priority, and status, and carries an internal note, so new agents give the same answer veterans do."
 
 ## Next steps (suggested order)
 
-1. Run the unseen set with Ollama on your 3060 Ti machine and note the accuracy: `python triage.py --backend ollama --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout`
+1. Run the unseen set with Ollama on your PC and note the accuracy: `python triage.py --backend ollama --model qwen2.5:14b --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout`
 2. Rebuild the demo page with AI drafts (`build_demo.py --results ...`) and republish.
 3. Record a 2-minute Loom walking through the demo page. Buyers on Upwork respond to video.
 4. Put the code on GitHub (public repo) and link it from your listing and resume.

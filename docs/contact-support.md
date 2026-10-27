@@ -14,25 +14,25 @@ Our team answers emails and chat Monday through Friday, 8 a.m. to 6 p.m. Central
 
 | Plan | First response |
 |---|---|
-| Solo and Team | Within 1 business day |
-| Plus | Within 4 business hours (priority queue) |
-| Free trial | Within 1 business day |
+| Free | Within 2 business days |
+| Team | Within 1 business day |
+| Business | Within 4 business hours (priority queue) |
 
 Outages and security issues are handled around the clock regardless of plan.
 
 ## How to reach us
 
-- **Chat:** Click the help icon in the bottom-right of the Pharos dashboard.
+- **Chat:** Click the **?** icon in the bottom-right corner of Pharos.
 - **Email:** `support@pharos.example`
 - We don't offer phone support right now.
 
 ## Get a faster answer
 
-Include your business name, the email on your account, what you expected to happen, what happened instead, and a screenshot if you can. For booking problems, include the date, time, and staff member.
+Include your workspace name, the email on your account, what you expected to happen, what happened instead, and a screenshot if you can.
 
 ## Is Pharos down?
 
-Check `status.pharos.example` for live status and incident updates. You can subscribe there to get email or SMS alerts when an incident starts and ends. If the status page shows everything working but you're having trouble, contact support.
+Check `status.pharos.example` for live status and incident updates. You can subscribe there to get email alerts when an incident starts and ends. If the status page shows everything working but you're having trouble, contact support.
 
 ## Feature requests
 
@@ -40,4 +40,4 @@ We read every request. Send them to support or vote on existing ideas at `ideas.
 
 ## Our roadmap
 
-We publish what we're building at `ideas.pharos.example/roadmap`. Waitlists for fully booked days and recurring appointment packages are currently planned. Group classes are not on the current roadmap.
+We publish what we're building at `ideas.pharos.example/roadmap`. Task dependencies on the timeline view and offline mode for the mobile app are currently planned. Whiteboards and built-in invoicing are not on the current roadmap.

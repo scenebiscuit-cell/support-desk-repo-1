@@ -12,7 +12,7 @@ Support agents exploring a help-desk demo and end users seeking answers in its p
 
 ## Product Purpose
 
-Pharos Support Desk demonstrates support operations for a fictional online booking and reminders app, alongside an end-user portal for finding source-grounded help-center answers.
+Pharos Support Desk demonstrates support operations for Pharos, a fictional project-management app for small teams, alongside an end-user portal for finding source-grounded help-center answers.
 
 ## Positioning
 

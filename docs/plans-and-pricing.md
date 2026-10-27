@@ -6,34 +6,30 @@ category: Billing
 
 # Plans and pricing
 
-Pharos has three plans. All plans include unlimited bookings, a branded booking page, email reminders, and calendar sync.
+Pharos has three plans. Paid plans are billed per member, so you only pay for the people on your team.
 
 ## Plan comparison
 
-| Plan | Price (monthly) | Staff calendars | SMS reminders included | Locations |
+| Plan | Price (monthly) | Members | Projects | Guests |
 |---|---|---|---|---|
-| Solo | $19/month | 1 | 300 per month | 1 |
-| Team | $49/month | Up to 10 | 1,000 per month | 1 |
-| Plus | $99/month | Unlimited | 3,000 per month | Unlimited |
+| Free | $0 | Up to 3 | Up to 5 | None |
+| Team | $10 per member/month | Unlimited | Unlimited | 5 per paid member |
+| Business | $20 per member/month | Unlimited | Unlimited | Unlimited |
 
 ## Annual billing
 
-Pay annually and get two months free: Solo is $190/year, Team is $490/year, and Plus is $990/year.
+Pay annually and get two months free: Team is $100 per member per year, and Business is $200 per member per year.
 
-## Extra SMS messages
+## Business-only features
 
-If you send more SMS reminders than your plan includes, extra messages cost $0.02 each and are added to your next invoice. You can set a monthly SMS cap under **Settings > Reminders > SMS limit** so you never get a surprise bill.
-
-## Plus-only features
-
-- Custom domain for your booking page (for example, `book.yourbusiness.com`)
-- Multiple locations with separate hours and staff
+- Single sign-on (SSO) with Google Workspace, Microsoft Entra ID, or Okta
+- Advanced permissions and private projects
+- Audit log of workspace activity
 - Priority support with a 4-business-hour first response
-- Remove the "Powered by Pharos" badge
 
 ## Discounts
 
-Registered nonprofits get 30% off any plan. Email support with proof of nonprofit status to apply. We don't offer other discount codes.
+Registered nonprofits get 30% off any paid plan. Email support with proof of nonprofit status to apply. We don't offer other discount codes.
 
 ## Taxes
 

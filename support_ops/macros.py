@@ -23,7 +23,7 @@ def choose_macro(category: str, text: str, churn_risk: bool) -> str:
     if category == "refund":
         if "annual" in t or "year" in t:
             return "M02"
-        if any(w in t for w in ("twice", "duplicate", "double charge", "charged me")):
+        if any(w in t for w in ("twice", "duplicate", "double charge", "charged me", "charged us", "wrong plan")):
             return "M01"
         return "M03"
     if category == "cancellation":
@@ -31,16 +31,16 @@ def choose_macro(category: str, text: str, churn_risk: bool) -> str:
         if "owner" in t or not churn_risk:
             return "M04"
         return "M05"
-    if category == "booking_setup":
-        return "M08" if any(w in t for w in ("time zone", "hour", "early", "late", "wrong time")) else "M09"
+    if category == "workspace_setup":
+        return "M08" if any(w in t for w in ("time zone", "timezone", "day early", "day earlier", "due date")) else "M09"
     if category == "account_access":
         return "M12" if any(w in t for w in ("2fa", "code", "phone", "two-factor", "authenticator")) else "M11"
-    if category == "staff":
+    if category == "seats":
         return "M14" if "owner" in t else "M13"
     if category == "data_privacy":
         return "M16" if "export" in t and "delet" not in t else "M15"
     return {
-        "billing": "M22", "calendar_sync": "M06", "reminders": "M07", "payments": "M10",
+        "billing": "M22", "integrations": "M06", "notifications": "M07", "bug": "M10",
         "outage": "M17", "security": "M18", "feature_request": "M19", "presales": "M20",
         "feedback": "M21", "spam": "M23",
     }.get(category, "M09")

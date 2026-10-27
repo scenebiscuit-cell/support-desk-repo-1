@@ -1,31 +1,27 @@
 ---
-title: Export or delete your data
+title: Import, export, and delete your data
 slug: data-export-and-deletion
 category: Account
 ---
 
-# Export or delete your data
+# Import, export, and delete your data
 
 ## Export your data
 
-Owners and Admins can export data under **Settings > Data > Export**. Choose clients, appointments, or payments, and pick a date range. Exports download as CSV files that open in Excel or Google Sheets. Large exports are emailed to you as a link within 15 minutes.
+Owners and admins can export under **Settings > Data > Export**. Choose a single project or the whole workspace, as CSV (opens in Excel or Google Sheets) or JSON (includes comments and history). Large exports are emailed to you as a download link within 15 minutes. Attachments are included as a separate ZIP.
 
-## Import clients from another tool
+## Import from another tool
 
-Go to **Clients > Import** and upload a CSV with at least a name column and either an email or phone column. Download the template on that screen to see the expected format. Imports up to 10,000 clients are supported at once.
+Go to **Settings > Data > Import** to bring in projects from Trello, Asana, or a CSV file. Columns, tasks, assignees, and due dates come across; you'll be asked to match people by email.
 
-## Delete a single client
+## Someone asks you to delete their personal data
 
-Open the client and click **Delete client**. This removes their contact details and cancels their future appointments. Their past appointments stay in your reports as "Deleted client."
+Your workspace owns its data, and Pharos processes it on your behalf. If a former employee or client asks to have their personal data removed, a workspace admin can remove them under **Settings > Members** and anonymize their name on past comments with **Anonymize**. Contact support if you need help with a formal request.
 
-## Client asks you to delete their data
+## Delete your whole workspace
 
-You're responsible for your clients' data. If a client asks you to delete their information, use **Delete client** as above. Pharos processes client data on your behalf and follows your instructions.
-
-## Delete your whole account
-
-Only the owner can delete the account, under **Settings > Account > Delete account**. You must cancel your plan first. After you confirm, the account is scheduled for deletion and permanently erased after 30 days. During those 30 days, you can contact support to restore it. After 30 days, it can't be recovered.
+Only the owner can delete the workspace, under **Settings > Workspace > Delete workspace**. You must cancel any paid plan first. After you confirm, the workspace is scheduled for deletion and permanently erased after 30 days. During those 30 days, you can contact support to restore it. After that, it can't be recovered.
 
 ## How long we keep data
 
-Cancelled accounts are kept for 60 days, then deleted. Backups are fully purged within 90 days of deletion. See our privacy policy at `pharos.example/privacy` for details.
+Deleted workspaces are erased after 30 days, and backups are fully purged within 90 days. See our privacy policy at `pharos.example/privacy` for details.

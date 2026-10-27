@@ -3,19 +3,19 @@
   "summary": {
     "tickets": 12,
     "by_category": {
-      "booking_setup": 2,
+      "billing": 2,
+      "integrations": 2,
       "account_access": 2,
-      "reminders": 2,
-      "payments": 2,
-      "calendar_sync": 1,
+      "notifications": 2,
       "presales": 1,
       "cancellation": 1,
-      "billing": 1
+      "bug": 1,
+      "refund": 1
     },
     "by_priority": {
       "urgent": 0,
-      "high": 4,
-      "normal": 8,
+      "high": 3,
+      "normal": 9,
       "low": 0
     },
     "churn_risk": [],
@@ -23,24 +23,13 @@
     "ready_to_send": 3,
     "auto_closed_spam": 0,
     "accuracy": {
-      "category": 0.5,
-      "priority": 0.583,
+      "category": 0.667,
+      "priority": 0.667,
       "misses": [
-        {
-          "ticket_id": "H-01",
-          "got": [
-            "booking_setup",
-            "high"
-          ],
-          "expected": [
-            "billing",
-            "high"
-          ]
-        },
         {
           "ticket_id": "H-02",
           "got": [
-            "calendar_sync",
+            "integrations",
             "high"
           ],
           "expected": [
@@ -49,46 +38,24 @@
           ]
         },
         {
-          "ticket_id": "H-03",
+          "ticket_id": "H-09",
           "got": [
-            "booking_setup",
+            "notifications",
             "normal"
           ],
           "expected": [
-            "calendar_sync",
-            "normal"
-          ]
-        },
-        {
-          "ticket_id": "H-04",
-          "got": [
-            "account_access",
-            "normal"
-          ],
-          "expected": [
-            "account_access",
+            "notifications",
             "high"
-          ]
-        },
-        {
-          "ticket_id": "H-06",
-          "got": [
-            "reminders",
-            "high"
-          ],
-          "expected": [
-            "reminders",
-            "normal"
           ]
         },
         {
           "ticket_id": "H-10",
           "got": [
-            "payments",
+            "refund",
             "normal"
           ],
           "expected": [
-            "booking_setup",
+            "workspace_setup",
             "normal"
           ]
         },
@@ -121,22 +88,24 @@
     {
       "ticket_id": "H-01",
       "engine": "rules",
-      "category": "booking_setup",
+      "category": "billing",
       "priority": "high",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "booking_setup",
-        "booking_page_error"
+        "billing",
+        "prorated_charges"
       ],
-      "macro_id": "M09",
-      "macro_title": "Booking page: error for a single business",
-      "summary": "Page says not taking bookings",
-      "draft_reply": "Hi Dana,\n\nSorry your booking page isn't loading. Let's get it back up. A few quick checks:\n\n1. Status page: https://status.pharos.example shows any active incidents.\n2. Account status: a paused or past-due account shows \"This business isn't taking bookings right now.\"\n3. Try the page in a private browser window to rule out extensions.\n\nIf it still fails, please reply with the page URL, a screenshot, and roughly when it started, and I'll dig in right away.\n\nAlex\nPharos Support",
-      "unfilled_placeholders": [],
-      "needs_human": false,
+      "macro_id": "M22",
+      "macro_title": "Billing: prorated member charges explained",
+      "summary": "Everything is read-only",
+      "draft_reply": "Hi Dana,\n\nThank you for contacting Pharos. I can see how that was a surprise, so here's what happened.\n\nPlans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.\n\n[[fill in: credit line]]\n\nTwo tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "credit_line"
+      ],
+      "needs_human": true,
       "cited_articles": [
-        "booking-page",
+        "integrations",
         "billing-and-refunds"
       ],
       "confidence": 1.0
@@ -144,24 +113,23 @@
     {
       "ticket_id": "H-02",
       "engine": "rules",
-      "category": "calendar_sync",
+      "category": "integrations",
       "priority": "high",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "calendar_sync",
-        "double_booking"
+        "integrations"
       ],
       "macro_id": "M06",
-      "macro_title": "Calendar sync: double booking troubleshooting",
-      "summary": "recurring lessons",
-      "draft_reply": "Hi Leo,\n\nI'm really sorry about the double booking. That's exactly what Pharos is supposed to prevent, and I understand how frustrating it is in front of your clients.\n\nI'm pulling the sync log for [[fill in: staff name]]'s calendar now. In the meantime, these are the most common causes, and it's worth a 2-minute check:\n\n1. The calendar event is set to \"Free\" instead of \"Busy.\" Only Busy events block the booking page.\n2. The calendar holding that event isn't selected under Settings > Calendar sync > Calendars to check.\n3. The connection expired (often after a password change). If you see a red \"Reconnect\" banner in Settings > Calendar sync, click it and sign in again.\n\nI'll follow up today with what the log shows and what we're doing about it.\n\nGuide: https://help.pharos.example/calendar-sync\n\nAlex\nPharos Support",
+      "macro_title": "Integrations: connection stopped working",
+      "summary": "offline on the phone app",
+      "draft_reply": "Hi Leo,\n\nThank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.\n\nIn the meantime, these cause most integration problems and only take a minute to check:\n1. A red \"Reconnect\" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.\n2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.\n3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.\n\nTalk soon,\nAlex\nPharos Support",
       "unfilled_placeholders": [
-        "staff_name"
+        "integration"
       ],
       "needs_human": true,
       "cited_articles": [
-        "billing-and-refunds",
+        "contact-support",
         "contact-support"
       ],
       "confidence": 1.0
@@ -169,31 +137,32 @@
     {
       "ticket_id": "H-03",
       "engine": "rules",
-      "category": "booking_setup",
+      "category": "integrations",
       "priority": "normal",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "booking_setup",
-        "booking_page_error"
+        "integrations"
       ],
-      "macro_id": "M09",
-      "macro_title": "Booking page: error for a single business",
-      "summary": "Outlook events not blocking my availability",
-      "draft_reply": "Hi Imani,\n\nSorry your booking page isn't loading. Let's get it back up. A few quick checks:\n\n1. Status page: https://status.pharos.example shows any active incidents.\n2. Account status: a paused or past-due account shows \"This business isn't taking bookings right now.\"\n3. Try the page in a private browser window to rule out extensions.\n\nIf it still fails, please reply with the page URL, a screenshot, and roughly when it started, and I'll dig in right away.\n\nAlex\nPharos Support",
-      "unfilled_placeholders": [],
+      "macro_id": "M06",
+      "macro_title": "Integrations: connection stopped working",
+      "summary": "Due dates not on my Google Calendar",
+      "draft_reply": "Hi Imani,\n\nThank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.\n\nIn the meantime, these cause most integration problems and only take a minute to check:\n1. A red \"Reconnect\" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.\n2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.\n3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.\n\nTalk soon,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "integration"
+      ],
       "needs_human": true,
       "cited_articles": [
-        "calendar-sync",
-        "calendar-sync"
+        "integrations",
+        "integrations"
       ],
-      "confidence": 0.54
+      "confidence": 0.6
     },
     {
       "ticket_id": "H-04",
       "engine": "rules",
       "category": "account_access",
-      "priority": "normal",
+      "priority": "high",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
@@ -203,14 +172,14 @@
       "macro_id": "M11",
       "macro_title": "Account access: password reset email not arriving",
       "summary": "too many attempts",
-      "draft_reply": "Hi Paul,\n\nSorry you're stuck. Reset emails come from security@pharos.example and only go to the exact email your login was created with, so if you signed up with an older address, the email went there.\n\nTry requesting the reset using your other email address. The link expires after 1 hour, so use it right away. If you no longer have access to that inbox, reply from it if you can, or let me know and I'll walk you through verifying your account.\n\nGuide: https://help.pharos.example/account-security\n\nAlex\nPharos Support",
+      "draft_reply": "Hi Paul,\n\nThank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.\n\nTry requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [],
-      "needs_human": true,
+      "needs_human": false,
       "cited_articles": [
         "account-security",
-        "deposits-and-payments"
+        "plans-and-pricing"
       ],
-      "confidence": 0.3
+      "confidence": 1.0
     },
     {
       "ticket_id": "H-05",
@@ -226,37 +195,37 @@
       "macro_id": "M20",
       "macro_title": "Presales: plan and feature questions",
       "summary": "Nonprofit pricing?",
-      "draft_reply": "Hi Ruth,\n\nSo glad you're enjoying the trial! Happy to help you pick the right plan.\n\n[[fill in: answers]]\n\nYou can compare plans here: https://help.pharos.example/plans-and-pricing. And if you pay annually, you get two months free.\n\nAny other questions, just reply here.\n\nAlex\nPharos Support",
+      "draft_reply": "Hi Ruth,\n\nThank you for contacting Pharos! I'm so glad you're enjoying the trial. Happy to help you pick the right plan.\n\n[[fill in: answers]]\n\nYou can compare all the plans at help.pharos.example/plans-and-pricing, and paying annually gets you two months free.\n\nIf anything else comes up, just reply here.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [
         "answers"
       ],
       "needs_human": true,
       "cited_articles": [
         "plans-and-pricing",
-        "plans-and-pricing"
+        "getting-started"
       ],
-      "confidence": 0.3
+      "confidence": 1.0
     },
     {
       "ticket_id": "H-06",
       "engine": "rules",
-      "category": "reminders",
-      "priority": "high",
+      "category": "notifications",
+      "priority": "normal",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "reminders",
-        "sms"
+        "notifications",
+        "email"
       ],
       "macro_id": "M07",
-      "macro_title": "Reminders: SMS not delivering",
-      "summary": "confirmation emails going to spam",
-      "draft_reply": "Hi Sofia,\n\nThanks for flagging this, and I'm sorry about the no-shows. Since email reminders are still going out, this is almost always an SMS-specific setting. I'm checking your account now. Here's what I'm looking at:\n\n1. Whether a monthly SMS cap is set under Settings > Reminders > SMS limit. Once it's reached, texts stop until next month.\n2. The delivery status in Clients > [client] > Messages (Sent, Delivered, Failed, or Opted out).\n3. Whether clients replied STOP, which unsubscribes them from all texts.\n\nIf you can send a screenshot of the Messages tab for one patient who didn't get a text, that will speed things up.\n\nGuide: https://help.pharos.example/reminders\n\nAlex\nPharos Support",
+      "macro_title": "Notifications: emails not arriving",
+      "summary": "emails going to junk",
+      "draft_reply": "Hi Sofia,\n\nThank you for contacting Pharos, and I'm sorry this has caused missed work. I'm checking our email delivery log for your workspace now.\n\nA few settings that usually explain it:\n1. Email is turned on for each notification type under Profile > Notifications.\n2. Daily digest is off. When it's on, individual emails pause.\n3. Do not disturb (the moon icon by your profile picture) is off.\n4. Your company's email filter isn't blocking notifications@pharos.example. Your IT team can allow our domain.\n\nIf you can send a screenshot of one teammate's notification settings, that'll help me get to the bottom of it faster.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [],
       "needs_human": true,
       "cited_articles": [
-        "reminders",
-        "deposits-and-payments"
+        "notifications",
+        "notifications"
       ],
       "confidence": 0.3
     },
@@ -271,89 +240,84 @@
         "cancellation"
       ],
       "macro_id": "M04",
-      "macro_title": "Cancellation: how to cancel (owner vs. staff login)",
+      "macro_title": "Cancellation: how to cancel (owner vs. other roles)",
       "summary": "close account",
-      "draft_reply": "Hi Walt,\n\nThanks for reaching out. The Cancel plan option only shows up for the account owner, which is probably why you can't find it. Staff and admin logins don't have billing access.\n\nThe account owner can cancel in a few clicks:\n1. Log in and go to Settings > Billing > Cancel plan.\n2. Pick a reason and confirm.\n3. The plan stays active until the end of the current billing period.\n\nIf the owner prefers, they can reply to this email from the owner's email address and I'll take care of it for them.\n\nFull guide: https://help.pharos.example/change-or-cancel-plan\n\nBest,\nAlex\nPharos Support",
+      "draft_reply": "Hi Walt,\n\nThank you for contacting Pharos. You're not missing anything: the Cancel plan option only appears for the workspace owner, so admin and member logins won't see it.\n\nThe owner can cancel in a minute or two:\n1. Log in and go to Settings > Billing > Cancel plan.\n2. Pick a reason and confirm.\n3. The plan stays active until the end of the current billing period, then the workspace moves to the Free plan. Nothing is deleted.\n\nIf it's easier, the owner can reply to this email from their own address and I'll take care of it.\n\nWe're sorry to see you go, and thank you for using Pharos.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [],
       "needs_human": true,
       "cited_articles": [
-        "staff-and-permissions",
-        "change-or-cancel-plan"
+        "billing-and-refunds",
+        "contact-support"
       ],
       "confidence": 0.55
     },
     {
       "ticket_id": "H-08",
       "engine": "rules",
-      "category": "payments",
+      "category": "bug",
       "priority": "normal",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "payments",
-        "deposit"
+        "bug"
       ],
       "macro_id": "M10",
-      "macro_title": "Payments: deposit not collected",
-      "summary": "refund a patient's deposit",
-      "draft_reply": "Hi Mei,\n\nThanks for the details. Since Stripe shows Connected, there are two usual reasons a deposit gets skipped:\n\n1. Deposits are set per service. Open Services > [[fill in: service name]] and make sure \"Require payment at booking\" is turned on.\n2. Bookings added by your team from the calendar skip payment by design. Only bookings clients make on the booking page collect a deposit.\n\nFor this Friday's appointment, you can send the client a payment link from the appointment, or turn on Card on file so you can charge a no-show fee.\n\nGuide: https://help.pharos.example/deposits-and-payments\n\nAlex\nPharos Support",
-      "unfilled_placeholders": [
-        "service_name"
-      ],
-      "needs_human": true,
+      "macro_title": "Bug: troubleshooting and next steps",
+      "summary": "video won't attach",
+      "draft_reply": "Hi Mei,\n\nThank you for contacting Pharos, and sorry for the scare. This is usually recoverable, so let's track it down.\n\nFor missing tasks, check these first:\n1. Click Clear filters at the top of the board. A saved view can hide tasks.\n2. Turn on Show archived in the view menu. Completed tasks can be archived automatically.\n3. Look in Projects > Trash. Deleted tasks stay there for 30 days and can be restored.\n\nFor a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.\n\nIf none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
       "cited_articles": [
-        "deposits-and-payments",
-        "deposits-and-payments"
+        "troubleshooting",
+        "troubleshooting"
       ],
-      "confidence": 0.7
+      "confidence": 1.0
     },
     {
       "ticket_id": "H-09",
       "engine": "rules",
-      "category": "reminders",
-      "priority": "high",
+      "category": "notifications",
+      "priority": "normal",
       "sentiment": "negative",
       "churn_risk": false,
       "tags": [
-        "reminders",
-        "sms"
+        "notifications",
+        "email"
       ],
       "macro_id": "M07",
-      "macro_title": "Reminders: SMS not delivering",
-      "summary": "texts at 3am?!",
-      "draft_reply": "Hi Dre,\n\nThanks for flagging this, and I'm sorry about the no-shows. Since email reminders are still going out, this is almost always an SMS-specific setting. I'm checking your account now. Here's what I'm looking at:\n\n1. Whether a monthly SMS cap is set under Settings > Reminders > SMS limit. Once it's reached, texts stop until next month.\n2. The delivery status in Clients > [client] > Messages (Sent, Delivered, Failed, or Opted out).\n3. Whether clients replied STOP, which unsubscribes them from all texts.\n\nIf you can send a screenshot of the Messages tab for one patient who didn't get a text, that will speed things up.\n\nGuide: https://help.pharos.example/reminders\n\nAlex\nPharos Support",
+      "macro_title": "Notifications: emails not arriving",
+      "summary": "400 emails overnight?!",
+      "draft_reply": "Hi Dre,\n\nThank you for contacting Pharos, and I'm sorry this has caused missed work. I'm checking our email delivery log for your workspace now.\n\nA few settings that usually explain it:\n1. Email is turned on for each notification type under Profile > Notifications.\n2. Daily digest is off. When it's on, individual emails pause.\n3. Do not disturb (the moon icon by your profile picture) is off.\n4. Your company's email filter isn't blocking notifications@pharos.example. Your IT team can allow our domain.\n\nIf you can send a screenshot of one teammate's notification settings, that'll help me get to the bottom of it faster.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [],
-      "needs_human": false,
+      "needs_human": true,
       "cited_articles": [
-        "plans-and-pricing",
-        "account-security"
+        "notifications",
+        "notifications"
       ],
-      "confidence": 1.0
+      "confidence": 0.3
     },
     {
       "ticket_id": "H-10",
       "engine": "rules",
-      "category": "payments",
+      "category": "refund",
       "priority": "normal",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "payments",
-        "deposit"
+        "refund",
+        "policy_decline"
       ],
-      "macro_id": "M10",
-      "macro_title": "Payments: deposit not collected",
-      "summary": "embed not showing on squarespace",
-      "draft_reply": "Hi Ava,\n\nThanks for the details. Since Stripe shows Connected, there are two usual reasons a deposit gets skipped:\n\n1. Deposits are set per service. Open Services > [[fill in: service name]] and make sure \"Require payment at booking\" is turned on.\n2. Bookings added by your team from the calendar skip payment by design. Only bookings clients make on the booking page collect a deposit.\n\nFor this Friday's appointment, you can send the client a payment link from the appointment, or turn on Card on file so you can charge a no-show fee.\n\nGuide: https://help.pharos.example/deposits-and-payments\n\nAlex\nPharos Support",
-      "unfilled_placeholders": [
-        "service_name"
-      ],
+      "macro_id": "M03",
+      "macro_title": "Refund: monthly plan (policy, no partial months)",
+      "summary": "reuse our refund requests board",
+      "draft_reply": "Hi Ava,\n\nThank you for contacting Pharos. I wish I had better news: on monthly plans, we aren't able to refund part of a month. The good news is that nothing shuts off early. You'll keep full access through the end of the period you've already paid for.\n\nIf you'd like to make sure you aren't charged again, I'm happy to cancel for you, or you can do it anytime under Settings > Billing > Cancel plan.\n\nAnd if something on our end didn't work the way it should have, please tell me. I'd like to take another look.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
       "needs_human": true,
       "cited_articles": [
-        "booking-page",
-        "booking-page"
+        "billing-and-refunds",
+        "contact-support"
       ],
-      "confidence": 1.0
+      "confidence": 0.75
     },
     {
       "ticket_id": "H-11",
@@ -364,21 +328,21 @@
       "churn_risk": false,
       "tags": [
         "billing",
-        "sms_overage"
+        "prorated_charges"
       ],
       "macro_id": "M22",
-      "macro_title": "Billing: SMS overage explained",
+      "macro_title": "Billing: prorated member charges explained",
       "summary": "Billed for wrong plan",
-      "draft_reply": "Hi Ray,\n\nI understand the surprise, and I'm sorry it wasn't clearer. Here's what happened: your Team plan includes 1,000 SMS reminders a month. Texts beyond that are $0.02 each, and last month's extra texts were added to this invoice.\n\nTo make sure it doesn't happen again:\n1. Set a monthly cap under Settings > Reminders > SMS limit. Texts stop when you hit it.\n2. Send one reminder per appointment instead of two, or keep texts under 160 characters (longer ones count as two messages).\n\n[[fill in: credit line]]\n\nGuide: https://help.pharos.example/plans-and-pricing\n\nAlex\nPharos Support",
+      "draft_reply": "Hi Ray,\n\nThank you for contacting Pharos. I can see how that was a surprise, so here's what happened.\n\nPlans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.\n\n[[fill in: credit line]]\n\nTwo tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [
         "credit_line"
       ],
       "needs_human": true,
       "cited_articles": [
-        "billing-and-refunds",
+        "plans-and-pricing",
         "plans-and-pricing"
       ],
-      "confidence": 1.0
+      "confidence": 0.79
     },
     {
       "ticket_id": "H-12",
@@ -394,12 +358,12 @@
       "macro_id": "M11",
       "macro_title": "Account access: password reset email not arriving",
       "summary": "Login I don't recognize",
-      "draft_reply": "Hi Beth,\n\nSorry you're stuck. Reset emails come from security@pharos.example and only go to the exact email your login was created with, so if you signed up with an older address, the email went there.\n\nTry requesting the reset using your other email address. The link expires after 1 hour, so use it right away. If you no longer have access to that inbox, reply from it if you can, or let me know and I'll walk you through verifying your account.\n\nGuide: https://help.pharos.example/account-security\n\nAlex\nPharos Support",
+      "draft_reply": "Hi Beth,\n\nThank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.\n\nTry requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [],
       "needs_human": false,
       "cited_articles": [
         "account-security",
-        "data-export-and-deletion"
+        "troubleshooting"
       ],
       "confidence": 1.0
     }

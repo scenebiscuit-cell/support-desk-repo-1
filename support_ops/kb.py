@@ -20,7 +20,7 @@ STOPWORDS = set(
     me my of on or our so that the their them then there these they this to too was we were what when
     where which who why will with would you your yours im ive id dont cant isnt just like get got please
     hi hello hey thanks thank any some also about all been being am up out over only very more most much
-    other than such should need want know""".split()
+    other than such should need want know work works working""".split()
 )
 
 # Map customer words onto the words the docs actually use.
@@ -28,18 +28,19 @@ SYNONYMS = {
     "subscription": "plan", "membership": "plan", "tier": "plan",
     "unsubscribe": "cancel", "cancellation": "cancel", "quit": "cancel",
     "money": "refund", "reimburse": "refund", "refunded": "refund",
-    "text": "sms", "texts": "sms", "sm": "sms",
     "2fa": "two-factor", "authenticator": "two-factor", "mfa": "two-factor",
     "signin": "login", "logins": "login", "locked": "lock",
     "cost": "price", "pricing": "price", "costs": "price", "expensive": "price",
-    "doublebooked": "double", "overlap": "double",
-    "employee": "staff", "employees": "staff", "stylist": "staff", "stylists": "staff",
-    "worker": "staff", "seat": "staff", "seats": "staff",
+    "employee": "member", "employees": "member", "teammate": "member", "teammates": "member",
+    "user": "member", "users": "member", "seat": "member", "seats": "member", "staff": "member",
     "delete": "delet", "deletion": "delet", "remove": "delet", "erase": "delet",
     "down": "outage", "offline": "outage",
     "timezone": "time-zone",
     "outlook": "calendar", "gcal": "calendar",
-    "domain": "domain", "url": "domain", "website": "domain",
+    "alert": "notification", "alerts": "notification", "emails": "notification", "pings": "notification",
+    "disappeared": "missing", "vanished": "missing", "gone": "missing", "lost": "missing",
+    "board": "project", "boards": "project", "workspace": "workspace",
+    "connected": "connect",
 }
 
 
@@ -51,7 +52,7 @@ def stem(word: str) -> str:
     return word
 
 
-PHRASES = {"how much": "price", "double booked": "double booking", "log in": "login", "sign in": "login",
+PHRASES = {"how much": "price", "log in": "login", "sign in": "login",
            "two factor": "two-factor", "time zone": "timezone", "no show": "no-show"}
 
 

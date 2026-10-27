@@ -6,7 +6,7 @@ category: Billing
 
 # Change or cancel your plan
 
-Only the account owner can change or cancel a plan.
+Only the workspace owner can change or cancel a plan.
 
 ## Upgrade
 
@@ -14,20 +14,16 @@ Go to **Settings > Billing > Change plan** and choose the new plan. Upgrades tak
 
 ## Downgrade
 
-Downgrades take effect at the start of your next billing period. Before downgrading, make sure you're within the new plan's limits. For example, moving from Team to Solo requires removing all but one staff calendar. If you're over the limit, the **Change plan** screen tells you what to remove.
-
-## Pause your account
-
-Seasonal business? You can pause your account for up to 3 months once per year under **Settings > Billing > Pause account**. While paused, you pay $5/month, your booking page is offline, and all your data, clients, and settings are kept.
+Downgrades take effect at the start of your next billing period. Moving to the Free plan requires 3 or fewer members and 5 or fewer active projects. If you're over the limit, the **Change plan** screen shows what to remove or archive.
 
 ## Cancel
 
 1. Go to **Settings > Billing > Cancel plan**.
 2. Pick a reason (this helps us improve) and confirm.
-3. Your plan stays active until the end of the current billing period, then your booking page goes offline.
+3. Your plan stays active until the end of the current billing period, then the workspace moves to the Free plan.
 
-After cancellation, your data is kept for 60 days in case you come back. To delete it sooner, see *Export or delete your data*.
+Cancelling doesn't delete anything. Projects over the Free plan limits become read-only, and you can upgrade again anytime to unlock them. To delete your workspace completely, see *Export or delete your data*.
 
 ## Can't find the cancel button?
 
-If you don't see **Cancel plan**, you're probably logged in as a staff member, not the owner. Ask the account owner to cancel, or contact support from the owner's email address.
+If you don't see **Cancel plan**, you're probably logged in as an admin or member, not the owner. Ask the workspace owner to cancel, or contact support from the owner's email address.

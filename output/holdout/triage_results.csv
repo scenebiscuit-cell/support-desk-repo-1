@@ -1,157 +1,155 @@
 ticket_id,category,priority,sentiment,churn_risk,needs_human,macro_id,tags,summary,confidence,engine,draft_reply
-H-01,booking_setup,high,neutral,False,False,M09,booking_setup booking_page_error,Page says not taking bookings,1.0,rules,"Hi Dana,
+H-01,billing,high,neutral,False,True,M22,billing prorated_charges,Everything is read-only,1.0,rules,"Hi Dana,
 
-Sorry your booking page isn't loading. Let's get it back up. A few quick checks:
+Thank you for contacting Pharos. I can see how that was a surprise, so here's what happened.
 
-1. Status page: https://status.pharos.example shows any active incidents.
-2. Account status: a paused or past-due account shows ""This business isn't taking bookings right now.""
-3. Try the page in a private browser window to rule out extensions.
+Plans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.
 
-If it still fails, please reply with the page URL, a screenshot, and roughly when it started, and I'll dig in right away.
+[[fill in: credit line]]
 
-Alex
-Pharos Support"
-H-02,calendar_sync,high,neutral,False,True,M06,calendar_sync double_booking,recurring lessons,1.0,rules,"Hi Leo,
-
-I'm really sorry about the double booking. That's exactly what Pharos is supposed to prevent, and I understand how frustrating it is in front of your clients.
-
-I'm pulling the sync log for [[fill in: staff name]]'s calendar now. In the meantime, these are the most common causes, and it's worth a 2-minute check:
-
-1. The calendar event is set to ""Free"" instead of ""Busy."" Only Busy events block the booking page.
-2. The calendar holding that event isn't selected under Settings > Calendar sync > Calendars to check.
-3. The connection expired (often after a password change). If you see a red ""Reconnect"" banner in Settings > Calendar sync, click it and sign in again.
-
-I'll follow up today with what the log shows and what we're doing about it.
-
-Guide: https://help.pharos.example/calendar-sync
-
-Alex
-Pharos Support"
-H-03,booking_setup,normal,neutral,False,True,M09,booking_setup booking_page_error,Outlook events not blocking my availability,0.54,rules,"Hi Imani,
-
-Sorry your booking page isn't loading. Let's get it back up. A few quick checks:
-
-1. Status page: https://status.pharos.example shows any active incidents.
-2. Account status: a paused or past-due account shows ""This business isn't taking bookings right now.""
-3. Try the page in a private browser window to rule out extensions.
-
-If it still fails, please reply with the page URL, a screenshot, and roughly when it started, and I'll dig in right away.
-
-Alex
-Pharos Support"
-H-04,account_access,normal,neutral,False,True,M11,account_access password_reset,too many attempts,0.3,rules,"Hi Paul,
-
-Sorry you're stuck. Reset emails come from security@pharos.example and only go to the exact email your login was created with, so if you signed up with an older address, the email went there.
-
-Try requesting the reset using your other email address. The link expires after 1 hour, so use it right away. If you no longer have access to that inbox, reply from it if you can, or let me know and I'll walk you through verifying your account.
-
-Guide: https://help.pharos.example/account-security
-
-Alex
-Pharos Support"
-H-05,presales,normal,neutral,False,True,M20,presales trial,Nonprofit pricing?,0.3,rules,"Hi Ruth,
-
-So glad you're enjoying the trial! Happy to help you pick the right plan.
-
-[[fill in: answers]]
-
-You can compare plans here: https://help.pharos.example/plans-and-pricing. And if you pay annually, you get two months free.
-
-Any other questions, just reply here.
-
-Alex
-Pharos Support"
-H-06,reminders,high,neutral,False,True,M07,reminders sms,confirmation emails going to spam,0.3,rules,"Hi Sofia,
-
-Thanks for flagging this, and I'm sorry about the no-shows. Since email reminders are still going out, this is almost always an SMS-specific setting. I'm checking your account now. Here's what I'm looking at:
-
-1. Whether a monthly SMS cap is set under Settings > Reminders > SMS limit. Once it's reached, texts stop until next month.
-2. The delivery status in Clients > [client] > Messages (Sent, Delivered, Failed, or Opted out).
-3. Whether clients replied STOP, which unsubscribes them from all texts.
-
-If you can send a screenshot of the Messages tab for one patient who didn't get a text, that will speed things up.
-
-Guide: https://help.pharos.example/reminders
-
-Alex
-Pharos Support"
-H-07,cancellation,normal,positive,False,True,M04,cancellation,close account,0.55,rules,"Hi Walt,
-
-Thanks for reaching out. The Cancel plan option only shows up for the account owner, which is probably why you can't find it. Staff and admin logins don't have billing access.
-
-The account owner can cancel in a few clicks:
-1. Log in and go to Settings > Billing > Cancel plan.
-2. Pick a reason and confirm.
-3. The plan stays active until the end of the current billing period.
-
-If the owner prefers, they can reply to this email from the owner's email address and I'll take care of it for them.
-
-Full guide: https://help.pharos.example/change-or-cancel-plan
+Two tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.
 
 Best,
 Alex
 Pharos Support"
-H-08,payments,normal,neutral,False,True,M10,payments deposit,refund a patient's deposit,0.7,rules,"Hi Mei,
+H-02,integrations,high,neutral,False,True,M06,integrations,offline on the phone app,1.0,rules,"Hi Leo,
 
-Thanks for the details. Since Stripe shows Connected, there are two usual reasons a deposit gets skipped:
+Thank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.
 
-1. Deposits are set per service. Open Services > [[fill in: service name]] and make sure ""Require payment at booking"" is turned on.
-2. Bookings added by your team from the calendar skip payment by design. Only bookings clients make on the booking page collect a deposit.
+In the meantime, these cause most integration problems and only take a minute to check:
+1. A red ""Reconnect"" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.
+2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.
+3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.
 
-For this Friday's appointment, you can send the client a payment link from the appointment, or turn on Card on file so you can charge a no-show fee.
-
-Guide: https://help.pharos.example/deposits-and-payments
-
+Talk soon,
 Alex
 Pharos Support"
-H-09,reminders,high,negative,False,False,M07,reminders sms,texts at 3am?!,1.0,rules,"Hi Dre,
+H-03,integrations,normal,neutral,False,True,M06,integrations,Due dates not on my Google Calendar,0.6,rules,"Hi Imani,
 
-Thanks for flagging this, and I'm sorry about the no-shows. Since email reminders are still going out, this is almost always an SMS-specific setting. I'm checking your account now. Here's what I'm looking at:
+Thank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.
 
-1. Whether a monthly SMS cap is set under Settings > Reminders > SMS limit. Once it's reached, texts stop until next month.
-2. The delivery status in Clients > [client] > Messages (Sent, Delivered, Failed, or Opted out).
-3. Whether clients replied STOP, which unsubscribes them from all texts.
+In the meantime, these cause most integration problems and only take a minute to check:
+1. A red ""Reconnect"" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.
+2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.
+3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.
 
-If you can send a screenshot of the Messages tab for one patient who didn't get a text, that will speed things up.
-
-Guide: https://help.pharos.example/reminders
-
+Talk soon,
 Alex
 Pharos Support"
-H-10,payments,normal,neutral,False,True,M10,payments deposit,embed not showing on squarespace,1.0,rules,"Hi Ava,
+H-04,account_access,high,neutral,False,False,M11,account_access password_reset,too many attempts,1.0,rules,"Hi Paul,
 
-Thanks for the details. Since Stripe shows Connected, there are two usual reasons a deposit gets skipped:
+Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
 
-1. Deposits are set per service. Open Services > [[fill in: service name]] and make sure ""Require payment at booking"" is turned on.
-2. Bookings added by your team from the calendar skip payment by design. Only bookings clients make on the booking page collect a deposit.
+Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
 
-For this Friday's appointment, you can send the client a payment link from the appointment, or turn on Card on file so you can charge a no-show fee.
-
-Guide: https://help.pharos.example/deposits-and-payments
-
+Best,
 Alex
 Pharos Support"
-H-11,billing,normal,neutral,False,True,M22,billing sms_overage,Billed for wrong plan,1.0,rules,"Hi Ray,
+H-05,presales,normal,neutral,False,True,M20,presales trial,Nonprofit pricing?,1.0,rules,"Hi Ruth,
 
-I understand the surprise, and I'm sorry it wasn't clearer. Here's what happened: your Team plan includes 1,000 SMS reminders a month. Texts beyond that are $0.02 each, and last month's extra texts were added to this invoice.
+Thank you for contacting Pharos! I'm so glad you're enjoying the trial. Happy to help you pick the right plan.
 
-To make sure it doesn't happen again:
-1. Set a monthly cap under Settings > Reminders > SMS limit. Texts stop when you hit it.
-2. Send one reminder per appointment instead of two, or keep texts under 160 characters (longer ones count as two messages).
+[[fill in: answers]]
+
+You can compare all the plans at help.pharos.example/plans-and-pricing, and paying annually gets you two months free.
+
+If anything else comes up, just reply here.
+
+Best,
+Alex
+Pharos Support"
+H-06,notifications,normal,neutral,False,True,M07,notifications email,emails going to junk,0.3,rules,"Hi Sofia,
+
+Thank you for contacting Pharos, and I'm sorry this has caused missed work. I'm checking our email delivery log for your workspace now.
+
+A few settings that usually explain it:
+1. Email is turned on for each notification type under Profile > Notifications.
+2. Daily digest is off. When it's on, individual emails pause.
+3. Do not disturb (the moon icon by your profile picture) is off.
+4. Your company's email filter isn't blocking notifications@pharos.example. Your IT team can allow our domain.
+
+If you can send a screenshot of one teammate's notification settings, that'll help me get to the bottom of it faster.
+
+Best,
+Alex
+Pharos Support"
+H-07,cancellation,normal,positive,False,True,M04,cancellation,close account,0.55,rules,"Hi Walt,
+
+Thank you for contacting Pharos. You're not missing anything: the Cancel plan option only appears for the workspace owner, so admin and member logins won't see it.
+
+The owner can cancel in a minute or two:
+1. Log in and go to Settings > Billing > Cancel plan.
+2. Pick a reason and confirm.
+3. The plan stays active until the end of the current billing period, then the workspace moves to the Free plan. Nothing is deleted.
+
+If it's easier, the owner can reply to this email from their own address and I'll take care of it.
+
+We're sorry to see you go, and thank you for using Pharos.
+
+Best,
+Alex
+Pharos Support"
+H-08,bug,normal,neutral,False,False,M10,bug,video won't attach,1.0,rules,"Hi Mei,
+
+Thank you for contacting Pharos, and sorry for the scare. This is usually recoverable, so let's track it down.
+
+For missing tasks, check these first:
+1. Click Clear filters at the top of the board. A saved view can hide tasks.
+2. Turn on Show archived in the view menu. Completed tasks can be archived automatically.
+3. Look in Projects > Trash. Deleted tasks stay there for 30 days and can be restored.
+
+For a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.
+
+If none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.
+
+Best,
+Alex
+Pharos Support"
+H-09,notifications,normal,negative,False,True,M07,notifications email,400 emails overnight?!,0.3,rules,"Hi Dre,
+
+Thank you for contacting Pharos, and I'm sorry this has caused missed work. I'm checking our email delivery log for your workspace now.
+
+A few settings that usually explain it:
+1. Email is turned on for each notification type under Profile > Notifications.
+2. Daily digest is off. When it's on, individual emails pause.
+3. Do not disturb (the moon icon by your profile picture) is off.
+4. Your company's email filter isn't blocking notifications@pharos.example. Your IT team can allow our domain.
+
+If you can send a screenshot of one teammate's notification settings, that'll help me get to the bottom of it faster.
+
+Best,
+Alex
+Pharos Support"
+H-10,refund,normal,neutral,False,True,M03,refund policy_decline,reuse our refund requests board,0.75,rules,"Hi Ava,
+
+Thank you for contacting Pharos. I wish I had better news: on monthly plans, we aren't able to refund part of a month. The good news is that nothing shuts off early. You'll keep full access through the end of the period you've already paid for.
+
+If you'd like to make sure you aren't charged again, I'm happy to cancel for you, or you can do it anytime under Settings > Billing > Cancel plan.
+
+And if something on our end didn't work the way it should have, please tell me. I'd like to take another look.
+
+Best,
+Alex
+Pharos Support"
+H-11,billing,normal,neutral,False,True,M22,billing prorated_charges,Billed for wrong plan,0.79,rules,"Hi Ray,
+
+Thank you for contacting Pharos. I can see how that was a surprise, so here's what happened.
+
+Plans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.
 
 [[fill in: credit line]]
 
-Guide: https://help.pharos.example/plans-and-pricing
+Two tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.
 
+Best,
 Alex
 Pharos Support"
 H-12,account_access,normal,neutral,False,False,M11,account_access password_reset,Login I don't recognize,1.0,rules,"Hi Beth,
 
-Sorry you're stuck. Reset emails come from security@pharos.example and only go to the exact email your login was created with, so if you signed up with an older address, the email went there.
+Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
 
-Try requesting the reset using your other email address. The link expires after 1 hour, so use it right away. If you no longer have access to that inbox, reply from it if you can, or let me know and I'll walk you through verifying your account.
+Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
 
-Guide: https://help.pharos.example/account-security
-
+Best,
 Alex
 Pharos Support"

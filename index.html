@@ -268,21 +268,26 @@ section.view{display:grid;gap:22px}
 /* ---------- how it works ---------- */
 /* How it works: tinted, numbered journey cards + bento note cards (palette: lapis, ocean, gold, sand) */
 .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px;counter-reset:flow}
-.step{counter-increment:flow;position:relative;display:grid;gap:4px;align-content:start;padding:18px 16px 16px;border-radius:16px;
+.step{counter-increment:flow;position:relative;isolation:isolate;display:grid;gap:4px;align-content:start;padding:18px 16px 16px;border-radius:16px;
   background:linear-gradient(165deg,color-mix(in srgb,var(--accent) 11%,var(--sheet)) 0%,var(--sheet) 72%);
   border:1px solid color-mix(in srgb,var(--accent) 20%,var(--rule));
-  box-shadow:0 1px 2px rgba(18,26,43,.05),0 12px 24px -20px rgba(18,26,43,.55);transition:transform .2s ease,box-shadow .2s ease}
+  box-shadow:0 1px 2px rgba(18,26,43,.05),0 12px 24px -20px rgba(18,26,43,.55);transition:transform .2s ease,box-shadow .2s ease,border-color .25s ease}
 .step:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(18,26,43,.06),0 18px 30px -20px rgba(18,26,43,.6)}
 .step::before{content:counter(flow);position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
   font:600 11.5px/1 var(--f-mono);color:var(--band-hi);background:linear-gradient(135deg,var(--band-a),var(--band-b));box-shadow:0 0 0 3px color-mix(in srgb,var(--band-hi) 22%,transparent)}
 .step b{font-family:var(--f-display);font-size:17px;font-weight:700;padding-right:30px}
 .step span{font-size:13px;color:var(--muted)}
 .step .eyebrow{color:var(--accent);font-weight:600}
-.step.human{background:linear-gradient(165deg,color-mix(in srgb,var(--band-hi) 30%,var(--sheet)) 0%,var(--sheet) 75%);border-color:color-mix(in srgb,var(--band-hi) 60%,var(--rule))}
-.step.human .eyebrow{color:var(--warn)}
-.step.human::before{background:var(--band-hi);color:#1d1f2a;box-shadow:0 0 0 3px color-mix(in srgb,var(--band-hi) 30%,transparent)}
-.step:last-child{background:linear-gradient(165deg,color-mix(in srgb,var(--band-c) 16%,var(--sheet)) 0%,var(--sheet) 72%);border-color:color-mix(in srgb,var(--band-c) 30%,var(--rule))}
-.step:last-child .eyebrow{color:color-mix(in srgb,var(--band-c) 50%,var(--ink))}
+/* hover: any step warms from lapis to the gold "review" look (fades via an overlay, since gradients can't transition) */
+.step::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s ease;
+  background:linear-gradient(165deg,color-mix(in srgb,var(--band-hi) 30%,var(--sheet)) 0%,var(--sheet) 75%)}
+.step>*{position:relative;z-index:1}
+.step::before{z-index:2;transition:background .25s ease,color .25s ease}
+.step .eyebrow{transition:color .25s ease}
+.step:hover{border-color:color-mix(in srgb,var(--band-hi) 60%,var(--rule))}
+.step:hover::after{opacity:1}
+.step:hover .eyebrow{color:var(--warn)}
+.step:hover::before{background:var(--band-hi);color:#1d1f2a;box-shadow:0 0 0 3px color-mix(in srgb,var(--band-hi) 30%,transparent)}
 .notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:6px}
 .notes>div{position:relative;overflow:hidden;background:var(--sheet);border:1px solid var(--rule);border-radius:16px;padding:22px 22px 18px;
   box-shadow:0 1px 2px rgba(18,26,43,.05),0 12px 24px -20px rgba(18,26,43,.5)}

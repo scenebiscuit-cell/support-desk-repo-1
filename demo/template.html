@@ -773,12 +773,13 @@ $("#copy-email").addEventListener("click", e => copyText("nlaxatx@gmail.com", e.
 
 /* ---------- tabs ---------- */
 const TABS = ["chat","triage","macros","how"];
-function showTab(id){
+function showTab(id, setHash = true){
   TABS.forEach(t => { $("#"+t).hidden = t!==id; $("#tab-"+t).setAttribute("aria-selected", t===id); });
-  try { history.replaceState(null,"","#"+id); } catch {}
+  if (setHash) try { history.replaceState(null,"","#"+id); } catch {}
 }
 TABS.forEach(t => $("#tab-"+t).addEventListener("click", ()=>showTab(t)));
-showTab(TABS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "chat");
+/* Don't write #chat on first load: a fragment in the URL at load end makes the browser jump past the masthead. */
+showTab(TABS.includes(location.hash.slice(1)) ? location.hash.slice(1) : "chat", false);
 addEventListener("hashchange", () => { const h = location.hash.slice(1); if (TABS.includes(h)) showTab(h); });
 
 /* ---------- help chat ---------- */

@@ -72,12 +72,12 @@ components:
 
 **Creative North Star: "The lighthouse of Alexandria over open water."**
 
-Pharos takes its name from the lighthouse of Alexandria, so the palette is ocean and ancient Egypt: lapis lazuli and deep-ocean blues, Egyptian gold, and a papyrus page. The masthead is a lapis band with a faint gold grid and an animated gold wireframe sea whose swells roll toward the reader and break near the front, throwing spray. The lighthouse's beam sweeps across the water and turns toward the mouse while the pointer is over the masthead.
+Pharos takes its name from the lighthouse of Alexandria, so the palette is ocean and ancient Egypt: lapis lazuli and deep-ocean blues, Egyptian gold, and a papyrus page. The masthead is a plain lapis-to-ocean gradient (no grid) with a quiet animated gold wireframe sea whose swells roll slowly toward the reader, with occasional light spray. The sea fades out behind the headline so text stays easy to read, and a small "Pause waves" button stops it (remembered per visitor). The lighthouse's beam sweeps across the water and turns toward the mouse while the pointer is over the masthead.
 
 Below the masthead the page is a calm operations console: a frosted sticky tab bar, then each tool as a pair of panels (the work on the left, the "why" on the right). The agent demo (`index.html`, `demo/`) and the public help portal (`portal/`) share this system.
 
 **Key Characteristics:**
-- Lapis-to-ocean gradient masthead with a 28px gold grid and the canvas wave animation.
+- Lapis-to-ocean gradient masthead (no grid lines) with a subtle canvas wave animation and a Pause waves button.
 - Lighthouse mark beside the product name; its lamp is the beam's origin.
 - Papyrus page, off-white panels, 2px ink rules under section and panel headings.
 - Gold is for the masthead and highlights; lapis carries actions and selection.
@@ -122,9 +122,9 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 
 ## Motion
 
-- **Wave sea:** canvas perspective mesh, 17 rows; crests sharpen and lean forward near the viewer, spawning spray particles (capped at 260). Color is read from `--band-hi`, so it follows the theme.
+- **Wave sea:** canvas perspective mesh, 17 rows, slow swell; low-contrast lines (alpha .06–.26), a small forward lean on near crests, sparse spray (capped at 70). Masked to fade toward the text side. Keep it quiet: it's background, not content. Color is read from `--band-hi`, so it follows the theme.
 - **Beam:** radial-gradient wedge from the lighthouse lamp; sweeps on its own, eases toward the mouse while the pointer is over the masthead (fine pointers only).
-- Pauses when the masthead is off screen or the tab is hidden. Reduced-motion users get one still frame.
+- Pauses when the masthead is off screen, the tab is hidden, or the visitor clicks Pause waves (WCAG 2.2.2). Reduced-motion users get one still frame and no button.
 
 ## Components
 

@@ -115,7 +115,7 @@ FORM: One single-column help conversation in the same visual system as the agent
     .how { margin-top: 30px; }
     .how h2 { margin: 0; padding-bottom: 10px; border-bottom: 2px solid var(--ink); font: 700 22px/1.2 var(--display); }
     .how-intro { max-width: 70ch; margin: 10px 0 16px; color: var(--muted); }
-    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr)); gap: 16px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
     .steps li { padding: 14px 16px; background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--band-hi); border-radius: var(--r); counter-increment: step; }
     .steps h3 { margin: 0 0 4px; font: 700 16px/1.25 var(--display); }
     .steps h3::before { content: counter(step, decimal-leading-zero) "  "; font: 600 12px var(--mono); color: var(--muted); }
@@ -276,6 +276,10 @@ FORM: One single-column help conversation in the same visual system as the agent
         <li>
           <h3>Check the source</h3>
           <p>Open the citation in a reply to read the exact help-center passage.</p>
+        </li>
+        <li>
+          <h3>Still stuck? Raise a request</h3>
+          <p><a href="#new">Contact support</a> and follow the reply and status under <a href="#requests">My requests</a>.</p>
         </li>
       </ol>
       <p class="demo-limit">This is a fictional product demo. It does not access real accounts. If an answer is not in the articles, the Keeper says so and offers to raise a request. Requests are saved only in your browser, and they appear in the <a href="../#triage">agent desk</a>, where you can answer them as the support agent and see the reply land here under My requests.</p>

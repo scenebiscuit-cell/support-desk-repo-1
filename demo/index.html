@@ -265,7 +265,10 @@ section.view{display:grid;gap:22px}
 .notes h3{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--accent)}
 .notes p,.notes li{font-size:14px;color:var(--muted);margin:0 0 6px}
 .notes b{color:var(--ink)}
-.notes ul{margin:0;padding-left:18px}
+.notes ul,.notes ol{margin:0;padding-left:18px}
+.loop li{margin-bottom:8px}
+.loop-btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px!important}
+.loop-btns a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .evalt{overflow-x:auto}
 .evalt table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:520px;width:100%}
 .evalt th,.evalt td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
@@ -484,13 +487,14 @@ details.data .evalt{padding:0 14px 12px}
 
   <!-- HOW -->
   <section class="view" id="how" role="tabpanel" aria-labelledby="tab-how" hidden>
-    <div class="sec-head"><h2>How it works <span>Method</span></h2><p>The same three pieces work for any small software company or local business with a help center and an inbox. Swap in their docs and past tickets, and the system adapts.</p></div>
+    <div class="sec-head"><h2>How it works <span>Method</span></h2><p>The same pieces work for any small software company or local business with a help center and an inbox. Swap in their docs and past tickets, and the system adapts.</p></div>
     <div class="flow">
       <div class="step"><span class="eyebrow">In</span><b>Request arrives</b><span>Help-portal form, email, or chat. Articles are suggested first, so some never become tickets</span></div>
       <div class="step"><span class="eyebrow">Search</span><b>Find the right docs</b><span>Ranks every help-center section by relevance</span></div>
       <div class="step"><span class="eyebrow">Classify</span><b>Tag and prioritize</b><span>Category, urgency, sentiment, churn risk</span></div>
       <div class="step"><span class="eyebrow">Draft</span><b>Pick a macro, write the reply</b><span>Grounded in policy, no invented answers</span></div>
       <div class="step human"><span class="eyebrow">Review</span><b>Agent approves</b><span>Refunds, identity checks, and escalations stay with people</span></div>
+      <div class="step"><span class="eyebrow">Out</span><b>Customer sees the reply</b><span>In My requests on the help portal. Internal notes stay internal</span></div>
     </div>
     <div class="notes">
       <div>
@@ -499,11 +503,29 @@ details.data .evalt{padding:0 14px 12px}
       </div>
       <div>
         <h3>Agent desk</h3>
-        <p>Sorts the inbox by what matters: outages and security first, then teams that are blocked or losing money, then how-to questions. Churn risk is flagged so the right person can step in early. Each request opens like a Jira Service Management issue: the conversation, a reply pre-drafted from the right macro, internal notes only agents see, status, assignee, an SLA clock from the plan's response-time promise, and matching help articles to share.</p>
+        <p>Sorts the inbox by what matters: outages and security first, then teams that are blocked or losing money, then how-to questions. Churn risk is flagged so the right person can step in early. Each ticket opens like a Jira Service Management issue, with the reply already drafted.</p>
       </div>
       <div>
         <h3>Macro library</h3>
         <p>Consistent, on-policy replies the whole team can use, exportable as CSV for most helpdesks. The triage step picks the right macro and fills in the specifics.</p>
+      </div>
+    </div>
+    <div class="notes">
+      <div>
+        <h3>A request, end to end</h3>
+        <ol class="loop">
+          <li><b>Ask.</b> The customer asks the Keeper in the help portal. If the docs cover it, they're done.</li>
+          <li><b>Raise a request.</b> If not, they contact support. Matching articles appear while they type, and "This answered my question" closes it with no ticket.</li>
+          <li><b>Triage.</b> The request lands in <b>Live requests</b> as PH-101: tagged, prioritized, with an SLA clock from the plan's response time (Business 4h, Team 1 business day, Free 2 business days; outages and security right away). Emails to support@ arrive the same way.</li>
+          <li><b>Work it.</b> The agent reads the thread, adds internal notes, shares a help article, edits the drafted reply, and sends. Status: <i>Waiting for customer</i>.</li>
+          <li><b>Close the loop.</b> The customer sees the reply under My requests, answers back (it returns to the queue) or marks it resolved.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Try both sides</h3>
+        <p>Open the help portal in a second tab and raise a request. It shows up in the Agent desk's <b>Live requests</b> within a second. Reply here, then check <b>My requests</b> there. No portal handy? Simulate an incoming email instead.</p>
+        <p class="loop-btns"><a class="btn primary" href="portal/#new" target="_blank" rel="noopener">Open the help portal ↗</a> <button class="btn" type="button" id="how-sim">Simulate an email</button></p>
+        <p>Requests are saved only in your browser, so every visitor gets a private sandbox. In production they'd live on the server, with a support address feeding them in through Cloudflare Email Routing.</p>
       </div>
     </div>
     <div class="notes">
@@ -1326,7 +1348,8 @@ addEventListener("storage", e => {
   }
   renderQueue();
 });
-setInterval(() => { if (curSet === "live" && !document.hidden) renderQueue(); }, 60000);   // keep SLA clocks fresh
+setInterval(() => { if (curSet === "live" && !document.hidden) renderQueue(); }, 60000);
+$("#how-sim")?.addEventListener("click", () => { showTab("triage"); pickSet("live"); $("#sim-email")?.click(); scrollTo({top: $("#triage").getBoundingClientRect().top + scrollY - 70}); });   // keep SLA clocks fresh
 if (Desk.data.requests.some(t => !isHandled(t))) pickSet("live");
 else { curId = D.sets.sample.tickets.map(t=>({t,r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority])[0].t.id; renderQueue(); renderDetail(); }
 aiReady.then(ok => { if (ok) renderDetail(); });

@@ -67,7 +67,14 @@ FORM: One single-column help conversation in the same visual system as the agent
     .eb-sep { opacity: .7; margin: 0 2px; }
     .eb-sep:has(+ .seabtn[hidden]) { display: none; }
     @media (pointer: coarse), (max-width: 640px) { .seabtn { padding: 8px 12px; min-height: 36px; } }
-    @media (max-width: 640px) { .eb-sep { display: none; } .brand .eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; } }
+    @media (max-width: 640px) {
+      .eb-sep { display: none; }
+      .brand .eyebrow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+      /* phones: just a gold pause/play icon; the label stays as its accessible name */
+      .seabtn { border: 0; background: none; padding: 0; width: 36px; height: 36px; min-height: 0; margin: -8px 0; justify-content: center; font-size: 0; }
+      .seabtn::before { font-size: 14px; color: var(--band-hi); }
+      .seabtn:hover { background: none; }
+    }
     .brand h1 { margin: 6px 0 0; font: 700 clamp(30px, 5vw, 44px)/1 var(--display); }
     .brand p { margin: 8px 0 0; color: var(--band-soft); font-size: 15.5px; max-width: 52ch; }
     .brand p strong { color: var(--band-ink); font-weight: 600; }

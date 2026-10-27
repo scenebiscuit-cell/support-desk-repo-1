@@ -144,7 +144,7 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 
 ## Responsive rules (phones)
 
-- Header stats sit in a 3-column row; the tagline drops to 15px. The Pause waves control wraps under the eyebrow on its own line (no separator dot), 36px tall.
+- Header stats sit in a 3-column row; the tagline drops to 15px. On phones the eyebrow shortens to "AI help desk demo" and Pause waves becomes just a gold ❚❚ / ▶ icon (36px tap area) at the right end of that line; the label stays as its accessible name.
 - Sticky nav: tabs scroll sideways with a fade hint; the Ctrl K palette is hidden (keyboard feature) and "Portal ↗" stays visible.
 - Agent desk: the queue switcher is a 2x2 grid; tapping a ticket scrolls to it, with "Back to the queue".
 - Suggested questions scroll sideways in one row so the conversation stays in view.

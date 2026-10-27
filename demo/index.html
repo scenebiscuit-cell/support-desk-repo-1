@@ -77,7 +77,11 @@ button,input,select,textarea{font:inherit;color:inherit}
 .eb-sep{opacity:.7}
 .eb-sep:has(+ .seabtn[hidden]){display:none}
 @media (pointer:coarse), (max-width:640px){ .seabtn{padding:8px 12px;min-height:36px;margin-top:2px} .band .eyebrow{flex-wrap:wrap;row-gap:4px} }
-@media (max-width:640px){ .eb-sep{display:none} }
+@media (max-width:640px){ .eb-sep{display:none} .eb-long{display:none}
+  .band .eyebrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:8px;align-items:center}
+  /* phones: just a gold pause/play icon; the label stays as its accessible name */
+  .seabtn{border:0;background:none;padding:0;width:36px;height:36px;min-height:0;margin:-8px 0;justify-content:center;font-size:0}
+  .seabtn::before{font-size:14px;color:var(--band-hi)} .seabtn:hover{background:none} }
 .band h1{font-size:clamp(34px, 5.2vw, 56px);font-weight:700;line-height:1;letter-spacing:-.005em}
 .band-title{display:flex;align-items:flex-end;gap:14px;margin-top:10px}
 .lighthouse{flex:none;width:clamp(40px, 5vw, 58px);height:auto;aspect-ratio:48/86;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
@@ -439,7 +443,7 @@ details.data .evalt{padding:0 14px 12px}
     <div class="band-copy">
       <div class="eyebrow">
         <svg width="16" height="18" viewBox="0 0 38 40" aria-hidden="true"><path d="M15 6 L19 2 L23 6 Z" fill="currentColor"/><rect x="15" y="7" width="8" height="7" rx="1" fill="currentColor"/><path d="M15 15 L23 15 L25 34 L13 34 Z" fill="currentColor"/><rect x="8" y="35" width="22" height="3" rx="1" fill="currentColor"/><path d="M2 8 L14 10.5 L14 12.5 L2 15 Z" fill="currentColor" opacity=".55"/><path d="M36 8 L24 10.5 L24 12.5 L36 15 Z" fill="currentColor" opacity=".55"/></svg>
-        Support operations · AI help desk demo
+        <span><span class="eb-long">Support operations · </span>AI help desk demo</span>
         <span class="eb-sep" aria-hidden="true">·</span><button class="seabtn" id="seaToggle" type="button" aria-pressed="false" hidden>Pause waves</button>
       </div>
       <div class="band-title"><svg class="lighthouse" id="lamp" data-ox=".5" data-oy=".22" viewBox="20 6 48 86" aria-hidden="true"><path d="M35 19 L44 10 L53 19 Z" fill="var(--band-ink)"/><rect x="37" y="19" width="14" height="12" rx="1.5" fill="var(--band-hi)"/><rect x="40" y="21" width="8" height="7" rx="1" fill="#fff6d8"/><path d="M35 32 L53 32 L58 82 L30 82 Z" fill="var(--band-ink)"/><path d="M34 48 L55 48 L56 54 L33 54 Z" fill="var(--band-hi)"/><path d="M32 66 L56 66 L57 72 L31 72 Z" fill="var(--band-hi)"/><rect x="23" y="83" width="42" height="5" rx="2" fill="var(--band-soft)"/></svg><h1>Pharos Support Desk</h1></div>

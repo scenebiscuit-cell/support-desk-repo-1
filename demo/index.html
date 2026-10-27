@@ -82,6 +82,9 @@ nav.tabs{display:flex;gap:4px;overflow-x:auto;padding-block:14px 0;border-bottom
 nav.tabs button{background:none;border:0;padding:10px 14px;border-bottom:2px solid transparent;color:var(--muted);font-weight:500;cursor:pointer;white-space:nowrap}
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--beam);font-weight:600}
 nav.tabs button:hover{color:var(--ink)}
+.portal-entry{display:flex;justify-content:flex-end;margin:-9px 0 14px;font-size:15px}
+.portal-entry a{color:var(--accent);font-weight:600;text-decoration:none}
+.portal-entry a:hover{text-decoration:underline}
 section.panel{padding-bottom:48px}
 .lede{max-width:68ch;color:var(--muted);margin:0 0 18px}
 
@@ -272,6 +275,7 @@ section.panel{padding-bottom:48px}
     <button role="tab" id="tab-macros" aria-controls="macros" aria-selected="false">Macro library</button>
     <button role="tab" id="tab-how" aria-controls="how" aria-selected="false">How it works</button>
   </nav>
+  <p class="portal-entry"><a href="../portal/">Open the customer help portal <span aria-hidden="true">↗</span></a></p>
 
   <!-- HELP CHAT -->
   <section class="panel" id="chat" role="tabpanel" aria-labelledby="tab-chat">

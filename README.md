@@ -98,6 +98,12 @@ After deploying the Cloudflare Worker, connect the demo to its `workers.dev` URL
 python build_demo.py --cloud-url https://<worker-name>.<account-subdomain>.workers.dev
 ```
 
+## Public help portal
+
+`portal/index.html` is the end-user-facing help portal, published at `/portal/`. It contains only the help chat and a short explanation of how answers are grounded in the help center; it does not include ticket, triage, or macro data. The cited article passage expands directly in the conversation.
+
+`python build_demo.py` regenerates the portal from `portal/template.html` and the same public help-center articles used by the demo. When a Worker URL is configured, the portal sends the question and matching article excerpts to `/chat`; if the Worker is unavailable, the page shows the relevant help-center text instead. The portal clearly states that the fictional demo does not access real accounts or create support tickets.
+
 ## Adapting it for a client
 
 1. Replace `docs/*.md` with their help articles (keep the small front-matter block and `## ` section headings).
@@ -120,6 +126,7 @@ support_ops/macros.py    macro selection, placeholder fill, exports
 support_ops/triage_engine.py  rules + LLM triage, prompt, scoring
 triage.py  chat.py  export_macros.py  build_demo.py
 demo/template.html → demo/index.html
+portal/template.html → portal/index.html
 worker/worker.template.js → worker/worker.js
 output/                  generated reports
 ```

@@ -8,24 +8,26 @@ web
 
 ## Users
 
-Support agents exploring a help-desk demo.
+Support agents exploring a help-desk demo and end users seeking answers in its public help portal.
 
 ## Product Purpose
 
-Pharos Support Desk demonstrates how support agents for a fictional online booking and reminders app can find knowledge-base answers, triage tickets, and draft replies with AI assistance.
+Pharos Support Desk demonstrates support operations for a fictional online booking and reminders app, alongside an end-user portal for finding source-grounded help-center answers.
 
 ## Positioning
 
-The demo pairs AI-assisted chat and ticket triage with visible knowledge sources, a rules-based baseline, and editable support macros.
+The support-operations demo pairs AI-assisted chat and ticket triage with visible knowledge sources, a rules-based baseline, and editable support macros. The public portal presents only the help chat and a concise explanation of how it works.
 
 ## Operating Context
 
-Visitors explore sample and holdout support tickets, search help content in chat, review triage recommendations, and inspect reply macros.
+Support agents explore sample and holdout support tickets, search help content, review triage recommendations, and inspect reply macros. End users ask questions in the public portal and inspect the cited help-center passage.
 
 ## Capabilities and Constraints
 
 - The site includes chat, ticket triage, macros, and a guide to the demo's workflow.
+- `/portal/` is a public, chat-only end-user surface with a short “How it works” section; it must not expose ticket, triage, or macro data.
 - Cloud AI requests go to the Pharos Cloudflare Worker; the app also supports its existing offline and sample modes.
+- The public portal may answer only from help-center excerpts and must not imply real account access or support-ticket creation.
 - Demo ticket data is fictional and must remain clearly labeled as such.
 - Preserve the existing content, request/response behavior, keyboard access, responsive layout, and reduced-motion support.
 

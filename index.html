@@ -89,6 +89,9 @@ nav.tabs button{background:none;border:0;padding:10px 14px;border-bottom:2px sol
 nav.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--beam);font-weight:600}
 nav.tabs button:hover{color:var(--ink)}
 nav.tabs button{transition:color .15s, border-color .2s}
+.portal-entry{display:flex;justify-content:flex-end;margin:-9px 0 14px;font-size:15px}
+.portal-entry a{color:var(--accent);font-weight:600;text-decoration:none}
+.portal-entry a:hover{text-decoration:underline}
 nav.tabs .kbar-open{margin-left:auto;align-self:center;display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:8px;padding:6px 8px 6px 12px;color:var(--muted);background:var(--surface);font-weight:400;font-size:13.5px}
 nav.tabs .kbar-open:hover{border-color:var(--accent);color:var(--ink)}
 kbd{font:500 11.5px/1 var(--f-mono);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:3px 6px;background:var(--sunk);color:var(--muted)}
@@ -350,6 +353,7 @@ section.panel{padding-bottom:48px}
     <button role="tab" id="tab-how" aria-controls="how" aria-selected="false">How it works</button>
     <button type="button" class="kbar-open" id="kbar-open" aria-label="Search or jump to (Ctrl K)"><span class="lbl">Search or jump to…</span><kbd id="kbar-key">Ctrl K</kbd></button>
   </nav>
+  <p class="portal-entry"><a href="portal/">Open the customer help portal <span aria-hidden="true">↗</span></a></p>
 
   <!-- HELP CHAT -->
   <section class="panel" id="chat" role="tabpanel" aria-labelledby="tab-chat">

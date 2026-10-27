@@ -22,6 +22,7 @@ from support_ops.triage_engine import SYSTEM_PROMPT, rules_triage, summarize
 
 ROOT = Path(__file__).resolve().parent
 AGENT = "Alex"
+CHAT_MAX_INPUT = 8000
 
 
 def run_set(tickets_path: Path, labels_path: Path, kb, macros, results_path: Path | None):
@@ -86,9 +87,22 @@ def main() -> None:
     template = replace_worker_url(template, worker_url)
     out = template.replace("/*__DEMO_DATA__*/null", blob)
     (ROOT / "demo" / "index.html").write_text(out, encoding="utf-8")
+    portal_template = (ROOT / "portal" / "template.html").read_text(encoding="utf-8")
+    portal_data = {"kb": data["kb"], "thresholds": data["thresholds"], "max_input": CHAT_MAX_INPUT}
+    portal_blob = json.dumps(portal_data, ensure_ascii=False).replace("</", "<\\/")
+    portal_marker = "/*__PORTAL_DATA__*/null"
+    if portal_template.count(portal_marker) != 1:
+        raise RuntimeError("Expected exactly one PORTAL_DATA marker in portal/template.html")
+    portal_template = replace_worker_url(portal_template, worker_url)
+    portal_out = portal_template.replace(portal_marker, portal_blob)
+    (ROOT / "portal" / "index.html").write_text(portal_out, encoding="utf-8")
     root_page = (ROOT / "index.html").read_text(encoding="utf-8")
     (ROOT / "index.html").write_text(replace_worker_url(root_page, worker_url), encoding="utf-8")
     worker_template = (ROOT / "worker" / "worker.template.js").read_text(encoding="utf-8")
+    limit_marker = "/*__CHAT_MAX_INPUT__*/8000"
+    if worker_template.count(limit_marker) != 1:
+        raise RuntimeError("Expected exactly one CHAT_MAX_INPUT marker in worker/worker.template.js")
+    worker_template = worker_template.replace(limit_marker, str(CHAT_MAX_INPUT))
     prompt_json = json.dumps(prompts, ensure_ascii=False).replace("</", "<\\/")
     prompt_marker = "/*__PROMPTS__*/{}"
     if worker_template.count(prompt_marker) != 1:
@@ -98,6 +112,7 @@ def main() -> None:
     s = data["sets"]
     print(f"Built demo/index.html ({len(out) // 1024} KB): {len(kb.chunks)} doc sections, {len(macros)} macros, "
           f"{len(s['sample']['tickets'])} + {len(s['unseen']['tickets'])} tickets ({s['sample']['engine']})")
+    print(f"Built portal/index.html ({len(portal_out) // 1024} KB): help-center content only")
     print(f"Built worker/worker.js and index.html (Cloudflare Worker URL: {worker_url or 'not configured'})")
 
 

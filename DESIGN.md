@@ -7,12 +7,12 @@ colors:
   deep-ocean: "#0a4766"
   band-ink: "#ffffff"
   gold: "#ebc874"
-  papyrus: "#f4efe3"
-  sheet: "#fffdf8"
-  tint: "#f9f4ea"
-  ink: "#121a2b"
-  muted-ink: "#585d6c"
-  rule: "#ddd3bd"
+  papyrus: "#ebdfc9"
+  sheet: "#f6eedf"
+  tint: "#f0e5d1"
+  ink: "#1d1f2a"
+  muted-ink: "#5b5547"
+  rule: "#d5c4a3"
   lapis-action: "#1d4f91"
   lapis-soft: "#e0e8f4"
   pass-green: "#1f7a46"
@@ -94,8 +94,8 @@ Below the masthead the page is a calm operations console: a frosted sticky tab b
 - **Pass** (#1f7a46), **Warn** (#a15c00), **Fail** (#b4261b): verdict stamps, priorities, handoffs. Category tags keep their own hues; the turquoise "account" tag doubles as Egyptian faience.
 
 ### Neutral
-- **Papyrus** (#f4efe3): page ground. **Sheet** (#fffdf8): panels. **Tint** (#f9f4ea): inputs, chips, bot bubbles.
-- **Ink** (#121a2b), **Muted Ink** (#585d6c), **Rule** (#ddd3bd).
+- **Sand** (#ebdfc9): page ground. **Sheet** (#f6eedf, warm off-white sand): panels. **Tint** (#f0e5d1): inputs, chips, bot bubbles. No pure white surfaces in the light theme; keep it calm and beachy.
+- **Ink** (#1d1f2a), **Muted Ink** (#5b5547, warm driftwood), **Rule** (#d5c4a3).
 
 ### Dark theme
 Night-sea navy page (#0a0f1c) and panels (#111829), warm parchment text (#ebe6d9), a darker lapis masthead, the same gold (#e6c36a), and a light lapis action color (#8fb3ec).

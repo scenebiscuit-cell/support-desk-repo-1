@@ -72,12 +72,12 @@ components:
 
 **Creative North Star: "The lighthouse of Alexandria over open water."**
 
-Pharos takes its name from the lighthouse of Alexandria, so the palette is ocean and ancient Egypt: lapis lazuli and deep-ocean blues, Egyptian gold, and a papyrus page. The masthead is a plain lapis-to-ocean gradient (no grid) with a quiet animated gold wireframe sea whose swells roll slowly toward the reader, with occasional light spray. The sea fades out behind the headline so text stays easy to read, and a small "Pause waves" button stops it (remembered per visitor). The lighthouse's beam sweeps across the water and turns toward the mouse while the pointer is over the masthead.
+Pharos takes its name from the lighthouse of Alexandria, so the palette is ocean and ancient Egypt: lapis lazuli and deep-ocean blues, Egyptian gold, and a papyrus page. The masthead is a plain lapis-to-ocean gradient (no grid) with a quiet animated gold wireframe sea whose swells roll slowly toward the reader, with occasional light spray. The sea fades out behind the headline so text stays easy to read, and a "Pause waves" control sits inline at the end of the masthead eyebrow, styled like the eyebrow (gold mono caps in a thin pill), and stops it (remembered per visitor). The lighthouse's beam sweeps across the water and turns toward the mouse while the pointer is over the masthead.
 
 Below the masthead the page is a calm operations console: a frosted sticky tab bar, then each tool as a pair of panels (the work on the left, the "why" on the right). The agent demo (`index.html`, `demo/`) and the public help portal (`portal/`) share this system.
 
 **Key Characteristics:**
-- Lapis-to-ocean gradient masthead (no grid lines) with a subtle canvas wave animation and a Pause waves button.
+- Lapis-to-ocean gradient masthead (no grid lines) with a subtle canvas wave animation; the Pause waves control is inline in the eyebrow line.
 - Lighthouse mark beside the product name; its lamp is the beam's origin.
 - Papyrus page, off-white panels, 2px ink rules under section and panel headings.
 - Gold is for the masthead and highlights; lapis carries actions and selection.
@@ -144,7 +144,7 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 
 ## Responsive rules (phones)
 
-- Header stats sit in a 3-column row; the tagline drops to 15px. The Pause waves control becomes a 40px round icon in the top-right corner.
+- Header stats sit in a 3-column row; the tagline drops to 15px. The Pause waves control wraps under the eyebrow on its own line (no separator dot), 36px tall.
 - Sticky nav: tabs scroll sideways with a fade hint; the Ctrl K palette is hidden (keyboard feature) and "Portal ↗" stays visible.
 - Agent desk: the queue switcher is a 2x2 grid; tapping a ticket scrolls to it, with "Back to the queue".
 - Suggested questions scroll sideways in one row so the conversation stays in view.

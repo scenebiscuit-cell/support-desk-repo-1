@@ -67,13 +67,17 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sea{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
 /* keep the water quiet behind the headline: fade it on the text side */
 .sea{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.6) 40%,#000 75%);mask-image:linear-gradient(90deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.6) 40%,#000 75%)}
-.seabtn{position:absolute;right:max(12px, env(safe-area-inset-right, 0px));bottom:10px;z-index:1;border:1px solid rgba(235,200,116,.35);background:rgba(0,0,0,.22);color:var(--band-soft);border-radius:999px;padding:3px 10px;font:500 11px/1.4 var(--f-mono);letter-spacing:.04em;cursor:pointer}
-.seabtn:hover{color:var(--band-ink);border-color:var(--band-hi)}
-@media (max-width:640px){ .seabtn{top:max(10px, env(safe-area-inset-top, 0px));bottom:auto;right:max(10px, env(safe-area-inset-right, 0px));width:40px;height:40px;padding:0;font-size:0;display:grid;place-items:center}
-  .seabtn::before{content:"❚❚";font-size:12px;letter-spacing:-2px;color:var(--band-ink)} .seabtn[aria-pressed="true"]::before{content:"▶";letter-spacing:0} }
 .band-in{position:relative;max-width:1240px;margin:0 auto;padding-block:34px 30px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-end;justify-content:space-between}
 .band-copy{min-width:0;flex:1 1 520px}
 .band .eyebrow{color:var(--band-hi);display:flex;align-items:center;gap:8px}
+.seabtn{display:inline-flex;align-items:center;gap:6px;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;background:none;border:1px solid rgba(235,200,116,.35);border-radius:999px;padding:2px 9px 2px 7px;cursor:pointer;line-height:1.4;vertical-align:middle}
+.seabtn::before{content:"❚❚";font-size:.8em;letter-spacing:-2px}
+.seabtn[aria-pressed="true"]::before{content:"▶";letter-spacing:0}
+.seabtn:hover{border-color:var(--band-hi);background:rgba(0,0,0,.18)}
+.eb-sep{opacity:.7}
+.eb-sep:has(+ .seabtn[hidden]){display:none}
+@media (pointer:coarse), (max-width:640px){ .seabtn{padding:8px 12px;min-height:36px;margin-top:2px} .band .eyebrow{flex-wrap:wrap;row-gap:4px} }
+@media (max-width:640px){ .eb-sep{display:none} }
 .band h1{font-size:clamp(34px, 5.2vw, 56px);font-weight:700;line-height:1;letter-spacing:-.005em}
 .band-title{display:flex;align-items:flex-end;gap:14px;margin-top:10px}
 .lighthouse{flex:none;width:clamp(40px, 5vw, 58px);height:auto;aspect-ratio:48/86;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
@@ -395,7 +399,6 @@ details.data .evalt{padding:0 14px 12px}
   /* compact header: stats in one row instead of three stacked cards */
   .band-in{padding-block:22px 26px;gap:18px}
   .band p{font-size:15px}
-  .band .eyebrow{padding-right:44px}
   .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
   .stat{min-width:0;padding:10px 10px 8px}
   .stat b{font-size:26px}
@@ -432,12 +435,12 @@ details.data .evalt{padding:0 14px 12px}
 <a class="skip" href="#main">Skip to the demo</a>
 <header class="band">
   <canvas class="sea" id="sea" aria-hidden="true"></canvas>
-  <button class="seabtn" id="seaToggle" type="button" aria-pressed="false" hidden>Pause waves</button>
   <div class="band-in gutter">
     <div class="band-copy">
       <div class="eyebrow">
         <svg width="16" height="18" viewBox="0 0 38 40" aria-hidden="true"><path d="M15 6 L19 2 L23 6 Z" fill="currentColor"/><rect x="15" y="7" width="8" height="7" rx="1" fill="currentColor"/><path d="M15 15 L23 15 L25 34 L13 34 Z" fill="currentColor"/><rect x="8" y="35" width="22" height="3" rx="1" fill="currentColor"/><path d="M2 8 L14 10.5 L14 12.5 L2 15 Z" fill="currentColor" opacity=".55"/><path d="M36 8 L24 10.5 L24 12.5 L36 15 Z" fill="currentColor" opacity=".55"/></svg>
         Support operations · AI help desk demo
+        <span class="eb-sep" aria-hidden="true">·</span><button class="seabtn" id="seaToggle" type="button" aria-pressed="false" hidden>Pause waves</button>
       </div>
       <div class="band-title"><svg class="lighthouse" id="lamp" data-ox=".5" data-oy=".22" viewBox="20 6 48 86" aria-hidden="true"><path d="M35 19 L44 10 L53 19 Z" fill="var(--band-ink)"/><rect x="37" y="19" width="14" height="12" rx="1.5" fill="var(--band-hi)"/><rect x="40" y="21" width="8" height="7" rx="1" fill="#fff6d8"/><path d="M35 32 L53 32 L58 82 L30 82 Z" fill="var(--band-ink)"/><path d="M34 48 L55 48 L56 54 L33 54 Z" fill="var(--band-hi)"/><path d="M32 66 L56 66 L57 72 L31 72 Z" fill="var(--band-hi)"/><rect x="23" y="83" width="42" height="5" rx="2" fill="var(--band-soft)"/></svg><h1>Pharos Support Desk</h1></div>
       <p><b>A light for every question.</b> AI support ops for a small project-management software company: a help chat that answers only from the docs, ticket triage that drafts on-policy replies, and a macro library.</p>

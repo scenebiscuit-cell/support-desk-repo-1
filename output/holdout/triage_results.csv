@@ -153,3 +153,300 @@ Try requesting the reset with your other address, and use the link within an hou
 Best,
 Alex
 Pharos Support"
+H-13,billing,normal,neutral,False,True,M22,billing prorated_charges,Can I pay by invoice instead of card?,1.0,rules,"Hi Owen,
+
+Thank you for contacting Pharos. I can see how that was a surprise, so here's what happened.
+
+Plans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.
+
+[[fill in: credit line]]
+
+Two tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.
+
+Best,
+Alex
+Pharos Support"
+H-14,billing,normal,neutral,False,True,M22,billing prorated_charges,"Charged for 14 seats, we only have 9",0.62,rules,"Hi Leah,
+
+Thank you for contacting Pharos. I can see how that was a surprise, so here's what happened.
+
+Plans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.
+
+[[fill in: credit line]]
+
+Two tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.
+
+Best,
+Alex
+Pharos Support"
+H-15,cancellation,normal,neutral,True,True,M05,cancellation churn_risk,Close our account,0.75,rules,"Hi Tom,
+
+Thank you for contacting Pharos, and for being honest with us. I'm sorry we haven't been what you needed. I've passed your feedback straight to our product team.
+
+Getting your data out is easy:
+1. Go to Settings > Data > Export.
+2. Choose the whole workspace and pick JSON to keep comments and history, or CSV for spreadsheets.
+3. Larger exports arrive by email as a download link within 15 minutes, with attachments in a separate ZIP.
+
+When you're ready, cancel under Settings > Billing > Cancel plan. You'll keep access until the end of your billing period.
+
+Before you go, I'd be glad to look at [[fill in: pain point]] with you. It's often a quick fix. And if you'd rather not pay for now, your workspace can drop to the Free plan and keep all your projects.
+
+Either way, I'm here if you need anything.
+
+Best,
+Alex
+Pharos Support"
+H-16,integrations,normal,neutral,False,True,M06,integrations,GitHub PRs not linking to tasks,1.0,rules,"Hi Priya,
+
+Thank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.
+
+In the meantime, these cause most integration problems and only take a minute to check:
+1. A red ""Reconnect"" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.
+2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.
+3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.
+
+Talk soon,
+Alex
+Pharos Support"
+H-17,notifications,normal,neutral,False,True,M07,notifications email,Way too many emails,0.3,rules,"Hi Carlos,
+
+Thank you for contacting Pharos, and I'm sorry this has caused missed work. I'm checking our email delivery log for your workspace now.
+
+A few settings that usually explain it:
+1. Email is turned on for each notification type under Profile > Notifications.
+2. Daily digest is off. When it's on, individual emails pause.
+3. Do not disturb (the moon icon by your profile picture) is off.
+4. Your company's email filter isn't blocking notifications@pharos.example. Your IT team can allow our domain.
+
+If you can send a screenshot of one teammate's notification settings, that'll help me get to the bottom of it faster.
+
+Best,
+Alex
+Pharos Support"
+H-18,workspace_setup,normal,neutral,False,True,M09,workspace_setup how_to,How do I make a project private?,0.3,rules,"Hi Mei,
+
+Thank you for contacting Pharos. Happy to help with that.
+
+[[fill in: answer]]
+
+There's more detail in our guide to projects, boards, and templates: help.pharos.example/projects-and-boards
+
+Best,
+Alex
+Pharos Support"
+H-19,bug,high,neutral,False,False,M10,bug,File uploads failing,1.0,rules,"Hi Jordan,
+
+Thank you for contacting Pharos, and sorry for the scare. This is usually recoverable, so let's track it down.
+
+For missing tasks, check these first:
+1. Click Clear filters at the top of the board. A saved view can hide tasks.
+2. Turn on Show archived in the view menu. Completed tasks can be archived automatically.
+3. Look in Projects > Trash. Deleted tasks stay there for 30 days and can be restored.
+
+For a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.
+
+If none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.
+
+Best,
+Alex
+Pharos Support"
+H-20,account_access,normal,neutral,False,False,M12,account_access 2fa_reset identity_verification,Locked out after new phone,1.0,rules,"Hi Sam,
+
+Thank you for contacting Pharos. I'll get you back in as quickly as I can. To keep your account safe, I just need to confirm it's you first. Please reply from this email address with:
+
+1. The name of your Pharos workspace
+2. If you're the workspace owner, the last 4 digits of the card on file
+
+As soon as that checks out, I'll reset two-factor authentication so you can log in. Once you're in, set it up on your new phone under Profile > Security, and save the backup codes. They'll get you in if this ever happens again.
+
+We'll never ask for your password.
+
+Best,
+Alex
+Pharos Support"
+H-21,seats,normal,neutral,False,False,M13,seats plan_limit upsell,Adding a client as a guest,1.0,rules,"Hi Ava,
+
+Thank you for contacting Pharos, and congratulations on growing your team! The Free plan includes up to 3 members, so you have two options:
+
+1. Upgrade to Team ($10 per member a month) for unlimited members and projects. It takes effect right away: Settings > Billing > Change plan.
+2. If the new person only needs to view and comment on certain projects, you can invite them as a guest instead. Guests are free on paid plans.
+
+Happy to help with either one.
+
+Best,
+Alex
+Pharos Support"
+H-22,data_privacy,normal,neutral,False,False,M15,data_privacy deletion_request,Delete my personal data,1.0,rules,"Hi Noah,
+
+Thank you for contacting Pharos, and for handling this so carefully. Here's how it works:
+
+1. A workspace admin removes the person under Settings > Members.
+2. On their profile, click Anonymize. Their name is replaced on past comments and activity, and their personal details are removed.
+3. On our side, removed data is cleared from active systems right away and fully purged from backups within 90 days.
+
+Since Pharos handles your workspace data on your behalf, that's all you need to do, and you can let them know it's done. If they've made a formal request and you'd like written confirmation, just let me know.
+
+Best,
+Alex
+Pharos Support"
+H-23,outage,urgent,neutral,False,True,M17,outage incident,Is Pharos down?,1.0,rules,"Hi Grace,
+
+Thank you for letting us know so quickly, and I'm sorry. I know your team can't work while Pharos is down. Our engineers are on it right now.
+
+You can follow live updates at status.pharos.example and subscribe there for an alert the moment it's fixed. I've also linked your ticket to the incident, so I'll update you here directly.
+
+Best,
+Alex
+Pharos Support"
+H-24,security,urgent,neutral,False,True,M18,security vulnerability_report,Possible XSS in task comments,1.0,rules,"Hi Ivan,
+
+Thank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.
+
+Please send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.
+
+Thanks again for helping keep our customers safe.
+
+Best,
+Alex
+Pharos Support"
+H-25,workspace_setup,normal,positive,False,True,M09,workspace_setup how_to,Gantt view?,0.3,rules,"Hi Lucy,
+
+Thank you for contacting Pharos. Happy to help with that.
+
+[[fill in: answer]]
+
+There's more detail in our guide to projects, boards, and templates: help.pharos.example/projects-and-boards
+
+Best,
+Alex
+Pharos Support"
+H-26,presales,normal,neutral,False,True,M20,presales trial,Questions before we sign up,0.6,rules,"Hi Ben,
+
+Thank you for contacting Pharos! I'm so glad you're enjoying the trial. Happy to help you pick the right plan.
+
+[[fill in: answers]]
+
+You can compare all the plans at help.pharos.example/plans-and-pricing, and paying annually gets you two months free.
+
+If anything else comes up, just reply here.
+
+Best,
+Alex
+Pharos Support"
+H-27,feedback,low,positive,False,False,M21,feedback positive,Just wanted to say thanks,0.75,rules,"Hi Rosa,
+
+Thank you so much for writing in. This genuinely made our whole team's day, and I've shared it with everyone here.
+
+If you ever have a minute, a short review on Capterra or G2 helps other small teams find us. No pressure at all.
+
+Thanks for being part of Pharos,
+Alex
+Pharos Support"
+H-28,spam,low,neutral,False,False,M23,spam,"Get 10,000 leads this month",1.0,rules,
+H-29,seats,normal,neutral,False,False,M14,seats ownership_transfer identity_verification,Transfer ownership,1.0,rules,"Hi Ethan,
+
+Thank you for contacting Pharos. Normally the current owner transfers ownership, but since they aren't reachable, we can take care of it for you after a quick verification.
+
+Please reply with one of these showing your name and the business name:
+- A business license or registration
+- A recent business invoice or bank statement
+
+Once a team lead approves it, usually within one business day, I'll move ownership to your login, since you're already an admin.
+
+Best,
+Alex
+Pharos Support"
+H-30,billing,normal,neutral,False,True,M22,billing prorated_charges,"Card declined, account suspended?",1.0,rules,"Hi Hana,
+
+Thank you for contacting Pharos. I can see how that was a surprise, so here's what happened.
+
+Plans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.
+
+[[fill in: credit line]]
+
+Two tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.
+
+Best,
+Alex
+Pharos Support"
+H-31,data_privacy,normal,neutral,False,False,M16,data_export,Export all our projects,1.0,rules,"Hi Leo,
+
+Thank you for contacting Pharos. You can export everything yourself in a couple of minutes:
+
+1. Go to Settings > Data > Export (owners and admins only).
+2. Choose one project or the whole workspace.
+3. Pick CSV for spreadsheets or JSON to keep comments and history. Larger exports arrive by email as a link within 15 minutes, with attachments in a separate ZIP.
+
+Best,
+Alex
+Pharos Support"
+H-32,integrations,normal,neutral,False,True,M06,integrations,Google Calendar not showing due dates,0.6,rules,"Hi Zoe,
+
+Thank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.
+
+In the meantime, these cause most integration problems and only take a minute to check:
+1. A red ""Reconnect"" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.
+2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.
+3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.
+
+Talk soon,
+Alex
+Pharos Support"
+H-33,bug,normal,neutral,False,False,M10,bug,Tasks disappeared from a board,0.76,rules,"Hi Marco,
+
+Thank you for contacting Pharos, and sorry for the scare. This is usually recoverable, so let's track it down.
+
+For missing tasks, check these first:
+1. Click Clear filters at the top of the board. A saved view can hide tasks.
+2. Turn on Show archived in the view menu. Completed tasks can be archived automatically.
+3. Look in Projects > Trash. Deleted tasks stay there for 30 days and can be restored.
+
+For a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.
+
+If none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.
+
+Best,
+Alex
+Pharos Support"
+H-34,cancellation,high,negative,True,True,M05,cancellation churn_risk,We're switching to a competitor unless this gets fixed,0.62,rules,"Hi Nina,
+
+Thank you for contacting Pharos, and for being honest with us. I'm sorry we haven't been what you needed. I've passed your feedback straight to our product team.
+
+Getting your data out is easy:
+1. Go to Settings > Data > Export.
+2. Choose the whole workspace and pick JSON to keep comments and history, or CSV for spreadsheets.
+3. Larger exports arrive by email as a download link within 15 minutes, with attachments in a separate ZIP.
+
+When you're ready, cancel under Settings > Billing > Cancel plan. You'll keep access until the end of your billing period.
+
+Before you go, I'd be glad to look at [[fill in: pain point]] with you. It's often a quick fix. And if you'd rather not pay for now, your workspace can drop to the Free plan and keep all your projects.
+
+Either way, I'm here if you need anything.
+
+Best,
+Alex
+Pharos Support"
+H-35,account_access,normal,neutral,False,False,M11,account_access password_reset,Weird login from another country,1.0,rules,"Hi Omar,
+
+Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
+
+Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
+
+Best,
+Alex
+Pharos Support"
+H-36,refund,normal,neutral,False,True,M02,refund annual_plan,Refund for annual plan we just bought,1.0,rules,"Hi Ella,
+
+Thank you for contacting Pharos, and please don't apologize. I'm sorry things have changed, and I hope all is well with you.
+
+Since you're within 30 days of your annual payment, you're eligible for a refund for the rest of the year. I'll take care of everything:
+1. I'll cancel the annual plan and refund the unused days.
+2. The refund will reach your card in 5 to 7 business days.
+3. Your workspace stays fully active until [[fill in: end date]], so you can wrap up any open projects.
+
+If you'd like a copy of your projects, you can export them anytime under Settings > Data > Export.
+
+Wishing you all the best,
+Alex
+Pharos Support"

@@ -1,21 +1,70 @@
-# Pharos Support Desk — AI support-ops demo
+# Pharos Support Desk
+
+**AI support operations for a small software company: a help-center chatbot that only answers from the docs, ticket triage that drafts on-policy replies, and a macro library, with every result measured against hand-labeled tickets.**
 
 *Created by Nick Lax · nlaxatx@gmail.com*
 
-A working AI support-operations package for **Pharos**, a made-up project-management app for small teams. It has three parts:
+**[Live demo](https://scenebiscuit-cell.github.io/support-desk-repo-1/)** · **[Customer help portal](https://scenebiscuit-cell.github.io/support-desk-repo-1/portal/)** · **Walkthrough video:** *coming soon*
 
-1. **Help-center chatbot** (`chat.py`) — answers only from the company's docs, cites the article, and hands off to a person when the docs don't cover the question.
-2. **Ticket triage** (`triage.py`) — tags each ticket with category, priority, sentiment, and churn risk, picks the right macro, and drafts a reply. Refunds, identity checks, and escalations are flagged for a human.
-3. **Macro library** (`macros/`) — 23 on-policy replies with tags, priority/status actions, and internal notes. Exports to CSV and Markdown.
+![The Pharos Support Desk demo](screenshots/hero.png)
 
-Plus two web pages, built from the real data in this folder:
+## The problem
 
-- **Agent demo** (`index.html`, also at `demo/index.html`) puts all three tools in one shareable page.
-- **Customer help portal** (`portal/index.html`) is what a customer would see: just the Keeper chat, no tickets or macros.
+Small support teams lose hours every week to the same three things: sorting the inbox, rewriting the same replies, and answering questions that are already in the help center. AI can help with all three, but only if it doesn't make things up, doesn't promise refunds it can't give, and keeps a person in charge of anything risky.
 
-Everything is Python standard library. Nothing to `pip install`.
+Pharos is a fictional project-management app for small teams. I built its support operation the way I'd build one for a real client: from the help articles and policies outward, and measured before trusting.
+
+## What I built
+
+| | What it does | Guardrail |
+|---|---|---|
+| **Help-center chatbot ("the Keeper")** | Searches 12 help articles and answers from them, citing the source | Answers only when the docs clearly cover the question; otherwise hands off to a person instead of guessing |
+| **Ticket triage** | Tags each ticket with category, priority, sentiment, and churn risk, picks the best macro, and drafts a reply | Refunds, outages, and security reports are always flagged for a person; drafts are never auto-sent |
+| **Macro library** | 23 on-policy replies with tags, status actions, and internal notes; exports to CSV for any helpdesk | One consistent policy answer, whoever is on shift |
+| **Customer help portal** | The public-facing version of the chatbot, with no ticket or staff data | Warns visitors not to share passwords or payment details |
+
+![Help chat with its search trace](screenshots/help-chat.png)
+
+*The chat shows which help-center sections matched, how strongly, and why it answered or handed off.*
+
+## How it works
+
+1. **Search.** Help articles are split into sections and ranked with BM25 keyword search, plus synonyms and phrases ("can't log in" → login). It's fast, free, and explainable.
+2. **Confidence gate.** The bot only answers when the best match clears a relevance bar. Below it, the question goes to a person.
+3. **Triage, two layers.** A rules engine gives an instant, free baseline. An AI layer (Llama 3.3 70B on Cloudflare Workers AI, a local model through Ollama, or Claude) reads the ticket with the matching help sections and candidate macros, and returns structured JSON. If the AI fails or returns bad JSON, that ticket falls back to the rules.
+4. **Voice guard.** AI drafts are cleaned up server-side before an agent sees them: stock phrases like "I understand your frustration" are removed, every draft opens with "Thank you for contacting Pharos," and it ends with one consistent sign-off.
+5. **Cost and abuse limits.** The live AI runs on a small Cloudflare Worker that only serves this site, keeps the prompts server-side, caps input size, and limits each visitor to 10 AI answers a day (40 for the whole demo). That keeps it on Cloudflare's free tier.
+
+![Ticket triage with an escalation and draft reply](screenshots/triage.png)
+
+## Results
+
+Every ticket has a hand label (correct category and priority), so accuracy is scored, not eyeballed. The **unseen** tickets were written and labeled after the rules were finished, and the rules were never tuned on them.
+
+| Test set | Tickets | Routed to the right category | Right priority |
+|---|---|---|---|
+| Sample (rules written alongside these) | 20 | **100%** (20/20) | 100% |
+| **Unseen** | **36** | **78%** (28/36) | 72% (26/36) |
+
+![Accuracy chart](screenshots/accuracy.png)
+
+**What the misses taught me.** Of the 36 unseen tickets, the rules flagged every refund and outage for a person. They missed two security reports ("someone logged into my account from another country"), which looked like ordinary login problems. Keyword rules can't tell those apart; reading intent is exactly the job of the AI layer, and it's why I'd measure any AI support tool on unseen tickets before trusting it.
+
+![The public help portal answering with a cited source](screenshots/portal.png)
+
+## What I'd do next
+
+- **Score the AI layer on the same 36 unseen tickets** and put that number next to the rules baseline.
+- **Add a security safety net:** route any mention of an unrecognized login straight to security, whatever the rest of the ticket says.
+- **Use embeddings** for search once a help center grows past a few dozen articles.
+- **Connect a real helpdesk** (Zendesk, Help Scout, or Freshdesk) so tags, macros, and drafts land where agents already work.
+- **Track deflection:** what share of chat questions got answered without a ticket, and how many handoffs turned out to be covered by the docs.
 
 ---
+
+# Running it
+
+Everything is Python standard library. Nothing to `pip install`.
 
 ## Quick start (Windows, Mac, or Linux, Python 3.10+)
 
@@ -68,16 +117,11 @@ Every ticket set has hand labels, so accuracy is scored rather than eyeballed.
 ```bash
 python triage.py --eval                                                    # sample set
 python triage.py --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout
+node tests/parity.js           # the web page's triage matches the Python engine exactly
+node tests/worker_voice.mjs    # the Worker's draft cleanup
 ```
 
-Current offline rules results:
-
-| Set | Tickets | Category | Priority |
-|---|---|---|---|
-| Sample (rules were written alongside these) | 20 | 100% | 100% |
-| Unseen (written after, rules not tuned on them) | 12 | 67% | 67% |
-
-The gap is the point. Keyword rules break on new phrasing (a question about reusing a board named "Refund Requests" gets tagged as a refund; "sync later" in a mobile-offline feature request gets tagged as an integration problem; a suspicious-login report gets treated as a password reset). That's the job the LLM layer does. **Run the unseen set with Ollama or Claude and put that number in your pitch.**
+See **Results** above for the current numbers. To score an AI backend on the unseen set, add `--backend ollama` (or `anthropic`) to the second command.
 
 ## The demo page
 
@@ -135,7 +179,7 @@ Then open your GitHub Pages link in Chrome or Edge. If the browser asks to allow
 ```
 docs/                    12 help-center articles (Markdown)
 data/tickets.json        20 sample tickets        data/labels.json          their hand labels
-data/holdout_tickets.json 12 unseen tickets       data/holdout_labels.json  their hand labels
+data/holdout_tickets.json 36 unseen tickets       data/holdout_labels.json  their hand labels
 macros/                  macros.json (source), macros.csv, macros.md
 support_ops/kb.py        doc chunking + BM25 search
 support_ops/llm.py       Ollama / Anthropic backends (stdlib HTTP)
@@ -146,6 +190,8 @@ triage.py  chat.py  export_macros.py  build_demo.py
 demo/template.html → demo/index.html and index.html (the GitHub Pages home page)
 portal/template.html → portal/index.html (public help portal)
 DESIGN.md, PRODUCT.md     design system and product notes
+screenshots/              images used in this README
+tests/                   parity and Worker voice tests
 worker/                  Cloudflare Worker for free live AI: worker.template.js → worker.js, wrangler.toml, README.md
 .github/workflows/        deploys the Worker when worker/ changes
 output/                  generated reports

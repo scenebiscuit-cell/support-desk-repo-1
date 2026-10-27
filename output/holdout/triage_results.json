@@ -1,30 +1,40 @@
 {
   "engine": "rules",
   "summary": {
-    "tickets": 12,
+    "tickets": 36,
     "by_category": {
-      "billing": 2,
-      "integrations": 2,
-      "account_access": 2,
-      "notifications": 2,
-      "presales": 1,
-      "cancellation": 1,
-      "bug": 1,
-      "refund": 1
+      "billing": 5,
+      "integrations": 4,
+      "account_access": 4,
+      "notifications": 3,
+      "cancellation": 3,
+      "bug": 3,
+      "presales": 2,
+      "refund": 2,
+      "workspace_setup": 2,
+      "seats": 2,
+      "data_privacy": 2,
+      "outage": 1,
+      "security": 1,
+      "feedback": 1,
+      "spam": 1
     },
     "by_priority": {
-      "urgent": 0,
-      "high": 3,
-      "normal": 9,
-      "low": 0
+      "urgent": 2,
+      "high": 5,
+      "normal": 27,
+      "low": 2
     },
-    "churn_risk": [],
-    "needs_human": 9,
-    "ready_to_send": 3,
-    "auto_closed_spam": 0,
+    "churn_risk": [
+      "H-15",
+      "H-34"
+    ],
+    "needs_human": 23,
+    "ready_to_send": 12,
+    "auto_closed_spam": 1,
     "accuracy": {
-      "category": 0.667,
-      "priority": 0.667,
+      "category": 0.778,
+      "priority": 0.722,
       "misses": [
         {
           "ticket_id": "H-02",
@@ -72,6 +82,83 @@
         },
         {
           "ticket_id": "H-12",
+          "got": [
+            "account_access",
+            "normal"
+          ],
+          "expected": [
+            "security",
+            "urgent"
+          ]
+        },
+        {
+          "ticket_id": "H-14",
+          "got": [
+            "billing",
+            "normal"
+          ],
+          "expected": [
+            "refund",
+            "high"
+          ]
+        },
+        {
+          "ticket_id": "H-20",
+          "got": [
+            "account_access",
+            "normal"
+          ],
+          "expected": [
+            "account_access",
+            "high"
+          ]
+        },
+        {
+          "ticket_id": "H-25",
+          "got": [
+            "workspace_setup",
+            "normal"
+          ],
+          "expected": [
+            "feature_request",
+            "low"
+          ]
+        },
+        {
+          "ticket_id": "H-30",
+          "got": [
+            "billing",
+            "normal"
+          ],
+          "expected": [
+            "billing",
+            "high"
+          ]
+        },
+        {
+          "ticket_id": "H-33",
+          "got": [
+            "bug",
+            "normal"
+          ],
+          "expected": [
+            "bug",
+            "high"
+          ]
+        },
+        {
+          "ticket_id": "H-34",
+          "got": [
+            "cancellation",
+            "high"
+          ],
+          "expected": [
+            "notifications",
+            "high"
+          ]
+        },
+        {
+          "ticket_id": "H-35",
           "got": [
             "account_access",
             "normal"
@@ -364,6 +451,577 @@
       "cited_articles": [
         "account-security",
         "troubleshooting"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-13",
+      "engine": "rules",
+      "category": "billing",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "billing",
+        "prorated_charges"
+      ],
+      "macro_id": "M22",
+      "macro_title": "Billing: prorated member charges explained",
+      "summary": "Can I pay by invoice instead of card?",
+      "draft_reply": "Hi Owen,\n\nThank you for contacting Pharos. I can see how that was a surprise, so here's what happened.\n\nPlans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.\n\n[[fill in: credit line]]\n\nTwo tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "credit_line"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "plans-and-pricing",
+        "members-and-permissions"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-14",
+      "engine": "rules",
+      "category": "billing",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "billing",
+        "prorated_charges"
+      ],
+      "macro_id": "M22",
+      "macro_title": "Billing: prorated member charges explained",
+      "summary": "Charged for 14 seats, we only have 9",
+      "draft_reply": "Hi Leah,\n\nThank you for contacting Pharos. I can see how that was a surprise, so here's what happened.\n\nPlans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.\n\n[[fill in: credit line]]\n\nTwo tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "credit_line"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "billing-and-refunds",
+        "plans-and-pricing"
+      ],
+      "confidence": 0.62
+    },
+    {
+      "ticket_id": "H-15",
+      "engine": "rules",
+      "category": "cancellation",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": true,
+      "tags": [
+        "cancellation",
+        "churn_risk"
+      ],
+      "macro_id": "M05",
+      "macro_title": "Cancellation: churn risk (export help + save offer)",
+      "summary": "Close our account",
+      "draft_reply": "Hi Tom,\n\nThank you for contacting Pharos, and for being honest with us. I'm sorry we haven't been what you needed. I've passed your feedback straight to our product team.\n\nGetting your data out is easy:\n1. Go to Settings > Data > Export.\n2. Choose the whole workspace and pick JSON to keep comments and history, or CSV for spreadsheets.\n3. Larger exports arrive by email as a download link within 15 minutes, with attachments in a separate ZIP.\n\nWhen you're ready, cancel under Settings > Billing > Cancel plan. You'll keep access until the end of your billing period.\n\nBefore you go, I'd be glad to look at [[fill in: pain point]] with you. It's often a quick fix. And if you'd rather not pay for now, your workspace can drop to the Free plan and keep all your projects.\n\nEither way, I'm here if you need anything.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "pain_point"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "change-or-cancel-plan",
+        "change-or-cancel-plan"
+      ],
+      "confidence": 0.75
+    },
+    {
+      "ticket_id": "H-16",
+      "engine": "rules",
+      "category": "integrations",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "integrations"
+      ],
+      "macro_id": "M06",
+      "macro_title": "Integrations: connection stopped working",
+      "summary": "GitHub PRs not linking to tasks",
+      "draft_reply": "Hi Priya,\n\nThank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.\n\nIn the meantime, these cause most integration problems and only take a minute to check:\n1. A red \"Reconnect\" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.\n2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.\n3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.\n\nTalk soon,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "integration"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "integrations",
+        "notifications"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-17",
+      "engine": "rules",
+      "category": "notifications",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "notifications",
+        "email"
+      ],
+      "macro_id": "M07",
+      "macro_title": "Notifications: emails not arriving",
+      "summary": "Way too many emails",
+      "draft_reply": "Hi Carlos,\n\nThank you for contacting Pharos, and I'm sorry this has caused missed work. I'm checking our email delivery log for your workspace now.\n\nA few settings that usually explain it:\n1. Email is turned on for each notification type under Profile > Notifications.\n2. Daily digest is off. When it's on, individual emails pause.\n3. Do not disturb (the moon icon by your profile picture) is off.\n4. Your company's email filter isn't blocking notifications@pharos.example. Your IT team can allow our domain.\n\nIf you can send a screenshot of one teammate's notification settings, that'll help me get to the bottom of it faster.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": true,
+      "cited_articles": [
+        "notifications",
+        "notifications"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticket_id": "H-18",
+      "engine": "rules",
+      "category": "workspace_setup",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "workspace_setup",
+        "how_to"
+      ],
+      "macro_id": "M09",
+      "macro_title": "Workspace setup: how-to answer",
+      "summary": "How do I make a project private?",
+      "draft_reply": "Hi Mei,\n\nThank you for contacting Pharos. Happy to help with that.\n\n[[fill in: answer]]\n\nThere's more detail in our guide to projects, boards, and templates: help.pharos.example/projects-and-boards\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "answer"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "projects-and-boards",
+        "plans-and-pricing"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticket_id": "H-19",
+      "engine": "rules",
+      "category": "bug",
+      "priority": "high",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "bug"
+      ],
+      "macro_id": "M10",
+      "macro_title": "Bug: troubleshooting and next steps",
+      "summary": "File uploads failing",
+      "draft_reply": "Hi Jordan,\n\nThank you for contacting Pharos, and sorry for the scare. This is usually recoverable, so let's track it down.\n\nFor missing tasks, check these first:\n1. Click Clear filters at the top of the board. A saved view can hide tasks.\n2. Turn on Show archived in the view menu. Completed tasks can be archived automatically.\n3. Look in Projects > Trash. Deleted tasks stay there for 30 days and can be restored.\n\nFor a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.\n\nIf none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "troubleshooting",
+        "integrations"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-20",
+      "engine": "rules",
+      "category": "account_access",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "account_access",
+        "2fa_reset",
+        "identity_verification"
+      ],
+      "macro_id": "M12",
+      "macro_title": "Account access: lost 2FA device (identity verification)",
+      "summary": "Locked out after new phone",
+      "draft_reply": "Hi Sam,\n\nThank you for contacting Pharos. I'll get you back in as quickly as I can. To keep your account safe, I just need to confirm it's you first. Please reply from this email address with:\n\n1. The name of your Pharos workspace\n2. If you're the workspace owner, the last 4 digits of the card on file\n\nAs soon as that checks out, I'll reset two-factor authentication so you can log in. Once you're in, set it up on your new phone under Profile > Security, and save the backup codes. They'll get you in if this ever happens again.\n\nWe'll never ask for your password.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "account-security",
+        "account-security"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-21",
+      "engine": "rules",
+      "category": "seats",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "seats",
+        "plan_limit",
+        "upsell"
+      ],
+      "macro_id": "M13",
+      "macro_title": "Seats: Free plan member limit (upgrade path)",
+      "summary": "Adding a client as a guest",
+      "draft_reply": "Hi Ava,\n\nThank you for contacting Pharos, and congratulations on growing your team! The Free plan includes up to 3 members, so you have two options:\n\n1. Upgrade to Team ($10 per member a month) for unlimited members and projects. It takes effect right away: Settings > Billing > Change plan.\n2. If the new person only needs to view and comment on certain projects, you can invite them as a guest instead. Guests are free on paid plans.\n\nHappy to help with either one.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "members-and-permissions",
+        "getting-started"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-22",
+      "engine": "rules",
+      "category": "data_privacy",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "data_privacy",
+        "deletion_request"
+      ],
+      "macro_id": "M15",
+      "macro_title": "Privacy: personal data deletion request",
+      "summary": "Delete my personal data",
+      "draft_reply": "Hi Noah,\n\nThank you for contacting Pharos, and for handling this so carefully. Here's how it works:\n\n1. A workspace admin removes the person under Settings > Members.\n2. On their profile, click Anonymize. Their name is replaced on past comments and activity, and their personal details are removed.\n3. On our side, removed data is cleared from active systems right away and fully purged from backups within 90 days.\n\nSince Pharos handles your workspace data on your behalf, that's all you need to do, and you can let them know it's done. If they've made a formal request and you'd like written confirmation, just let me know.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "data-export-and-deletion",
+        "data-export-and-deletion"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-23",
+      "engine": "rules",
+      "category": "outage",
+      "priority": "urgent",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "outage",
+        "incident"
+      ],
+      "macro_id": "M17",
+      "macro_title": "Outage: acknowledge and link status page",
+      "summary": "Is Pharos down?",
+      "draft_reply": "Hi Grace,\n\nThank you for letting us know so quickly, and I'm sorry. I know your team can't work while Pharos is down. Our engineers are on it right now.\n\nYou can follow live updates at status.pharos.example and subscribe there for an alert the moment it's fixed. I've also linked your ticket to the incident, so I'll update you here directly.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": true,
+      "cited_articles": [
+        "troubleshooting",
+        "getting-started"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-24",
+      "engine": "rules",
+      "category": "security",
+      "priority": "urgent",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "security",
+        "vulnerability_report"
+      ],
+      "macro_id": "M18",
+      "macro_title": "Security: vulnerability report acknowledgment",
+      "summary": "Possible XSS in task comments",
+      "draft_reply": "Hi Ivan,\n\nThank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.\n\nPlease send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.\n\nThanks again for helping keep our customers safe.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": true,
+      "cited_articles": [
+        "account-security",
+        "troubleshooting"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-25",
+      "engine": "rules",
+      "category": "workspace_setup",
+      "priority": "normal",
+      "sentiment": "positive",
+      "churn_risk": false,
+      "tags": [
+        "workspace_setup",
+        "how_to"
+      ],
+      "macro_id": "M09",
+      "macro_title": "Workspace setup: how-to answer",
+      "summary": "Gantt view?",
+      "draft_reply": "Hi Lucy,\n\nThank you for contacting Pharos. Happy to help with that.\n\n[[fill in: answer]]\n\nThere's more detail in our guide to projects, boards, and templates: help.pharos.example/projects-and-boards\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "answer"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "getting-started",
+        "contact-support"
+      ],
+      "confidence": 0.3
+    },
+    {
+      "ticket_id": "H-26",
+      "engine": "rules",
+      "category": "presales",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "presales",
+        "trial"
+      ],
+      "macro_id": "M20",
+      "macro_title": "Presales: plan and feature questions",
+      "summary": "Questions before we sign up",
+      "draft_reply": "Hi Ben,\n\nThank you for contacting Pharos! I'm so glad you're enjoying the trial. Happy to help you pick the right plan.\n\n[[fill in: answers]]\n\nYou can compare all the plans at help.pharos.example/plans-and-pricing, and paying annually gets you two months free.\n\nIf anything else comes up, just reply here.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "answers"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "plans-and-pricing",
+        "plans-and-pricing"
+      ],
+      "confidence": 0.6
+    },
+    {
+      "ticket_id": "H-27",
+      "engine": "rules",
+      "category": "feedback",
+      "priority": "low",
+      "sentiment": "positive",
+      "churn_risk": false,
+      "tags": [
+        "feedback",
+        "positive"
+      ],
+      "macro_id": "M21",
+      "macro_title": "Feedback: thank you",
+      "summary": "Just wanted to say thanks",
+      "draft_reply": "Hi Rosa,\n\nThank you so much for writing in. This genuinely made our whole team's day, and I've shared it with everyone here.\n\nIf you ever have a minute, a short review on Capterra or G2 helps other small teams find us. No pressure at all.\n\nThanks for being part of Pharos,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "contact-support",
+        "projects-and-boards"
+      ],
+      "confidence": 0.75
+    },
+    {
+      "ticket_id": "H-28",
+      "engine": "rules",
+      "category": "spam",
+      "priority": "low",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "spam"
+      ],
+      "macro_id": "M23",
+      "macro_title": "Spam / vendor pitch: close without reply",
+      "summary": "Get 10,000 leads this month",
+      "draft_reply": "",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "getting-started",
+        "plans-and-pricing"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-29",
+      "engine": "rules",
+      "category": "seats",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "seats",
+        "ownership_transfer",
+        "identity_verification"
+      ],
+      "macro_id": "M14",
+      "macro_title": "Seats: ownership transfer (owner unavailable)",
+      "summary": "Transfer ownership",
+      "draft_reply": "Hi Ethan,\n\nThank you for contacting Pharos. Normally the current owner transfers ownership, but since they aren't reachable, we can take care of it for you after a quick verification.\n\nPlease reply with one of these showing your name and the business name:\n- A business license or registration\n- A recent business invoice or bank statement\n\nOnce a team lead approves it, usually within one business day, I'll move ownership to your login, since you're already an admin.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "members-and-permissions",
+        "contact-support"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-30",
+      "engine": "rules",
+      "category": "billing",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "billing",
+        "prorated_charges"
+      ],
+      "macro_id": "M22",
+      "macro_title": "Billing: prorated member charges explained",
+      "summary": "Card declined, account suspended?",
+      "draft_reply": "Hi Hana,\n\nThank you for contacting Pharos. I can see how that was a surprise, so here's what happened.\n\nPlans are billed per member. When someone joins partway through the month, we charge for the days left in that month, and that charge lands on your next invoice. That's the prorated line you're seeing, and it won't repeat. Going forward, your bill reflects your current number of members.\n\n[[fill in: credit line]]\n\nTwo tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "credit_line"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "account-security",
+        "getting-started"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-31",
+      "engine": "rules",
+      "category": "data_privacy",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "data_export"
+      ],
+      "macro_id": "M16",
+      "macro_title": "Data: how to export",
+      "summary": "Export all our projects",
+      "draft_reply": "Hi Leo,\n\nThank you for contacting Pharos. You can export everything yourself in a couple of minutes:\n\n1. Go to Settings > Data > Export (owners and admins only).\n2. Choose one project or the whole workspace.\n3. Pick CSV for spreadsheets or JSON to keep comments and history. Larger exports arrive by email as a link within 15 minutes, with attachments in a separate ZIP.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "data-export-and-deletion",
+        "data-export-and-deletion"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-32",
+      "engine": "rules",
+      "category": "integrations",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "integrations"
+      ],
+      "macro_id": "M06",
+      "macro_title": "Integrations: connection stopped working",
+      "summary": "Google Calendar not showing due dates",
+      "draft_reply": "Hi Zoe,\n\nThank you for contacting Pharos, and I'm sorry about the trouble. I'm checking the [[fill in: integration]] log for your workspace now and will follow up with what I find.\n\nIn the meantime, these cause most integration problems and only take a minute to check:\n1. A red \"Reconnect\" banner under Settings > Integrations. Access can expire after a password change or when the person who connected it leaves the workspace. Click Reconnect and sign in again.\n2. For Slack, make sure the Pharos app is still in the channel. If not, type /invite @Pharos there.\n3. For GitHub, check that the repository is still selected under Settings > Integrations > GitHub > Repositories.\n\nTalk soon,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "integration"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "integrations",
+        "projects-and-boards"
+      ],
+      "confidence": 0.6
+    },
+    {
+      "ticket_id": "H-33",
+      "engine": "rules",
+      "category": "bug",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "bug"
+      ],
+      "macro_id": "M10",
+      "macro_title": "Bug: troubleshooting and next steps",
+      "summary": "Tasks disappeared from a board",
+      "draft_reply": "Hi Marco,\n\nThank you for contacting Pharos, and sorry for the scare. This is usually recoverable, so let's track it down.\n\nFor missing tasks, check these first:\n1. Click Clear filters at the top of the board. A saved view can hide tasks.\n2. Turn on Show archived in the view menu. Completed tasks can be archived automatically.\n3. Look in Projects > Trash. Deleted tasks stay there for 30 days and can be restored.\n\nFor a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.\n\nIf none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "getting-started",
+        "troubleshooting"
+      ],
+      "confidence": 0.76
+    },
+    {
+      "ticket_id": "H-34",
+      "engine": "rules",
+      "category": "cancellation",
+      "priority": "high",
+      "sentiment": "negative",
+      "churn_risk": true,
+      "tags": [
+        "cancellation",
+        "churn_risk"
+      ],
+      "macro_id": "M05",
+      "macro_title": "Cancellation: churn risk (export help + save offer)",
+      "summary": "We're switching to a competitor unless this gets fixed",
+      "draft_reply": "Hi Nina,\n\nThank you for contacting Pharos, and for being honest with us. I'm sorry we haven't been what you needed. I've passed your feedback straight to our product team.\n\nGetting your data out is easy:\n1. Go to Settings > Data > Export.\n2. Choose the whole workspace and pick JSON to keep comments and history, or CSV for spreadsheets.\n3. Larger exports arrive by email as a download link within 15 minutes, with attachments in a separate ZIP.\n\nWhen you're ready, cancel under Settings > Billing > Cancel plan. You'll keep access until the end of your billing period.\n\nBefore you go, I'd be glad to look at [[fill in: pain point]] with you. It's often a quick fix. And if you'd rather not pay for now, your workspace can drop to the Free plan and keep all your projects.\n\nEither way, I'm here if you need anything.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "pain_point"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "data-export-and-deletion",
+        "troubleshooting"
+      ],
+      "confidence": 0.62
+    },
+    {
+      "ticket_id": "H-35",
+      "engine": "rules",
+      "category": "account_access",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "account_access",
+        "password_reset"
+      ],
+      "macro_id": "M11",
+      "macro_title": "Account access: password reset email not arriving",
+      "summary": "Weird login from another country",
+      "draft_reply": "Hi Omar,\n\nThank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.\n\nTry requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.\n\nBest,\nAlex\nPharos Support",
+      "unfilled_placeholders": [],
+      "needs_human": false,
+      "cited_articles": [
+        "account-security",
+        "account-security"
+      ],
+      "confidence": 1.0
+    },
+    {
+      "ticket_id": "H-36",
+      "engine": "rules",
+      "category": "refund",
+      "priority": "normal",
+      "sentiment": "neutral",
+      "churn_risk": false,
+      "tags": [
+        "refund",
+        "annual_plan"
+      ],
+      "macro_id": "M02",
+      "macro_title": "Refund: annual plan within 30 days (pro-rated)",
+      "summary": "Refund for annual plan we just bought",
+      "draft_reply": "Hi Ella,\n\nThank you for contacting Pharos, and please don't apologize. I'm sorry things have changed, and I hope all is well with you.\n\nSince you're within 30 days of your annual payment, you're eligible for a refund for the rest of the year. I'll take care of everything:\n1. I'll cancel the annual plan and refund the unused days.\n2. The refund will reach your card in 5 to 7 business days.\n3. Your workspace stays fully active until [[fill in: end date]], so you can wrap up any open projects.\n\nIf you'd like a copy of your projects, you can export them anytime under Settings > Data > Export.\n\nWishing you all the best,\nAlex\nPharos Support",
+      "unfilled_placeholders": [
+        "end_date"
+      ],
+      "needs_human": true,
+      "cited_articles": [
+        "billing-and-refunds",
+        "plans-and-pricing"
       ],
       "confidence": 1.0
     }

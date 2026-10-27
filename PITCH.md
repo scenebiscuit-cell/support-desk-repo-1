@@ -34,7 +34,7 @@ It can run on the AI provider of your choice, or entirely on your own computer i
 
 - "I built AI ticket deflection for a demo SaaS: a docs-grounded chatbot that cites sources and hands off when it's not confident."
 - "I built triage that sorts by real business impact (outages and security first, then teams that are blocked or losing money) and flags churn risk from tone and intent."
-- "I measured it. My keyword baseline scored 100% on tickets I wrote it against and 67% on unseen ones. That gap is why the LLM layer exists, and it's how I'd evaluate any AI support tool before trusting it." (Swap in your Ollama/Claude number once you run it.)
+- "I measured it. My keyword baseline scored 100% on the 20 tickets I wrote it against and 78% on 36 unseen ones, and the misses were exactly the cases that need judgment, like a suspicious login that reads like a password problem. That gap is why the LLM layer exists, and it's how I'd evaluate any AI support tool before trusting it." (Swap in your Ollama/Claude number once you run it.)
 - "I designed it so AI drafts and people decide: refunds, identity verification, and security reports always route to a human."
 - "Macros encode policy. Each one sets tags, priority, and status, and carries an internal note, so new agents give the same answer veterans do."
 

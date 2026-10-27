@@ -96,6 +96,7 @@ FORM: One single-column help conversation in the same visual system as the agent
     .source-copy { margin-top: 8px; color: var(--ink); white-space: pre-wrap; }
     .source-copy strong { display: block; margin-bottom: 4px; }
     .source-copy a { display: inline-block; margin-top: 8px; white-space: normal; }
+    .message code, .source-copy code { font: 500 .88em var(--mono); background: var(--tint); border: 1px solid var(--rule); border-radius: 4px; padding: 0 4px; overflow-wrap: anywhere; }
     .suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 18px 0; border-top: 1px solid var(--rule); }
     .suggestions button { min-height: 32px; padding: 4px 12px; background: var(--tint); border: 1px solid var(--rule); border-radius: 999px; cursor: pointer; font-size: 13.5px; }
     .suggestions button:hover { border-color: var(--accent); }
@@ -272,6 +273,19 @@ FORM: One single-column help conversation in the same visual system as the agent
       return results.sort((a, b) => b.score - a.score).slice(0, limit);
     }
 
+    // Help articles and AI answers use **bold** and `code`; render those safely (no HTML from the text).
+    function setRich(el, text) {
+      el.textContent = "";
+      for (const part of String(text).split(/(\*\*[^*\n]+\*\*|`[^`\n]+`)/)) {
+        if (!part) continue;
+        if (part.startsWith("**") && part.endsWith("**") && part.length > 4) {
+          const b = document.createElement("strong"); b.textContent = part.slice(2, -2); el.append(b);
+        } else if (part.startsWith("`") && part.endsWith("`") && part.length > 2) {
+          const c = document.createElement("code"); c.textContent = part.slice(1, -1); el.append(c);
+        } else el.append(document.createTextNode(part));
+      }
+    }
+
     function addMessage(role, text, { error = false } = {}) {
       const message = document.createElement("article");
       message.className = `message ${role}${error ? " error" : ""}`;
@@ -280,7 +294,7 @@ FORM: One single-column help conversation in the same visual system as the agent
       label.textContent = role === "user" ? "You" : "The Keeper";
       const body = document.createElement("div");
       body.className = "message-body";
-      body.textContent = text;
+      setRich(body, text);
       message.append(label, body);
       $("#messages").append(message);
       $("#messages").scrollTop = $("#messages").scrollHeight;
@@ -303,7 +317,7 @@ FORM: One single-column help conversation in the same visual system as the agent
       const heading = document.createElement("strong");
       heading.textContent = chunk.heading;
       const passage = document.createElement("div");
-      passage.textContent = chunk.text;
+      setRich(passage, chunk.text);
       copy.append(heading, passage);
       if (chunk.url) {
         const link = document.createElement("a");
@@ -436,12 +450,12 @@ FORM: One single-column help conversation in the same visual system as the agent
         }
         const citedTitle = answer.match(/(?:^|\n)Source:\s*(.+)\s*$/i)?.[1]?.trim();
         const answerText = answer.replace(/\n?Source:\s*.+\s*$/i, "").trim();
-        message.querySelector(".message-body").textContent = answerText;
+        setRich(message.querySelector(".message-body"), answerText);
         addSource(message, chunks.find(chunk => chunk.title === citedTitle) || chunks[0]);
       } catch (error) {
         message.classList.add("error");
-        message.querySelector(".message-body").textContent =
-          `The AI answer isn’t available right now. Here is the relevant help-center content instead.\n\n${excerptText(relevantChunks(hits), "")}`.trim();
+        setRich(message.querySelector(".message-body"),
+          `The AI answer isn’t available right now. Here is the relevant help-center content instead.\n\n${excerptText(relevantChunks(hits), "")}`.trim());
         addSource(message, chunks[0]);
       } finally {
         busy = false;

@@ -1,15 +1,147 @@
 {
-  "_about": "Hand labels for data/holdout_tickets.json. These tickets were written AFTER the rules engine, and the rules were not tuned on them, so they show how it does on tickets it has never seen.",
-  "H-01": {"category": "billing", "priority": "high"},
-  "H-02": {"category": "feature_request", "priority": "low"},
-  "H-03": {"category": "integrations", "priority": "normal"},
-  "H-04": {"category": "account_access", "priority": "high"},
-  "H-05": {"category": "presales", "priority": "normal"},
-  "H-06": {"category": "notifications", "priority": "normal"},
-  "H-07": {"category": "cancellation", "priority": "normal"},
-  "H-08": {"category": "bug", "priority": "normal"},
-  "H-09": {"category": "notifications", "priority": "high"},
-  "H-10": {"category": "workspace_setup", "priority": "normal"},
-  "H-11": {"category": "refund", "priority": "high"},
-  "H-12": {"category": "security", "priority": "urgent"}
+  "_about": "Hand labels for data/holdout_tickets.json. These tickets were written AFTER the rules engine (H-13 to H-36 added later, labeled before the first run), and the rules were never tuned on them, so they show how it does on tickets it has never seen.",
+  "H-01": {
+    "category": "billing",
+    "priority": "high"
+  },
+  "H-02": {
+    "category": "feature_request",
+    "priority": "low"
+  },
+  "H-03": {
+    "category": "integrations",
+    "priority": "normal"
+  },
+  "H-04": {
+    "category": "account_access",
+    "priority": "high"
+  },
+  "H-05": {
+    "category": "presales",
+    "priority": "normal"
+  },
+  "H-06": {
+    "category": "notifications",
+    "priority": "normal"
+  },
+  "H-07": {
+    "category": "cancellation",
+    "priority": "normal"
+  },
+  "H-08": {
+    "category": "bug",
+    "priority": "normal"
+  },
+  "H-09": {
+    "category": "notifications",
+    "priority": "high"
+  },
+  "H-10": {
+    "category": "workspace_setup",
+    "priority": "normal"
+  },
+  "H-11": {
+    "category": "refund",
+    "priority": "high"
+  },
+  "H-12": {
+    "category": "security",
+    "priority": "urgent"
+  },
+  "H-13": {
+    "category": "billing",
+    "priority": "normal"
+  },
+  "H-14": {
+    "category": "refund",
+    "priority": "high"
+  },
+  "H-15": {
+    "category": "cancellation",
+    "priority": "normal"
+  },
+  "H-16": {
+    "category": "integrations",
+    "priority": "normal"
+  },
+  "H-17": {
+    "category": "notifications",
+    "priority": "normal"
+  },
+  "H-18": {
+    "category": "workspace_setup",
+    "priority": "normal"
+  },
+  "H-19": {
+    "category": "bug",
+    "priority": "high"
+  },
+  "H-20": {
+    "category": "account_access",
+    "priority": "high"
+  },
+  "H-21": {
+    "category": "seats",
+    "priority": "normal"
+  },
+  "H-22": {
+    "category": "data_privacy",
+    "priority": "normal"
+  },
+  "H-23": {
+    "category": "outage",
+    "priority": "urgent"
+  },
+  "H-24": {
+    "category": "security",
+    "priority": "urgent"
+  },
+  "H-25": {
+    "category": "feature_request",
+    "priority": "low"
+  },
+  "H-26": {
+    "category": "presales",
+    "priority": "normal"
+  },
+  "H-27": {
+    "category": "feedback",
+    "priority": "low"
+  },
+  "H-28": {
+    "category": "spam",
+    "priority": "low"
+  },
+  "H-29": {
+    "category": "seats",
+    "priority": "normal"
+  },
+  "H-30": {
+    "category": "billing",
+    "priority": "high"
+  },
+  "H-31": {
+    "category": "data_privacy",
+    "priority": "normal"
+  },
+  "H-32": {
+    "category": "integrations",
+    "priority": "normal"
+  },
+  "H-33": {
+    "category": "bug",
+    "priority": "high"
+  },
+  "H-34": {
+    "category": "notifications",
+    "priority": "high"
+  },
+  "H-35": {
+    "category": "security",
+    "priority": "urgent"
+  },
+  "H-36": {
+    "category": "refund",
+    "priority": "normal"
+  }
 }

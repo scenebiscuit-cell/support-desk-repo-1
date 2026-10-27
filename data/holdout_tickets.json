@@ -1,50 +1,470 @@
 [
-  {"id": "H-01", "created_at": "2026-10-22T08:05:00-05:00", "channel": "email",
-   "customer": {"name": "Dana Fowler", "email": "dana@fowlerlegal.example", "business": "Fowler Legal Ops", "plan": "Team"},
-   "subject": "Everything is read-only",
-   "body": "This morning none of us can edit anything in Pharos. There's a banner saying the workspace is read-only. I think my card expired last week. I updated it an hour ago but we still can't edit, and my team is just sitting here."},
-  {"id": "H-02", "created_at": "2026-10-22T09:30:00-05:00", "channel": "chat",
-   "customer": {"name": "Leo Martins", "email": "leo@martinsfield.example", "business": "Martins Field Services", "plan": "Team"},
-   "subject": "offline on the phone app",
-   "body": "My crews work in buildings with no signal. Is there any way the mobile app can work offline and sync later? Right now they write stuff on paper and re-enter it."},
-  {"id": "H-03", "created_at": "2026-10-22T10:12:00-05:00", "channel": "email",
-   "customer": {"name": "Imani Wright", "email": "imani@wrightwellnessco.example", "business": "Wright Wellness Co.", "plan": "Team"},
-   "subject": "Due dates not on my Google Calendar",
-   "body": "I connected my Google Calendar last week but none of my task due dates are showing up on it. I'd really like to see them next to my meetings."},
-  {"id": "H-04", "created_at": "2026-10-22T11:48:00-05:00", "channel": "chat",
-   "customer": {"name": "Paul Grady", "email": "paul@gradyhvac.example", "business": "Grady HVAC", "plan": "Team"},
-   "subject": "too many attempts",
-   "body": "It says too many attempts and won't let me in. I'm presenting the project plan to a customer in 20 minutes and it's all in there."},
-  {"id": "H-05", "created_at": "2026-10-22T13:02:00-05:00", "channel": "email",
-   "customer": {"name": "Ruth Okafor", "email": "ruth@eastsidefreeclinic.example", "business": "Eastside Free Clinic", "plan": "Trial"},
-   "subject": "Nonprofit pricing?",
-   "body": "We're a volunteer-run free clinic (501c3) using the trial to organize our outreach events. Is there any discount for nonprofits before we commit to a plan?"},
-  {"id": "H-06", "created_at": "2026-10-22T14:20:00-05:00", "channel": "email",
-   "customer": {"name": "Sofia Reyes", "email": "sofia@reyesbrand.example", "business": "Reyes Brand Studio", "plan": "Team"},
-   "subject": "emails going to junk",
-   "body": "A couple of people on my team said the emails from Pharos land in their junk folder, so they miss when they're assigned something. Anything I can do?"},
-  {"id": "H-07", "created_at": "2026-10-22T15:41:00-05:00", "channel": "email",
-   "customer": {"name": "Walt Hughes", "email": "walt@hughesrestoration.example", "business": "Hughes Restoration", "plan": "Team"},
-   "subject": "close account",
-   "body": "Retiring at the end of the year. Please close my account and delete everything when the time comes. Thanks for the good service."},
-  {"id": "H-08", "created_at": "2026-10-23T08:55:00-05:00", "channel": "chat",
-   "customer": {"name": "Mei Chen", "email": "mei@chenvisuals.example", "business": "Chen Visuals", "plan": "Team"},
-   "subject": "video won't attach",
-   "body": "I'm trying to attach a 250 MB video file to a task for client review and it just says Upload failed every time. Smaller images work fine."},
-  {"id": "H-09", "created_at": "2026-10-23T09:40:00-05:00", "channel": "email",
-   "customer": {"name": "Dre Washington", "email": "dre@washingtoncreative.example", "business": "Washington Creative", "plan": "Business"},
-   "subject": "400 emails overnight?!",
-   "body": "Everyone on my team woke up to hundreds of Pharos emails, one for every single comment on our big launch project. People are furious and some are talking about turning email off entirely. What happened and how do I stop this?"},
-  {"id": "H-10", "created_at": "2026-10-23T10:15:00-05:00", "channel": "chat",
-   "customer": {"name": "Ava Lindqvist", "email": "ava@lindqvistinteriors.example", "business": "Lindqvist Interiors", "plan": "Team"},
-   "subject": "reuse our refund requests board",
-   "body": "We have a project called Refund Requests with columns we really like. Can I reuse that setup for new projects so I don't rebuild it every time?"},
-  {"id": "H-11", "created_at": "2026-10-23T11:30:00-05:00", "channel": "email",
-   "customer": {"name": "Ray Dominguez", "email": "ray@dominguezlandscape.example", "business": "Dominguez Landscape", "plan": "Team"},
-   "subject": "Billed for wrong plan",
-   "body": "We're on the Team plan but this month's invoice charged us $20 per person for Business. We never upgraded. Please correct it."},
-  {"id": "H-12", "created_at": "2026-10-23T12:05:00-05:00", "channel": "email",
-   "customer": {"name": "Beth Sorensen", "email": "beth@sorensencounseling.example", "business": "Sorensen Counseling Group", "plan": "Business"},
-   "subject": "Login I don't recognize",
-   "body": "Under recent activity I see a login from another country at 2am yesterday. That wasn't me or anyone on my team. What should I do?"}
+  {
+    "id": "H-01",
+    "created_at": "2026-10-22T08:05:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Dana Fowler",
+      "email": "dana@fowlerlegal.example",
+      "business": "Fowler Legal Ops",
+      "plan": "Team"
+    },
+    "subject": "Everything is read-only",
+    "body": "This morning none of us can edit anything in Pharos. There's a banner saying the workspace is read-only. I think my card expired last week. I updated it an hour ago but we still can't edit, and my team is just sitting here."
+  },
+  {
+    "id": "H-02",
+    "created_at": "2026-10-22T09:30:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Leo Martins",
+      "email": "leo@martinsfield.example",
+      "business": "Martins Field Services",
+      "plan": "Team"
+    },
+    "subject": "offline on the phone app",
+    "body": "My crews work in buildings with no signal. Is there any way the mobile app can work offline and sync later? Right now they write stuff on paper and re-enter it."
+  },
+  {
+    "id": "H-03",
+    "created_at": "2026-10-22T10:12:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Imani Wright",
+      "email": "imani@wrightwellnessco.example",
+      "business": "Wright Wellness Co.",
+      "plan": "Team"
+    },
+    "subject": "Due dates not on my Google Calendar",
+    "body": "I connected my Google Calendar last week but none of my task due dates are showing up on it. I'd really like to see them next to my meetings."
+  },
+  {
+    "id": "H-04",
+    "created_at": "2026-10-22T11:48:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Paul Grady",
+      "email": "paul@gradyhvac.example",
+      "business": "Grady HVAC",
+      "plan": "Team"
+    },
+    "subject": "too many attempts",
+    "body": "It says too many attempts and won't let me in. I'm presenting the project plan to a customer in 20 minutes and it's all in there."
+  },
+  {
+    "id": "H-05",
+    "created_at": "2026-10-22T13:02:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Ruth Okafor",
+      "email": "ruth@eastsidefreeclinic.example",
+      "business": "Eastside Free Clinic",
+      "plan": "Trial"
+    },
+    "subject": "Nonprofit pricing?",
+    "body": "We're a volunteer-run free clinic (501c3) using the trial to organize our outreach events. Is there any discount for nonprofits before we commit to a plan?"
+  },
+  {
+    "id": "H-06",
+    "created_at": "2026-10-22T14:20:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Sofia Reyes",
+      "email": "sofia@reyesbrand.example",
+      "business": "Reyes Brand Studio",
+      "plan": "Team"
+    },
+    "subject": "emails going to junk",
+    "body": "A couple of people on my team said the emails from Pharos land in their junk folder, so they miss when they're assigned something. Anything I can do?"
+  },
+  {
+    "id": "H-07",
+    "created_at": "2026-10-22T15:41:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Walt Hughes",
+      "email": "walt@hughesrestoration.example",
+      "business": "Hughes Restoration",
+      "plan": "Team"
+    },
+    "subject": "close account",
+    "body": "Retiring at the end of the year. Please close my account and delete everything when the time comes. Thanks for the good service."
+  },
+  {
+    "id": "H-08",
+    "created_at": "2026-10-23T08:55:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Mei Chen",
+      "email": "mei@chenvisuals.example",
+      "business": "Chen Visuals",
+      "plan": "Team"
+    },
+    "subject": "video won't attach",
+    "body": "I'm trying to attach a 250 MB video file to a task for client review and it just says Upload failed every time. Smaller images work fine."
+  },
+  {
+    "id": "H-09",
+    "created_at": "2026-10-23T09:40:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Dre Washington",
+      "email": "dre@washingtoncreative.example",
+      "business": "Washington Creative",
+      "plan": "Business"
+    },
+    "subject": "400 emails overnight?!",
+    "body": "Everyone on my team woke up to hundreds of Pharos emails, one for every single comment on our big launch project. People are furious and some are talking about turning email off entirely. What happened and how do I stop this?"
+  },
+  {
+    "id": "H-10",
+    "created_at": "2026-10-23T10:15:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Ava Lindqvist",
+      "email": "ava@lindqvistinteriors.example",
+      "business": "Lindqvist Interiors",
+      "plan": "Team"
+    },
+    "subject": "reuse our refund requests board",
+    "body": "We have a project called Refund Requests with columns we really like. Can I reuse that setup for new projects so I don't rebuild it every time?"
+  },
+  {
+    "id": "H-11",
+    "created_at": "2026-10-23T11:30:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Ray Dominguez",
+      "email": "ray@dominguezlandscape.example",
+      "business": "Dominguez Landscape",
+      "plan": "Team"
+    },
+    "subject": "Billed for wrong plan",
+    "body": "We're on the Team plan but this month's invoice charged us $20 per person for Business. We never upgraded. Please correct it."
+  },
+  {
+    "id": "H-12",
+    "created_at": "2026-10-23T12:05:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Beth Sorensen",
+      "email": "beth@sorensencounseling.example",
+      "business": "Sorensen Counseling Group",
+      "plan": "Business"
+    },
+    "subject": "Login I don't recognize",
+    "body": "Under recent activity I see a login from another country at 2am yesterday. That wasn't me or anyone on my team. What should I do?"
+  },
+  {
+    "id": "H-13",
+    "created_at": "2026-10-27T09:00:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Owen Price",
+      "email": "owen@pricestudio.example",
+      "business": "Price Studio",
+      "plan": "Team"
+    },
+    "subject": "Can I pay by invoice instead of card?",
+    "body": "Our finance team wants to pay annually by bank transfer instead of a credit card. Is that possible and how do we set it up?"
+  },
+  {
+    "id": "H-14",
+    "created_at": "2026-10-27T09:10:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Leah Moss",
+      "email": "leah@mossandco.example",
+      "business": "Moss & Co",
+      "plan": "Business"
+    },
+    "subject": "Charged for 14 seats, we only have 9",
+    "body": "Our latest invoice bills us for 14 seats but there are only 9 people in our workspace. We removed 5 people last month. Please refund the difference."
+  },
+  {
+    "id": "H-15",
+    "created_at": "2026-10-27T09:20:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Tom Becker",
+      "email": "tom@beckerprint.example",
+      "business": "Becker Print",
+      "plan": "Team"
+    },
+    "subject": "Close our account",
+    "body": "We've moved our projects to another tool and won't be renewing. Please cancel our subscription at the end of this billing period."
+  },
+  {
+    "id": "H-16",
+    "created_at": "2026-10-27T09:30:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Priya Nair",
+      "email": "priya@nairdesign.example",
+      "business": "Nair Design",
+      "plan": "Team"
+    },
+    "subject": "GitHub PRs not linking to tasks",
+    "body": "When we mention a task ID in a GitHub pull request it used to link automatically. Since Monday nothing links anymore. Did something change?"
+  },
+  {
+    "id": "H-17",
+    "created_at": "2026-10-27T09:40:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Carlos Ruiz",
+      "email": "carlos@ruizarch.example",
+      "business": "Ruiz Architecture",
+      "plan": "Business"
+    },
+    "subject": "Way too many emails",
+    "body": "I'm getting an email for every single comment on every project. How do I turn these down to just things I'm assigned to?"
+  },
+  {
+    "id": "H-18",
+    "created_at": "2026-10-27T09:50:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Mei Lin",
+      "email": "mei@linlabs.example",
+      "business": "Lin Labs",
+      "plan": "Team"
+    },
+    "subject": "How do I make a project private?",
+    "body": "I want a project only three of us can see while we plan a surprise for the rest of the team. How do I do that?"
+  },
+  {
+    "id": "H-19",
+    "created_at": "2026-10-27T10:00:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Jordan Hale",
+      "email": "jordan@halemedia.example",
+      "business": "Hale Media",
+      "plan": "Business"
+    },
+    "subject": "File uploads failing",
+    "body": "Every time I try to attach a PDF to a task I get 'Upload failed'. Images work fine. Client review is tomorrow and I need these files in."
+  },
+  {
+    "id": "H-20",
+    "created_at": "2026-10-27T10:10:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Sam Ortiz",
+      "email": "sam@ortizco.example",
+      "business": "Ortiz Co",
+      "plan": "Team"
+    },
+    "subject": "Locked out after new phone",
+    "body": "I got a new phone and my authenticator app didn't transfer, so I can't get past two-factor. I have a deadline this afternoon. Please help me get back in."
+  },
+  {
+    "id": "H-21",
+    "created_at": "2026-10-27T10:20:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Ava Green",
+      "email": "ava@greenroom.example",
+      "business": "Green Room Events",
+      "plan": "Team"
+    },
+    "subject": "Adding a client as a guest",
+    "body": "We want our client to see one project but not the rest of our workspace. Can we add them as a guest and does that cost a seat?"
+  },
+  {
+    "id": "H-22",
+    "created_at": "2026-10-27T10:30:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Noah Fischer",
+      "email": "noah@fischerlaw.example",
+      "business": "Fischer Law",
+      "plan": "Business"
+    },
+    "subject": "Delete my personal data",
+    "body": "I left Fischer Law last week. Under GDPR I'm asking you to delete my personal data from Pharos."
+  },
+  {
+    "id": "H-23",
+    "created_at": "2026-10-27T10:40:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Grace Obi",
+      "email": "grace@obiconsult.example",
+      "business": "Obi Consulting",
+      "plan": "Team"
+    },
+    "subject": "Is Pharos down?",
+    "body": "None of the boards are loading for anyone on my team, and two other agencies I know say the same. Just a spinning wheel."
+  },
+  {
+    "id": "H-24",
+    "created_at": "2026-10-27T10:50:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Ivan Petrov",
+      "email": "ivan@sec-research.example",
+      "business": "",
+      "plan": ""
+    },
+    "subject": "Possible XSS in task comments",
+    "body": "Hi, I'm a security researcher. I found a way to run JavaScript through a crafted task comment. I'd like to report it responsibly. Who should I send details to?"
+  },
+  {
+    "id": "H-25",
+    "created_at": "2026-10-27T11:00:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Lucy Tran",
+      "email": "lucy@tranfilms.example",
+      "business": "Tran Films",
+      "plan": "Team"
+    },
+    "subject": "Gantt view?",
+    "body": "Do you have a Gantt chart or timeline view? We'd really love one for production schedules."
+  },
+  {
+    "id": "H-26",
+    "created_at": "2026-10-27T11:10:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Ben Carter",
+      "email": "ben@carterhq.example",
+      "business": "",
+      "plan": ""
+    },
+    "subject": "Questions before we sign up",
+    "body": "We're a 12-person agency comparing tools. Do you offer a discount for annual billing and can we try the Business plan features during the trial?"
+  },
+  {
+    "id": "H-27",
+    "created_at": "2026-10-27T11:20:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Rosa Diaz",
+      "email": "rosa@diazstudio.example",
+      "business": "Diaz Studio",
+      "plan": "Team"
+    },
+    "subject": "Just wanted to say thanks",
+    "body": "Your new board templates saved us hours this week. The team loves them. No question, just a thank you!"
+  },
+  {
+    "id": "H-28",
+    "created_at": "2026-10-27T11:30:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Growth Hacker",
+      "email": "deals@leadsblast.example",
+      "business": "LeadsBlast",
+      "plan": ""
+    },
+    "subject": "Get 10,000 leads this month",
+    "body": "Hi there, we help SaaS companies like yours 10x their pipeline with our premium lead lists. Book a call this week for 50% off."
+  },
+  {
+    "id": "H-29",
+    "created_at": "2026-10-27T11:40:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Ethan Moore",
+      "email": "ethan@moorebuild.example",
+      "business": "Moore Build",
+      "plan": "Business"
+    },
+    "subject": "Transfer ownership",
+    "body": "I'm leaving the company and need to hand workspace ownership to my colleague Kate before Friday. How do I do that?"
+  },
+  {
+    "id": "H-30",
+    "created_at": "2026-10-27T11:50:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Hana Sato",
+      "email": "hana@satoux.example",
+      "business": "Sato UX",
+      "plan": "Team"
+    },
+    "subject": "Card declined, account suspended?",
+    "body": "My card was declined on renewal and now we got an email saying the workspace will be suspended. I've added a new card. Will we lose anything?"
+  },
+  {
+    "id": "H-31",
+    "created_at": "2026-10-27T12:00:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Leo Brooks",
+      "email": "leo@brooksagency.example",
+      "business": "Brooks Agency",
+      "plan": "Team"
+    },
+    "subject": "Export all our projects",
+    "body": "We need a full export of every project and task for our records. What format do we get and how long does it take?"
+  },
+  {
+    "id": "H-32",
+    "created_at": "2026-10-27T12:10:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Zoe Clark",
+      "email": "zoe@clarkpr.example",
+      "business": "Clark PR",
+      "plan": "Business"
+    },
+    "subject": "Google Calendar not showing due dates",
+    "body": "I connected Google Calendar but none of our task due dates show up. It's been a day. Am I missing a step?"
+  },
+  {
+    "id": "H-33",
+    "created_at": "2026-10-27T12:20:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Marco Bianchi",
+      "email": "marco@bianchi.example",
+      "business": "Bianchi Foods",
+      "plan": "Team"
+    },
+    "subject": "Tasks disappeared from a board",
+    "body": "About 20 tasks vanished from our Launch board overnight. Nobody deleted them as far as we know. This is our main board for a launch next week."
+  },
+  {
+    "id": "H-34",
+    "created_at": "2026-10-27T12:30:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Nina Kowal",
+      "email": "nina@kowalart.example",
+      "business": "Kowal Art",
+      "plan": "Team"
+    },
+    "subject": "We're switching to a competitor unless this gets fixed",
+    "body": "Third time this month notifications just stop for a whole day. We rely on them. If this happens again we're moving to another tool."
+  },
+  {
+    "id": "H-35",
+    "created_at": "2026-10-27T12:40:00-05:00",
+    "channel": "chat",
+    "customer": {
+      "name": "Omar Haddad",
+      "email": "omar@haddadtech.example",
+      "business": "Haddad Tech",
+      "plan": "Business"
+    },
+    "subject": "Weird login from another country",
+    "body": "I got an alert that someone logged into my account from a country I've never been to. I didn't do this. What should I do?"
+  },
+  {
+    "id": "H-36",
+    "created_at": "2026-10-27T12:50:00-05:00",
+    "channel": "email",
+    "customer": {
+      "name": "Ella Ward",
+      "email": "ella@wardevents.example",
+      "business": "Ward Events",
+      "plan": "Team"
+    },
+    "subject": "Refund for annual plan we just bought",
+    "body": "We bought the annual Team plan 10 days ago by mistake, we meant to pick monthly. Can we get a refund and switch?"
+  }
 ]

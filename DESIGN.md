@@ -135,6 +135,12 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 - **Chat:** bot bubbles are tint with a 4px lapis left edge; handoffs switch to the warn colors; user bubbles are solid lapis.
 - **Verdict stamps:** bordered blocks with a 5px top edge in the semantic color.
 
+## How it works tab
+
+- **Flow steps:** 16px-radius cards with a soft lapis tint fading into the sheet, a numbered badge (gold numeral on a lapis disc), and a 2px lift on hover. "Review" is gold-tinted with a gold badge; "Out" is ocean-tinted. Two columns on phones.
+- **Notes as bento cards:** sheet cards with a 3px lapis → ocean → gold top line and a small gold dot before each heading.
+- **Feature card ("Try both sides"):** the masthead's lapis-and-ocean gradient with a faint gold glow, gold heading, and a gold primary button, so the hands-on demo stands out.
+
 ## Service desk (Jira Service Management model)
 
 - **Agent desk issue view:** two columns. Main: header (key · channel · plan), a conversation timeline (customer messages on tint, agent replies with a 4px lapis edge, internal notes on warn-soft with a dashed border, system events as small mono lines), the verdict stamp, the macro note, then the composer with **Reply to customer** / **Add internal note** tabs. Sidebar on tint: status select, assignee, SLA box (left edge green/amber/red), request details, labels, knowledge base with "Share with customer". Stacks below 1100px.

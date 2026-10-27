@@ -266,21 +266,45 @@ section.view{display:grid;gap:22px}
 .empty{display:grid;gap:10px;justify-items:center;text-align:center;padding:40px 20px;color:var(--muted)}
 
 /* ---------- how it works ---------- */
-.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:10px}
-.step{background:var(--sheet);border:1px solid var(--rule);border-radius:12px;padding:14px 16px;display:grid;gap:4px;align-content:start;position:relative;overflow:hidden}
-.step::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--accent)}
-.step b{font-family:var(--f-display);font-size:17px;font-weight:700}
+/* How it works: tinted, numbered journey cards + bento note cards (palette: lapis, ocean, gold, sand) */
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:12px;counter-reset:flow}
+.step{counter-increment:flow;position:relative;display:grid;gap:4px;align-content:start;padding:18px 16px 16px;border-radius:16px;
+  background:linear-gradient(165deg,color-mix(in srgb,var(--accent) 11%,var(--sheet)) 0%,var(--sheet) 72%);
+  border:1px solid color-mix(in srgb,var(--accent) 20%,var(--rule));
+  box-shadow:0 1px 2px rgba(18,26,43,.05),0 12px 24px -20px rgba(18,26,43,.55);transition:transform .2s ease,box-shadow .2s ease}
+.step:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(18,26,43,.06),0 18px 30px -20px rgba(18,26,43,.6)}
+.step::before{content:counter(flow);position:absolute;top:14px;right:14px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  font:600 11.5px/1 var(--f-mono);color:var(--band-hi);background:linear-gradient(135deg,var(--band-a),var(--band-b));box-shadow:0 0 0 3px color-mix(in srgb,var(--band-hi) 22%,transparent)}
+.step b{font-family:var(--f-display);font-size:17px;font-weight:700;padding-right:30px}
 .step span{font-size:13px;color:var(--muted)}
 .step .eyebrow{color:var(--accent);font-weight:600}
-.step.human::before{background:var(--warn)} .step.human .eyebrow{color:var(--warn)} .step.human{background:var(--warn-soft);border-color:var(--warn)}
-.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:22px 32px;border-top:2px solid var(--ink);padding-top:22px}
-.notes h3{font-size:18px;font-weight:700;margin-bottom:6px;color:var(--accent)}
+.step.human{background:linear-gradient(165deg,color-mix(in srgb,var(--band-hi) 30%,var(--sheet)) 0%,var(--sheet) 75%);border-color:color-mix(in srgb,var(--band-hi) 60%,var(--rule))}
+.step.human .eyebrow{color:var(--warn)}
+.step.human::before{background:var(--band-hi);color:#1d1f2a;box-shadow:0 0 0 3px color-mix(in srgb,var(--band-hi) 30%,transparent)}
+.step:last-child{background:linear-gradient(165deg,color-mix(in srgb,var(--band-c) 16%,var(--sheet)) 0%,var(--sheet) 72%);border-color:color-mix(in srgb,var(--band-c) 30%,var(--rule))}
+.step:last-child .eyebrow{color:color-mix(in srgb,var(--band-c) 50%,var(--ink))}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:6px}
+.notes>div{position:relative;overflow:hidden;background:var(--sheet);border:1px solid var(--rule);border-radius:16px;padding:22px 22px 18px;
+  box-shadow:0 1px 2px rgba(18,26,43,.05),0 12px 24px -20px rgba(18,26,43,.5)}
+.notes>div::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--band-b),var(--band-c) 60%,var(--band-hi))}
+.notes h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--accent);display:flex;align-items:center;gap:8px}
+.notes h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--band-hi);box-shadow:0 0 0 3px color-mix(in srgb,var(--band-hi) 25%,transparent);flex:none}
 .notes p,.notes li{font-size:14px;color:var(--muted);margin:0 0 6px}
 .notes b{color:var(--ink)}
 .notes ul,.notes ol{margin:0;padding-left:18px}
 .loop li{margin-bottom:8px}
+.loop li::marker{color:var(--accent);font-weight:700}
 .loop-btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px!important}
 .loop-btns a.btn{text-decoration:none;display:inline-flex;align-items:center}
+/* feature card: the hands-on demo, in the masthead's lapis-and-ocean */
+.notes>div.feature{color:var(--band-ink);border-color:color-mix(in srgb,var(--band-hi) 28%,transparent);background:radial-gradient(120% 90% at 100% 0%,color-mix(in srgb,var(--band-hi) 16%,transparent),transparent 55%),linear-gradient(135deg,var(--band-a),var(--band-b) 55%,var(--band-c))}
+.notes>div.feature::before{background:linear-gradient(90deg,var(--band-hi),transparent)}
+.notes>div.feature h3{color:var(--band-hi)}
+.notes>div.feature p{color:var(--band-soft)}
+.notes>div.feature b{color:var(--band-ink)}
+.notes>div.feature .btn{background:rgba(0,0,0,.2);color:var(--band-ink);border-color:rgba(235,200,116,.45)}
+.notes>div.feature .btn.primary{background:var(--band-hi);color:#1d1f2a;border-color:var(--band-hi)}
+@media (prefers-reduced-motion:reduce){ .step,.step:hover{transition:none;transform:none} }
 .evalt{overflow-x:auto}
 .evalt table{border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;min-width:520px;width:100%}
 .evalt th,.evalt td{text-align:left;padding:7px 12px 7px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
@@ -577,7 +601,7 @@ details.data .evalt{padding:0 14px 12px}
           <li><b>Close the loop.</b> The customer sees the reply under My requests, answers back (it returns to the queue) or marks it resolved.</li>
         </ol>
       </div>
-      <div>
+      <div class="feature">
         <h3>Try both sides</h3>
         <p>Open the help portal in a second tab and raise a request. It shows up in the Agent desk's <b>Live requests</b> within a second. Reply here, then check <b>My requests</b> there. No portal handy? Simulate an incoming email instead.</p>
         <p class="loop-btns"><a class="btn primary" href="portal/#new" target="_blank" rel="noopener">Open the help portal ↗</a> <button class="btn" type="button" id="how-sim">Simulate an email</button></p>

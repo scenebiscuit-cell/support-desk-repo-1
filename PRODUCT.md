@@ -8,7 +8,7 @@ web
 
 ## Users
 
-Support agents exploring a help-desk demo and end users seeking answers in its public help portal.
+Support agents working requests in the agent desk, and customers finding answers or raising requests in the public help portal.
 
 ## Product Purpose
 
@@ -25,7 +25,8 @@ Support agents explore sample and holdout support tickets, search help content, 
 ## Capabilities and Constraints
 
 - The site includes chat, ticket triage, macros, and a guide to the demo's workflow.
-- `/portal/` is a public, chat-only end-user surface with a short “How it works” section; it must not expose ticket, triage, or macro data.
+- `/portal/` is the public help center: Ask the Keeper, Contact support (raise a request, with article suggestions), and My requests (status and conversation). It must never expose triage data, macros, internal notes, or other customers' requests.
+- The agent desk (`/`, Agent desk tab) receives portal requests and simulated emails in Live requests and works them in a Jira Service Management-style issue view. Requests live in the visitor's browser (`shared/desk-store.js`), never on a server.
 - Cloud AI requests go to the Pharos Cloudflare Worker; the app also supports its existing offline and sample modes.
 - The public portal may answer only from help-center excerpts and must not imply real account access or support-ticket creation.
 - Demo ticket data is fictional and must remain clearly labeled as such.

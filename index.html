@@ -190,7 +190,7 @@ section.view{display:grid;gap:22px}
 /* ---------- triage ---------- */
 .tri-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
 .qsum{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.tri-grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:24px;align-items:start}
+.tri-grid{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:24px;align-items:start}
 .queue{max-height:820px;overflow-y:auto}
 .qprog{position:sticky;top:0;z-index:1;background:var(--sheet);border-bottom:2px solid var(--ink);padding:14px 16px 12px;display:grid;gap:8px;font-size:13px;color:var(--muted)}
 .qprog b{color:var(--ink);font-family:var(--f-display);font-size:18px;font-variant-numeric:tabular-nums}
@@ -333,6 +333,53 @@ details.data .evalt{padding:0 14px 12px}
   .queue{max-height:360px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- agent desk: issue view (Jira Service Management style) ---------- */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#set-seg .count{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font:600 11px/18px var(--f-mono);text-align:center}
+.qtools{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:14px 16px;border-bottom:1px solid var(--rule)}
+.qempty{padding:18px 16px;display:grid;gap:8px}.qempty h3{font-size:17px}.qempty p{margin:0}
+.lozenge{font:600 10.5px/1 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 7px;border-radius:4px;background:var(--info-soft);color:var(--info);white-space:nowrap}
+.lozenge[data-s="progress"]{background:var(--accent-soft);color:var(--accent)}
+.lozenge[data-s="customer"]{background:var(--warn-soft);color:var(--warn)}
+.lozenge[data-s="resolved"],.lozenge[data-s="closed"]{background:var(--pass-soft);color:var(--pass)}
+.sla{font-family:var(--f-mono);font-size:11.5px;font-weight:600}
+.sla.ok{color:var(--pass)} .sla.soon{color:var(--warn)} .sla.breached{color:var(--fail)}
+.issue{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,250px);align-items:start}
+.issue-main{min-width:0;grid-template-columns:minmax(0,1fr)}
+.issue-main>*{min-width:0}
+.d-head .who,.d-head h2{overflow-wrap:anywhere}
+.issue-side{display:grid;gap:12px;padding:20px 18px;border-left:1px solid var(--rule);background:var(--tint);border-radius:0 var(--r) var(--r) 0;align-self:stretch}
+.srow{display:grid;gap:3px;font-size:14px}
+.srow select{background:var(--sheet);border:1.5px solid var(--rule);border-radius:var(--r);padding:7px 9px;font-weight:600}
+.avatar{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font:700 11px/1 var(--f-body);margin-right:6px;vertical-align:-4px}
+.sla-box{display:grid;gap:2px;padding:10px 12px;border:1px solid var(--rule);border-left:4px solid var(--info);border-radius:var(--r);background:var(--sheet)}
+.sla-box b{font-family:var(--f-display);font-size:19px}
+.sla-box.ok{border-left-color:var(--pass)} .sla-box.met{border-left-color:var(--pass)} .sla-box.met b{color:var(--pass)}
+.sla-box.soon{border-left-color:var(--warn)} .sla-box.soon b{color:var(--warn)}
+.sla-box.breached{border-left-color:var(--fail)} .sla-box.breached b{color:var(--fail)}
+.issue-side .tags{display:flex;flex-wrap:wrap;gap:4px}
+.kb{display:grid;gap:8px;padding-top:10px;border-top:1px solid var(--rule)}
+.kb-item{display:grid;gap:2px;font-size:13.5px}
+.kb-item a{font-weight:600}
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ev{border:1px solid var(--rule);border-radius:var(--r);background:var(--sheet);padding:10px 14px}
+.ev-h{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;margin-bottom:4px}
+.ev-h time,.ev.sys time{color:var(--muted);font-size:12px;white-space:nowrap}
+.ev-b{white-space:pre-wrap;font-size:14.5px}
+.ev.customer{background:var(--tint)}
+.ev.agent{border-left:4px solid var(--accent)}
+.ev.internal{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 35%,var(--rule));border-style:dashed}
+.ev.sys{display:flex;justify-content:space-between;gap:10px;border:0;background:none;padding:0 4px;color:var(--muted);font-size:12.5px;font-family:var(--f-mono)}
+.ev .tag{font:600 10.5px/1 var(--f-mono);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);margin-left:6px}
+.composer-box{display:grid;gap:10px;border:1.5px solid var(--rule);border-radius:var(--r);padding:12px 14px;background:var(--sheet)}
+.composer-box[data-mode="note"]{background:var(--warn-soft)}
+.ctabs{display:flex;gap:4px;border-bottom:1px solid var(--rule)}
+.ctabs button{border:0;background:none;padding:8px 12px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.ctabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+#cmp{width:100%;resize:vertical;background:var(--tint);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;line-height:1.5}
+#cmp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
+@media (max-width:1100px){ .issue{grid-template-columns:minmax(0,1fr)} .issue-side{border-left:0;border-top:1px solid var(--rule);border-radius:0 0 var(--r) var(--r)} }
 </style>
 
 <a class="skip" href="#main">Skip to the demo</a>
@@ -363,7 +410,7 @@ details.data .evalt{padding:0 14px 12px}
   <div class="secnav-in gutter">
     <div class="tabs" role="tablist">
       <button role="tab" id="tab-chat" aria-controls="chat" aria-selected="true">Help chat</button>
-      <button role="tab" id="tab-triage" aria-controls="triage" aria-selected="false">Ticket triage</button>
+      <button role="tab" id="tab-triage" aria-controls="triage" aria-selected="false">Agent desk</button>
       <button role="tab" id="tab-macros" aria-controls="macros" aria-selected="false">Macro library</button>
       <button role="tab" id="tab-how" aria-controls="how" aria-selected="false">How it works</button>
     </div>
@@ -411,9 +458,10 @@ details.data .evalt{padding:0 14px 12px}
 
   <!-- TRIAGE -->
   <section class="view" id="triage" role="tabpanel" aria-labelledby="tab-triage" hidden>
-    <div class="sec-head"><h2>Ticket triage <span>Sorted by what matters</span></h2><p>Every ticket gets a category, priority, sentiment, churn-risk flag, the best macro, and a draft grounded in the docs. Refunds, identity checks, and escalations are flagged for a person before anything is sent.</p></div>
+    <div class="sec-head"><h2>Agent desk <span>Triage, reply, resolve</span></h2><p>Requests from the help portal and email land in <b>Live requests</b>. Every ticket gets a category, priority, sentiment, churn-risk flag, the best macro, an SLA clock, and a draft reply grounded in the docs. Reply to the customer or add an internal note, then set the status. Refunds, outages, and security reports are flagged for a person before anything is sent.</p></div>
     <div class="tri-top">
       <div class="seg" id="set-seg">
+        <button aria-pressed="false" data-set="live">Live requests</button>
         <button aria-pressed="true" data-set="sample">Sample tickets</button>
         <button aria-pressed="false" data-set="unseen">Unseen tickets</button>
         <button aria-pressed="false" data-set="own">Try your own</button>
@@ -440,7 +488,7 @@ details.data .evalt{padding:0 14px 12px}
   <section class="view" id="how" role="tabpanel" aria-labelledby="tab-how" hidden>
     <div class="sec-head"><h2>How it works <span>Method</span></h2><p>The same three pieces work for any small software company or local business with a help center and an inbox. Swap in their docs and past tickets, and the system adapts.</p></div>
     <div class="flow">
-      <div class="step"><span class="eyebrow">In</span><b>Ticket or question</b><span>Email, chat, or help widget</span></div>
+      <div class="step"><span class="eyebrow">In</span><b>Request arrives</b><span>Help-portal form, email, or chat. Articles are suggested first, so some never become tickets</span></div>
       <div class="step"><span class="eyebrow">Search</span><b>Find the right docs</b><span>Ranks every help-center section by relevance</span></div>
       <div class="step"><span class="eyebrow">Classify</span><b>Tag and prioritize</b><span>Category, urgency, sentiment, churn risk</span></div>
       <div class="step"><span class="eyebrow">Draft</span><b>Pick a macro, write the reply</b><span>Grounded in policy, no invented answers</span></div>
@@ -452,8 +500,8 @@ details.data .evalt{padding:0 14px 12px}
         <p>Answers from the company's own articles and cites the source. A confidence check on every answer means questions the docs don't cover go to a person, along with the conversation so far.</p>
       </div>
       <div>
-        <h3>Ticket triage</h3>
-        <p>Sorts the inbox by what matters: outages and security first, then teams that are blocked or losing money, then how-to questions. Churn risk is flagged so the right person can step in early.</p>
+        <h3>Agent desk</h3>
+        <p>Sorts the inbox by what matters: outages and security first, then teams that are blocked or losing money, then how-to questions. Churn risk is flagged so the right person can step in early. Each request opens like a Jira Service Management issue: the conversation, a reply pre-drafted from the right macro, internal notes only agents see, status, assignee, an SLA clock from the plan's response-time promise, and matching help articles to share.</p>
       </div>
       <div>
         <h3>Macro library</h3>
@@ -929,33 +977,156 @@ async function aiTriage(ticket, baseline, engine="claude"){
   return r;
 }
 
-/* ---------- triage UI ---------- */
+/* ---------- shared ticket store ----------
+   The customer portal (/portal/) and the agent desk (/) are on the same site, so they share requests through
+   this browser's localStorage. build_demo.py inlines this file into both pages; edit it here, not in the pages.
+   Each visitor gets a private sandbox: nothing leaves the browser. */
+const DESK_KEY = "pharos-desk-v1";
+const STATUS = {
+  open: "Waiting for support", progress: "In progress", customer: "Waiting for customer",
+  resolved: "Resolved", closed: "Closed",
+};
+const REQUEST_TYPES = ["Billing and refunds", "Technical problem", "Account and login", "Integrations", "Feature request", "Something else"];
+const Desk = (() => {
+  const blank = () => ({ v: 1, seq: 100, requests: [], state: {}, deflected: 0, profile: null });
+  let mem = blank();
+  function load() {
+    try {
+      const v = JSON.parse(localStorage.getItem(DESK_KEY) || "null");
+      mem = v && Array.isArray(v.requests) && v.state ? { ...blank(), ...v } : blank();
+    } catch (e) { /* storage blocked: keep working in memory */ }
+    return mem;
+  }
+  function save() { try { localStorage.setItem(DESK_KEY, JSON.stringify(mem)); } catch (e) {} }
+  load();
+  return {
+    get data() { return mem; },
+    reload: load,
+    update(fn) { load(); fn(mem); save(); return mem; },
+    nextKey(m) { m.seq += 1; return `PH-${m.seq}`; },
+    // A ticket's conversation and status. Sample tickets start as a single customer message.
+    stateOf(t) {
+      return mem.state[t.id] || { status: "open", assignee: null, first_response_at: null,
+        thread: [{ who: "customer", name: t.customer?.name || "Customer", text: t.body, at: t.created_at }] };
+    },
+    ensure(m, t) {
+      if (!m.state[t.id]) m.state[t.id] = JSON.parse(JSON.stringify(this.stateOf(t)));
+      return m.state[t.id];
+    },
+  };
+})();
+function ago(iso) {
+  const ms = Date.now() - new Date(iso).getTime();
+  if (!isFinite(ms)) return "";
+  const m = Math.round(ms / 60000);
+  if (m < 1) return "just now";
+  if (m < 60) return `${m} min ago`;
+  const h = Math.round(m / 60);
+  if (h < 24) return `${h} h ago`;
+  return new Date(iso).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+}
+
+
+/* ---------- agent desk: queue + issue view (modeled on Jira Service Management) ---------- */
 const ORDER = {urgent:0, high:1, normal:2, low:3};
+const HANDLED = new Set(["customer","resolved","closed"]);
 let curSet = "sample", curId = null;
-const handled = {sample: new Set(), unseen: new Set()};
-function orderedRows(){ const s = setData(); return s.tickets.map(t=>({t, r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority]); }
-function nextOpen(after){ const rows = orderedRows().filter(x => !handled[curSet].has(x.t.id)); return rows.find(x => x.t.id !== after)?.t.id || null; }
 const aiResults = {};      // ticket id -> live AI result
+const drafts = {};         // ticket id -> {reply, note, mode} the agent is still writing
 const ownTicket = {id:"YOU-1", channel:"email", customer:{name:"Jamie Rivera", email:"jamie@example.com", business:"Your business", plan:"Team"},
   subject:"Slack updates stopped", body:"Hi, our #client-work Slack channel stopped getting task updates from Pharos sometime yesterday. Nothing changed on our end. Can you help?"};
 let ownResult = null;
+const liveResults = {};    // rules triage for live requests, computed once per request
+// Emails that "arrive" when the agent clicks Simulate incoming email.
+const EMAIL_POOL = [
+  {customer:{name:"Rachel Kim", email:"rachel@kimcreative.example", business:"Kim Creative", plan:"Business"}, subject:"Invite link expired for new hire",
+   body:"Hi, I sent our new designer an invite on Friday and she says the link has expired. She starts today. How do I resend it?"},
+  {customer:{name:"Diego Santos", email:"diego@santosbuild.example", business:"Santos Build", plan:"Team"}, subject:"Charged after I downgraded",
+   body:"I downgraded us to the Free plan last month but we still got charged $48 this week. Can you look into this and refund it?"},
+  {customer:{name:"Amara Okafor", email:"amara@okafordesign.example", business:"Okafor Design", plan:"Team"}, subject:"Zapier zap stopped creating tasks",
+   body:"Our Zapier zap that turns form submissions into Pharos tasks stopped working two days ago. It says 'authentication failed'. We didn't change anything."},
+  {customer:{name:"Peter Novak", email:"peter@novakstudio.example", business:"Novak Studio", plan:"Business"}, subject:"Due dates showing a day early",
+   body:"All our due dates show one day earlier than what we set. Half the team is in London and half in Austin. Is this a time zone thing?"},
+  {customer:{name:"Sofia Rossi", email:"sofia@rossiagency.example", business:"Rossi Agency", plan:"Team"}, subject:"Thinking about leaving",
+   body:"Honestly the last month has been rough. Notifications are unreliable and we've missed two client deadlines because of it. Give me a reason to stay."},
+  {customer:{name:"Kenji Watanabe", email:"kenji@watanabelabs.example", business:"Watanabe Labs", plan:"Free"}, subject:"Can we import from Trello?",
+   body:"We're moving from Trello. Is there a way to bring our boards over, or do we need to start from scratch?"},
+];
 
-function setData(){ return D.sets[curSet]; }
-function resultFor(id){ if (aiResults[id]) return aiResults[id]; const s=setData(); return s.results.find(r=>r.ticket_id===id); }
+function liveSet(){
+  const tickets = Desk.data.requests;
+  for (const t of tickets) if (!liveResults[t.id]) liveResults[t.id] = rulesTriage(t);
+  const results = tickets.map(t => liveResults[t.id]);
+  const by_priority = Object.fromEntries(PR.map(p => [p, results.filter(r=>r.priority===p).length]));
+  return {tickets, results, summary:{by_priority, ready_to_send: results.filter(r=>!r.needs_human && r.category!=="spam").length,
+    needs_human: results.filter(r=>r.needs_human).length}};
+}
+function setData(){ return curSet === "live" ? liveSet() : D.sets[curSet]; }
+function resultFor(id){ if (aiResults[id]) return aiResults[id]; return setData().results.find(r=>r.ticket_id===id); }
+function isHandled(t){ return HANDLED.has(Desk.stateOf(t).status); }
+function orderedRows(){ const s = setData(); return s.tickets.map(t=>({t, r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority]); }
+function nextOpen(after){ const rows = orderedRows().filter(x => !isHandled(x.t)); return rows.find(x => x.t.id !== after)?.t.id || null; }
+
+/* SLA: first-response targets from the Contact support article. Outages and security run around the clock.
+   (Business hours are simplified to clock hours for the demo.) */
+function slaTarget(t, r){
+  if (["outage","security"].includes(r.category)) return {hours:1, why:"outage or security, 24/7"};
+  const plan = t.customer?.plan;
+  if (plan === "Business") return {hours:4, why:"Business plan"};
+  if (plan === "Team") return {hours:8, why:"Team plan, 1 business day"};
+  return {hours:16, why:`${plan && plan !== "None" ? plan + " plan" : "no plan"}, 2 business days`};
+}
+const fmtDur = ms => { const m = Math.max(0, Math.round(Math.abs(ms)/60000)), h = Math.floor(m/60); return h ? `${h}h ${m%60}m` : `${m}m`; };
+function slaState(t, r){
+  const tg = slaTarget(t, r), st = Desk.stateOf(t);
+  if (curSet !== "live") return {cls:"", text:`Target ${tg.hours}h`, why:tg.why};
+  const due = new Date(t.created_at).getTime() + tg.hours*3600e3;
+  if (st.first_response_at) return new Date(st.first_response_at).getTime() <= due ? {cls:"met", text:"Met", why:tg.why} : {cls:"breached", text:"Missed", why:tg.why};
+  const left = due - Date.now();
+  if (left < 0) return {cls:"breached", text:`${fmtDur(left)} over`, why:tg.why};
+  return {cls: left < tg.hours*3600e3*.25 ? "soon" : "ok", text:`${fmtDur(left)} left`, why:tg.why};
+}
 
 function renderQueue(){
+  const liveOpen = Desk.data.requests.filter(t => !isHandled(t)).length;
+  const lb = document.querySelector('#set-seg [data-set="live"]');
+  if (lb) lb.innerHTML = `Live requests${liveOpen ? ` <span class="count">${liveOpen}</span>` : ""}`;
   if (curSet === "own"){ $("#queue").innerHTML = ownForm(); bindOwn(); $("#qsum").innerHTML = ""; return; }
   const s = setData();
   const rows = s.tickets.map(t=>({t, r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority]);
   const sum = s.summary;
   $("#qsum").innerHTML = PR.slice().reverse().map(p=>`<span class="pill p-${p}">${sum.by_priority[p]} ${p}</span>`).join("") +
     `<span class="chip">${sum.ready_to_send} ready</span><span class="chip">${sum.needs_human} need a person</span>`;
-  const done = handled[curSet], n = rows.length, k = rows.filter(x=>done.has(x.t.id)).length;
-  rows.sort((a,b) => done.has(a.t.id) - done.has(b.t.id));
-  $("#queue").innerHTML = `<div class="qprog"><span><b>${k} of ${n}</b> handled${k && k<n ? " · next up is at the top" : ""}</span><div class="bar"><i style="width:${n?Math.round(k/n*100):0}%"></i></div></div>` +
-    rows.map(({t,r})=>`<button class="qitem${done.has(t.id)?" done":""}" data-id="${t.id}" data-p="${r.priority}" aria-current="${t.id===curId}">
-      <span class="row"><span class="pill p-${r.priority}">${r.priority}</span>${catChip(r.category)}${r.churn_risk?'<span class="flag">churn risk</span>':""}${done.has(t.id)?'<span class="flag ok">handled</span>':""}</span>
-      <span class="subj">${esc(t.subject)}</span><span class="who"><span class="mono">${t.id}</span> · ${esc(t.customer.business)}</span></button>`).join("");
+  const n = rows.length, k = rows.filter(x=>isHandled(x.t)).length;
+  rows.sort((a,b) => isHandled(a.t) - isHandled(b.t));
+  const live = curSet === "live";
+  const tools = live ? `<div class="qtools"><button class="btn" type="button" id="sim-email">Simulate incoming email</button><a class="linkbtn" href="portal/#new" target="_blank" rel="noopener">Raise one as a customer ↗</a></div>` : "";
+  if (live && !n){
+    $("#queue").innerHTML = tools + `<div class="qempty"><h3>No live requests yet</h3><p>Requests arrive here two ways: a customer raises one in the <a href="portal/#new" target="_blank" rel="noopener">help portal</a>, or an email comes in to support@pharos.example. Try either one.</p><p class="note">Saved only in this browser, so each visitor gets their own sandbox.</p></div>`;
+    bindQueueTools(); return;
+  }
+  $("#queue").innerHTML = tools + `<div class="qprog"><span><b>${k} of ${n}</b> handled${k && k<n ? " · next up is at the top" : ""}</span><div class="bar"><i style="width:${n?Math.round(k/n*100):0}%"></i></div></div>` +
+    rows.map(({t,r})=>{ const st = Desk.stateOf(t), done = isHandled(t), sla = live ? slaState(t, r) : null;
+      return `<button class="qitem${done?" done":""}" data-id="${t.id}" data-p="${r.priority}" aria-current="${t.id===curId}">
+      <span class="row"><span class="pill p-${r.priority}">${r.priority}</span>${catChip(r.category)}${r.churn_risk?'<span class="flag">churn risk</span>':""}${live || st.status!=="open" ? `<span class="lozenge" data-s="${st.status}">${STATUS[st.status]}</span>` : ""}</span>
+      <span class="subj">${esc(t.subject)}</span><span class="who"><span class="mono">${t.id}</span> · ${esc(t.customer.business || t.customer.name)}${live ? ` · via ${esc(t.channel)} · ${ago(t.created_at)}` : ""}${sla && !done ? ` · <span class="sla ${sla.cls}">${sla.text}</span>` : ""}</span></button>`; }).join("");
+  bindQueueTools();
+}
+function bindQueueTools(){
+  const b = $("#sim-email"); if (!b) return;
+  b.addEventListener("click", () => {
+    let id;
+    Desk.update(m => {
+      const n = m.requests.filter(x=>x.channel==="email").length, e = EMAIL_POOL[n % EMAIL_POOL.length];
+      id = Desk.nextKey(m);
+      const t = {id, created_at:new Date().toISOString(), channel:"email", request_type:"Emailed request", customer:{...e.customer}, subject:e.subject, body:e.body};
+      m.requests.push(t);
+      m.state[id] = {status:"open", assignee:null, first_response_at:null, thread:[
+        {who:"system", text:`Email to support@pharos.example became request ${id}`, at:t.created_at},
+        {who:"customer", name:e.customer.name, text:e.body, at:t.created_at}]};
+    });
+    curId = id; renderQueue(); renderDetail(); toast(`New email from ${Desk.data.requests.at(-1).customer.name}: ${id}`);
+  });
 }
 function verdictHTML(r){
   const v = ["outage","security"].includes(r.category) ? ["escalate","Escalate","Escalate now", "A person takes this immediately. The draft is an acknowledgment only."]
@@ -965,75 +1136,155 @@ function verdictHTML(r){
   return `<div class="verdict" data-v="${v[0]}"><span class="stamp">${v[1]}</span>
     <div class="vtext"><span class="eyebrow">${esc(catLabel(r.category))} · ${esc(r.priority)} priority</span><h3>${v[2]}</h3><p>${v[3]}</p></div></div>`;
 }
-function fieldsHTML(r){
-  const f = (k,v) => `<div class="field"><span class="eyebrow">${k}</span><span class="v">${v}</span></div>`;
-  return `<div class="fields">
-    ${f("Priority", `<span class="pill p-${r.priority}">${r.priority}</span>`)}
-    ${f("Category", catChip(r.category))}
-    ${f("Sentiment", esc(r.sentiment))}
-    ${f("Churn risk", r.churn_risk ? '<span class="flag">Yes</span>' : "No")}
-    ${f("Confidence", `${Math.round((+r.confidence||0)*100)}%`)}
-    ${f("Macro", `<span class="mono">${r.macro_id}</span> ${esc(r.macro_title)}`)}
-  </div>
-  <div class="tags">${r.tags.map(x=>`<span class="chip">#${esc(x)}</span>`).join("")}</div>`;
+function timelineHTML(t, st){
+  return `<ol class="timeline" aria-label="Conversation">${st.thread.map(e => {
+    if (e.who === "system") return `<li class="ev sys"><span>${esc(e.text)}</span><time>${esc(ago(e.at))}</time></li>`;
+    const who = e.who === "customer" ? esc(e.name || t.customer.name) : e.who === "internal" ? `${esc(e.name||"Alex")} <span class="tag">Internal note · agents only</span>` : `${esc(e.name||"Alex")} <span class="tag">Reply to customer</span>`;
+    return `<li class="ev ${e.who}"><div class="ev-h"><b>${who}</b><time>${esc(ago(e.at))}</time></div><div class="ev-b">${esc(e.text)}</div></li>`;
+  }).join("")}</ol>`;
 }
-function draftHTML(r){
-  const body = r.draft_reply ? esc(r.draft_reply).replace(/\[\[fill in: ([^\]]+)\]\]/g,'<span class="fillin">$1</span>') : '<span class="note">No reply. Closed as spam.</span>';
-  const m = MACROS[r.macro_id];
-  return `<div>
-    <div class="draft-h"><h3>Draft reply</h3><span class="engine">${esc(r.engine==="rules"?"Offline rules engine":r.engine)}</span>
-      ${r.draft_reply?'<button class="btn" data-copy>Copy</button>':""}
-      ${curSet!=="own" ? (handled[curSet].has(r.ticket_id) ? '<button class="btn" data-reopen>Reopen</button>' : `<button class="btn primary" data-done>${r.category==="spam"?"Close as spam":"Mark as sent"}</button>`) : ""}
-      <span class="draft-actions">
+function draftText(r){ return (r.draft_reply || "").replace(/\[\[fill in: ([^\]]+)\]\]/g, "[$1]"); }
+function composerHTML(t, r, st){
+  if (curSet === "own") return "";
+  const d = drafts[t.id] || (drafts[t.id] = {reply: draftText(r), note: "", mode: "reply"});
+  if (r.category === "spam") return `<div class="composer-box"><p class="note">This looks like a vendor pitch, so there's nothing to reply to.</p>
+    <div class="draft-actions"><button class="btn primary" data-close>Close as spam</button></div></div>`;
+  const ph = /\[[^\]]+\]/.test(d.reply);
+  return `<div class="composer-box" data-mode="${d.mode}">
+    <div class="ctabs" role="tablist" aria-label="Respond">
+      <button role="tab" type="button" data-mode="reply" aria-selected="${d.mode==="reply"}">Reply to customer</button>
+      <button role="tab" type="button" data-mode="note" aria-selected="${d.mode==="note"}">Add internal note</button>
+    </div>
+    <label class="sr-only" for="cmp">${d.mode==="reply"?"Reply to customer":"Internal note"}</label>
+    <textarea id="cmp" rows="${d.mode==="reply"?11:4}" placeholder="${d.mode==="reply"?"Write a reply the customer will see":"Only agents see internal notes"}">${esc(d.mode==="reply"?d.reply:d.note)}</textarea>
+    <div class="draft-h">
+      ${d.mode==="reply" ? `<button class="btn primary" data-send>Send reply</button>` : `<button class="btn primary" data-note>Save note</button>`}
+      <span class="engine">${d.mode==="reply" ? "Drafted by " + esc(r.engine==="rules"?"the offline rules engine":r.engine) : ""}</span>
+      ${d.mode==="reply" ? `<span class="draft-actions">
+        <button class="btn" data-copy>Copy</button>
         <button class="btn cloud-only" data-cloud ${cloudOn?"":"hidden"}>${String(r.engine).startsWith("AI (")?"Redraft with AI":"Draft with AI"}</button>
         <button class="btn ai-only" data-ai ${sample?"":"hidden"}>${r.engine==="Claude (live)"?"Redraft with Claude":"Draft with Claude"}</button>
         <button class="btn local-only" data-local ${localModel?"":"hidden"}>${String(r.engine).startsWith("Local AI")?"Redraft with local AI":"Draft with local AI"}</button>
-      </span></div>
-    <div class="draft">${body}</div>
-    ${r.unfilled_placeholders?.length ? `<p class="note">Highlighted fields need the agent's input. The AI engine writes these from the ticket.</p>` : ""}
-    ${r.rules_baseline ? `<p class="note">Rules engine said: ${esc(catLabel(r.rules_baseline.category))}, ${r.rules_baseline.priority}, ${r.rules_baseline.macro_id}.</p>` : ""}
-  </div>
-  ${m?.internal_note ? `<div class="internal"><span class="eyebrow">Internal note on ${m.id}</span><br>${esc(m.internal_note)}</div>` : ""}
-  <p class="note">Grounded in: ${r.cited_articles.map(s=>`<a href="${esc(D.kb.docs_url)}/${esc(s)}.md" target="_blank" rel="noopener">${esc(s)}</a>`).join(", ")}</p>`;
+      </span>` : ""}
+    </div>
+    ${d.mode==="reply" && ph ? `<p class="note">Fill in the parts in [brackets] before sending.</p>` : ""}
+    ${d.mode==="reply" && r.rules_baseline ? `<p class="note">Rules engine said: ${esc(catLabel(r.rules_baseline.category))}, ${r.rules_baseline.priority}, ${r.rules_baseline.macro_id}.</p>` : ""}
+  </div>`;
+}
+function sideHTML(t, r, st){
+  const sla = slaState(t, r), row = (k, v) => `<div class="srow"><span class="eyebrow">${k}</span><span>${v}</span></div>`;
+  const kbSeen = new Set(), kb = search(`${t.subject} ${t.body}`, 6).filter(h => h.score > 1.5 && !kbSeen.has(h.c.slug) && kbSeen.add(h.c.slug)).slice(0, 3);
+  return `<aside class="issue-side" aria-label="Request details">
+    <label class="srow"><span class="eyebrow">Status</span>
+      <select id="st-sel" ${curSet==="own"?"disabled":""}>${Object.entries(STATUS).map(([k,v])=>`<option value="${k}" ${k===st.status?"selected":""}>${v}</option>`).join("")}</select></label>
+    ${row("Assignee", st.assignee ? `<span class="avatar" aria-hidden="true">A</span>${esc(st.assignee)}` : `Unassigned ${curSet!=="own"?'<button class="linkbtn" data-assign>Assign to me</button>':""}`)}
+    <div class="sla-box ${sla.cls}"><span class="eyebrow">Time to first response</span><b>${esc(sla.text)}</b><span class="note">${esc(sla.why)}</span></div>
+    ${row("Request type", esc(t.request_type || (t.channel==="chat"?"Chat":"Emailed request")))}
+    ${row("Priority", `<span class="pill p-${r.priority}">${r.priority}</span>`)}
+    ${row("Category", catChip(r.category))}
+    ${row("Sentiment", esc(r.sentiment))}
+    ${row("Churn risk", r.churn_risk ? '<span class="flag">Yes</span>' : "No")}
+    ${row("Confidence", `${Math.round((+r.confidence||0)*100)}%`)}
+    ${row("Macro", `<span class="mono">${r.macro_id}</span> ${esc(r.macro_title)}`)}
+    <div class="srow"><span class="eyebrow">Labels</span><span class="tags">${r.tags.map(x=>`<span class="chip">#${esc(x)}</span>`).join("")}</span></div>
+    <div class="kb"><span class="eyebrow">Knowledge base</span>
+      ${kb.length ? kb.map(h=>`<div class="kb-item"><a href="${esc(h.c.url)}" target="_blank" rel="noopener">${esc(h.c.title)}</a><span class="note">${esc(h.c.heading)}</span>
+        ${curSet!=="own" && r.category!=="spam" ? `<button class="linkbtn" data-share="${esc(h.c.slug)}" data-title="${esc(h.c.title)}" data-url="${esc(h.c.url)}">Share with customer</button>` : ""}</div>`).join("")
+        : '<p class="note">No closely matching articles.</p>'}
+    </div>
+  </aside>`;
 }
 function renderDetail(){
   let t, r;
   if (curSet === "own"){ t = ownTicket; r = ownResult; }
-  else { t = setData().tickets.find(x=>x.id===curId); r = resultFor(curId); }
+  else { t = setData().tickets.find(x=>x.id===curId); r = t && resultFor(curId); }
   if (curSet !== "own" && curId === null){
+    if (curSet === "live" && !Desk.data.requests.length){ $("#detail").innerHTML = `<div class="allclear"><div class="beam" aria-hidden="true"></div><h2>Waiting for the first request</h2><p>Simulate an email or raise a request in the help portal, and it lands here.</p></div>`; return; }
     $("#detail").innerHTML = `<div class="allclear"><div class="beam" aria-hidden="true"></div><h2>Inbox zero</h2>
       <p>Every customer in this queue has an answer. The light's on, and nobody's waiting.</p>
-      <button class="btn" id="reset-queue">Reset the queue</button></div>`;
-    $("#reset-queue").addEventListener("click", () => { handled[curSet].clear(); curId = nextOpen(null); renderQueue(); renderDetail(); });
+      ${curSet!=="live" ? '<button class="btn" id="reset-queue">Reset the queue</button>' : ""}</div>`;
+    const rq = $("#reset-queue");
+    if (rq) rq.addEventListener("click", () => { Desk.update(m => { for (const x of setData().tickets) delete m.state[x.id]; }); curId = nextOpen(null); renderQueue(); renderDetail(); });
     return;
   }
   if (!t || !r){ $("#detail").innerHTML = `<div class="detail"><p class="note">Pick a ticket from the queue.</p></div>`; return; }
-  $("#detail").innerHTML = `<div class="detail">
-    <div class="d-head"><span class="eyebrow">${esc(t.id)} · ${esc(t.channel)} · ${t.customer.plan==="None" ? "not a customer" : esc(t.customer.plan) + " plan"}</span>
-      <h2>${esc(t.subject)}</h2><span class="who">${esc(t.customer.name)}, ${esc(t.customer.business)}</span></div>
-    <div class="cust-msg">${esc(t.body)}</div>
-    ${r.summary && r.summary !== t.subject ? `<div><span class="eyebrow">Summary for the agent</span><div style="margin-top:4px">${esc(r.summary)}</div></div>` : ""}
-    ${verdictHTML(r)}
-    ${fieldsHTML(r)}
-    ${draftHTML(r)}
+  const st = curSet === "own" ? {status:"open", assignee:null, thread:[{who:"customer", name:t.customer.name, text:t.body, at:new Date().toISOString()}]} : Desk.stateOf(t);
+  const m = MACROS[r.macro_id];
+  $("#detail").innerHTML = `<div class="issue">
+    <div class="detail issue-main">
+      <div class="d-head"><span class="eyebrow">${esc(t.id)} · via ${esc(t.channel)} · ${t.customer.plan==="None" || !t.customer.plan ? "not a customer" : esc(t.customer.plan) + " plan"}</span>
+        <h2>${esc(t.subject)}</h2><span class="who">${esc(t.customer.name)}${t.customer.business ? ", " + esc(t.customer.business) : ""}${t.customer.email ? ` · <span class="mono">${esc(t.customer.email)}</span>` : ""}</span></div>
+      ${timelineHTML(t, st)}
+      ${r.summary && r.summary !== t.subject ? `<div><span class="eyebrow">Summary for the agent</span><div style="margin-top:4px">${esc(r.summary)}</div></div>` : ""}
+      ${verdictHTML(r)}
+      ${m?.internal_note ? `<div class="internal"><span class="eyebrow">Macro note on ${m.id}</span><br>${esc(m.internal_note)}</div>` : ""}
+      ${composerHTML(t, r, st)}
+      ${curSet==="own" ? `<div><div class="draft-h"><h3>Draft reply</h3><span class="engine">${esc(r.engine==="rules"?"Offline rules engine":r.engine)}</span><span class="draft-actions">
+        <button class="btn cloud-only" data-cloud ${cloudOn?"":"hidden"}>Draft with AI</button><button class="btn ai-only" data-ai ${sample?"":"hidden"}>Draft with Claude</button><button class="btn local-only" data-local ${localModel?"":"hidden"}>Draft with local AI</button></span></div>
+        <div class="draft">${r.draft_reply ? esc(r.draft_reply).replace(/\[\[fill in: ([^\]]+)\]\]/g,'<span class="fillin">$1</span>') : '<span class="note">No reply. Closed as spam.</span>'}</div></div>` : ""}
+      <p class="note">Grounded in: ${r.cited_articles.map(s=>`<a href="${esc(D.kb.docs_url)}/${esc(s)}.md" target="_blank" rel="noopener">${esc(s)}</a>`).join(", ")}</p>
+    </div>
+    ${sideHTML(t, r, st)}
   </div>`;
-  const cp = $("#detail [data-copy]"); if (cp) cp.addEventListener("click", ()=>copyText(r.draft_reply, cp));
-  const dn = $("#detail [data-done]");
-  if (dn) dn.addEventListener("click", () => {
+  bindDetail(t, r);
+}
+function bindDetail(t, r){
+  const q = s => $("#detail " + s), d = drafts[t.id];
+  const ta = q("#cmp");
+  if (ta) ta.addEventListener("input", () => { d[d.mode === "reply" ? "reply" : "note"] = ta.value; });
+  document.querySelectorAll("#detail .ctabs [data-mode]").forEach(b => b.addEventListener("click", () => { d.mode = b.dataset.mode; renderDetail(); $("#cmp")?.focus(); }));
+  const snapshot = () => JSON.stringify(Desk.data.state[t.id] || null);
+  const restore = (id, snap) => Desk.update(m => { const v = JSON.parse(snap); if (v) m.state[id] = v; else delete m.state[id]; });
+  const finish = (msg, snap, prevDraft) => {
     const id = t.id, set = curSet;
-    handled[set].add(id); curId = nextOpen(id);
-    renderQueue(); renderDetail();
-    toast(curId ? `${r.category==="spam"?"Closed":"Sent"}. Next up: ${curId}.` : "That's the last one. Nice work.", {label:"Undo", run: () => { handled[set].delete(id); curSet = set; curId = id; renderQueue(); renderDetail(); }});
+    curId = nextOpen(id); renderQueue(); renderDetail();
+    toast(msg + (curId ? ` Next up: ${curId}.` : ""), {label:"Undo", run: () => { restore(id, snap); drafts[id] = prevDraft; curSet = set; curId = id; renderQueue(); renderDetail(); }});
+  };
+  const send = q("[data-send]");
+  if (send) send.addEventListener("click", () => {
+    const text = (ta?.value || "").trim();
+    if (!text){ ta?.focus(); return; }
+    if (/\[[^\]]+\]/.test(text) && send.dataset.sure !== "1"){ send.dataset.sure = "1"; send.textContent = "Send with [brackets]?"; return; }
+    const snap = snapshot(), prev = {...d}, now = new Date().toISOString();
+    Desk.update(m => { const s = Desk.ensure(m, t); s.thread.push({who:"agent", name:"Alex", text, at:now}); s.first_response_at ||= now; s.status = "customer"; s.assignee = "Alex"; });
+    drafts[t.id] = {reply:"", note:"", mode:"reply"};
+    finish(`Reply sent to ${t.customer.name.split(" ")[0]}. Status: ${STATUS.customer}.`, snap, prev);
   });
-  const ro = $("#detail [data-reopen]");
-  if (ro) ro.addEventListener("click", () => { handled[curSet].delete(t.id); renderQueue(); renderDetail(); });
+  const note = q("[data-note]");
+  if (note) note.addEventListener("click", () => {
+    const text = (ta?.value || "").trim(); if (!text){ ta?.focus(); return; }
+    Desk.update(m => { const s = Desk.ensure(m, t); s.thread.push({who:"internal", name:"Alex", text, at:new Date().toISOString()}); s.assignee ||= "Alex"; if (s.status === "open") s.status = "progress"; });
+    d.note = ""; d.mode = "reply"; renderQueue(); renderDetail(); toast("Internal note saved. Only agents see it.");
+  });
+  const close = q("[data-close]");
+  if (close) close.addEventListener("click", () => {
+    const snap = snapshot(), prev = {...d};
+    Desk.update(m => { const s = Desk.ensure(m, t); s.status = "closed"; s.thread.push({who:"system", text:"Closed as spam", at:new Date().toISOString()}); });
+    finish("Closed as spam.", snap, prev);
+  });
+  const sel = q("#st-sel");
+  if (sel) sel.addEventListener("change", () => {
+    Desk.update(m => { const s = Desk.ensure(m, t); s.status = sel.value; s.thread.push({who:"system", text:`Status changed to ${STATUS[sel.value]}`, at:new Date().toISOString()}); });
+    renderQueue(); renderDetail();
+  });
+  const as = q("[data-assign]");
+  if (as) as.addEventListener("click", () => { Desk.update(m => { const s = Desk.ensure(m, t); s.assignee = "Alex"; if (s.status === "open") s.status = "progress"; }); renderQueue(); renderDetail(); });
+  document.querySelectorAll("#detail [data-share]").forEach(b => b.addEventListener("click", () => {
+    d.mode = "reply";
+    const line = `This article walks through it step by step: ${b.dataset.title} (${b.dataset.url})`;
+    // put the link above the sign-off ("Best,", "Talk soon," … then the name)
+    const sign = d.reply.match(/\n\n[^\n]{1,30},\n[^\n]+(?:\n[^\n]+)?\s*$/);
+    d.reply = d.reply.includes(b.dataset.url) ? d.reply : sign ? d.reply.slice(0, sign.index) + `\n\n${line}` + d.reply.slice(sign.index) : `${d.reply}${d.reply ? "\n\n" : ""}${line}`;
+    renderDetail(); toast("Article link added to your reply.");
+  }));
+  const cp = q("[data-copy]"); if (cp) cp.addEventListener("click", () => copyText(ta?.value || "", cp));
   document.querySelectorAll("#detail [data-ai], #detail [data-local], #detail [data-cloud]").forEach(ab => ab.addEventListener("click", async () => {
     const engine = ab.hasAttribute("data-local") ? "local" : ab.hasAttribute("data-cloud") ? "cloud" : "claude";
     ab.disabled = true; ab.textContent = engine === "cloud" ? "Drafting a reply… (about 10–20 s)" : "Drafting a reply…";
     try {
       const base = curSet==="own" ? rulesTriage(t) : setData().results.find(x=>x.ticket_id===t.id);
       const res = await aiTriage(t, base, engine);
-      if (curSet==="own") ownResult = res; else aiResults[t.id] = res;
+      if (curSet==="own") ownResult = res; else { aiResults[t.id] = res; drafts[t.id] = {reply: draftText(res), note: d?.note || "", mode: "reply"}; }
       renderQueue(); renderDetail();
     } catch(e){ ab.textContent = e?.code==="bad_json" ? "The model's reply wasn't usable. Try again." : aiError(e); }
   }));
@@ -1058,15 +1309,28 @@ function bindOwn(){
     ownResult = rulesTriage(ownTicket); renderDetail();
   });
 }
-$("#queue").addEventListener("click", e => { const b = e.target.closest(".qitem"); if (!b) return; curId = b.dataset.id; renderQueue(); renderDetail(); });
-document.querySelectorAll("#set-seg button").forEach(b => b.addEventListener("click", () => {
-  curSet = b.dataset.set; document.querySelectorAll("#set-seg button").forEach(x=>x.setAttribute("aria-pressed", x===b));
+function pickSet(name){
+  curSet = name; document.querySelectorAll("#set-seg button").forEach(x=>x.setAttribute("aria-pressed", x.dataset.set===name));
   if (curSet === "own"){ ownResult = ownResult || rulesTriage(ownTicket); }
   else { curId = nextOpen(null); }
   renderQueue(); renderDetail();
-}));
-curId = D.sets.sample.tickets.map(t=>({t,r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority])[0].t.id;
-renderQueue(); renderDetail();
+}
+$("#queue").addEventListener("click", e => { const b = e.target.closest(".qitem"); if (!b) return; curId = b.dataset.id; renderQueue(); renderDetail(); });
+document.querySelectorAll("#set-seg button").forEach(b => b.addEventListener("click", () => pickSet(b.dataset.set)));
+// Requests raised in the portal (another tab) show up here live.
+addEventListener("storage", e => {
+  if (e.key !== DESK_KEY) return;
+  const before = Desk.data.requests.length; Desk.reload();
+  const fresh = Desk.data.requests.length > before;
+  if (curSet === "live" || fresh){
+    if (curSet !== "live" && fresh) toast(`New request ${Desk.data.requests.at(-1).id} from the help portal.`, {label:"Open", run: () => { pickSet("live"); curId = Desk.data.requests.at(-1).id; renderQueue(); renderDetail(); }});
+    if (curSet === "live"){ if (!curId) curId = nextOpen(null); if (document.activeElement?.id !== "cmp") renderDetail(); }
+  }
+  renderQueue();
+});
+setInterval(() => { if (curSet === "live" && !document.hidden) renderQueue(); }, 60000);   // keep SLA clocks fresh
+if (Desk.data.requests.some(t => !isHandled(t))) pickSet("live");
+else { curId = D.sets.sample.tickets.map(t=>({t,r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority])[0].t.id; renderQueue(); renderDetail(); }
 aiReady.then(ok => { if (ok) renderDetail(); });
 localReady.then(ok => { if (ok){ renderDetail(); if (curSet==="own") renderQueue(); } });
 cloudReady.then(ok => { if (ok){ renderDetail(); if (curSet==="own") renderQueue(); } });
@@ -1138,7 +1402,7 @@ renderMacros();
   const kbar = $("#kbar"), input = $("#kbar-q"), list = $("#kbar-list");
   let items = [], active = 0, lastFocus = null;
   const recent = [];
-  const tabNames = {chat:"Help chat", triage:"Ticket triage", macros:"Macro library", how:"How it works"};
+  const tabNames = {chat:"Help chat", triage:"Agent desk", macros:"Macro library", how:"How it works"};
   function openTicket(set, id){
     curSet = set; document.querySelectorAll("#set-seg button").forEach(x => x.setAttribute("aria-pressed", x.dataset.set === set));
     curId = id; showTab("triage"); renderQueue(); renderDetail();
@@ -1148,6 +1412,8 @@ renderMacros();
     for (const [id, name] of Object.entries(tabNames)) out.push({group:"Go to", kind:"tab", label:name, run:() => showTab(id)});
     const nxt = (() => { const keep = curSet; if (keep === "own") return null; return nextOpen(null); })();
     if (nxt) out.push({group:"Go to", kind:"next", label:`Next ticket to handle (${nxt})`, run:() => openTicket(curSet === "own" ? "sample" : curSet, nxt)});
+    out.push({group:"Go to", kind:"email", label:"Simulate an incoming email", run:() => { openTicket("live", null); $("#sim-email")?.click(); }});
+    for (const t of Desk.data.requests) out.push({group:"Tickets", kind:t.id, label:`${t.subject} · ${t.customer.name} (live)`, run:() => openTicket("live", t.id)});
     for (const [key, name] of [["sample","Sample"],["unseen","Unseen"]]) for (const t of D.sets[key].tickets)
       out.push({group:"Tickets", kind:t.id, label:`${t.subject} · ${t.customer.business}`, run:() => openTicket(key, t.id)});
     for (const m of D.macros) out.push({group:"Macros", kind:m.id, label:m.title, run:() => { showTab("macros"); $("#mac-cat").value = ""; $("#mac-q").value = m.title; renderMacros(); }});

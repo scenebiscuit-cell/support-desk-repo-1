@@ -134,6 +134,13 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 - **Chat:** bot bubbles are tint with a 4px lapis left edge; handoffs switch to the warn colors; user bubbles are solid lapis.
 - **Verdict stamps:** bordered blocks with a 5px top edge in the semantic color.
 
+## Service desk (Jira Service Management model)
+
+- **Agent desk issue view:** two columns. Main: header (key · channel · plan), a conversation timeline (customer messages on tint, agent replies with a 4px lapis edge, internal notes on warn-soft with a dashed border, system events as small mono lines), the verdict stamp, the macro note, then the composer with **Reply to customer** / **Add internal note** tabs. Sidebar on tint: status select, assignee, SLA box (left edge green/amber/red), request details, labels, knowledge base with "Share with customer". Stacks below 1100px.
+- **Status lozenges:** small mono caps. Waiting for support = info, In progress = lapis, Waiting for customer = warn, Resolved/Closed = pass.
+- **Portal:** a pill nav (Ask the Keeper · Contact support · My requests with a gold count badge), a request form in a card, suggested articles in a dashed lapis box, and My requests as a list then a thread. Customers never see internal notes.
+- **SLA targets** come from the Contact support article: Business 4 business hours, Team 1 business day, Free 2 business days, outages and security around the clock (clock hours in the demo).
+
 ## Do's and Don'ts
 
 ### Do:

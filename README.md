@@ -1,6 +1,6 @@
 # Pharos Support Desk
 
-**AI support operations for a small software company: a help-center chatbot that only answers from the docs, ticket triage that drafts on-policy replies, and a macro library, with every result measured against hand-labeled tickets.**
+**AI support operations for a small software company, modeled on Jira Service Management: a customer help portal with a docs-grounded chatbot, an agent desk where requests are triaged, drafted, and answered, and a macro library, with every result measured against hand-labeled tickets.**
 
 *Created by Nick Lax · nlaxatx@gmail.com*
 
@@ -19,9 +19,10 @@ Pharos is a fictional project-management app for small teams. I built its suppor
 | | What it does | Guardrail |
 |---|---|---|
 | **Help-center chatbot ("the Keeper")** | Searches 12 help articles and answers from them, citing the source | Answers only when the docs clearly cover the question; otherwise hands off to a person instead of guessing |
-| **Ticket triage** | Tags each ticket with category, priority, sentiment, and churn risk, picks the best macro, and drafts a reply | Refunds, outages, and security reports are always flagged for a person; drafts are never auto-sent |
+| **Customer help portal** | Customers ask the Keeper first; if it can't help, they raise a request, see suggested articles while they type, and follow replies under **My requests** | Warns visitors not to share passwords or payment details |
+| **Agent desk** | Requests from the portal and email land in a live queue. Each opens like a Jira issue: conversation, reply pre-drafted from the right macro, internal notes, status, assignee, an SLA clock, and help articles to share | Refunds, outages, and security reports are always flagged for a person; drafts are never auto-sent |
+| **Ticket triage** | Tags each ticket with category, priority, sentiment, and churn risk and picks the best macro, with rules or AI | Every result is scored against hand labels |
 | **Macro library** | 23 on-policy replies with tags, status actions, and internal notes; exports to CSV for any helpdesk | One consistent policy answer, whoever is on shift |
-| **Customer help portal** | The public-facing version of the chatbot, with no ticket or staff data | Warns visitors not to share passwords or payment details |
 
 ![Help chat with its search trace](screenshots/help-chat.png)
 
@@ -35,7 +36,23 @@ Pharos is a fictional project-management app for small teams. I built its suppor
 4. **Voice guard.** AI drafts are cleaned up server-side before an agent sees them: stock phrases like "I understand your frustration" are removed, every draft opens with "Thank you for contacting Pharos," and it ends with one consistent sign-off.
 5. **Cost and abuse limits.** The live AI runs on a small Cloudflare Worker that only serves this site, keeps the prompts server-side, caps input size, and limits each visitor to 10 AI answers a day (40 for the whole demo). That keeps it on Cloudflare's free tier.
 
-![Ticket triage with an escalation and draft reply](screenshots/triage.png)
+## A request, end to end
+
+1. **The customer asks the Keeper.** If the help center doesn't cover it, the Keeper says so and offers **Contact support**.
+2. **They raise a request.** While they type, matching help articles appear. "This answered my question" closes the loop without a ticket (deflection).
+
+   ![Raising a request in the help portal, with suggested articles](screenshots/portal-contact.png)
+
+3. **It lands in the agent desk** as **PH-101** in *Live requests*, already triaged, with an SLA clock based on the customer's plan (Business: 4 business hours, Team: 1 business day, Free: 2 business days; outages and security around the clock). Emails to support@ arrive the same way. In the demo, *Simulate incoming email* plays that part.
+4. **The agent works it like a Jira Service Management issue:** read the conversation, add an internal note, share a help article, edit the pre-drafted reply (or redraft it with AI), and send. The status moves to *Waiting for customer*.
+
+   ![The agent desk: conversation, internal note, draft reply, SLA, and knowledge base](screenshots/agent-desk.png)
+
+5. **The customer sees the reply under My requests**, never the internal notes, and can answer back (which puts it back in the queue) or mark it resolved.
+
+   ![The customer's view of the request and the agent's reply](screenshots/portal-request.png)
+
+The portal and the agent desk share requests through the visitor's own browser, so anyone can play both sides of the conversation in two tabs, and nothing leaves their machine. In production, the same store would live on the server (Cloudflare KV or D1), and a support address would feed it through Cloudflare Email Routing and a small Worker.
 
 ## Results
 
@@ -57,7 +74,8 @@ Every ticket has a hand label (correct category and priority), so accuracy is sc
 - **Score the AI layer on the same 36 unseen tickets** and put that number next to the rules baseline.
 - **Add a security safety net:** route any mention of an unrecognized login straight to security, whatever the rest of the ticket says.
 - **Use embeddings** for search once a help center grows past a few dozen articles.
-- **Connect a real helpdesk** (Zendesk, Help Scout, or Freshdesk) so tags, macros, and drafts land where agents already work.
+- **Real email intake:** Cloudflare Email Routing → a Worker that turns each message into a request, with tickets stored server-side instead of in the browser.
+- **Connect a real helpdesk** (Jira Service Management, Zendesk, or Help Scout) so tags, macros, and drafts land where agents already work.
 - **Track deflection:** what share of chat questions got answered without a ticket, and how many handoffs turned out to be covered by the docs.
 
 ---
@@ -119,6 +137,7 @@ python triage.py --eval                                                    # sam
 python triage.py --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout
 node tests/parity.js           # the web page's triage matches the Python engine exactly
 node tests/worker_voice.mjs    # the Worker's draft cleanup
+python -m http.server 8000 & node tests/e2e_desk.js   # portal -> agent desk -> portal, end to end (needs Playwright)
 ```
 
 See **Results** above for the current numbers. To score an AI backend on the unseen set, add `--backend ollama` (or `anthropic`) to the second command.
@@ -128,9 +147,9 @@ See **Results** above for the current numbers. To score an AI backend on the uns
 `demo/index.html` is self-contained. Open it in a browser, or share the published version.
 
 - **Help chat** shows which doc sections matched, how strongly, and why the bot answered or handed off.
-- **Ticket triage** shows the queue sorted by priority, each ticket's tags, and the draft. "Try your own" triages any pasted ticket in the browser.
+- **Agent desk** has four queues: **Live requests** (from the help portal and simulated email), the 20 **sample** and 36 **unseen** test tickets, and **Try your own** for any pasted ticket. Every ticket opens as an issue view with the conversation, reply and internal-note tabs, status, assignee, SLA, and knowledge-base suggestions.
 - **Macro library** is searchable and copyable.
-- **AI mode**: when the page is opened inside Claude (claude.ai), "AI answer" and "Draft with AI" buttons appear and use the viewer's own Claude account. Everywhere else, the page runs on the offline engine, so it always works.
+- **AI mode**: on the live site, "AI answer" and "Draft with AI" use the Cloudflare Worker. With Ollama running locally, local-AI buttons appear too. Without either, the page runs on the offline engine, so it always works.
 
 To show AI-written drafts in the queue, run triage with a model, then rebuild:
 
@@ -188,10 +207,11 @@ support_ops/macros.py    macro selection, placeholder fill, exports
 support_ops/triage_engine.py  rules + LLM triage, prompt, scoring
 triage.py  chat.py  export_macros.py  build_demo.py
 demo/template.html → demo/index.html and index.html (the GitHub Pages home page)
-portal/template.html → portal/index.html (public help portal)
+portal/template.html → portal/index.html (public help portal: Ask the Keeper, Contact support, My requests)
+shared/desk-store.js     the shared request store, inlined into both pages by build_demo.py
 DESIGN.md, PRODUCT.md     design system and product notes
 screenshots/              images used in this README
-tests/                   parity and Worker voice tests
+tests/                   parity, Worker voice, and end-to-end desk tests
 worker/                  Cloudflare Worker for free live AI: worker.template.js → worker.js, wrangler.toml, README.md
 .github/workflows/        deploys the Worker when worker/ changes
 output/                  generated reports

@@ -9,7 +9,7 @@ related_targets: ["demo/template.html"]
 Full Pharos Support Desk demo site; Operate.
 
 ## Audience and task
-Support agents exploring the help-desk demo use chat to find sourced answers, review ticket triage and draft replies, and inspect reusable macros.
+Support agents use chat to find sourced answers, work requests in the Jira Service Management-style agent desk (live requests from the portal and email, sample and unseen test tickets), reply or add internal notes, and inspect reusable macros.
 
 ## Content and proof
 The page shows the fictional company's help center, labeled demo tickets, decision traces, macro actions, and the human-review boundary.

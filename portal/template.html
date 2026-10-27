@@ -44,7 +44,7 @@ FORM: One single-column help conversation in the same visual system as the agent
     [hidden] { display: none !important; }
     html { background: var(--paper); }
     body { min-width: 320px; margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
-    button, input { font: inherit; color: inherit; }
+    button, input, select, textarea { font: inherit; color: inherit; }
     a { color: var(--accent); font-weight: 500; }
     :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
     .wrap { width: min(100% - 32px, 920px); margin-inline: auto; }
@@ -123,6 +123,46 @@ FORM: One single-column help conversation in the same visual system as the agent
     .demo-limit { max-width: 74ch; margin: 16px 0 0; padding: 10px 12px; color: var(--muted); background: var(--tint); border: 1px dashed var(--rule); border-radius: var(--r); font-size: 14px; }
     footer { padding-block: 16px 26px; border-top: 1px solid var(--rule); color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: space-between; }
     footer b { color: var(--ink); }
+    /* help-center nav, request form, my requests (Jira Service Management style) */
+    .pnav { display: flex; gap: 4px; margin: 0 0 22px; padding: 4px; background: var(--tint); border: 1px solid var(--rule); border-radius: 999px; width: max-content; max-width: 100%; overflow-x: auto; }
+    .pnav a { padding: 7px 14px; border-radius: 999px; color: var(--muted); font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .pnav a:hover { color: var(--ink); }
+    .pnav a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+    .count { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 4px; border-radius: 999px; background: var(--band-hi); color: #1d1f2a; font: 600 11px/18px var(--mono); text-align: center; }
+    .still { margin: 14px 0 0; color: var(--muted); }
+    .msg-cta { display: inline-block; margin-top: 10px; padding: 7px 14px; border-radius: var(--r); background: var(--accent); color: var(--accent-ink); font-weight: 700; text-decoration: none; white-space: normal; }
+    .card { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--shadow); padding: 18px; }
+    .form { display: grid; gap: 14px; }
+    .form label { display: grid; gap: 5px; font-weight: 600; font-size: 14px; }
+    .form input, .form select, .form textarea, .reply textarea { width: 100%; min-width: 0; min-height: 44px; padding: 9px 12px; background: var(--tint); border: 1px solid var(--rule); border-radius: var(--r); font-weight: 400; }
+    .form input:focus, .form select:focus, .form textarea:focus, .reply textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .sugbox { border: 1px dashed var(--accent); border-radius: var(--r); padding: 12px 14px; background: var(--accent-soft); display: grid; gap: 8px; }
+    .sugbox h3 { margin: 0; font: 700 15px/1.3 var(--display); }
+    .sugbox details { background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); padding: 8px 10px; }
+    .sugbox summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+    .sugbox .passage { white-space: pre-wrap; margin-top: 8px; font-size: 14px; }
+    .linkish { background: none; border: 0; padding: 0; color: var(--accent); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+    .lozenge { font: 600 10.5px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase; padding: 4px 7px; border-radius: 4px; background: #e5edf2; color: #3f5664; white-space: nowrap; }
+    .lozenge[data-s="progress"] { background: var(--accent-soft); color: var(--accent); }
+    .lozenge[data-s="customer"] { background: var(--warn-soft); color: var(--warn); }
+    .lozenge[data-s="resolved"], .lozenge[data-s="closed"] { background: #e0f2e7; color: #1f7a46; }
+    .rq { display: grid; grid-template-columns: auto minmax(0,1fr) auto; gap: 4px 12px; align-items: center; padding: 12px 4px; border-bottom: 1px solid var(--rule); text-decoration: none; color: var(--ink); }
+    .rq:last-child { border-bottom: 0; }
+    .rq:hover .rq-s { color: var(--accent); }
+    .rq-s { font-weight: 600; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .rq small { grid-column: 2 / -1; color: var(--muted); }
+    .thread { list-style: none; margin: 14px 0; padding: 0; display: grid; gap: 10px; }
+    .thread li { border: 1px solid var(--rule); border-radius: var(--r); padding: 10px 14px; background: var(--tint); }
+    .thread li.agent { background: var(--sheet); border-left: 4px solid var(--accent); }
+    .thread li.sys { background: none; border: 0; padding: 0 4px; color: var(--muted); font: 12.5px var(--mono); }
+    .thread .th { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; margin-bottom: 4px; }
+    .thread .th time { color: var(--muted); font-size: 12px; }
+    .thread .tb { white-space: pre-wrap; }
+    .reply { display: grid; gap: 10px; }
+    .reply .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .dark-note { color: var(--muted); font-size: 13px; }
+    @media (max-width: 640px) { .two { grid-template-columns: 1fr; } .pnav { width: 100%; } }
     @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 640px) {
       .masthead { padding-block: 18px 52px; }
@@ -159,6 +199,13 @@ FORM: One single-column help conversation in the same visual system as the agent
   </header>
 
   <main class="wrap">
+    <nav class="pnav" aria-label="Help center">
+      <a href="#ask" data-view="ask">Ask the Keeper</a>
+      <a href="#new" data-view="new">Contact support</a>
+      <a href="#requests" data-view="requests">My requests <span class="count" id="req-count" hidden></span></a>
+    </nav>
+
+    <div id="view-ask">
     <section class="welcome" aria-labelledby="welcome-title">
       <h2 id="welcome-title">Ask the Keeper</h2>
       <p>Ask in your own words. The Keeper searches the Pharos help articles, answers from them, and shows the passage behind every answer. If the articles don’t cover it, it says so instead of guessing.</p>
@@ -184,6 +231,35 @@ FORM: One single-column help conversation in the same visual system as the agent
         <p class="privacy-note">When AI is enabled, your question is sent to the demo AI service. Don’t enter passwords, payment details, or other sensitive information.</p>
       </form>
     </section>
+    <p class="still">Still stuck? <a href="#new">Contact support</a> and a person will get back to you.</p>
+    </div>
+
+    <section id="view-new" class="pview" aria-labelledby="new-title" hidden>
+      <div class="welcome"><h2 id="new-title">Contact support</h2>
+        <p>Tell us what's going on. While you type, we'll show help articles that might already answer it.</p></div>
+      <form id="req-form" class="card form">
+        <label>What can we help with?
+          <select id="rf-type" required></select></label>
+        <div class="two">
+          <label>Your name<input id="rf-name" autocomplete="name" required placeholder="Jamie Rivera"></label>
+          <label>Email<input id="rf-email" type="email" autocomplete="email" required placeholder="jamie@yourteam.example"></label>
+        </div>
+        <label>Your plan
+          <select id="rf-plan"><option>Team</option><option>Business</option><option>Free</option><option value="None">Not a customer yet</option></select></label>
+        <label>Summary<input id="rf-subj" required maxlength="140" placeholder="Slack stopped posting task updates"></label>
+        <div id="rf-sugs" class="sugbox" aria-live="polite" hidden></div>
+        <label>Details<textarea id="rf-body" rows="6" required maxlength="3000" placeholder="What happened, what you expected, and anything you've already tried."></textarea></label>
+        <p class="privacy-note">Requests are saved only in this browser for the demo, and they show up in the <a href="../#triage" target="_blank" rel="noopener">agent desk</a>. Don't include passwords or payment details.</p>
+        <div><button class="send" type="submit">Send request</button></div>
+      </form>
+      <div id="req-done" class="card" hidden></div>
+    </section>
+
+    <section id="view-requests" class="pview" aria-labelledby="req-title" hidden>
+      <div class="welcome"><h2 id="req-title">My requests</h2><p>Every request you've raised, its status, and the conversation with our team.</p></div>
+      <div id="req-list" class="card"></div>
+      <div id="req-detail" hidden></div>
+    </section>
 
     <section class="how" aria-labelledby="how-title">
       <h2 id="how-title">How it works</h2>
@@ -202,7 +278,7 @@ FORM: One single-column help conversation in the same visual system as the agent
           <p>Open the citation in a reply to read the exact help-center passage.</p>
         </li>
       </ol>
-      <p class="demo-limit">This is a fictional product demo. It does not access real accounts or create support tickets. If an answer is not in the articles, the Keeper will say so and show the documented support information.</p>
+      <p class="demo-limit">This is a fictional product demo. It does not access real accounts. If an answer is not in the articles, the Keeper says so and offers to raise a request. Requests are saved only in your browser, and they appear in the <a href="../#triage">agent desk</a>, where you can answer them as the support agent and see the reply land here under My requests.</p>
     </section>
   </main>
 
@@ -350,10 +426,13 @@ FORM: One single-column help conversation in the same visual system as the agent
     function addHandoff() {
       const message = addMessage(
         "assistant",
-        "I couldn’t find a reliable answer in the help articles, so I won’t guess. This demo doesn’t create a support ticket. Open the source below for the documented support options.",
+        "I couldn’t find a reliable answer in the help articles, so I won’t guess. A person on our support team can help.",
         { error: true },
       );
-      addSource(message, contactChunk());
+      const go = document.createElement("a");
+      go.href = "#new"; go.className = "msg-cta"; go.textContent = "Contact support";
+      go.addEventListener("click", () => { pendingSubject = previousQuestion; });
+      message.append(go);
     }
 
     function excerptText(chunks, prefix) {
@@ -485,6 +564,142 @@ FORM: One single-column help conversation in the same visual system as the agent
       ask($("#question").value);
     });
     addMessage("assistant", "Hello! I can help you find answers in the Pharos help center. What would you like to know?");
+
+    /*__DESK_STORE__*/
+
+    /* ---------- help-center requests: Contact support + My requests ---------- */
+    let pendingSubject = "";
+    const SLA_TEXT = { Business: "within 4 business hours", Team: "within 1 business day", Free: "within 2 business days", None: "within 2 business days" };
+    const escH = s => String(s ?? "").replace(/[&<>"]/g, ch => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]));
+    const myRequests = () => Desk.data.requests.filter(r => r.channel === "portal");
+
+    function showView(name) {
+      const [view, id] = name.split("/");
+      const v = ["ask", "new", "requests", "request"].includes(view) ? view : "ask";
+      $("#view-ask").hidden = v !== "ask";
+      $("#view-new").hidden = v !== "new";
+      $("#view-requests").hidden = !(v === "requests" || v === "request");
+      document.querySelectorAll(".pnav a").forEach(a => a.setAttribute("aria-current", a.dataset.view === (v === "request" ? "requests" : v) ? "page" : "false"));
+      if (v === "new") openForm();
+      if (v === "requests" || v === "request") renderRequests(v === "request" ? id : null);
+      updateCount();
+    }
+    function updateCount() {
+      const open = myRequests().filter(r => (Desk.stateOf(r).status === "customer")).length;
+      const c = $("#req-count"); c.hidden = !open; c.textContent = open; c.title = open ? `${open} waiting for your reply` : "";
+    }
+
+    /* request form, with help articles suggested while the customer types (deflection) */
+    function openForm() {
+      $("#req-form").hidden = false; $("#req-done").hidden = true;
+      const sel = $("#rf-type");
+      if (!sel.options.length) sel.innerHTML = REQUEST_TYPES.map(t => `<option>${escH(t)}</option>`).join("");
+      const p = Desk.data.profile;
+      if (p) { $("#rf-name").value ||= p.name || ""; $("#rf-email").value ||= p.email || ""; if (p.plan) $("#rf-plan").value = p.plan; }
+      if (pendingSubject) { $("#rf-subj").value = pendingSubject.slice(0, 140); pendingSubject = ""; suggest(); }
+    }
+    let sugTimer = 0;
+    function suggest() {
+      clearTimeout(sugTimer);
+      sugTimer = setTimeout(() => {
+        const q = `${$("#rf-subj").value} ${$("#rf-body").value}`.trim();
+        const box = $("#rf-sugs");
+        const hits = q.length < 8 ? [] : search(q, 3).filter(h => confident(h.score, h.coverage) || h.score >= TH.min_score * 1.4);
+        if (!hits.length) { box.hidden = true; return; }
+        box.hidden = false;
+        box.innerHTML = `<h3>These articles might answer it</h3>` + hits.map((h, i) => `<details><summary>${escH(h.chunk.title)} — ${escH(h.chunk.heading)}</summary>
+          <div class="passage" data-i="${i}"></div>${h.chunk.url ? `<a href="${escH(h.chunk.url)}" target="_blank" rel="noopener">Read the full article</a> · ` : ""}<button type="button" class="linkish" data-solved>This answered my question</button></details>`).join("");
+        hits.forEach((h, i) => setRich(box.querySelector(`.passage[data-i="${i}"]`), h.chunk.text));
+        box.querySelectorAll("[data-solved]").forEach(b => b.addEventListener("click", () => {
+          Desk.update(m => { m.deflected = (m.deflected || 0) + 1; });
+          $("#req-form").reset(); box.hidden = true; $("#req-form").hidden = true;
+          const done = $("#req-done"); done.hidden = false;
+          done.innerHTML = `<h3 style="margin:0 0 6px">Glad that helped!</h3><p style="margin:0">No request needed. <a href="#ask">Ask the Keeper</a> anytime.</p>`;
+        }));
+      }, 250);
+    }
+    $("#rf-subj").addEventListener("input", suggest);
+    $("#rf-body").addEventListener("input", suggest);
+    $("#req-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const name = $("#rf-name").value.trim(), email = $("#rf-email").value.trim(), plan = $("#rf-plan").value;
+      const subject = $("#rf-subj").value.trim(), body = $("#rf-body").value.trim(), type = $("#rf-type").value;
+      if (!name || !email || !subject || !body) return;
+      let id;
+      Desk.update(m => {
+        id = Desk.nextKey(m);
+        const now = new Date().toISOString();
+        m.requests.push({ id, created_at: now, channel: "portal", request_type: type,
+          customer: { name, email, business: "", plan }, subject, body });
+        m.state[id] = { status: "open", assignee: null, first_response_at: null, thread: [
+          { who: "system", text: `Raised in the help portal as "${type}"`, at: now },
+          { who: "customer", name, text: body, at: now }] };
+        m.profile = { name, email, plan };
+      });
+      $("#req-form").reset(); $("#rf-sugs").hidden = true; $("#req-form").hidden = true;
+      const done = $("#req-done"); done.hidden = false;
+      done.innerHTML = `<span class="eyebrow" style="color:var(--muted)">Request sent</span>
+        <h3 style="margin:4px 0 6px;font:700 22px/1.2 var(--display)">${escH(id)}: ${escH(subject)}</h3>
+        <p style="margin:0 0 12px">Thanks, ${escH(name.split(" ")[0])}. Our team usually replies ${SLA_TEXT[plan] || "within 1 business day"}. You'll see the reply under <a href="#request/${escH(id)}">My requests</a>.</p>
+        <p class="dark-note" style="margin:0">Demo tip: open the <a href="../#triage" target="_blank" rel="noopener">agent desk</a> in another tab. Your request is waiting in <b>Live requests</b>. Reply there, then come back here.</p>`;
+      updateCount();
+    });
+
+    /* My requests: list + one request's conversation (internal notes are never shown to customers) */
+    function renderRequests(openId) {
+      const list = myRequests().slice().reverse();
+      $("#req-list").hidden = !!openId;
+      $("#req-detail").hidden = !openId;
+      if (!openId) {
+        $("#req-list").innerHTML = list.length ? list.map(r => { const st = Desk.stateOf(r);
+          return `<a class="rq" href="#request/${escH(r.id)}"><span class="mono" style="font-family:var(--mono);font-size:13px">${escH(r.id)}</span>
+            <span class="rq-s">${escH(r.subject)}</span><span class="lozenge" data-s="${st.status}">${escH(st.status === "customer" ? "Reply from support" : STATUS[st.status])}</span>
+            <small>${escH(r.request_type)} · raised ${escH(ago(r.created_at))}</small></a>`; }).join("")
+          : `<p style="margin:0">You haven't raised any requests yet. <a href="#new">Contact support</a></p>`;
+        return;
+      }
+      const r = list.find(x => x.id === openId);
+      if (!r) { location.hash = "#requests"; return; }
+      const st = Desk.stateOf(r);
+      const items = st.thread.filter(e => e.who !== "internal").map(e => e.who === "system"
+        ? `<li class="sys">${escH(e.text)} · ${escH(ago(e.at))}</li>`
+        : `<li class="${e.who}"><div class="th"><b>${escH(e.who === "agent" ? `${e.name || "Alex"}, Pharos Support` : "You")}</b><time>${escH(ago(e.at))}</time></div><div class="tb"></div></li>`).join("");
+      $("#req-detail").innerHTML = `<div class="card">
+        <a href="#requests" class="dark-note">← All requests</a>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:8px">
+          <h3 style="margin:0;font:700 22px/1.2 var(--display)">${escH(r.subject)}</h3>
+          <span class="lozenge" data-s="${st.status}">${escH(STATUS[st.status])}</span></div>
+        <p class="dark-note" style="margin:4px 0 0">${escH(r.id)} · ${escH(r.request_type)} · raised ${escH(ago(r.created_at))}</p>
+        <ol class="thread">${items}</ol>
+        ${st.status === "closed" ? "" : `<form class="reply" id="req-reply"><label class="sr-only" for="rr-text">Add a reply</label>
+          <textarea id="rr-text" rows="4" placeholder="${st.status === "resolved" ? "Still having trouble? Reply to reopen this request." : "Add a reply for our support team"}"></textarea>
+          <div class="row"><button class="send" type="submit">Send</button>
+          ${st.status !== "resolved" ? `<button type="button" class="linkish" id="rr-resolve">This is resolved</button>` : ""}</div></form>`}
+      </div>`;
+      const bodies = $("#req-detail").querySelectorAll(".thread li:not(.sys) .tb");
+      st.thread.filter(e => e.who !== "internal" && e.who !== "system").forEach((e, i) => setRich(bodies[i], e.text));
+      const form = $("#req-reply");
+      if (form) form.addEventListener("submit", ev => {
+        ev.preventDefault();
+        const text = $("#rr-text").value.trim(); if (!text) return;
+        Desk.update(m => { const s = Desk.ensure(m, r); s.thread.push({ who: "customer", name: r.customer.name, text, at: new Date().toISOString() }); s.status = "open"; });
+        renderRequests(openId); updateCount();
+      });
+      const res = $("#rr-resolve");
+      if (res) res.addEventListener("click", () => {
+        Desk.update(m => { const s = Desk.ensure(m, r); s.status = "resolved"; s.thread.push({ who: "system", text: "You marked this request as resolved", at: new Date().toISOString() }); });
+        renderRequests(openId); updateCount();
+      });
+    }
+    // The agent desk (another tab) writes replies to the same store; show them as they arrive.
+    addEventListener("storage", e => {
+      if (e.key !== DESK_KEY) return;
+      Desk.reload(); updateCount();
+      const h = location.hash.slice(1);
+      if ((h === "requests" || h.startsWith("request/")) && document.activeElement?.id !== "rr-text") showView(h);
+    });
+    addEventListener("hashchange", () => { showView(location.hash.slice(1) || "ask"); scrollTo({ top: 0 }); });
+    showView(location.hash.slice(1) || "ask");
 
     /* ---------- header: wireframe sea breaking toward the viewer, swept by the lighthouse beam ---------- */
     (function(){

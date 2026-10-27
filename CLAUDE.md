@@ -3,11 +3,12 @@
 A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing. Pharos is a **fictional project-management app for small teams**. Never reintroduce the old booking/reminders company.
 
 ## What's here
-- `docs/` 12 help articles · `macros/macros.json` 23 macros · `data/` sample (20) and unseen (12) tickets with hand labels
+- `docs/` 12 help articles · `macros/macros.json` 23 macros · `data/` sample (20) and unseen (36) tickets with hand labels
 - `support_ops/` Python engine: BM25 search (`kb.py`), rules triage + LLM prompt (`triage_engine.py`), taxonomy, macros
 - `chat.py`, `triage.py`, `export_macros.py` — CLI tools (Python stdlib only, no pip installs)
-- `demo/template.html` → **generated** `demo/index.html` and `index.html` (site home): agent demo (help chat, triage, macros)
-- `portal/template.html` → **generated** `portal/index.html`: public customer help portal (chat only — never ticket/macro data)
+- `demo/template.html` → **generated** `demo/index.html` and `index.html` (site home): agent demo (help chat, agent desk with triage, macros)
+- `portal/template.html` → **generated** `portal/index.html`: public help center (Ask the Keeper, Contact support, My requests). Never show triage data, macros, or internal notes there.
+- `shared/desk-store.js`: the request store both pages share via localStorage (key `pharos-desk-v1`); `build_demo.py` inlines it at `/*__DESK_STORE__*/`. The agent desk (Agent desk tab) is modeled on Jira Service Management.
 - `worker/worker.template.js` → **generated** `worker/worker.js`: Cloudflare Worker (Llama 3.3 70B) with daily caps, origin lock, and a voice guard that cleans AI drafts
 - `DESIGN.md` is the design system (lapis + gold, papyrus page, IBM Plex, canvas wave masthead). Follow it.
 
@@ -17,6 +18,7 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
 3. Tests, all must pass:
    - `node tests/parity.js` — the page's JS triage must match the Python rules engine exactly (0 mismatches). JS search/triage in `demo/template.html` mirrors `support_ops/`; change both together.
    - `node tests/worker_voice.mjs` — Worker draft cleanup
+   - `python -m http.server 8000` then `node tests/e2e_desk.js` — portal → agent desk → portal loop (Playwright)
    - `python triage.py --eval` — sample set should stay at 100% category/priority. Report the unseen-set number (`--tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout`); don't tune rules on the unseen tickets.
 4. For visual changes, screenshot the pages with Playwright (desktop + 390px phone, light + dark).
 

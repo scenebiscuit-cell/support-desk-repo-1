@@ -141,6 +141,15 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 - **Portal:** a pill nav (Ask the Keeper · Contact support · My requests with a gold count badge), a request form in a card, suggested articles in a dashed lapis box, and My requests as a list then a thread. Customers never see internal notes.
 - **SLA targets** come from the Contact support article: Business 4 business hours, Team 1 business day, Free 2 business days, outages and security around the clock (clock hours in the demo).
 
+## Responsive rules (phones)
+
+- Header stats sit in a 3-column row; the tagline drops to 15px. The Pause waves control becomes a 40px round icon in the top-right corner.
+- Sticky nav: tabs scroll sideways with a fade hint; the Ctrl K palette is hidden (keyboard feature) and "Portal ↗" stays visible.
+- Agent desk: the queue switcher is a 2x2 grid; tapping a ticket scrolls to it, with "Back to the queue".
+- Suggested questions scroll sideways in one row so the conversation stays in view.
+- Tap targets are at least 40px tall on touch or narrow screens; inputs are 16px so iOS doesn't zoom on focus.
+- Portal nav uses short labels (Ask · Contact · My requests) in three equal segments.
+
 ## Do's and Don'ts
 
 ### Do:

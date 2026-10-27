@@ -69,6 +69,8 @@ button,input,select,textarea{font:inherit;color:inherit}
 .sea{-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.6) 40%,#000 75%);mask-image:linear-gradient(90deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.6) 40%,#000 75%)}
 .seabtn{position:absolute;right:max(12px, env(safe-area-inset-right, 0px));bottom:10px;z-index:1;border:1px solid rgba(235,200,116,.35);background:rgba(0,0,0,.22);color:var(--band-soft);border-radius:999px;padding:3px 10px;font:500 11px/1.4 var(--f-mono);letter-spacing:.04em;cursor:pointer}
 .seabtn:hover{color:var(--band-ink);border-color:var(--band-hi)}
+@media (max-width:640px){ .seabtn{top:max(10px, env(safe-area-inset-top, 0px));bottom:auto;right:max(10px, env(safe-area-inset-right, 0px));width:40px;height:40px;padding:0;font-size:0;display:grid;place-items:center}
+  .seabtn::before{content:"❚❚";font-size:12px;letter-spacing:-2px;color:var(--band-ink)} .seabtn[aria-pressed="true"]::before{content:"▶";letter-spacing:0} }
 .band-in{position:relative;max-width:1240px;margin:0 auto;padding-block:34px 30px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-end;justify-content:space-between}
 .band-copy{min-width:0;flex:1 1 520px}
 .band .eyebrow{color:var(--band-hi);display:flex;align-items:center;gap:8px}
@@ -381,6 +383,50 @@ details.data .evalt{padding:0 14px 12px}
 #cmp{width:100%;resize:vertical;background:var(--tint);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;font-size:14.5px;line-height:1.5}
 #cmp:focus{border-color:var(--accent);outline:none;box-shadow:0 0 0 3px var(--accent-soft)}
 @media (max-width:1100px){ .issue{grid-template-columns:minmax(0,1fr)} .issue-side{border-left:0;border-top:1px solid var(--rule);border-radius:0 0 var(--r) var(--r)} }
+
+/* ---------- phones and touch: responsive best practices ---------- */
+.portal-link{text-decoration:none;padding:6px 12px}
+.portal-link .lbl-s{display:none}
+@media (max-width:640px){ .portal-link .lbl-s{display:inline} }
+.back-q{display:none}
+.view-cust{font-size:13px}
+@media (max-width:860px){ .back-q{display:inline-block} #detail{scroll-margin-top:72px} #queue{scroll-margin-top:72px} }
+@media (max-width:640px){
+  /* compact header: stats in one row instead of three stacked cards */
+  .band-in{padding-block:22px 26px;gap:18px}
+  .band p{font-size:15px}
+  .band .eyebrow{padding-right:44px}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%}
+  .stat{min-width:0;padding:10px 10px 8px}
+  .stat b{font-size:26px}
+  .stat span{font-size:12px;line-height:1.3;max-width:none}
+  /* sticky nav: the palette is a keyboard feature, so phones get the portal link instead */
+  #kbar-open{display:none}
+  .portal-link .lbl{display:none}
+  .tabs{-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent);padding-right:18px}
+  /* queue switcher: a 2x2 grid instead of four squeezed columns */
+  #set-seg{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  #set-seg button{min-height:44px}
+  #set-seg button:nth-child(3){border-left:0}
+  #set-seg button:nth-child(n+3){border-top:1px solid var(--rule)}
+  /* suggested questions: one swipeable row so the chat stays visible */
+  .sugs{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+  .sugs button{flex:none}
+  /* 16px inputs stop iOS from zooming the page on focus */
+  input,select,textarea,#cmp{font-size:16px!important}
+  .issue-side{padding:16px}
+}
+@media (pointer:coarse), (max-width:640px){
+  /* comfortable tap targets (aim for 44px) */
+  .sugs button{min-height:40px;padding:6px 14px}
+  .bandbtn,.kbar-open,.themebtn{min-height:40px}
+  .linkbtn{display:inline-block;padding:10px 0}
+  .kb-item .linkbtn{padding:8px 0}
+  .kb-item a,.note a{display:inline-block;padding:6px 0}
+  .mac-card .linkbtn,.qempty a{padding:10px 0}
+  .ctabs button{min-height:44px}
+  .tabs button{min-height:40px}
+}
 </style>
 
 <a class="skip" href="#main">Skip to the demo</a>
@@ -416,6 +462,7 @@ details.data .evalt{padding:0 14px 12px}
       <button role="tab" id="tab-how" aria-controls="how" aria-selected="false">How it works</button>
     </div>
     <div class="navtools">
+      <a class="kbar-open portal-link" href="portal/" target="_blank" rel="noopener" aria-label="Open the customer help portal in a new tab"><span class="lbl">Help portal</span><span class="lbl-s">Portal</span> ↗</a>
       <button type="button" class="kbar-open" id="kbar-open" aria-label="Search or jump to (Ctrl K)"><span class="lbl">Search or jump to…</span><kbd id="kbar-key">Ctrl K</kbd></button>
       <button type="button" class="themebtn" id="themebtn" aria-label="Color theme: system"><span aria-hidden="true">◐</span><span id="themeLbl">System</span></button>
     </div>
@@ -1184,8 +1231,9 @@ function renderDetail(){
   const m = MACROS[r.macro_id];
   $("#detail").innerHTML = `<div class="issue">
     <div class="detail issue-main">
+      ${curSet !== "own" ? `<button type="button" class="linkbtn back-q" data-backq>← Back to the queue</button>` : ""}
       <div class="d-head"><span class="eyebrow">${esc(t.id)} · via ${esc(t.channel)} · ${t.customer.plan==="None" || !t.customer.plan ? "not a customer" : esc(t.customer.plan) + " plan"}</span>
-        <h2>${esc(t.subject)}</h2><span class="who">${esc(t.customer.name)}${t.customer.business ? ", " + esc(t.customer.business) : ""}${t.customer.email ? ` · <span class="mono">${esc(t.customer.email)}</span>` : ""}</span></div>
+        <h2>${esc(t.subject)}</h2>${curSet === "live" && t.channel === "portal" ? `<a class="linkbtn view-cust" href="portal/#request/${esc(t.id)}" target="_blank" rel="noopener">View as customer ↗</a>` : ""}<span class="who">${esc(t.customer.name)}${t.customer.business ? ", " + esc(t.customer.business) : ""}${t.customer.email ? ` · <span class="mono">${esc(t.customer.email)}</span>` : ""}</span></div>
       ${timelineHTML(t, st)}
       ${r.summary && r.summary !== t.subject ? `<div><span class="eyebrow">Summary for the agent</span><div style="margin-top:4px">${esc(r.summary)}</div></div>` : ""}
       ${verdictHTML(r)}
@@ -1202,6 +1250,7 @@ function renderDetail(){
 }
 function bindDetail(t, r){
   const q = s => $("#detail " + s), d = drafts[t.id];
+  q("[data-backq]")?.addEventListener("click", () => { $("#queue").scrollIntoView({block: "start"}); $(`#queue .qitem[data-id="${t.id}"]`)?.focus(); });
   const ta = q("#cmp");
   if (ta) ta.addEventListener("input", () => { d[d.mode === "reply" ? "reply" : "note"] = ta.value; });
   document.querySelectorAll("#detail .ctabs [data-mode]").forEach(b => b.addEventListener("click", () => { d.mode = b.dataset.mode; renderDetail(); $("#cmp")?.focus(); }));
@@ -1287,7 +1336,9 @@ function pickSet(name){
   else { curId = nextOpen(null); }
   renderQueue(); renderDetail();
 }
-$("#queue").addEventListener("click", e => { const b = e.target.closest(".qitem"); if (!b) return; curId = b.dataset.id; renderQueue(); renderDetail(); });
+const narrow = matchMedia("(max-width: 860px)");
+$("#queue").addEventListener("click", e => { const b = e.target.closest(".qitem"); if (!b) return; curId = b.dataset.id; renderQueue(); renderDetail();
+  if (narrow.matches) $("#detail").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start"}); });
 document.querySelectorAll("#set-seg button").forEach(b => b.addEventListener("click", () => pickSet(b.dataset.set)));
 // Requests raised in the portal (another tab) show up here live.
 addEventListener("storage", e => {

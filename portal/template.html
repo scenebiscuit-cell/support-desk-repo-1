@@ -58,6 +58,11 @@ FORM: One single-column help conversation in the same visual system as the agent
     .sea { -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,.6) 40%, #000 75%); mask-image: linear-gradient(90deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,.6) 40%, #000 75%); }
     .seabtn { position: absolute; right: 12px; bottom: 10px; z-index: 1; border: 1px solid rgba(235,200,116,.35); background: rgba(0,0,0,.22); color: var(--band-soft); border-radius: 999px; padding: 3px 10px; font: 500 11px/1.4 var(--mono); letter-spacing: .04em; cursor: pointer; }
     .seabtn:hover { color: var(--band-ink); border-color: var(--band-hi); }
+    @media (max-width: 640px) {
+      .seabtn { top: max(10px, env(safe-area-inset-top, 0px)); bottom: auto; right: 10px; width: 40px; height: 40px; padding: 0; font-size: 0; display: grid; place-items: center; }
+      .seabtn::before { content: "❚❚"; font-size: 12px; letter-spacing: -2px; color: var(--band-ink); }
+      .seabtn[aria-pressed="true"]::before { content: "▶"; letter-spacing: 0; }
+    }
     .masthead { position: relative; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 18px; padding-block: 26px 64px; }
     .lighthouse { flex: none; width: 52px; height: auto; aspect-ratio: 48/86; filter: drop-shadow(0 4px 10px rgba(0,0,0,.25)); }
     .brand { flex: 1 1 260px; min-width: 0; }
@@ -162,7 +167,30 @@ FORM: One single-column help conversation in the same visual system as the agent
     .reply { display: grid; gap: 10px; }
     .reply .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
     .dark-note { color: var(--muted); font-size: 13px; }
-    @media (max-width: 640px) { .two { grid-template-columns: 1fr; } .pnav { width: 100%; } }
+    .pnav .short { display: none; }
+    @media (max-width: 640px) {
+      .two { grid-template-columns: 1fr; }
+      /* nav: three equal segments that always fit */
+      .pnav { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .pnav a { text-align: center; padding: 10px 6px; min-height: 44px; display: grid; place-items: center; }
+      .pnav .long { display: none; } .pnav .short { display: inline; }
+      /* masthead: keep the lighthouse at the top, links on their own row */
+      .masthead { align-items: flex-start; padding-right: 48px; }
+      /* suggested questions: one swipeable row so the conversation stays in view */
+      .suggestions { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: none; }
+      .suggestions button { flex: none; }
+      /* 16px inputs stop iOS from zooming the page on focus */
+      input, select, textarea { font-size: 16px !important; }
+      .card { padding: 14px; }
+      .rq { grid-template-columns: minmax(0,1fr) auto; }
+      .rq > .mono { grid-column: 1 / -1; }
+    }
+    @media (pointer: coarse), (max-width: 640px) {
+      .suggestions button { min-height: 40px; padding: 6px 14px; }
+      .band-link, .demo-badge { min-height: 36px; display: inline-flex; align-items: center; }
+      .linkish { padding: 10px 0; }
+      .source summary { padding: 8px 0; }
+    }
     @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
     @media (max-width: 640px) {
       .masthead { padding-block: 18px 52px; }
@@ -200,8 +228,8 @@ FORM: One single-column help conversation in the same visual system as the agent
 
   <main class="wrap">
     <nav class="pnav" aria-label="Help center">
-      <a href="#ask" data-view="ask">Ask the Keeper</a>
-      <a href="#new" data-view="new">Contact support</a>
+      <a href="#ask" data-view="ask"><span class="long">Ask the Keeper</span><span class="short">Ask</span></a>
+      <a href="#new" data-view="new"><span class="long">Contact support</span><span class="short">Contact</span></a>
       <a href="#requests" data-view="requests">My requests <span class="count" id="req-count" hidden></span></a>
     </nav>
 

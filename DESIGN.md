@@ -138,6 +138,7 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 ## How it works tab
 
 - **Flow steps:** 16px-radius cards, all with the same soft lapis tint fading into the sheet and a numbered badge (gold numeral on a lapis disc). On hover a card warms to gold (gold tint fades in over 0.25 s, gold border and badge, amber label) and lifts 2px. Two columns on phones.
+- **Group dividers:** each card group (steps, the three tools, the request loop, runs/measured) is separated by the same 2px ink rule as the section header.
 - **Notes as bento cards:** sheet cards with a 3px lapis → ocean → gold top line and a small gold dot before each heading.
 - **Feature card ("Try both sides"):** the masthead's lapis-and-ocean gradient with a faint gold glow, gold heading, and a gold primary button, so the hands-on demo stands out.
 

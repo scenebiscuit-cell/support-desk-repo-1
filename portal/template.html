@@ -54,7 +54,7 @@ FORM: One single-column help conversation in the same visual system as the agent
     } }
     *, *::before, *::after { box-sizing: border-box; }
     [hidden] { display: none !important; }
-    html { background: var(--paper); }
+    html { background: var(--paper); -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body { min-width: 320px; margin: 0; background: var(--paper); color: var(--ink); font: 400 15px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
     button, input, select, textarea { font: inherit; color: inherit; }
     a { color: var(--accent); font-weight: 500; }
@@ -102,7 +102,7 @@ FORM: One single-column help conversation in the same visual system as the agent
     .welcome p { max-width: 66ch; margin: 6px 0 0; color: var(--muted); }
 
     /* conversation */
-    .conversation { display: flex; min-height: 460px; height: min(64vh, 600px); flex-direction: column; overflow: hidden;
+    .conversation { display: flex; min-height: 460px; height: min(64vh, 600px); height: min(64svh, 600px); flex-direction: column; overflow: hidden;
       background: var(--sheet); border: 1px solid var(--rule); border-radius: var(--r); box-shadow: var(--shadow); }
     .chat-head { display: flex; align-items: center; gap: 10px; margin: 0 18px; padding: 16px 0 12px; border-bottom: 2px solid var(--ink); }
     .live-mark { width: 10px; height: 10px; flex: none; border-radius: 50%; background: var(--band-hi); box-shadow: 0 0 0 4px color-mix(in srgb, var(--band-hi) 28%, transparent); }
@@ -192,7 +192,7 @@ FORM: One single-column help conversation in the same visual system as the agent
       .two { grid-template-columns: 1fr; }
       /* nav: three equal segments that always fit */
       .pnav { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .pnav a { text-align: center; padding: 10px 6px; min-height: 44px; display: grid; place-items: center; }
+      .pnav a { text-align: center; padding: 10px 4px; min-height: 44px; display: grid; place-items: center; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: clamp(13px, 3.6vw, 15px); }
       .pnav .long { display: none; } .pnav .short { display: inline; }
       /* masthead: keep the lighthouse at the top, links on their own row */
       .masthead { align-items: flex-start; }
@@ -216,7 +216,7 @@ FORM: One single-column help conversation in the same visual system as the agent
       .masthead { padding-block: 18px 52px; }
       .lighthouse { width: 40px; }
       main { padding-block: 20px 34px; }
-      .conversation { height: min(66vh, 560px); min-height: 420px; }
+      .conversation { height: min(66vh, 560px); height: min(66svh, 560px); min-height: 420px; }
       .messages { padding: 12px; }
       .message { max-width: 94%; }
       .chat-head { margin: 0 12px; }

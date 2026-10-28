@@ -151,6 +151,8 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 
 ## Responsive rules (phones)
 
+- **No `viewport-fit=cover`.** Android WebView browsers (e.g., DuckDuckGo) report a status-bar `safe-area-inset-top` even though their toolbar covers it, which pushed the sticky nav down and hid the masthead eyebrow behind a strip. Without `cover`, every browser reports 0 and phones keep content clear of notches themselves.
+
 - Header stats sit in a 3-column row; the tagline drops to 15px. On phones the eyebrow shortens to "AI help desk demo" and Pause waves becomes just a gold ❚❚ / ▶ icon (36px tap area) at the right end of that line; the label stays as its accessible name.
 - Sticky nav: tabs scroll sideways with a fade hint; the Ctrl K palette is hidden (keyboard feature) and "Portal ↗" stays visible.
 - Agent desk: the queue switcher is a 2x2 grid; tapping a ticket scrolls to it, with "Back to the queue".

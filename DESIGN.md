@@ -151,6 +151,8 @@ Centered 1240px container (920px for the portal) with 16px safe-area-aware gutte
 
 ## Responsive rules (phones)
 
+- **Smooth scrolling on touch:** the masthead animation pauses while the page is being scrolled (resumes ~0.2 s after), and the sticky nav uses a solid background instead of a live blur. Android WebView browsers (DuckDuckGo) stutter and jump otherwise. Keep in-flow heights off `vh`; use `svh` so a collapsing address bar never resizes content.
+
 - **No `viewport-fit=cover`.** Android WebView browsers (e.g., DuckDuckGo) report a status-bar `safe-area-inset-top` even though their toolbar covers it, which pushed the sticky nav down and hid the masthead eyebrow behind a strip. Without `cover`, every browser reports 0 and phones keep content clear of notches themselves.
 
 - Header stats sit in a 3-column row; the tagline drops to 15px. On phones the eyebrow shortens to "AI help desk demo" and Pause waves becomes just a gold ❚❚ / ▶ icon (36px tap area) at the right end of that line; the label stays as its accessible name.

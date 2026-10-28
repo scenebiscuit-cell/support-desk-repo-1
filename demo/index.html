@@ -465,6 +465,8 @@ details.data .evalt{padding:0 14px 12px}
   .issue-side{padding:16px}
 }
 @media (pointer:coarse), (max-width:640px){
+  /* no live blur behind the sticky nav on touch screens: cheaper to scroll */
+  .secnav{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--paper)}
   /* comfortable tap targets (aim for 44px) */
   .sugs button{min-height:40px;padding:6px 14px}
   .bandbtn,.kbar-open,.themebtn{min-height:40px}
@@ -984,10 +986,15 @@ function makeSeaLife() {
     }
   }
   function loop(now){ if (!running) return; draw((now - t0)/1000); raf = requestAnimationFrame(loop); }
-  function update(){ const go = !still && !paused && visible && !document.hidden; if (go && !running){ running = true; raf = requestAnimationFrame(loop); } else if (!go && running){ running = false; cancelAnimationFrame(raf); } }
+  function update(){ const go = !still && !paused && !scrolling && visible && !document.hidden; if (go && !running){ running = true; raf = requestAnimationFrame(loop); } else if (!go && running){ running = false; cancelAnimationFrame(raf); } }
   new ResizeObserver(size).observe(band);
   if ("IntersectionObserver" in window) new IntersectionObserver(e => { visible = e[0].isIntersecting; update(); }).observe(band);
   document.addEventListener("visibilitychange", update);
+  // Touch browsers: hold the animation while the page is being scrolled so scrolling stays smooth
+  // (some Android WebView browsers, like DuckDuckGo, stutter and jump when a canvas redraws mid-scroll).
+  let scrolling = false, scrollTimer = 0;
+  if (matchMedia("(pointer: coarse)").matches || navigator.maxTouchPoints > 0)
+    addEventListener("scroll", () => { clearTimeout(scrollTimer); if (!scrolling){ scrolling = true; update(); } scrollTimer = setTimeout(() => { scrolling = false; update(); }, 220); }, {passive: true});
   new MutationObserver(() => { readInk(); if (!running) draw(2.2); }).observe(document.documentElement, {attributes:true, attributeFilter:["data-theme"]});
   matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () => { readInk(); if (!running) draw(2.2); });
   size(); update();

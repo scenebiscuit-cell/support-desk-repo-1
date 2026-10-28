@@ -128,6 +128,18 @@ Priority guide:
 - normal: a how-to question or a single problem with a workaround
 - low: feature requests, praise, spam
 
+Category guide (pick the single best fit; ask what the customer needs from us):
+- feature_request: the customer asks for something Pharos does not do or does not have yet, even when phrased as a question ("Any chance you'll add...?", "Can Pharos do X?" when the docs say it can't). Not a bug: nothing is broken, the thing was never there.
+- bug: something Pharos does offer is not working as documented (missing tasks, failed uploads, errors).
+- presales: a trial or prospective customer asking how things work before buying. If they ask for something Pharos lacks and they are not evaluating a purchase, that is feature_request.
+- billing: money questions where no refund is requested: invoice lines, prorated charges, card or payment problems. A workspace that went read-only because of an expired or failed card is billing, NOT an outage: the fix is updating the payment method.
+- outage: Pharos itself is down or erroring for many users at once, not just one account.
+- refund: the customer asks for money back (duplicate charge, wrong plan, annual plan).
+- cancellation: the customer is leaving or closing the workspace. If they also ask how to export data, the main intent is still cancellation; mention the export steps in the reply.
+- data_privacy: deleting someone's personal data, or exporting data with no sign they are leaving.
+- security: vulnerability reports, suspicious logins, or a possibly compromised account, even if phrased casually.
+- seats: invites, member limits, roles, ownership. account_access: the customer cannot get into their own account.
+
 Return one JSON object with exactly these keys:
 category: one of {categories}
 priority: one of low, normal, high, urgent

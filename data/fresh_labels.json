@@ -1,0 +1,21 @@
+{
+  "_about": "Hand labels for data/fresh_tickets.json. These 18 tickets were written and committed AFTER the prompt was revised and BEFORE any model was run on them, so they give a clean blind score for the revised prompt.",
+  "F-01": {"category": "billing", "priority": "high"},
+  "F-02": {"category": "refund", "priority": "normal"},
+  "F-03": {"category": "feature_request", "priority": "low"},
+  "F-04": {"category": "cancellation", "priority": "normal"},
+  "F-05": {"category": "integrations", "priority": "normal"},
+  "F-06": {"category": "notifications", "priority": "normal"},
+  "F-07": {"category": "workspace_setup", "priority": "normal"},
+  "F-08": {"category": "bug", "priority": "normal"},
+  "F-09": {"category": "account_access", "priority": "high"},
+  "F-10": {"category": "seats", "priority": "normal"},
+  "F-11": {"category": "data_privacy", "priority": "normal"},
+  "F-12": {"category": "outage", "priority": "urgent"},
+  "F-13": {"category": "security", "priority": "urgent"},
+  "F-14": {"category": "presales", "priority": "normal"},
+  "F-15": {"category": "feedback", "priority": "low"},
+  "F-16": {"category": "spam", "priority": "low"},
+  "F-17": {"category": "feature_request", "priority": "low"},
+  "F-18": {"category": "security", "priority": "urgent"}
+}

@@ -2,32 +2,32 @@
 
 Engine: **rules**  ·  Tickets: **36**  ·  Time: 0.0s
 
-- Ready to send after a quick review: **12**
-- Need a person to act first (refund, identity check, escalation): **23**
+- Ready to send after a quick review: **10**
+- Need a person to act first (refund, identity check, escalation): **25**
 - Spam closed automatically: **1**
 - Churn risk flagged: **H-15, H-34**
 
-**Accuracy vs. hand labels:** category 78%, priority 72%
+**Accuracy vs. hand labels:** category 83%, priority 78%
 
 - H-02: got integrations/high, expected feature_request/low
 - H-09: got notifications/normal, expected notifications/high
 - H-10: got refund/normal, expected workspace_setup/normal
 - H-11: got billing/normal, expected refund/high
-- H-12: got account_access/normal, expected security/urgent
 - H-14: got billing/normal, expected refund/high
 - H-20: got account_access/normal, expected account_access/high
 - H-25: got workspace_setup/normal, expected feature_request/low
 - H-30: got billing/normal, expected billing/high
 - H-33: got bug/normal, expected bug/high
 - H-34: got cancellation/high, expected notifications/high
-- H-35: got account_access/normal, expected security/urgent
 
 ## Queue (sorted by priority)
 
 | Ticket | Priority | Category | Macro | Human? | Subject |
 |---|---|---|---|---|---|
+| H-12 | urgent | security | M18 | yes | Login I don't recognize |
 | H-23 | urgent | outage | M17 | yes | Is Pharos down? |
 | H-24 | urgent | security | M18 | yes | Possible XSS in task comments |
+| H-35 | urgent | security | M18 | yes | Weird login from another country |
 | H-01 | high | billing | M22 | yes | Everything is read-only |
 | H-02 | high | integrations | M06 | yes | offline on the phone app |
 | H-04 | high | account_access | M11 | no | too many attempts |
@@ -41,7 +41,6 @@ Engine: **rules**  ·  Tickets: **36**  ·  Time: 0.0s
 | H-09 | normal | notifications | M07 | yes | 400 emails overnight?! |
 | H-10 | normal | refund | M03 | yes | reuse our refund requests board |
 | H-11 | normal | billing | M22 | yes | Billed for wrong plan |
-| H-12 | normal | account_access | M11 | no | Login I don't recognize |
 | H-13 | normal | billing | M22 | yes | Can I pay by invoice instead of card? |
 | H-14 | normal | billing | M22 | yes | Charged for 14 seats, we only have 9 |
 | H-15 | normal | cancellation | M05 | yes | Close our account |
@@ -58,12 +57,34 @@ Engine: **rules**  ·  Tickets: **36**  ·  Time: 0.0s
 | H-31 | normal | data_privacy | M16 | no | Export all our projects |
 | H-32 | normal | integrations | M06 | yes | Google Calendar not showing due dates |
 | H-33 | normal | bug | M10 | no | Tasks disappeared from a board |
-| H-35 | normal | account_access | M11 | no | Weird login from another country |
 | H-36 | normal | refund | M02 | yes | Refund for annual plan we just bought |
 | H-27 | low | feedback | M21 | no | Just wanted to say thanks |
 | H-28 | low | spam | M23 | no | Get 10,000 leads this month |
 
 ## Drafts
+
+### H-12 · Login I don't recognize
+
+*Beth Sorensen, Sorensen Counseling Group (Business)*  
+**urgent** · security · neutral · macro M18 · tags: security, vulnerability_report
+
+> Under recent activity I see a login from another country at 2am yesterday. That wasn't me or anyone on my team. What should I do?
+
+**Draft reply:**
+
+```
+Hi Beth,
+
+Thank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.
+
+Please send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.
+
+Thanks again for helping keep our customers safe.
+
+Best,
+Alex
+Pharos Support
+```
 
 ### H-23 · Is Pharos down?
 
@@ -97,6 +118,29 @@ Pharos Support
 
 ```
 Hi Ivan,
+
+Thank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.
+
+Please send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.
+
+Thanks again for helping keep our customers safe.
+
+Best,
+Alex
+Pharos Support
+```
+
+### H-35 · Weird login from another country
+
+*Omar Haddad, Haddad Tech (Business)*  
+**urgent** · security · neutral · macro M18 · tags: security, vulnerability_report
+
+> I got an alert that someone logged into my account from a country I've never been to. I didn't do this. What should I do?
+
+**Draft reply:**
+
+```
+Hi Omar,
 
 Thank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.
 
@@ -438,27 +482,6 @@ Plans are billed per member. When someone joins partway through the month, we ch
 [[fill in: credit line]]
 
 Two tips: removing someone credits their unused time to your next invoice, and clients or contractors who only need to view and comment can join as free guests.
-
-Best,
-Alex
-Pharos Support
-```
-
-### H-12 · Login I don't recognize
-
-*Beth Sorensen, Sorensen Counseling Group (Business)*  
-**normal** · account_access · neutral · macro M11 · tags: account_access, password_reset
-
-> Under recent activity I see a login from another country at 2am yesterday. That wasn't me or anyone on my team. What should I do?
-
-**Draft reply:**
-
-```
-Hi Beth,
-
-Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
-
-Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
 
 Best,
 Alex
@@ -861,27 +884,6 @@ For missing tasks, check these first:
 For a file that won't upload, attachments can be up to 100 MB on paid plans. Larger files, like videos, can be attached from Google Drive instead.
 
 If none of that solves it, reply with a screenshot and roughly when it happened, and I'll dig into your workspace activity.
-
-Best,
-Alex
-Pharos Support
-```
-
-### H-35 · Weird login from another country
-
-*Omar Haddad, Haddad Tech (Business)*  
-**normal** · account_access · neutral · macro M11 · tags: account_access, password_reset
-
-> I got an alert that someone logged into my account from a country I've never been to. I didn't do this. What should I do?
-
-**Draft reply:**
-
-```
-Hi Omar,
-
-Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
-
-Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
 
 Best,
 Alex

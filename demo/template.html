@@ -637,7 +637,7 @@ details.data .evalt{padding:0 14px 12px}
       </div>
       <div>
         <h3>Measured, not guessed</h3>
-        <p>Every ticket set has hand-checked labels, so accuracy is scored rather than eyeballed. The rules engine was written alongside the sample tickets, so its score there is a ceiling. The unseen set shows how each engine holds up on new phrasing: keyword rules 78%, a local AI model (Qwen 2.5 14B) 83%. Both missed two suspicious-login reports, which is why a security safety net belongs in front of any model.</p>
+        <p>Every ticket set has hand-checked labels, so accuracy is scored rather than eyeballed. The rules engine was written alongside the sample tickets, so its score there is a ceiling. The unseen set shows how each engine holds up on new phrasing. Both engines first missed two suspicious-login reports, so a security safety net now runs in front of them: keyword rules 83%, a local AI model (Qwen 2.5 14B) 89%.</p>
         <div class="acc" id="acc-chart" aria-hidden="true"></div>
         <details class="data"><summary>Table view</summary><div class="evalt"><table id="eval-table"></table></div></details>
       </div>
@@ -1044,13 +1044,17 @@ function fill(body, vals){
   const out = body.replace(/\{\{(\w+)\}\}/g, (_,k) => vals[k] || (missing.push(k), `[[fill in: ${k.replace(/_/g," ")}]]`));
   return [out, missing];
 }
+// Security safety net (same list as support_ops/taxonomy.py): an unrecognized login always goes to security.
+const SEC_RX = (TX.security_override || []).map(p => new RegExp(p));
+const securityOverride = text => { const t = String(text).toLowerCase(); return SEC_RX.some(rx => rx.test(t)); };
 function rulesTriage(ticket){
   const text = `${ticket.subject}\n${ticket.body}`, t = text.toLowerCase();
   const scores = Object.entries(TX.keywords).map(([cat,rules]) => [cat, rules.reduce((a,[p,w]) => a + (t.includes(p)?w:0), 0)]).sort((a,b)=>b[1]-a[1]);
   let [category, top] = scores[0]; const second = scores[1][1];
   const hits = search(text, 3);
   if (!top) category = hits.length ? (SLUG2CAT[hits[0].c.slug] || "presales") : "presales";
-  const confidence = top ? Math.round(top/(top+second)*100)/100 : .3;
+  let confidence = top ? Math.round(top/(top+second)*100)/100 : .3;
+  if (securityOverride(text)){ category = "security"; confidence = Math.max(confidence, .9); }   // safety net
   const neg = TX.negative.reduce((a,w)=>a+count(t,w),0), pos = TX.positive.reduce((a,w)=>a+count(t,w),0);
   const sentiment = neg>pos ? "negative" : pos>neg ? "positive" : "neutral";
   const churn = TX.churn.some(w=>t.includes(w)) && (sentiment==="negative" || category==="cancellation");
@@ -1100,6 +1104,10 @@ async function aiTriage(ticket, baseline, engine="claude"){
   if (Array.isArray(out.cited_articles)){ const v = out.cited_articles.filter(s=>CH.some(c=>c.slug===s)); if (v.length) r.cited_articles = v; }
   if (!isNaN(+out.confidence)) r.confidence = Math.round(+out.confidence*100)/100;
   r.needs_human = !!out.needs_human || ALWAYS_HUMAN.has(r.category);
+  if (securityOverride(`${ticket.subject}\n${ticket.body}`) && r.category !== "security"){
+    // Safety net beats the model: a login the customer doesn't recognize is a security incident.
+    Object.assign(r, {category:"security", priority:"urgent", needs_human:true, macro_id:baseline.macro_id, macro_title:baseline.macro_title, safety_net:true});
+  }
   return r;
 }
 
@@ -1460,7 +1468,7 @@ renderMacros();
   for (const [key, name] of [["sample","Sample"],["unseen","Unseen"]]){
     const set = D.sets[key];
     const rulesRes = set.engine === "rules" ? set.results : set.tickets.map(rulesTriage);
-    rows.push({set:name, engine:"Keyword rules", s:1, ...score(key, rulesRes)});
+    rows.push({set:name, engine:"Keyword rules + safety net", s:1, ...score(key, rulesRes)});
     if (set.engine !== "rules") rows.push({set:name, engine:set.engine.replace(/^ollama:/,"Local AI · "), s:2, ...score(key, set.results)});
     for (const a of (D.ai_evals || []).filter(a => a.set === key)) rows.push({set:name, engine:a.label, s:2, n:a.n, cat:a.category_correct, pri:a.priority_correct});
   }

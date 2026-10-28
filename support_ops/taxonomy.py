@@ -73,3 +73,16 @@ NEGATIVE_WORDS = ["ridiculous", "frustrat", "unacceptable", "again", "terrible",
 POSITIVE_WORDS = ["love", "loving", "thank you", "thanks", "great", "awesome", "amazing", "appreciate"]
 CHURN_WORDS = ["looking at other", "switch to", "switching", "moving to another", "different tool",
                "cancel", "competitor", "leaving"]
+
+
+# Security safety net: reports of a login or activity the customer doesn't recognize always go to security
+# (urgent, a person first), whatever the keyword rules or an AI model decided. Added after both engines
+# routed two such unseen tickets (H-12, H-35) as ordinary login problems. Lowercase regular expressions;
+# the page uses the same list (build_demo.py passes it through), so keep them JavaScript-compatible.
+SECURITY_OVERRIDE = [
+    r"\blog ?ins? (?:i|we) (?:don'?t|do not|didn'?t|did not) recogni[sz]e",
+    r"\b(?:log ?in|logged in|sign[- ]?in|signed in)s? from (?:another|a different|a foreign|an unknown|a strange) (?:country|location|city|device)",
+    r"\bsomeone (?:else )?(?:has )?(?:logged|signed) (?:in|into)",
+    r"\bunrecogni[sz]ed (?:log ?in|sign[- ]?in|device|location)",
+    r"\bsuspicious (?:log ?in|sign[- ]?in|activity)",
+]

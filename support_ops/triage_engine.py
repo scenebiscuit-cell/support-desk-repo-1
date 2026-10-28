@@ -8,6 +8,7 @@ Two engines share one output shape:
 from __future__ import annotations
 
 import json
+import re
 
 from . import taxonomy as tx
 from .kb import KnowledgeBase, tokenize
@@ -43,6 +44,12 @@ def _sentiment(t: str) -> str:
     return "neutral"
 
 
+def security_override(text: str) -> bool:
+    """True when the ticket reports a login/activity the customer doesn't recognize (see taxonomy.SECURITY_OVERRIDE)."""
+    t = text.lower()
+    return any(re.search(p, t) for p in tx.SECURITY_OVERRIDE)
+
+
 def rules_triage(ticket: dict, kb: KnowledgeBase, macros: list[dict], agent_name: str) -> dict:
     text = _ticket_text(ticket)
     t = text.lower()
@@ -55,6 +62,8 @@ def rules_triage(ticket: dict, kb: KnowledgeBase, macros: list[dict], agent_name
         # No keyword matched: fall back to whichever help article fits best.
         category = SLUG_TO_CATEGORY.get(hits[0][0].slug, "presales") if hits else "presales"
     confidence = round(top / (top + second), 2) if top else 0.3
+    if security_override(text):          # safety net: always security, whatever the keywords said
+        category, confidence = "security", max(confidence, 0.9)
 
     sentiment = _sentiment(t)
     churn_risk = any(w in t for w in tx.CHURN_WORDS) and (sentiment == "negative" or category == "cancellation")
@@ -209,6 +218,10 @@ def llm_triage(ticket: dict, kb: KnowledgeBase, macros: list[dict], llm, agent_n
     result["needs_human"] = bool(out.get("needs_human", False)) or result["category"] in ALWAYS_HUMAN
     result["rules_baseline"] = {"category": baseline["category"], "priority": baseline["priority"],
                                 "macro_id": baseline["macro_id"]}
+    if security_override(_ticket_text(ticket)) and result["category"] != "security":
+        # Safety net beats the model: a login the customer doesn't recognize is a security incident.
+        result.update(category="security", priority="urgent", needs_human=True, macro_id=baseline["macro_id"],
+                      macro_title=baseline["macro_title"], safety_net=True)
     return result
 
 

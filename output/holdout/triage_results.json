@@ -5,36 +5,36 @@
     "by_category": {
       "billing": 5,
       "integrations": 4,
-      "account_access": 4,
       "notifications": 3,
       "cancellation": 3,
       "bug": 3,
+      "security": 3,
+      "account_access": 2,
       "presales": 2,
       "refund": 2,
       "workspace_setup": 2,
       "seats": 2,
       "data_privacy": 2,
       "outage": 1,
-      "security": 1,
       "feedback": 1,
       "spam": 1
     },
     "by_priority": {
-      "urgent": 2,
+      "urgent": 4,
       "high": 5,
-      "normal": 27,
+      "normal": 25,
       "low": 2
     },
     "churn_risk": [
       "H-15",
       "H-34"
     ],
-    "needs_human": 23,
-    "ready_to_send": 12,
+    "needs_human": 25,
+    "ready_to_send": 10,
     "auto_closed_spam": 1,
     "accuracy": {
-      "category": 0.778,
-      "priority": 0.722,
+      "category": 0.833,
+      "priority": 0.778,
       "misses": [
         {
           "ticket_id": "H-02",
@@ -78,17 +78,6 @@
           "expected": [
             "refund",
             "high"
-          ]
-        },
-        {
-          "ticket_id": "H-12",
-          "got": [
-            "account_access",
-            "normal"
-          ],
-          "expected": [
-            "security",
-            "urgent"
           ]
         },
         {
@@ -155,17 +144,6 @@
           "expected": [
             "notifications",
             "high"
-          ]
-        },
-        {
-          "ticket_id": "H-35",
-          "got": [
-            "account_access",
-            "normal"
-          ],
-          "expected": [
-            "security",
-            "urgent"
           ]
         }
       ]
@@ -434,20 +412,20 @@
     {
       "ticket_id": "H-12",
       "engine": "rules",
-      "category": "account_access",
-      "priority": "normal",
+      "category": "security",
+      "priority": "urgent",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "account_access",
-        "password_reset"
+        "security",
+        "vulnerability_report"
       ],
-      "macro_id": "M11",
-      "macro_title": "Account access: password reset email not arriving",
+      "macro_id": "M18",
+      "macro_title": "Security: vulnerability report acknowledgment",
       "summary": "Login I don't recognize",
-      "draft_reply": "Hi Beth,\n\nThank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.\n\nTry requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.\n\nBest,\nAlex\nPharos Support",
+      "draft_reply": "Hi Beth,\n\nThank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.\n\nPlease send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.\n\nThanks again for helping keep our customers safe.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [],
-      "needs_human": false,
+      "needs_human": true,
       "cited_articles": [
         "account-security",
         "troubleshooting"
@@ -980,20 +958,20 @@
     {
       "ticket_id": "H-35",
       "engine": "rules",
-      "category": "account_access",
-      "priority": "normal",
+      "category": "security",
+      "priority": "urgent",
       "sentiment": "neutral",
       "churn_risk": false,
       "tags": [
-        "account_access",
-        "password_reset"
+        "security",
+        "vulnerability_report"
       ],
-      "macro_id": "M11",
-      "macro_title": "Account access: password reset email not arriving",
+      "macro_id": "M18",
+      "macro_title": "Security: vulnerability report acknowledgment",
       "summary": "Weird login from another country",
-      "draft_reply": "Hi Omar,\n\nThank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.\n\nTry requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.\n\nBest,\nAlex\nPharos Support",
+      "draft_reply": "Hi Omar,\n\nThank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.\n\nPlease send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.\n\nThanks again for helping keep our customers safe.\n\nBest,\nAlex\nPharos Support",
       "unfilled_placeholders": [],
-      "needs_human": false,
+      "needs_human": true,
       "cited_articles": [
         "account-security",
         "account-security"

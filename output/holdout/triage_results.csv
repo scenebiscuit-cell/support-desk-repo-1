@@ -144,11 +144,13 @@ Two tips: removing someone credits their unused time to your next invoice, and c
 Best,
 Alex
 Pharos Support"
-H-12,account_access,normal,neutral,False,False,M11,account_access password_reset,Login I don't recognize,1.0,rules,"Hi Beth,
+H-12,security,urgent,neutral,False,True,M18,security vulnerability_report,Login I don't recognize,1.0,rules,"Hi Beth,
 
-Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
+Thank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.
 
-Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
+Please send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.
+
+Thanks again for helping keep our customers safe.
 
 Best,
 Alex
@@ -427,11 +429,13 @@ Either way, I'm here if you need anything.
 Best,
 Alex
 Pharos Support"
-H-35,account_access,normal,neutral,False,False,M11,account_access password_reset,Weird login from another country,1.0,rules,"Hi Omar,
+H-35,security,urgent,neutral,False,True,M18,security vulnerability_report,Weird login from another country,1.0,rules,"Hi Omar,
 
-Thank you for contacting Pharos. I'll help you get back in. Reset emails come from security@pharos.example and only go to the exact address your account was created with, so if you signed up with a different email, that's where it went.
+Thank you for contacting Pharos, and for reporting this responsibly and keeping it private. I've escalated it to our security team, and they'll review it as a priority.
 
-Try requesting the reset with your other address, and use the link within an hour, since it expires after that. If you can't get into that inbox anymore, just let me know and I'll walk you through verifying your account another way.
+Please send the reproduction steps to security@pharos.example rather than replying here, and our security team will follow up with you directly. We'd appreciate you holding off on any public disclosure while we investigate and fix it.
+
+Thanks again for helping keep our customers safe.
 
 Best,
 Alex

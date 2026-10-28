@@ -61,15 +61,19 @@ Every ticket has a hand label (correct category and priority), so accuracy is sc
 | Test set | Engine | Tickets | Routed to the right category | Right priority |
 |---|---|---|---|---|
 | Sample (rules written alongside these) | Keyword rules | 20 | **100%** (20/20) | 100% |
-| **Unseen** | Keyword rules | **36** | 78% (28/36) | 72% (26/36) |
-| **Unseen** | **AI: Qwen 2.5 14B, running locally** | **36** | **83%** (30/36) | **78%** (28/36) |
+| Unseen | Keyword rules | 36 | 78% (28/36) | 72% (26/36) |
+| Unseen | AI: Qwen 2.5 14B, running locally | 36 | 83% (30/36) | 78% (28/36) |
+| Unseen | Keyword rules **+ security safety net** | 36 | 83% (30/36) | 78% (28/36) |
+| **Unseen** | **AI + security safety net** | **36** | **89%** (32/36) | **83%** (30/36) |
+
+The safety net was added *after* both engines missed the same two security reports (H-12, H-35), so those two tickets are no longer truly unseen for it. The rows above it are the honest blind scores; the net's value is that this whole class of incident can't be misrouted again.
 
 ![Accuracy chart](screenshots/accuracy.png)
 
 **What the misses taught me.**
 - **The AI reads intent the rules can't.** It recognized "Billed for wrong plan" and "Charged for 14 seats, we only have 9" as refund requests, and knew that reusing a board *named* "Refund Requests" is a setup question, not a refund.
 - **It isn't strictly better.** It turned "Everything is read-only" (an expired card) into an outage, a ticket the rules got right.
-- **Both missed the same two security reports** ("someone logged into my account from another country"), reading them as ordinary login problems. That's the case for a deterministic safety net that sits in front of any model: some routing decisions are too important to leave to a score.
+- **Both missed the same two security reports** ("someone logged into my account from another country"), reading them as ordinary login problems. So I added a deterministic **security safety net** (`SECURITY_OVERRIDE` in `support_ops/taxonomy.py`): any report of a login or activity the customer doesn't recognize goes straight to security, urgent, with a person first, whatever the rules or the model decided. It matches nothing else in the 56 tickets. Some routing decisions are too important to leave to a score.
 
 The AI run used a 14-billion-parameter open model on a home GPU, so ticket data never left the machine. Per-ticket results are in `output/holdout-ai/`.
 
@@ -77,7 +81,6 @@ The AI run used a 14-billion-parameter open model on a home GPU, so ticket data 
 
 ## What I'd do next
 
-- **Add a security safety net:** route any mention of an unrecognized login straight to security, whatever the rules or the AI say. Both missed it.
 - **Score the larger cloud model** (Llama 3.3 70B on the Worker) on the same 36 tickets, and track priority over- vs. under-calls separately.
 - **Use embeddings** for search once a help center grows past a few dozen articles.
 - **Real email intake:** Cloudflare Email Routing → a Worker that turns each message into a request, with tickets stored server-side instead of in the browser.

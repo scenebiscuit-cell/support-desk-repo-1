@@ -42,11 +42,11 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
 Live: https://scenebiscuit-cell.github.io/support-desk-repo-1/ (agent demo) and `/portal/` (customer help portal).
 Done: docs-grounded chat, Jira-style agent desk (live requests, SLA, internal notes, KB sharing), customer portal (contact support, My requests),
 AI drafting via the Cloudflare Worker, lapis/gold design with wave + fish masthead, mobile pass, DuckDuckGo/Android WebView fixes, favicon and link previews.
-Results: rules triage 100% on 20 sample tickets; on 36 unseen tickets, rules 78% category / 72% priority, local AI (Qwen 2.5 14B) 83% / 78% (output/holdout-ai/summary.json). Both miss two suspicious-login security reports (H-12, H-35).
+Results: rules triage 100% on 20 sample tickets; on 36 unseen tickets, rules 78% category / 72% priority, local AI (Qwen 2.5 14B) 83% / 78%. Both missed two suspicious-login reports (H-12, H-35), so a security safety net (SECURITY_OVERRIDE in support_ops/taxonomy.py, mirrored in the page, applied after the AI) now routes them to security: rules + net 83% / 78%, AI + net 89% / 83% (output/holdout-ai/summary.json).
 
 ## Open tasks Nick may ask for help with
+- Push AI accuracy past 90% the honest way (see README "What I'd do next"): improve the prompt using the SAMPLE tickets only (e.g., define feature_request as "asks for something Pharos doesn't do", and billing vs outage for expired cards), try the cloud 70B model, then write 15-20 NEW unseen tickets with labels BEFORE running, and report the new blind score. Never edit rules or prompts to fix specific holdout tickets.
 - Add the walkthrough video link to README.md (replace "Walkthrough video: *coming soon*").
-- Security safety net: route any mention of an unrecognized login straight to security (README "What I'd do next"). This is a rules change made because of a known failure class, so say so in the PR and report the unseen-set number before and after.
 - If DuckDuckGo on Android still scrolls oddly, Nick will share a screen recording; keep fixes inside the responsive rules in DESIGN.md.
 
 ## Working with Nick

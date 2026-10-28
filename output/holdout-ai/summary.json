@@ -1,12 +1,12 @@
 {
   "engine": "ollama:qwen2.5:14b",
-  "label": "Local AI \u00b7 Qwen 2.5 14B",
+  "label": "Local AI \u00b7 Qwen 2.5 14B + safety net",
   "set": "unseen",
   "run_on": "2026-10-27",
   "command": "python triage.py --backend ollama --model qwen2.5:14b --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout",
   "n": 36,
-  "category_correct": 30,
-  "priority_correct": 28,
+  "category_correct": 32,
+  "priority_correct": 30,
   "ready_to_send": 22,
   "needs_human": 13,
   "spam_closed": 1,
@@ -101,11 +101,12 @@
     },
     {
       "ticket_id": "H-12",
-      "category": "account_access",
-      "priority": "high",
+      "category": "security",
+      "priority": "urgent",
       "macro_id": "M11",
-      "category_ok": false,
-      "priority_ok": false
+      "category_ok": true,
+      "priority_ok": true,
+      "safety_net": true
     },
     {
       "ticket_id": "H-13",
@@ -285,11 +286,12 @@
     },
     {
       "ticket_id": "H-35",
-      "category": "account_access",
-      "priority": "high",
+      "category": "security",
+      "priority": "urgent",
       "macro_id": "M12",
-      "category_ok": false,
-      "priority_ok": false
+      "category_ok": true,
+      "priority_ok": true,
+      "safety_net": true
     },
     {
       "ticket_id": "H-36",
@@ -299,5 +301,10 @@
       "category_ok": true,
       "priority_ok": false
     }
-  ]
+  ],
+  "model_only": {
+    "category_correct": 30,
+    "priority_correct": 28
+  },
+  "note": "Model output recorded on 2026-10-27; the security safety net (support_ops/taxonomy.py SECURITY_OVERRIDE) is applied on top, exactly as llm_triage does."
 }

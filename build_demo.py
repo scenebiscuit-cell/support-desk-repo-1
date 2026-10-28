@@ -103,6 +103,7 @@ def main() -> None:
             "categories": tx.CATEGORIES, "priorities": tx.PRIORITIES, "default_priority": tx.DEFAULT_PRIORITY,
             "keywords": tx.KEYWORDS, "urgency": tx.URGENCY_WORDS, "negative": tx.NEGATIVE_WORDS,
             "positive": tx.POSITIVE_WORDS, "churn": tx.CHURN_WORDS,
+            "security_override": tx.SECURITY_OVERRIDE,
         },
         "sets": {
             "sample": run_set(ROOT / "data" / "tickets.json", ROOT / "data" / "labels.json", kb, macros,

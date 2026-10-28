@@ -37,7 +37,7 @@ function makeSeaLife() {
     step(ctx, pts, t, ink, foam, W) {
       const rows = pts.length;
       if (t >= nextAt) {
-        const i = Math.floor(rows * (.42 + Math.random() * .4)), z = i / (rows - 1);
+        const i = 7 + Math.floor(Math.random() * 8), z = i / (rows - 1);
         events.push({ kind: Math.random() < .72 ? "fish" : "splash", start: t, i, s: .55 + .8 * z,
           x0: W * (.6 + Math.random() * .3), dir: Math.random() < .5 ? -1 : 1, dur: 1.3 + Math.random() * .5, phase: -1 });
         nextAt = t + 7 + Math.random() * 6;

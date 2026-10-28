@@ -796,7 +796,7 @@ FORM: One single-column help conversation in the same visual system as the agent
         const horizon = H*(+cv.dataset.horizon || .04), rows = 30, cols = Math.max(24, Math.round(W/22)), cx = W*.62;
         const pts = [];
         for (let i = 0; i < rows; i++){
-          const z = i/(rows-1), D = 1 + 9*(1 - z), f = (1/D - .1)/.9, y0 = horizon + (H - horizon + 18)*f, amp = 2 + 45*f, spread = f + .02;
+          const z = i/(rows-1), D = 1 + 9*(1 - z), f = (1/D - .1)/.9, y0 = horizon + (H - horizon + 18)*f, amp = 2 + 45*f, spread = f + .02 + (1 - f)*1.2;
           const row = [];
           for (let j = 0; j <= cols; j++){
             const u = j/cols, h = wave(u, D, f, t);

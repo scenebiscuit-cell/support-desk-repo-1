@@ -1,0 +1,303 @@
+{
+  "engine": "ollama:qwen2.5:14b",
+  "label": "Local AI \u00b7 Qwen 2.5 14B",
+  "set": "unseen",
+  "run_on": "2026-10-27",
+  "command": "python triage.py --backend ollama --model qwen2.5:14b --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout",
+  "n": 36,
+  "category_correct": 30,
+  "priority_correct": 28,
+  "ready_to_send": 22,
+  "needs_human": 13,
+  "spam_closed": 1,
+  "results": [
+    {
+      "ticket_id": "H-01",
+      "category": "outage",
+      "priority": "high",
+      "macro_id": "M17",
+      "category_ok": false,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-02",
+      "category": "workspace_setup",
+      "priority": "normal",
+      "macro_id": "M09",
+      "category_ok": false,
+      "priority_ok": false
+    },
+    {
+      "ticket_id": "H-03",
+      "category": "integrations",
+      "priority": "normal",
+      "macro_id": "M06",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-04",
+      "category": "account_access",
+      "priority": "high",
+      "macro_id": "M11",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-05",
+      "category": "presales",
+      "priority": "normal",
+      "macro_id": "M20",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-06",
+      "category": "notifications",
+      "priority": "normal",
+      "macro_id": "M07",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-07",
+      "category": "cancellation",
+      "priority": "normal",
+      "macro_id": "M05",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-08",
+      "category": "bug",
+      "priority": "normal",
+      "macro_id": "M10",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-09",
+      "category": "notifications",
+      "priority": "high",
+      "macro_id": "M07",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-10",
+      "category": "workspace_setup",
+      "priority": "normal",
+      "macro_id": "M09",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-11",
+      "category": "refund",
+      "priority": "high",
+      "macro_id": "M03",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-12",
+      "category": "account_access",
+      "priority": "high",
+      "macro_id": "M11",
+      "category_ok": false,
+      "priority_ok": false
+    },
+    {
+      "ticket_id": "H-13",
+      "category": "billing",
+      "priority": "normal",
+      "macro_id": "M20",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-14",
+      "category": "refund",
+      "priority": "high",
+      "macro_id": "M03",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-15",
+      "category": "cancellation",
+      "priority": "normal",
+      "macro_id": "M04",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-16",
+      "category": "integrations",
+      "priority": "normal",
+      "macro_id": "M06",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-17",
+      "category": "notifications",
+      "priority": "normal",
+      "macro_id": "M07",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-18",
+      "category": "workspace_setup",
+      "priority": "normal",
+      "macro_id": "M09",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-19",
+      "category": "bug",
+      "priority": "high",
+      "macro_id": "M10",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-20",
+      "category": "account_access",
+      "priority": "high",
+      "macro_id": "M12",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-21",
+      "category": "seats",
+      "priority": "normal",
+      "macro_id": "M13",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-22",
+      "category": "data_privacy",
+      "priority": "normal",
+      "macro_id": "M15",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-23",
+      "category": "outage",
+      "priority": "high",
+      "macro_id": "M17",
+      "category_ok": true,
+      "priority_ok": false
+    },
+    {
+      "ticket_id": "H-24",
+      "category": "security",
+      "priority": "urgent",
+      "macro_id": "M18",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-25",
+      "category": "workspace_setup",
+      "priority": "normal",
+      "macro_id": "M09",
+      "category_ok": false,
+      "priority_ok": false
+    },
+    {
+      "ticket_id": "H-26",
+      "category": "presales",
+      "priority": "normal",
+      "macro_id": "M20",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-27",
+      "category": "feedback",
+      "priority": "normal",
+      "macro_id": "M21",
+      "category_ok": true,
+      "priority_ok": false
+    },
+    {
+      "ticket_id": "H-28",
+      "category": "spam",
+      "priority": "low",
+      "macro_id": "M23",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-29",
+      "category": "seats",
+      "priority": "high",
+      "macro_id": "M14",
+      "category_ok": true,
+      "priority_ok": false
+    },
+    {
+      "ticket_id": "H-30",
+      "category": "billing",
+      "priority": "high",
+      "macro_id": "M04",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-31",
+      "category": "data_privacy",
+      "priority": "normal",
+      "macro_id": "M16",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-32",
+      "category": "integrations",
+      "priority": "normal",
+      "macro_id": "M06",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-33",
+      "category": "bug",
+      "priority": "high",
+      "macro_id": "M10",
+      "category_ok": true,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-34",
+      "category": "cancellation",
+      "priority": "high",
+      "macro_id": "M05",
+      "category_ok": false,
+      "priority_ok": true
+    },
+    {
+      "ticket_id": "H-35",
+      "category": "account_access",
+      "priority": "high",
+      "macro_id": "M12",
+      "category_ok": false,
+      "priority_ok": false
+    },
+    {
+      "ticket_id": "H-36",
+      "category": "refund",
+      "priority": "high",
+      "macro_id": "M02",
+      "category_ok": true,
+      "priority_ok": false
+    }
+  ]
+}

@@ -42,12 +42,10 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
 Live: https://scenebiscuit-cell.github.io/support-desk-repo-1/ (agent demo) and `/portal/` (customer help portal).
 Done: docs-grounded chat, Jira-style agent desk (live requests, SLA, internal notes, KB sharing), customer portal (contact support, My requests),
 AI drafting via the Cloudflare Worker, lapis/gold design with wave + fish masthead, mobile pass, DuckDuckGo/Android WebView fixes, favicon and link previews.
-Results: rules triage 100% on 20 sample tickets, 78% category / 72% priority on 36 unseen tickets.
+Results: rules triage 100% on 20 sample tickets; on 36 unseen tickets, rules 78% category / 72% priority, local AI (Qwen 2.5 14B) 83% / 78% (output/holdout-ai/summary.json). Both miss two suspicious-login security reports (H-12, H-35).
 
 ## Open tasks Nick may ask for help with
 - Add the walkthrough video link to README.md (replace "Walkthrough video: *coming soon*").
-- Score the AI layer on the 36 unseen tickets with Ollama on Nick's PC and add that number next to the rules baseline in README.md, PITCH.md, and the How it works chart:
-  `python triage.py --backend ollama --model qwen2.5:14b --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout`
 - Security safety net: route any mention of an unrecognized login straight to security (README "What I'd do next"). This is a rules change made because of a known failure class, so say so in the PR and report the unseen-set number before and after.
 - If DuckDuckGo on Android still scrolls oddly, Nick will share a screen recording; keep fixes inside the responsive rules in DESIGN.md.
 

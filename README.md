@@ -58,21 +58,27 @@ The portal and the agent desk share requests through the visitor's own browser, 
 
 Every ticket has a hand label (correct category and priority), so accuracy is scored, not eyeballed. The **unseen** tickets were written and labeled after the rules were finished, and the rules were never tuned on them.
 
-| Test set | Tickets | Routed to the right category | Right priority |
-|---|---|---|---|
-| Sample (rules written alongside these) | 20 | **100%** (20/20) | 100% |
-| **Unseen** | **36** | **78%** (28/36) | 72% (26/36) |
+| Test set | Engine | Tickets | Routed to the right category | Right priority |
+|---|---|---|---|---|
+| Sample (rules written alongside these) | Keyword rules | 20 | **100%** (20/20) | 100% |
+| **Unseen** | Keyword rules | **36** | 78% (28/36) | 72% (26/36) |
+| **Unseen** | **AI: Qwen 2.5 14B, running locally** | **36** | **83%** (30/36) | **78%** (28/36) |
 
 ![Accuracy chart](screenshots/accuracy.png)
 
-**What the misses taught me.** Of the 36 unseen tickets, the rules flagged every refund and outage for a person. They missed two security reports ("someone logged into my account from another country"), which looked like ordinary login problems. Keyword rules can't tell those apart; reading intent is exactly the job of the AI layer, and it's why I'd measure any AI support tool on unseen tickets before trusting it.
+**What the misses taught me.**
+- **The AI reads intent the rules can't.** It recognized "Billed for wrong plan" and "Charged for 14 seats, we only have 9" as refund requests, and knew that reusing a board *named* "Refund Requests" is a setup question, not a refund.
+- **It isn't strictly better.** It turned "Everything is read-only" (an expired card) into an outage, a ticket the rules got right.
+- **Both missed the same two security reports** ("someone logged into my account from another country"), reading them as ordinary login problems. That's the case for a deterministic safety net that sits in front of any model: some routing decisions are too important to leave to a score.
+
+The AI run used a 14-billion-parameter open model on a home GPU, so ticket data never left the machine. Per-ticket results are in `output/holdout-ai/`.
 
 ![The public help portal answering with a cited source](screenshots/portal.png)
 
 ## What I'd do next
 
-- **Score the AI layer on the same 36 unseen tickets** and put that number next to the rules baseline.
-- **Add a security safety net:** route any mention of an unrecognized login straight to security, whatever the rest of the ticket says.
+- **Add a security safety net:** route any mention of an unrecognized login straight to security, whatever the rules or the AI say. Both missed it.
+- **Score the larger cloud model** (Llama 3.3 70B on the Worker) on the same 36 tickets, and track priority over- vs. under-calls separately.
 - **Use embeddings** for search once a help center grows past a few dozen articles.
 - **Real email intake:** Cloudflare Email Routing → a Worker that turns each message into a request, with tickets stored server-side instead of in the browser.
 - **Connect a real helpdesk** (Jira Service Management, Zendesk, or Help Scout) so tags, macros, and drafts land where agents already work.

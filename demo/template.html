@@ -637,7 +637,7 @@ details.data .evalt{padding:0 14px 12px}
       </div>
       <div>
         <h3>Measured, not guessed</h3>
-        <p>Every ticket set has hand-checked labels, so accuracy is scored rather than eyeballed. The rules engine was written alongside the sample tickets, so its score there is a ceiling. The unseen set shows how keyword rules hold up on new phrasing, and is the bar the AI engine has to beat.</p>
+        <p>Every ticket set has hand-checked labels, so accuracy is scored rather than eyeballed. The rules engine was written alongside the sample tickets, so its score there is a ceiling. The unseen set shows how each engine holds up on new phrasing: keyword rules 78%, a local AI model (Qwen 2.5 14B) 83%. Both missed two suspicious-login reports, which is why a security safety net belongs in front of any model.</p>
         <div class="acc" id="acc-chart" aria-hidden="true"></div>
         <details class="data"><summary>Table view</summary><div class="evalt"><table id="eval-table"></table></div></details>
       </div>
@@ -1445,7 +1445,8 @@ renderMacros();
 (function(){
   const row = (name, s) => { const a = s.summary.accuracy; return `<tr><td>${name}</td><td>${s.tickets.length}</td><td>${s.engine==="rules"?"Offline rules":esc(s.engine)}</td><td>${Math.round(a.category*100)}%</td><td>${Math.round(a.priority*100)}%</td></tr>`; };
   $("#eval-table").innerHTML = `<tr><th>Ticket set</th><th>Tickets</th><th>Engine</th><th>Category</th><th>Priority</th></tr>` +
-    row("Sample (rules written for these)", D.sets.sample) + row("Unseen (new phrasing)", D.sets.unseen);
+    row("Sample (rules written for these)", D.sets.sample) + row("Unseen (new phrasing)", D.sets.unseen) +
+    (D.ai_evals || []).map(a => `<tr><td>${a.set === "unseen" ? "Unseen (new phrasing)" : esc(a.set)}</td><td>${a.n}</td><td>${esc(a.label)}</td><td>${Math.round(a.category_correct / a.n * 100)}%</td><td>${Math.round(a.priority_correct / a.n * 100)}%</td></tr>`).join("");
 })();
 
 /* ---------- accuracy chart: one bar per engine and ticket set, color = engine ---------- */
@@ -1461,6 +1462,7 @@ renderMacros();
     const rulesRes = set.engine === "rules" ? set.results : set.tickets.map(rulesTriage);
     rows.push({set:name, engine:"Keyword rules", s:1, ...score(key, rulesRes)});
     if (set.engine !== "rules") rows.push({set:name, engine:set.engine.replace(/^ollama:/,"Local AI · "), s:2, ...score(key, set.results)});
+    for (const a of (D.ai_evals || []).filter(a => a.set === key)) rows.push({set:name, engine:a.label, s:2, n:a.n, cat:a.category_correct, pri:a.priority_correct});
   }
   const engines = [...new Map(rows.map(r => [r.s, r.engine])).entries()];
   const bar = (r, k) => { const v = r[k], pct = r.n ? Math.round(v / r.n * 100) : 0;

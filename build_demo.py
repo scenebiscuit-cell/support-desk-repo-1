@@ -115,6 +115,9 @@ def main() -> None:
                        "strong": chat.STRONG_COVERAGE_SCORE},
         "agent": AGENT,
         "cloud_url": worker_url,
+        # Scored AI runs (from output/*-ai/summary.json), shown next to the rules engine in the accuracy chart.
+        "ai_evals": [{k: v for k, v in json.loads(f.read_text(encoding="utf-8")).items() if k != "results"}
+                     for f in sorted((ROOT / "output").glob("*-ai/summary.json"))],
     }
 
     # Agent demo: demo/index.html, plus a copy at the site root for GitHub Pages.

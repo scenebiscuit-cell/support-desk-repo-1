@@ -22,7 +22,7 @@
 /* Layout: a lapis-and-ocean masthead (gold wireframe sea, lighthouse beam) holds the product name and headline numbers;
    a frosted sticky nav switches tools; each tool is a pair of panels (work on the left, the "why" on the right). Stacks on phones. */
 :root{
-  --paper:#ebdfc9; --sheet:#f6eedf; --ink:#1d1f2a; --muted:#5b5547; --rule:#d5c4a3; --tint:#f0e5d1;
+  --notes-bar:none; --paper:#d6c39c; --sheet:#f6eedf; --ink:#1d1f2a; --muted:#5b5547; --rule:#d5c4a3; --tint:#f0e5d1;
   --band-a:#0c1f4a; --band-b:#14397a; --band-c:#0a4766;
   --band-ink:#ffffff; --band-soft:rgba(255,255,255,.8); --band-hi:#ebc874; --band-line:rgba(235,200,116,.07);
   --accent:#1d4f91; --accent-ink:#ffffff; --accent-soft:#e0e8f4;
@@ -37,7 +37,7 @@
   --r:8px;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --paper:#0a0f1c; --sheet:#111829; --ink:#ebe6d9; --muted:#a39e90; --rule:#263049; --tint:#161e33;
+  --notes-bar:linear-gradient(90deg,var(--band-b),var(--band-c) 60%,var(--band-hi)); --paper:#0a0f1c; --sheet:#111829; --ink:#ebe6d9; --muted:#a39e90; --rule:#263049; --tint:#161e33;
   --band-a:#07163a; --band-b:#0d2a5a; --band-c:#072f48;
   --band-ink:#f2f8fb; --band-soft:rgba(242,248,251,.74); --band-hi:#e6c36a; --band-line:rgba(230,195,106,.05);
   --accent:#8fb3ec; --accent-ink:#0a0f1c; --accent-soft:#1a2a4d;
@@ -48,7 +48,7 @@
   --s1:#5b8fd6; --s2:#c9801f; --scrim:rgba(0,0,0,.6); --shadow:0 18px 50px rgba(0,0,0,.5);
   color-scheme:dark; } }
 :root[data-theme="dark"]{
-  --paper:#0a0f1c; --sheet:#111829; --ink:#ebe6d9; --muted:#a39e90; --rule:#263049; --tint:#161e33;
+  --notes-bar:linear-gradient(90deg,var(--band-b),var(--band-c) 60%,var(--band-hi)); --paper:#0a0f1c; --sheet:#111829; --ink:#ebe6d9; --muted:#a39e90; --rule:#263049; --tint:#161e33;
   --band-a:#07163a; --band-b:#0d2a5a; --band-c:#072f48;
   --band-ink:#f2f8fb; --band-soft:rgba(242,248,251,.74); --band-hi:#e6c36a; --band-line:rgba(230,195,106,.05);
   --accent:#8fb3ec; --accent-ink:#0a0f1c; --accent-soft:#1a2a4d;
@@ -301,7 +301,7 @@ section.view{display:grid;gap:22px}
 .notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px;margin-top:6px;border-top:2px solid var(--ink);padding-top:28px}
 .notes>div{position:relative;overflow:hidden;background:var(--sheet);border:1px solid var(--rule);border-radius:16px;padding:22px 22px 18px;
   box-shadow:0 1px 2px rgba(18,26,43,.05),0 12px 24px -20px rgba(18,26,43,.5)}
-.notes>div::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--band-b),var(--band-c) 60%,var(--band-hi))}
+.notes>div::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--notes-bar)}
 .notes h3{font-size:18px;font-weight:700;margin-bottom:8px;color:var(--accent);display:flex;align-items:center;gap:8px}
 .notes h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--band-hi);box-shadow:0 0 0 3px color-mix(in srgb,var(--band-hi) 25%,transparent);flex:none}
 .notes p,.notes li{font-size:14px;color:var(--muted);margin:0 0 6px}
@@ -851,24 +851,24 @@ $("#copy-email").addEventListener("click", e => copyText("nlaxatx@gmail.com", e.
   }
   // Height of the sea at column u (0..1 across) and depth z (0 far .. 1 near), time t.
   // Rows rise one after another as z grows, so swells roll toward the viewer and peak near the front.
-  function wave(u, z, t){
-    const roll = z*9 - t*.6 + Math.sin(u*3.1 + t*.18)*.6;
+  function wave(u, D, f, t){
+    const roll = -D*2.2 - t*.6 + Math.sin(u*3.1 + t*.18)*.6;
     const crest = Math.pow(.5 + .5*Math.sin(roll), 3);            // sharp crests, flat troughs
-    const chop = Math.sin(u*23 + t*.9 + z*4)*.1 + Math.sin(u*11 - t*.5)*.14;
-    return crest*(.55 + .45*z) + chop*(.25 + .5*z);
+    const chop = Math.sin(u*23 + t*.9 + f*4)*.1 + Math.sin(u*11 - t*.5)*.14;
+    return crest*(.55 + .45*f) + chop*(.25 + .5*f);
   }
   function draw(t){
     ctx.clearRect(0,0,W,H);
-    const horizon = H*(+cv.dataset.horizon || .30), rows = 17, cols = Math.max(24, Math.round(W/22)), cx = W*.62;
+    const horizon = H*(+cv.dataset.horizon || .04), rows = 30, cols = Math.max(24, Math.round(W/22)), cx = W*.62;
     const pts = [];
     for (let i = 0; i < rows; i++){
-      const z = i/(rows-1), y0 = horizon + (H - horizon + 18)*Math.pow(z, 1.55), amp = 3 + 44*Math.pow(z, 1.6), spread = .5 + .62*z;
+      const z = i/(rows-1), D = 1 + 9*(1 - z), f = (1/D - .1)/.9, y0 = horizon + (H - horizon + 18)*f, amp = 2 + 45*f, spread = f + .02;
       const row = [];
       for (let j = 0; j <= cols; j++){
-        const u = j/cols, h = wave(u, z, t);
+        const u = j/cols, h = wave(u, D, f, t);
         // breaking lip: on the nearest rows the tallest crests lean forward (down-screen) and throw foam
         const lean = z > .5 && h > .72 ? (h - .72)*amp*.5 : 0;
-        row.push([cx + (u*W*1.2 - W*.1 - cx)*spread, y0 - h*amp + lean, h, z]);
+        row.push([cx + (u*W*1.2 - W*.1 - cx)*spread, y0 - h*amp + lean, h, z, f]);
       }
       pts.push(row);
     }
@@ -884,7 +884,7 @@ $("#copy-email").addEventListener("click", e => copyText("nlaxatx@gmail.com", e.
       const z = i/(rows-1);
       ctx.beginPath();
       pts[i].forEach((p, j) => j ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]));
-      ctx.strokeStyle = `rgba(${ink},${.06 + .2*z})`; ctx.lineWidth = .7 + .5*z; ctx.stroke();
+      ctx.strokeStyle = `rgba(${ink},${(.06 + .2*z)*Math.min(1, pts[i][0][4]/.12)})`; ctx.lineWidth = .7 + .5*z; ctx.stroke();
       if (z > .45 && !still) for (const p of pts[i]) if (p[2] > .9 && Math.random() < .015*z) foam.push({x:p[0], y:p[1], vx:(Math.random()-.3)*.6, vy:-.4-Math.random()*.9, a:.32, r:.6+Math.random()*1.3});
     }
     // spray from breaking crests

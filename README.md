@@ -149,6 +149,7 @@ node tests/worker_voice.mjs    # the Worker's draft cleanup
 node tests/worker_email.mjs    # the Worker's real-email path: allowlist, reading the email, /inbox
 python -m http.server 8000 & node tests/e2e_desk.js   # portal -> agent desk -> portal, end to end (needs Playwright)
 node tests/e2e_inbox.js        # a real email arriving on the agent desk, with a stand-in Worker (same server)
+node tests/e2e_clear.js        # the agent desk's Clear requests control (same server)
 ```
 
 See **Results** above for the current numbers. To score an AI backend on the unseen set, add `--backend ollama` (or `anthropic`) to the second command.

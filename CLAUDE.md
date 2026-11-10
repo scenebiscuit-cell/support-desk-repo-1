@@ -22,6 +22,7 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
    - `node tests/worker_email.mjs` — Worker real-email path (allowlist, MIME reader, `/inbox`)
    - `python -m http.server 8000` then `node tests/e2e_desk.js` — portal → agent desk → portal loop (Playwright)
    - `node tests/e2e_inbox.js` — a real email arriving on the agent desk, with a stand-in Worker (same server)
+   - `node tests/e2e_clear.js` — the agent desk's Clear requests control (same server)
    - `python triage.py --eval` — sample set should stay at 100% category/priority. Report the unseen-set number (`--tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout`); don't tune rules on the unseen tickets.
 4. For visual changes, screenshot the pages with Playwright (desktop + 390px phone, light + dark).
 

@@ -393,6 +393,8 @@ details.data .evalt{padding:0 14px 12px}
 #set-seg .count{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font:600 11px/18px var(--f-mono);text-align:center}
 .qtools{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:14px 16px;border-bottom:1px solid var(--rule)}
 .qempty{padding:18px 16px;display:grid;gap:8px}.qempty h3{font-size:17px}.qempty p{margin:0}
+.clear-ask{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:13.5px;font-weight:600;color:var(--fail)}
+.clear-ask .btn{border-color:var(--fail);color:var(--fail)}
 .inbox-on{font:600 11px/1.3 var(--f-mono);letter-spacing:.03em;color:var(--pass);background:var(--pass-soft);padding:5px 8px;border-radius:4px;overflow-wrap:anywhere}
 .inbox-on::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px}
 .lozenge{font:600 10.5px/1 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 7px;border-radius:4px;background:var(--info-soft);color:var(--info);white-space:nowrap}
@@ -1268,6 +1270,9 @@ const ownTicket = {id:"YOU-1", channel:"email", customer:{name:"Jamie Rivera", e
   subject:"Slack updates stopped", body:"Hi, our #client-work Slack channel stopped getting task updates from Pharos sometime yesterday. Nothing changed on our end. Can you help?"};
 let ownResult = null;
 const liveResults = {};    // rules triage for live requests, computed once per request
+let clearAsk = false;      // "Clear requests" was clicked and is waiting for a yes
+// Request numbers start again at PH-101 after a clear, so anything remembered under an old number must go too.
+function forgetRequests(ids){ for (const id of ids){ delete liveResults[id]; delete aiResults[id]; delete drafts[id]; } }
 // Emails that "arrive" when the agent clicks Simulate incoming email.
 const EMAIL_POOL = [
   {customer:{name:"Rachel Kim", email:"rachel@kimcreative.example", business:"Kim Creative", plan:"Business"}, subject:"Invite link expired for new hire",
@@ -1331,7 +1336,9 @@ function renderQueue(){
   const n = rows.length, k = rows.filter(x=>isHandled(x.t)).length;
   rows.sort((a,b) => isHandled(a.t) - isHandled(b.t));
   const live = curSet === "live";
-  const tools = live ? `<div class="qtools"><button class="btn" type="button" id="sim-email">Simulate incoming email</button><a class="linkbtn" href="portal/#new" target="_blank" rel="noopener">Raise one as a customer ↗</a>${inbox.key ? `<span class="inbox-on" title="Emails from approved senders arrive here within about 30 seconds.">Real inbox connected${inbox.address ? ` · ${esc(inbox.address)}` : ""}</span>` : ""}</div>` : "";
+  const tools = live ? `<div class="qtools"><button class="btn" type="button" id="sim-email">Simulate incoming email</button><a class="linkbtn" href="portal/#new" target="_blank" rel="noopener">Raise one as a customer ↗</a>${inbox.key ? `<span class="inbox-on" title="Emails from approved senders arrive here within about 30 seconds.">Real inbox connected${inbox.address ? ` · ${esc(inbox.address)}` : ""}</span>` : ""}${!Desk.data.requests.length ? "" : clearAsk
+      ? `<span class="clear-ask" role="group" aria-label="Confirm clearing requests"><span>Clear all ${Desk.data.requests.length} live request${Desk.data.requests.length === 1 ? "" : "s"}? This can't be undone.</span><button class="btn" type="button" id="clear-yes">Yes, clear</button><button class="linkbtn" type="button" id="clear-no">Cancel</button></span>`
+      : `<button class="linkbtn" type="button" id="clear-req">Clear requests</button>`}</div>` : "";
   if (live && !n){
     $("#queue").innerHTML = tools + `<div class="qempty"><h3>No live requests yet</h3><p>Requests arrive here two ways: a customer raises one in the <a href="portal/#new" target="_blank" rel="noopener">help portal</a>, or an email comes in to support@pharos.example. Try either one.</p><p class="note">Saved only in this browser, so each visitor gets their own sandbox.</p></div>`;
     bindQueueTools(); return;
@@ -1344,6 +1351,17 @@ function renderQueue(){
   bindQueueTools();
 }
 function bindQueueTools(){
+  // Clear requests: empties this browser's live requests (portal and email) and restarts numbering at PH-101.
+  $("#clear-req")?.addEventListener("click", () => { clearAsk = true; renderQueue(); $("#clear-no")?.focus(); });
+  $("#clear-no")?.addEventListener("click", () => { clearAsk = false; renderQueue(); $("#clear-req")?.focus(); });
+  $("#clear-yes")?.addEventListener("click", () => {
+    let ids = [];
+    Desk.update(m => { ids = m.requests.map(r => r.id); for (const id of ids) delete m.state[id]; m.requests = []; m.seq = 100; m.deflected = 0; });
+    forgetRequests(ids); clearAsk = false; curId = null;
+    renderQueue(); renderDetail();
+    toast(`Cleared ${ids.length} live request${ids.length === 1 ? "" : "s"}. The next one will be PH-101.`);
+    $("#sim-email")?.focus();
+  });
   const b = $("#sim-email"); if (!b) return;
   b.addEventListener("click", () => {
     let id;
@@ -1555,8 +1573,10 @@ document.querySelectorAll("#set-seg button").forEach(b => b.addEventListener("cl
 // Requests raised in the portal (another tab) show up here live.
 addEventListener("storage", e => {
   if (e.key !== DESK_KEY) return;
-  const before = Desk.data.requests.length; Desk.reload();
+  const before = Desk.data.requests.length, hadIds = Desk.data.requests.map(r => r.id); Desk.reload();
   const fresh = Desk.data.requests.length > before;
+  const gone = hadIds.filter(id => !Desk.data.requests.some(r => r.id === id));
+  if (gone.length){ forgetRequests(gone); if (curSet === "live" && gone.includes(curId)) curId = null; }
   if (curSet === "live" || fresh){
     if (curSet !== "live" && fresh) toast(`New request ${Desk.data.requests.at(-1).id} from the help portal.`, {label:"Open", run: () => { pickSet("live"); curId = Desk.data.requests.at(-1).id; renderQueue(); renderDetail(); }});
     if (curSet === "live"){ if (!curId) curId = nextOpen(null); if (document.activeElement?.id !== "cmp") renderDetail(); }

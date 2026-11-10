@@ -10,6 +10,7 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
 - `portal/template.html` → **generated** `portal/index.html`: public help center (Ask the Keeper, Contact support, My requests). Never show triage data, macros, or internal notes there.
 - `shared/desk-store.js`: the request store both pages share via localStorage (key `pharos-desk-v1`); `build_demo.py` inlines it at `/*__DESK_STORE__*/`. The agent desk (Agent desk tab) is modeled on Jira Service Management.
 - `worker/worker.template.js` → **generated** `worker/worker.js`: Cloudflare Worker (Llama 3.3 70B) with daily caps, origin lock, and a voice guard that cleans AI drafts
+- Real email (optional): Cloudflare Email Routing sends an address on Nick's domain to the Worker's `email()` handler. Allowlisted senders only (`EMAIL_ALLOWLIST` secret); emails are kept 24 hours under one KV key and read through `GET /inbox`, which needs the `INBOX_KEY` secret. The desk polls only when the browser holds that key (connect once with `#inbox=<key>`). Secrets live in the Cloudflare dashboard, never in the repo.
 - `DESIGN.md` is the design system (lapis + gold, papyrus page, IBM Plex, canvas wave masthead). Follow it.
 
 ## Workflow
@@ -18,7 +19,9 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
 3. Tests, all must pass:
    - `node tests/parity.js` — the page's JS triage must match the Python rules engine exactly (0 mismatches). JS search/triage in `demo/template.html` mirrors `support_ops/`; change both together.
    - `node tests/worker_voice.mjs` — Worker draft cleanup
+   - `node tests/worker_email.mjs` — Worker real-email path (allowlist, MIME reader, `/inbox`)
    - `python -m http.server 8000` then `node tests/e2e_desk.js` — portal → agent desk → portal loop (Playwright)
+   - `node tests/e2e_inbox.js` — a real email arriving on the agent desk, with a stand-in Worker (same server)
    - `python triage.py --eval` — sample set should stay at 100% category/priority. Report the unseen-set number (`--tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout`); don't tune rules on the unseen tickets.
 4. For visual changes, screenshot the pages with Playwright (desktop + 390px phone, light + dark).
 

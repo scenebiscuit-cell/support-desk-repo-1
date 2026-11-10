@@ -149,7 +149,8 @@ node tests/worker_voice.mjs    # the Worker's draft cleanup
 node tests/worker_email.mjs    # the Worker's real-email path: allowlist, reading the email, /inbox
 python -m http.server 8000 & node tests/e2e_desk.js   # portal -> agent desk -> portal, end to end (needs Playwright)
 node tests/e2e_inbox.js        # a real email arriving on the agent desk, with a stand-in Worker (same server)
-node tests/e2e_clear.js        # the agent desk's Clear requests control (same server)
+node tests/worker_admin.mjs    # the Worker's admin password check
+node tests/e2e_clear.js        # the agent desk's Clear requests control and its admin password step (same server)
 ```
 
 See **Results** above for the current numbers. To score an AI backend on the unseen set, add `--backend ollama` (or `anthropic`) to the second command.
@@ -197,6 +198,10 @@ Setup, all in the Cloudflare dashboard (nothing secret goes in this repo):
 4. **Connect your browser once:** open the demo as `…/#inbox=YOUR_INBOX_KEY`. The key is saved in that browser and removed from the address bar. `…/#inbox=off` disconnects.
 
 An email usually shows up within about 30 seconds, which is how long Cloudflare's key-value storage caches a read.
+
+## Clearing the demo's requests
+
+On the agent desk, **Clear requests** (under *Live requests*) empties that browser's live requests and restarts numbering at PH-101, for a clean recording or live demo. It asks for an admin password, which the Worker checks against its `ADMIN_PASSWORD` secret (Worker > Settings > Variables and Secrets, type *Secret*). The password is never in the page or this repo, and wrong guesses are limited to 8 per visitor per day. Requests live only in each visitor's own browser, so the password guards the control, not shared data.
 
 ## Public help portal
 

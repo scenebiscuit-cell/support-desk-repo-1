@@ -393,6 +393,11 @@ details.data .evalt{padding:0 14px 12px}
 .qempty{padding:18px 16px;display:grid;gap:8px}.qempty h3{font-size:17px}.qempty p{margin:0}
 .clear-ask{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:13.5px;font-weight:600;color:var(--fail)}
 .clear-ask .btn{border-color:var(--fail);color:var(--fail)}
+.clear-ask label{flex-basis:100%;margin-top:4px;font:600 11px/1.2 var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.clear-ask input{flex:1 1 150px;min-width:0;max-width:240px;font:inherit;font-size:16px;font-weight:400;color:var(--ink);background:var(--tint);border:1.5px solid var(--rule);border-radius:8px;padding:8px 10px}
+.clear-ask input:focus-visible{outline:3px solid var(--accent-soft);border-color:var(--accent)}
+.clear-msg{flex-basis:100%;font-weight:600}
+.clear-msg:empty{display:none}
 .inbox-on{font:600 11px/1.3 var(--f-mono);letter-spacing:.03em;color:var(--pass);background:var(--pass-soft);padding:5px 8px;border-radius:4px;overflow-wrap:anywhere}
 .inbox-on::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px}
 .lozenge{font:600 10.5px/1 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 7px;border-radius:4px;background:var(--info-soft);color:var(--info);white-space:nowrap}
@@ -1147,7 +1152,8 @@ const ownTicket = {id:"YOU-1", channel:"email", customer:{name:"Jamie Rivera", e
   subject:"Slack updates stopped", body:"Hi, our #client-work Slack channel stopped getting task updates from Pharos sometime yesterday. Nothing changed on our end. Can you help?"};
 let ownResult = null;
 const liveResults = {};    // rules triage for live requests, computed once per request
-let clearAsk = false;      // "Clear requests" was clicked and is waiting for a yes
+let clearAsk = false;      // "Clear requests" was clicked and is waiting for the admin password
+let clearTyped = "", clearMsg = "";   // what's in the password box and under it, kept across redraws of the queue
 // Request numbers start again at PH-101 after a clear, so anything remembered under an old number must go too.
 function forgetRequests(ids){ for (const id of ids){ delete liveResults[id]; delete aiResults[id]; delete drafts[id]; } }
 // Emails that "arrive" when the agent clicks Simulate incoming email.
@@ -1214,7 +1220,7 @@ function renderQueue(){
   rows.sort((a,b) => isHandled(a.t) - isHandled(b.t));
   const live = curSet === "live";
   const tools = live ? `<div class="qtools"><button class="btn" type="button" id="sim-email">Simulate incoming email</button><a class="linkbtn" href="portal/#new" target="_blank" rel="noopener">Raise one as a customer ↗</a>${inbox.key ? `<span class="inbox-on" title="Emails from approved senders arrive here within about 30 seconds.">Real inbox connected${inbox.address ? ` · ${esc(inbox.address)}` : ""}</span>` : ""}${!Desk.data.requests.length ? "" : clearAsk
-      ? `<span class="clear-ask" role="group" aria-label="Confirm clearing requests"><span>Clear all ${Desk.data.requests.length} live request${Desk.data.requests.length === 1 ? "" : "s"}? This can't be undone.</span><button class="btn" type="button" id="clear-yes">Yes, clear</button><button class="linkbtn" type="button" id="clear-no">Cancel</button></span>`
+      ? `<form class="clear-ask" id="clear-form" aria-label="Confirm clearing requests"><span>Clear all ${Desk.data.requests.length} live request${Desk.data.requests.length === 1 ? "" : "s"}? This can't be undone.</span><label for="clear-pw">Admin password</label><input id="clear-pw" type="password" autocomplete="off" required><button class="btn" type="submit" id="clear-yes">Clear requests</button><button class="linkbtn" type="button" id="clear-no">Cancel</button><span class="clear-msg" id="clear-msg" role="alert"></span></form>`
       : `<button class="linkbtn" type="button" id="clear-req">Clear requests</button>`}</div>` : "";
   if (live && !n){
     $("#queue").innerHTML = tools + `<div class="qempty"><h3>No live requests yet</h3><p>Requests arrive here two ways: a customer raises one in the <a href="portal/#new" target="_blank" rel="noopener">help portal</a>, or an email comes in to support@pharos.example. Try either one.</p><p class="note">Saved only in this browser, so each visitor gets their own sandbox.</p></div>`;
@@ -1229,12 +1235,35 @@ function renderQueue(){
 }
 function bindQueueTools(){
   // Clear requests: empties this browser's live requests (portal and email) and restarts numbering at PH-101.
-  $("#clear-req")?.addEventListener("click", () => { clearAsk = true; renderQueue(); $("#clear-no")?.focus(); });
-  $("#clear-no")?.addEventListener("click", () => { clearAsk = false; renderQueue(); $("#clear-req")?.focus(); });
-  $("#clear-yes")?.addEventListener("click", () => {
+  const closeClear = () => { clearAsk = false; clearTyped = ""; clearMsg = ""; };
+  $("#clear-req")?.addEventListener("click", () => { clearAsk = true; renderQueue(); $("#clear-pw")?.focus(); });
+  $("#clear-no")?.addEventListener("click", () => { closeClear(); renderQueue(); $("#clear-req")?.focus(); });
+  const pw = $("#clear-pw"), note = $("#clear-msg");
+  if (pw){ pw.value = clearTyped; note.textContent = clearMsg; pw.addEventListener("input", () => { clearTyped = pw.value; }); }
+  $("#clear-form")?.addEventListener("submit", async e => {
+    e.preventDefault();
+    const say = t => { clearMsg = t; const el = $("#clear-msg"); if (el) el.textContent = t; };
+    if (!clearTyped) return;
+    if (!CLOUD) return say("The admin check needs the demo's Worker, which this copy doesn't have.");
+    $("#clear-yes").disabled = true; say("Checking…");
+    // The Worker checks the password; it is never kept in the page or the repo.
+    let res;
+    try { res = await fetch(`${CLOUD}/admin/verify`, {method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({password: clearTyped})}); }
+    catch { res = null; }
+    if (!res?.ok){
+      say(!res ? "Couldn't reach the Worker to check the password. Try again."
+        : res.status === 401 ? "That password isn't right."
+        : res.status === 429 ? "Too many tries today. Try again tomorrow."
+        : res.status === 404 ? "An admin password isn't set up on the Worker yet."
+        : res.status === 403 ? "The admin check only works on the live demo site."
+        : "The password check failed. Try again.");
+      const btn = $("#clear-yes"); if (btn) btn.disabled = false;
+      $("#clear-pw")?.select();
+      return;
+    }
     let ids = [];
     Desk.update(m => { ids = m.requests.map(r => r.id); for (const id of ids) delete m.state[id]; m.requests = []; m.seq = 100; m.deflected = 0; });
-    forgetRequests(ids); clearAsk = false; curId = null;
+    forgetRequests(ids); closeClear(); curId = null;
     renderQueue(); renderDetail();
     toast(`Cleared ${ids.length} live request${ids.length === 1 ? "" : "s"}. The next one will be PH-101.`);
     $("#sim-email")?.focus();
@@ -1460,7 +1489,7 @@ addEventListener("storage", e => {
   }
   renderQueue();
 });
-setInterval(() => { if (curSet === "live" && !document.hidden) renderQueue(); }, 60000);
+setInterval(() => { if (curSet === "live" && !document.hidden && !clearAsk) renderQueue(); }, 60000);
 
 // Real emails: ask the Worker every few seconds and turn each new one into a live request.
 let inboxTimer = null, inboxBusy = false;

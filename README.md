@@ -146,7 +146,9 @@ python triage.py --eval                                                    # sam
 python triage.py --eval --tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout
 node tests/parity.js           # the web page's triage matches the Python engine exactly
 node tests/worker_voice.mjs    # the Worker's draft cleanup
+node tests/worker_email.mjs    # the Worker's real-email path: allowlist, reading the email, /inbox
 python -m http.server 8000 & node tests/e2e_desk.js   # portal -> agent desk -> portal, end to end (needs Playwright)
+node tests/e2e_inbox.js        # a real email arriving on the agent desk, with a stand-in Worker (same server)
 ```
 
 See **Results** above for the current numbers. To score an AI backend on the unseen set, add `--backend ollama` (or `anthropic`) to the second command.
@@ -176,6 +178,24 @@ Both pages call a small Cloudflare Worker that runs Llama 3.3 70B on Cloudflare'
 ```bash
 python build_demo.py --cloud-url https://pharos-ai.YOUR-SUBDOMAIN.workers.dev
 ```
+
+## Real email into the agent desk (optional)
+
+The agent desk can receive real email. An address on your own domain is routed to the Worker by Cloudflare Email Routing. The Worker accepts mail only from an allowlist of senders, reads the sender, subject and message, and keeps the latest 20 emails for 24 hours. A desk that holds the inbox key checks for new email every few seconds and turns each one into a live request, triaged like any other. Other visitors never see those emails; they use *Simulate incoming email*.
+
+The allowlist is how I'd pilot this with a client: staff addresses first, then open it to customers once the triage has been checked on real mail.
+
+Setup, all in the Cloudflare dashboard (nothing secret goes in this repo):
+
+1. **Email Routing:** turn it on for your domain.
+2. **Worker secrets** (Worker > Settings > Variables and Secrets, type *Secret*):
+   - `EMAIL_ALLOWLIST`: the sender addresses allowed, separated by commas
+   - `INBOX_KEY`: a long random string
+   - `INBOX_ADDRESS` (optional): the address to show on the desk, such as `support@yourdomain.com`
+3. **Routing rule:** Email Routing > Routing rules > create a custom address and choose *Send to a Worker*.
+4. **Connect your browser once:** open the demo as `…/#inbox=YOUR_INBOX_KEY`. The key is saved in that browser and removed from the address bar. `…/#inbox=off` disconnects.
+
+An email usually shows up within about 30 seconds, which is how long Cloudflare's key-value storage caches a read.
 
 ## Public help portal
 

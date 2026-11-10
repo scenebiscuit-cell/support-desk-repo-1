@@ -393,6 +393,8 @@ details.data .evalt{padding:0 14px 12px}
 #set-seg .count{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font:600 11px/18px var(--f-mono);text-align:center}
 .qtools{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:14px 16px;border-bottom:1px solid var(--rule)}
 .qempty{padding:18px 16px;display:grid;gap:8px}.qempty h3{font-size:17px}.qempty p{margin:0}
+.inbox-on{font:600 11px/1.3 var(--f-mono);letter-spacing:.03em;color:var(--pass);background:var(--pass-soft);padding:5px 8px;border-radius:4px;overflow-wrap:anywhere}
+.inbox-on::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:6px}
 .lozenge{font:600 10.5px/1 var(--f-mono);letter-spacing:.04em;text-transform:uppercase;padding:4px 7px;border-radius:4px;background:var(--info-soft);color:var(--info);white-space:nowrap}
 .lozenge[data-s="progress"]{background:var(--accent-soft);color:var(--accent)}
 .lozenge[data-s="customer"]{background:var(--warn-soft);color:var(--warn)}
@@ -799,6 +801,23 @@ const cloudReady = (async () => {
     $("#chat-mode").hidden = false;
     return true;
   } catch { return false; }
+})();
+/* ---------- Real email inbox (optional) ----------
+   Emails sent to the demo's own address arrive through the Worker, from approved senders only. A desk checks
+   for them only if it holds the inbox key: open the page once as  …/#inbox=<key>  to connect this browser,
+   or  …/#inbox=off  to disconnect. The key stays in this browser and is removed from the address bar. */
+const INBOX_LS = "pharos-inbox";
+let inbox = (() => { try { return JSON.parse(localStorage.getItem(INBOX_LS) || "null") || {}; } catch { return {}; } })();
+const saveInbox = () => { try { localStorage.setItem(INBOX_LS, JSON.stringify(inbox)); } catch {} };
+let inboxJustSet = "";
+(() => {
+  const m = location.hash.match(/^#inbox=(.+)$/);
+  if (!m) return;
+  let v = m[1]; try { v = decodeURIComponent(v); } catch {}
+  inbox = v === "off" ? {} : { key: v, since: Date.now(), address: "" };   // only emails sent from now on
+  inboxJustSet = v === "off" ? "off" : "on";
+  saveInbox();
+  history.replaceState(null, "", location.pathname + location.search + "#triage");
 })();
 async function cloudCall(kind, input){
   let res;
@@ -1312,7 +1331,7 @@ function renderQueue(){
   const n = rows.length, k = rows.filter(x=>isHandled(x.t)).length;
   rows.sort((a,b) => isHandled(a.t) - isHandled(b.t));
   const live = curSet === "live";
-  const tools = live ? `<div class="qtools"><button class="btn" type="button" id="sim-email">Simulate incoming email</button><a class="linkbtn" href="portal/#new" target="_blank" rel="noopener">Raise one as a customer ↗</a></div>` : "";
+  const tools = live ? `<div class="qtools"><button class="btn" type="button" id="sim-email">Simulate incoming email</button><a class="linkbtn" href="portal/#new" target="_blank" rel="noopener">Raise one as a customer ↗</a>${inbox.key ? `<span class="inbox-on" title="Emails from approved senders arrive here within about 30 seconds.">Real inbox connected${inbox.address ? ` · ${esc(inbox.address)}` : ""}</span>` : ""}</div>` : "";
   if (live && !n){
     $("#queue").innerHTML = tools + `<div class="qempty"><h3>No live requests yet</h3><p>Requests arrive here two ways: a customer raises one in the <a href="portal/#new" target="_blank" rel="noopener">help portal</a>, or an email comes in to support@pharos.example. Try either one.</p><p class="note">Saved only in this browser, so each visitor gets their own sandbox.</p></div>`;
     bindQueueTools(); return;
@@ -1545,9 +1564,51 @@ addEventListener("storage", e => {
   renderQueue();
 });
 setInterval(() => { if (curSet === "live" && !document.hidden) renderQueue(); }, 60000);
+
+// Real emails: ask the Worker every few seconds and turn each new one into a live request.
+let inboxTimer = null, inboxBusy = false;
+async function pollInbox(){
+  if (!inbox.key || !CLOUD || inboxBusy || document.hidden) return;
+  inboxBusy = true;
+  try {
+    const res = await fetch(`${CLOUD}/inbox?since=${inbox.since || 0}`, {headers: {"X-Inbox-Key": inbox.key}});
+    if (res.status === 401 || res.status === 404){
+      inbox = {}; saveInbox(); clearInterval(inboxTimer);
+      toast(res.status === 401 ? "That inbox key wasn't accepted, so real email is disconnected." : "Real email isn't set up on the Worker yet.");
+      renderQueue(); return;
+    }
+    if (!res.ok) return;
+    const data = await res.json(), emails = Array.isArray(data.emails) ? data.emails : [];
+    const had = inbox.address || ""; inbox.address = String(data.address || "");
+    const fresh = [];
+    if (emails.length) Desk.update(m => {
+      for (const e of emails){
+        inbox.since = Math.max(inbox.since || 0, Number(String(e.id).split(":")[0]) || 0);
+        if (!e.from || m.requests.some(x => x.mail_id === e.id)) continue;
+        const id = Desk.nextKey(m), name = String(e.from.name || "Customer"), body = String(e.body || "(no message)");
+        const t = {id, mail_id:e.id, created_at:e.at, channel:"email", request_type:"Emailed request",
+          customer:{name, email:String(e.from.email || ""), business:"", plan:"Team"}, subject:String(e.subject || "(no subject)"), body};
+        m.requests.push(t);
+        m.state[id] = {status:"open", assignee:null, first_response_at:null, thread:[
+          {who:"system", text:`Email to ${inbox.address || "the support address"} became request ${id}`, at:e.at},
+          {who:"customer", name, text:body, at:e.at}]};
+        fresh.push(t);
+      }
+    });
+    if (emails.length || had !== inbox.address) saveInbox();
+    if (fresh.length){
+      const t = fresh.at(-1), open = () => { pickSet("live"); curId = t.id; renderQueue(); renderDetail(); };
+      if (curSet === "live" && document.activeElement?.id !== "cmp"){ curId = t.id; renderQueue(); renderDetail(); toast(`New email from ${esc(t.customer.name)}: ${t.id}`); }
+      else { renderQueue(); toast(`New email from ${esc(t.customer.name)}: ${t.id}`, {label:"Open", run:open}); }
+    } else if (had !== inbox.address && curSet === "live") renderQueue();
+  } catch {} finally { inboxBusy = false; }
+}
 $("#how-sim")?.addEventListener("click", () => { showTab("triage"); pickSet("live"); $("#sim-email")?.click(); scrollTo({top: $("#triage").getBoundingClientRect().top + scrollY - 70}); });   // keep SLA clocks fresh
 if (Desk.data.requests.some(t => !isHandled(t))) pickSet("live");
 else { curId = D.sets.sample.tickets.map(t=>({t,r:resultFor(t.id)})).sort((a,b)=>ORDER[a.r.priority]-ORDER[b.r.priority])[0].t.id; renderQueue(); renderDetail(); }
+// Real inbox: start checking once the desk has drawn itself.
+if (inbox.key && CLOUD){ pollInbox(); inboxTimer = setInterval(pollInbox, 5000); addEventListener("visibilitychange", pollInbox); }
+if (inboxJustSet){ pickSet("live"); toast(inboxJustSet === "on" ? "Real inbox connected. Emails from approved senders will arrive here." : "Real inbox disconnected."); }
 aiReady.then(ok => { if (ok) renderDetail(); });
 localReady.then(ok => { if (ok){ renderDetail(); if (curSet==="own") renderQueue(); } });
 cloudReady.then(ok => { if (ok){ renderDetail(); if (curSet==="own") renderQueue(); } });

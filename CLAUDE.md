@@ -11,6 +11,7 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
 - `shared/desk-store.js`: the request store both pages share via localStorage (key `pharos-desk-v1`); `build_demo.py` inlines it at `/*__DESK_STORE__*/`. The agent desk (Agent desk tab) is modeled on Jira Service Management.
 - `worker/worker.template.js` → **generated** `worker/worker.js`: Cloudflare Worker (Llama 3.3 70B) with daily caps, origin lock, and a voice guard that cleans AI drafts
 - Real email (optional): Cloudflare Email Routing sends an address on Nick's domain to the Worker's `email()` handler. Allowlisted senders only (`EMAIL_ALLOWLIST` secret); emails are kept 24 hours under one KV key and read through `GET /inbox`, which needs the `INBOX_KEY` secret. The desk polls only when the browser holds that key (connect once with `#inbox=<key>`). Secrets live in the Cloudflare dashboard, never in the repo.
+- Clear requests (agent desk, Live requests): empties this browser's live requests and restarts numbering at PH-101, after the Worker confirms the admin password (`POST /admin/verify`, `ADMIN_PASSWORD` secret, 8 wrong tries per visitor per day). The password is never in the page or the repo.
 - `DESIGN.md` is the design system (lapis + gold, papyrus page, IBM Plex, canvas wave masthead). Follow it.
 
 ## Workflow
@@ -22,6 +23,8 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
    - `node tests/worker_email.mjs` — Worker real-email path (allowlist, MIME reader, `/inbox`)
    - `python -m http.server 8000` then `node tests/e2e_desk.js` — portal → agent desk → portal loop (Playwright)
    - `node tests/e2e_inbox.js` — a real email arriving on the agent desk, with a stand-in Worker (same server)
+   - `node tests/worker_admin.mjs` — Worker admin password check
+   - `node tests/e2e_clear.js` — the agent desk's Clear requests control and its admin password step (same server)
    - `python triage.py --eval` — sample set should stay at 100% category/priority. Report the unseen-set number (`--tickets data/holdout_tickets.json --labels data/holdout_labels.json --out output/holdout`); don't tune rules on the unseen tickets.
 4. For visual changes, screenshot the pages with Playwright (desktop + 390px phone, light + dark).
 

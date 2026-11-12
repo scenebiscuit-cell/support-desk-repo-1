@@ -10,6 +10,6 @@ binding = "LIMITS"
 id = "99f432b341924d698b02ab7ddf3c4dac"
 
 [vars]
-ALLOWED_ORIGINS = "https://scenebiscuit-cell.github.io"
+ALLOWED_ORIGINS = "https://scenebiscuit-cell.github.io,https://scenebiscuit.com"
 PER_VISITOR_DAILY = "10"
 GLOBAL_DAILY = "40"

@@ -46,7 +46,7 @@ Results: rules triage 100% on 20 sample tickets; on 36 unseen tickets, rules 78%
 
 ## Open tasks Nick may ask for help with
 - Push AI accuracy past 90% the honest way (see README "What I'd do next"): improve the prompt using the SAMPLE tickets only (e.g., define feature_request as "asks for something Pharos doesn't do", and billing vs outage for expired cards), try the cloud 70B model, then write 15-20 NEW unseen tickets with labels BEFORE running, and report the new blind score. Never edit rules or prompts to fix specific holdout tickets.
-- Add the walkthrough video link to README.md (replace "Walkthrough video: *coming soon*").
+- Add the walkthrough video link to README.md, next to the Live demo and Customer help portal links at the top.
 - If DuckDuckGo on Android still scrolls oddly, Nick will share a screen recording; keep fixes inside the responsive rules in DESIGN.md.
 
 ## Working with Nick

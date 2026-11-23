@@ -4,7 +4,7 @@
 
 *Created by Nick Lax · nlaxatx@gmail.com*
 
-**[Live demo](https://scenebiscuit-cell.github.io/support-desk-repo-1/)** · **[Customer help portal](https://scenebiscuit-cell.github.io/support-desk-repo-1/portal/)**
+**[Live demo](https://scenebiscuit.com/support-desk-repo-1/)** · **[Customer help portal](https://scenebiscuit.com/support-desk-repo-1/portal/)**
 
 ![The Pharos Support Desk demo](screenshots/hero.png)
 

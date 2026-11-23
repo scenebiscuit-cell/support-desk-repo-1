@@ -15,7 +15,7 @@ Help desks like Freshdesk and Zendesk now sell AI, but it only answers as well a
 
 I come from enterprise technical support and regulatory compliance, so I build for accuracy and policy first: refunds, account access, and security issues always stay with a person. I measure accuracy against your real past tickets before anything goes live.
 
-**See it working:** [Live demo](https://scenebiscuit-cell.github.io/support-desk-repo-1/) · [Customer help portal](https://scenebiscuit-cell.github.io/support-desk-repo-1/portal/) · [Code and results](https://github.com/scenebiscuit-cell/support-desk-repo-1)  
+**See it working:** [Live demo](https://scenebiscuit.com/support-desk-repo-1/) · [Customer help portal](https://scenebiscuit.com/support-desk-repo-1/portal/) · [Code and results](https://github.com/scenebiscuit-cell/support-desk-repo-1)  
 **Contact:** Nick Lax · nlaxatx@gmail.com
 
 ### Why work with me

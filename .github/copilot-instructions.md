@@ -39,7 +39,7 @@ A portfolio demo by Nick Lax (nlaxatx@gmail.com) for AI support-ops freelancing.
 - Refunds, identity checks, and security reports always set `needs_human`.
 
 ## Where things stand (Oct 2026)
-Live: https://scenebiscuit-cell.github.io/support-desk-repo-1/ (agent demo) and `/portal/` (customer help portal).
+Live: https://scenebiscuit.com/support-desk-repo-1/ (agent demo) and `/portal/` (customer help portal).
 Done: docs-grounded chat, Jira-style agent desk (live requests, SLA, internal notes, KB sharing), customer portal (contact support, My requests),
 AI drafting via the Cloudflare Worker, lapis/gold design with wave + fish masthead, mobile pass, DuckDuckGo/Android WebView fixes, favicon and link previews.
 Results: rules triage 100% on 20 sample tickets; on 36 unseen tickets, rules 78% category / 72% priority, local AI (Qwen 2.5 14B) 83% / 78%. Both missed two suspicious-login reports (H-12, H-35), so a security safety net (SECURITY_OVERRIDE in support_ops/taxonomy.py, mirrored in the page, applied after the AI) now routes them to security: rules + net 83% / 78%, AI + net 89% / 83% (output/holdout-ai/summary.json).
